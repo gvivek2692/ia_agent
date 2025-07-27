@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(npm install)",
+      "Bash(timeout 10 npm start)",
+      "Bash(gtimeout:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(node:*)"
+    ],
+    "deny": []
+  }
+}
