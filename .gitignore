@@ -2,9 +2,13 @@
 node_modules/
 */node_modules/
 
-# Environment variables
+# Environment variables  
 .env
 backend/.env
+frontend/.env.local
+
+# Keep production .env files for reference
+!frontend/.env
 
 # Build outputs
 build/

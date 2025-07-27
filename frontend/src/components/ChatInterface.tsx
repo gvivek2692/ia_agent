@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io, { Socket } from 'socket.io-client';
 import MessageRenderer from './MessageRenderer';
+import { config } from '../config/environment';
 
 interface Message {
   id: number;
@@ -16,6 +17,7 @@ const ChatInterface: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [conversationId, setConversationId] = useState<string>('');
+  const [connectionError, setConnectionError] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const initializeConversation = () => {
@@ -47,17 +49,43 @@ I have access to your complete financial profile including your ₹5.6L portfoli
   };
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3001');
+    console.log('Connecting to backend:', config.backendUrl);
+    
+    const newSocket = io(config.backendUrl, {
+      transports: ['polling', 'websocket'], // Try polling first for better compatibility
+      timeout: 10000,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      forceNew: true
+    });
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
       setIsConnected(true);
-      console.log('Connected to server');
+      setConnectionError('');
+      console.log('Connected to server at:', config.backendUrl);
     });
 
     newSocket.on('disconnect', () => {
       setIsConnected(false);
       console.log('Disconnected from server');
+    });
+
+    newSocket.on('connect_error', (error) => {
+      console.error('Connection error to', config.backendUrl, ':', error);
+      setConnectionError(`Failed to connect to ${config.backendUrl}: ${error.message}`);
+      setIsConnected(false);
+    });
+
+    newSocket.on('reconnect_error', (error) => {
+      console.error('Reconnection error:', error);
+    });
+
+    newSocket.on('reconnect', (attemptNumber) => {
+      console.log('Reconnected after', attemptNumber, 'attempts');
+      setIsConnected(true);
+      setConnectionError('');
     });
 
     newSocket.on('chat_response', (response: Message) => {
@@ -128,7 +156,13 @@ I have access to your complete financial profile including your ₹5.6L portfoli
       <div className="border-b border-gray-200">
         <div className="flex items-center justify-between px-4 py-2">
           <div className={`text-sm flex items-center ${isConnected ? 'text-green-700' : 'text-red-700'}`}>
-            {isConnected ? '🟢 Connected to Wealth Manager AI' : '🔴 Disconnected - Reconnecting...'}
+            {isConnected ? (
+              <span>🟢 Connected to Wealth Manager AI</span>
+            ) : (
+              <span title={connectionError || 'Connecting...'}>
+                🔴 {connectionError ? 'Connection Failed' : 'Connecting...'}
+              </span>
+            )}
           </div>
           
           <div className="flex items-center space-x-2">
@@ -153,7 +187,13 @@ I have access to your complete financial profile including your ₹5.6L portfoli
         
         {/* Conversation Info */}
         <div className="px-4 py-1 bg-gray-50 text-xs text-gray-600 border-t border-gray-100">
-          Conversation: {conversationId.slice(-8)} • Messages: {messages.length} • Model: GPT-4.1 Mini with Web Search
+          <div className="flex justify-between items-center">
+            <span>Conversation: {conversationId.slice(-8)} • Messages: {messages.length}</span>
+            <span className="text-blue-600">Backend: {config.isDevelopment ? 'Local' : 'Render'}</span>
+          </div>
+          <div className="mt-0.5">
+            Model: GPT-4.1 Mini with Web Search • Endpoint: {config.backendUrl}
+          </div>
         </div>
       </div>
 

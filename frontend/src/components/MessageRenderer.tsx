@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 interface MessageRendererProps {
   content: string;
@@ -110,26 +109,6 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     ),
   };
 
-  // Format financial numbers (detect patterns like ₹1,00,000 or 1.5L)
-  const formatFinancialContent = (text: string) => {
-    return text
-      // Format large numbers with Indian numbering system
-      .replace(/₹(\d+)/g, (match, num) => {
-        const number = parseInt(num);
-        if (number >= 10000000) {
-          return `₹${(number / 10000000).toFixed(1)}Cr`;
-        } else if (number >= 100000) {
-          return `₹${(number / 100000).toFixed(1)}L`;
-        } else if (number >= 1000) {
-          return `₹${number.toLocaleString('en-IN')}`;
-        }
-        return match;
-      })
-      // Add proper spacing and formatting for percentages
-      .replace(/(\d+\.?\d*)%/g, '<span class="font-medium text-green-600">$1%</span>')
-      // Highlight important financial terms
-      .replace(/\b(SIP|PPF|ELSS|EPF|Nifty|Sensex)\b/g, '<span class="font-medium text-primary-600">$1</span>');
-  };
 
   if (!isBot) {
     return (

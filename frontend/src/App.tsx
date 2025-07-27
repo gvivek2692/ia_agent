@@ -1,5 +1,6 @@
 import React from 'react';
 import ChatInterface from './components/ChatInterface';
+import ConnectionTest from './components/ConnectionTest';
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
       </header>
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Connection Test - Remove this in production */}
+        <div className="mb-6">
+          <ConnectionTest />
+        </div>
+        
         <ChatInterface />
       </main>
     </div>

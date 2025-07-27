@@ -14,15 +14,33 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: [
+      "http://localhost:3000",
+      "https://localhost:3000",
+      "https://ia-agent-aguf.onrender.com",
+      /\.vercel\.app$/,
+      /\.netlify\.app$/,
+      /\.github\.io$/
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://localhost:3000", 
+    "https://ia-agent-aguf.onrender.com",
+    /\.vercel\.app$/,
+    /\.netlify\.app$/,
+    /\.github\.io$/
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // OpenAI client initialization
