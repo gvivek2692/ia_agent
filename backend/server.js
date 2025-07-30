@@ -7,6 +7,7 @@ const { OpenAI } = require('openai');
 const { getUserContext, getPortfolioSummary, getGoalsOverview, getRecentActivity } = require('./data');
 const conversationManager = require('./services/conversationManager');
 const marketDataService = require('./services/marketDataService');
+const conversationHistoryService = require('./services/conversationHistoryService');
 
 dotenv.config();
 
@@ -214,6 +215,102 @@ app.get('/api/market/portfolio-impact', (req, res) => {
   res.json(portfolioMarketData);
 });
 
+// Conversation History API Endpoints
+app.get('/api/conversations', async (req, res) => {
+  try {
+    const { limit = 50, offset = 0, userId = 'demo-user' } = req.query;
+    const conversations = await conversationHistoryService.getConversations(userId, parseInt(limit), parseInt(offset));
+    res.json(conversations);
+  } catch (error) {
+    console.error('Failed to get conversations:', error);
+    res.status(500).json({ error: 'Failed to retrieve conversations' });
+  }
+});
+
+app.get('/api/conversations/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const conversation = await conversationHistoryService.loadConversation(id);
+    if (conversation) {
+      res.json(conversation);
+    } else {
+      res.status(404).json({ error: 'Conversation not found' });
+    }
+  } catch (error) {
+    console.error('Failed to get conversation:', error);
+    res.status(500).json({ error: 'Failed to retrieve conversation' });
+  }
+});
+
+app.delete('/api/conversations/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const success = await conversationHistoryService.deleteConversation(id);
+    if (success) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Conversation not found' });
+    }
+  } catch (error) {
+    console.error('Failed to delete conversation:', error);
+    res.status(500).json({ error: 'Failed to delete conversation' });
+  }
+});
+
+app.put('/api/conversations/:id/title', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title } = req.body;
+    const success = await conversationHistoryService.renameConversation(id, title);
+    if (success) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Conversation not found' });
+    }
+  } catch (error) {
+    console.error('Failed to rename conversation:', error);
+    res.status(500).json({ error: 'Failed to rename conversation' });
+  }
+});
+
+app.put('/api/conversations/:id/archive', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const success = await conversationHistoryService.archiveConversation(id);
+    if (success) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: 'Conversation not found' });
+    }
+  } catch (error) {
+    console.error('Failed to archive conversation:', error);
+    res.status(500).json({ error: 'Failed to archive conversation' });
+  }
+});
+
+app.get('/api/conversations/search/:query', async (req, res) => {
+  try {
+    const { query } = req.params;
+    const { userId = 'demo-user' } = req.query;
+    const results = await conversationHistoryService.searchConversations(query, userId);
+    res.json(results);
+  } catch (error) {
+    console.error('Failed to search conversations:', error);
+    res.status(500).json({ error: 'Failed to search conversations' });
+  }
+});
+
+app.get('/api/conversations/stats', async (req, res) => {
+  try {
+    const { userId = 'demo-user' } = req.query;
+    const stats = await conversationHistoryService.getStats(userId);
+    res.json(stats);
+  } catch (error) {
+    console.error('Failed to get conversation stats:', error);
+    res.status(500).json({ error: 'Failed to get stats' });
+  }
+});
+
 // Socket.io connection handling
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
@@ -225,8 +322,11 @@ io.on('connection', (socket) => {
       const { message: userMessage, conversationId, conversationHistory } = data;
       const userContext = data.context || null;
       
-      // Add user message to conversation
+      // Add user message to conversation (in-memory)
       conversationManager.addMessage(conversationId, userMessage, false);
+      
+      // Add user message to persistent history
+      await conversationHistoryService.addMessage(conversationId, userMessage, false);
       
       // Get conversation context for AI
       const conversationContext = conversationManager.buildConversationContext(conversationId);
@@ -347,8 +447,11 @@ ${marketOverview.market_sentiment === 'Positive' || marketOverview.market_sentim
         aiResponse = await getWealthAdvisorResponse(userMessage, userContext, systemPrompt);
       }
       
-      // Add AI response to conversation
+      // Add AI response to conversation (in-memory)
       conversationManager.addMessage(conversationId, aiResponse, true);
+      
+      // Add AI response to persistent history
+      await conversationHistoryService.addMessage(conversationId, aiResponse, true);
       
       const response = {
         id: Date.now(),

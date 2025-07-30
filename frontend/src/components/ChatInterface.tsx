@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import io, { Socket } from 'socket.io-client';
 import MessageRenderer from './MessageRenderer';
 import { config } from '../config/environment';
+import { apiService } from '../services/apiService';
 
 interface Message {
   id: number;
@@ -10,7 +11,34 @@ interface Message {
   isBot: boolean;
 }
 
-const ChatInterface: React.FC = () => {
+interface ConversationMessage {
+  id: string;
+  content: string;
+  timestamp: string;
+  isBot: boolean;
+}
+
+interface ConversationData {
+  id: string;
+  title: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  messageCount: number;
+  tags: string[];
+  archived: boolean;
+  messages: ConversationMessage[];
+}
+
+interface ChatInterfaceProps {
+  selectedConversationId?: string;
+  onConversationChange?: (conversationId: string) => void;
+}
+
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ 
+  selectedConversationId, 
+  onConversationChange 
+}) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -20,9 +48,10 @@ const ChatInterface: React.FC = () => {
   const [connectionError, setConnectionError] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const initializeConversation = () => {
+  const initializeConversation = useCallback(() => {
     const newConversationId = `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     setConversationId(newConversationId);
+    onConversationChange?.(newConversationId);
     
     // Welcome message with enhanced formatting
     const welcomeMessage = {
@@ -46,7 +75,28 @@ I have access to your complete financial profile including your ₹5.6L portfoli
     
     setMessages([welcomeMessage]);
     return newConversationId;
-  };
+  }, [onConversationChange]);
+
+  const loadConversation = useCallback(async (conversationId: string) => {
+    try {
+      const conversation = await apiService.getConversation(conversationId) as ConversationData;
+      if (conversation && conversation.messages) {
+        const formattedMessages = conversation.messages.map((msg: ConversationMessage) => ({
+          id: parseInt(msg.id.replace('msg_', '').split('_')[0]) || Date.now(),
+          message: msg.content,
+          timestamp: msg.timestamp,
+          isBot: msg.isBot
+        }));
+        setMessages(formattedMessages);
+        setConversationId(conversationId);
+        onConversationChange?.(conversationId);
+      }
+    } catch (error) {
+      console.error('Failed to load conversation:', error);
+      // Fallback to new conversation if loading fails
+      initializeConversation();
+    }
+  }, [onConversationChange, initializeConversation]);
 
   useEffect(() => {
     console.log('Connecting to backend:', config.backendUrl);
@@ -99,16 +149,32 @@ I have access to your complete financial profile including your ₹5.6L portfoli
     });
 
     // Initialize first conversation
-    initializeConversation();
+    if (!selectedConversationId) {
+      initializeConversation();
+    }
 
     return () => {
       newSocket.close();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);  // Only run once on mount
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Handle conversation switching from parent component
+  useEffect(() => {
+    if (selectedConversationId && selectedConversationId !== conversationId) {
+      if (selectedConversationId === '') {
+        // Start new conversation
+        initializeConversation();
+      } else {
+        // Load existing conversation
+        loadConversation(selectedConversationId);
+      }
+    }
+  }, [selectedConversationId, conversationId, initializeConversation, loadConversation]);
 
   const sendMessage = () => {
     if (!inputMessage.trim() || !socket || !isConnected) return;
@@ -140,7 +206,10 @@ I have access to your complete financial profile including your ₹5.6L portfoli
   };
 
   const startNewConversation = () => {
-    clearConversation();
+    const newConversationId = initializeConversation();
+    if (socket) {
+      socket.emit('conversation_cleared', { conversationId: newConversationId });
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

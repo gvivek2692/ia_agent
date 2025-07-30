@@ -127,6 +127,42 @@ class ApiService {
     }
   }
 
+  // Conversation History API methods
+  async getConversations(limit = 50, offset = 0, userId = 'demo-user') {
+    return this.makeRequest(`/conversations?limit=${limit}&offset=${offset}&userId=${userId}`);
+  }
+
+  async getConversation(conversationId: string) {
+    return this.makeRequest(`/conversations/${conversationId}`);
+  }
+
+  async deleteConversation(conversationId: string) {
+    return this.makeRequest(`/conversations/${conversationId}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async renameConversation(conversationId: string, title: string) {
+    return this.makeRequest(`/conversations/${conversationId}/title`, {
+      method: 'PUT',
+      body: JSON.stringify({ title })
+    });
+  }
+
+  async archiveConversation(conversationId: string) {
+    return this.makeRequest(`/conversations/${conversationId}/archive`, {
+      method: 'PUT'
+    });
+  }
+
+  async searchConversations(query: string, userId = 'demo-user') {
+    return this.makeRequest(`/conversations/search/${encodeURIComponent(query)}?userId=${userId}`);
+  }
+
+  async getConversationStats(userId = 'demo-user') {
+    return this.makeRequest(`/conversations/stats?userId=${userId}`);
+  }
+
   // Test all API endpoints
   async testAllEndpoints() {
     const results = {

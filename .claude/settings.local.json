@@ -10,7 +10,12 @@
       "Bash(pkill:*)",
       "Bash(node:*)",
       "Bash(npm run build:*)",
-      "Bash(/dev/null)"
+      "Bash(/dev/null)",
+      "Bash(git checkout:*)",
+      "Bash(ls:*)",
+      "Bash(kill:*)",
+      "Bash(PORT=3001 node server.js)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
