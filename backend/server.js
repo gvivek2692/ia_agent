@@ -3,13 +3,23 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const dotenv = require('dotenv');
+
+// Load environment variables FIRST
+const envResult = dotenv.config();
+if (envResult.error) {
+  console.error('Error loading .env file:', envResult.error);
+}
+
+// Now import modules that depend on environment variables
 const { OpenAI } = require('openai');
 const { getUserContext, getPortfolioSummary, getGoalsOverview, getRecentActivity } = require('./data');
 const conversationManager = require('./services/conversationManager');
 const marketDataService = require('./services/marketDataService');
 const conversationHistoryService = require('./services/conversationHistoryService');
-
-dotenv.config();
+const authService = require('./services/authService');
+const webSearchService = require('./services/webSearchService');
+const { users, getUserById, getUserByEmail, getGoalsByUserId, getAllUsers } = require('./data/multipleUsers');
+const { getUserTransactions } = require('./data/userTransactions');
 
 const app = express();
 const server = http.createServer(app);
@@ -49,37 +59,88 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// Wealth advisor response function as specified in CLAUDE.md
+// Wealth advisor response function with web search integration
 const getWealthAdvisorResponse = async (userMessage, userContext = null, customSystemPrompt = null) => {
   try {
-    const systemPrompt = customSystemPrompt || buildSystemPrompt(userContext);
+    let systemPrompt = customSystemPrompt || buildSystemPrompt(userContext);
+    let webSearchResults = null;
+    let searchSources = [];
     
-    const response = await openai.responses.create({
-      model: "gpt-4.1-mini",
-      tools: [{"type": "web_search_preview"}],
-      input: `${systemPrompt}
-
-User Question: ${userMessage}`
+    // Check if web search is needed for this query
+    if (webSearchService.shouldPerformWebSearch(userMessage, userContext)) {
+      console.log('Performing web search for query:', userMessage);
+      
+      // Generate optimized search query
+      const searchQuery = webSearchService.generateSearchQuery(userMessage, userContext);
+      console.log('Search query:', searchQuery);
+      
+      // Perform web search
+      const searchResults = await webSearchService.search(searchQuery, {
+        location: userContext?.user_profile?.location || 'India',
+        num: 5
+      });
+      
+      if (!searchResults.error) {
+        webSearchResults = webSearchService.summarizeSearchResults(searchResults);
+        searchSources = webSearchService.extractSources(searchResults);
+        
+        console.log('Web search completed. Found', searchSources.length, 'sources');
+        
+        // Enhance system prompt with search results
+        systemPrompt += `\n\n${webSearchResults}`;
+      } else {
+        console.log('Web search error:', searchResults.error);
+      }
+    }
+    
+    // Check if OpenAI API key is configured
+    if (!process.env.OPENAI_API_KEY) {
+      console.warn('OpenAI API key not configured, using demo response');
+      let demoResponse = "I'm currently in demo mode. In production, I would provide AI-powered financial advice using the latest market data and your personal financial context.";
+      
+      if (webSearchResults) {
+        demoResponse += `\n\nBased on current web search:\n${webSearchResults}`;
+      }
+      
+      return demoResponse;
+    }
+    
+    // Use the standard chat completions API
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini", // Using a valid model name
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMessage }
+      ],
+      max_tokens: webSearchResults ? 2500 : 1500, // More tokens if we have search results
+      temperature: 0.7
     });
 
-    return response.output_text;
+    let aiResponse = response.choices[0].message.content;
+    
+    // Add source citations if we performed web search
+    if (searchSources.length > 0) {
+      aiResponse += `\n\n---\n**Sources:**\n`;
+      searchSources.forEach((source, index) => {
+        const sourceNum = index + 1;
+        let sourceText = `${sourceNum}. [${source.title}](${source.link})`;
+        if (source.date) sourceText += ` - ${source.date}`;
+        aiResponse += sourceText + '\n';
+      });
+    }
+
+    return aiResponse;
   } catch (error) {
     console.error('OpenAI API error:', error);
-    // Fallback to regular chat completion if responses API is not available
-    try {
-      const systemPrompt = customSystemPrompt || buildSystemPrompt(userContext);
-      const fallbackResponse = await openai.chat.completions.create({
-        model: "gpt-4-turbo-preview",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userMessage }
-        ],
-        max_tokens: 1500,
-        temperature: 0.7
-      });
-      return fallbackResponse.choices[0].message.content;
-    } catch (fallbackError) {
-      console.error('Fallback API error:', fallbackError);
+    
+    // Provide more specific error messages based on error type
+    if (error.code === 'invalid_api_key') {
+      return "I'm experiencing authentication issues with the AI service. Please try again later.";
+    } else if (error.code === 'rate_limit_exceeded') {
+      return "I'm currently handling many requests. Please try again in a moment.";
+    } else if (error.code === 'model_not_found') {
+      return "I'm experiencing technical difficulties with the AI model. Please try again later.";
+    } else {
       return "I apologize, but I'm experiencing technical difficulties. Please try again in a moment.";
     }
   }
@@ -93,22 +154,38 @@ const buildSystemPrompt = (userContext, conversationContext = '') => {
 Your role is to provide personalized, actionable financial advice to help users achieve their financial goals.
 
 CORE CAPABILITIES:
-- Portfolio analysis and optimization
+- Portfolio analysis and optimization with real-time market data
 - Investment recommendations for Indian markets (stocks, mutual funds, bonds)
 - Financial goal planning and SIP calculations
 - Risk assessment and asset allocation
 - Tax planning and optimization
-- Market analysis and economic insights
+- Live market analysis and economic insights via web search
 - Expense analysis and budgeting advice
+- Current news analysis affecting user's investments
+
+REAL-TIME DATA ACCESS:
+- I have access to live web search for current market prices, news, and economic data
+- I automatically search for latest information when discussing market conditions
+- I can provide up-to-date analysis of stocks in user's portfolio
+- I stay informed about latest RBI policies, budget announcements, and market events
 
 COMMUNICATION STYLE:
 - Professional yet conversational
-- Clear, actionable advice
+- Clear, actionable advice with current market context
 - Always include risk warnings where appropriate
-- Use current market data when relevant (search the web for latest information)
+- When web search results are provided, ALWAYS use them prominently in your response
+- Reference specific data points, prices, and news from the search results
 - Explain financial concepts in simple terms
-- Focus on long-term wealth building
-- Address the user as "Priya" when appropriate
+- Focus on long-term wealth building with current market awareness
+- Personalize advice based on user's specific profile and current market conditions
+
+WEB SEARCH INTEGRATION:
+- When CURRENT WEB SEARCH RESULTS are provided, they contain the most recent market data
+- ALWAYS prioritize this real-time information over general knowledge
+- Quote specific prices, percentages, and data from the search results
+- Mention when information is "based on latest market data" or "according to recent reports"
+- Use the exact figures and details provided in the search results
+- Do NOT provide generic market information when current search results are available
 
 INDIAN MARKET FOCUS:
 - NSE and BSE listed stocks
@@ -188,7 +265,251 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Demo data endpoints
+// Authentication endpoints
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email and password are required',
+        code: 'MISSING_CREDENTIALS'
+      });
+    }
+
+    const result = await authService.login(email, password);
+    const statusCode = result.success ? 200 : 401;
+    res.status(statusCode).json(result);
+  } catch (error) {
+    console.error('Login endpoint error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+app.post('/api/auth/logout', async (req, res) => {
+  try {
+    const sessionId = req.headers['x-session-id'];
+    
+    if (!sessionId) {
+      return res.status(400).json({
+        success: false,
+        error: 'Session ID required',
+        code: 'MISSING_SESSION_ID'
+      });
+    }
+
+    const result = await authService.logout(sessionId);
+    const statusCode = result.success ? 200 : 404;
+    res.status(statusCode).json(result);
+  } catch (error) {
+    console.error('Logout endpoint error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+app.get('/api/auth/verify', (req, res) => {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  const sessionId = req.headers['x-session-id'];
+  
+  if (token) {
+    const result = authService.verifyToken(token);
+    return res.json(result);
+  }
+  
+  if (sessionId) {
+    const result = authService.getSession(sessionId);
+    return res.json(result);
+  }
+  
+  res.status(400).json({
+    success: false,
+    error: 'Token or session ID required',
+    code: 'MISSING_AUTH'
+  });
+});
+
+app.get('/api/auth/session', (req, res) => {
+  const sessionId = req.headers['x-session-id'];
+  
+  if (!sessionId) {
+    return res.status(400).json({
+      success: false,
+      error: 'Session ID required',
+      code: 'MISSING_SESSION_ID'
+    });
+  }
+  
+  const result = authService.getUserBySession(sessionId);
+  const statusCode = result.success ? 200 : 404;
+  res.status(statusCode).json(result);
+});
+
+// User management endpoints
+app.get('/api/users', (req, res) => {
+  try {
+    const allUsers = getAllUsers();
+    res.json({
+      success: true,
+      users: allUsers,
+      count: allUsers.length
+    });
+  } catch (error) {
+    console.error('Get users error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve users',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+app.get('/api/users/:userId', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = getUserById(userId);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    // Remove password from response
+    const { credentials, ...userWithoutPassword } = user;
+    const { password, ...credentialsWithoutPassword } = credentials;
+
+    res.json({
+      success: true,
+      user: {
+        ...userWithoutPassword,
+        credentials: credentialsWithoutPassword
+      }
+    });
+  } catch (error) {
+    console.error('Get user error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve user',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+// User-specific data endpoints (protected)
+app.get('/api/user/:userId/context', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = getUserById(userId);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    // Build user context similar to existing getUserContext but for specific user
+    const userContext = {
+      user_profile: user.user_profile,
+      financial_profile: user.financial_profile,
+      investment_profile: user.investment_profile,
+      portfolio: user.portfolio,
+      financial_goals: {
+        goals: getGoalsByUserId(userId)
+      },
+      recent_transactions: getUserTransactions(userId).slice(0, 10)
+    };
+
+    res.json(userContext);
+  } catch (error) {
+    console.error('Get user context error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve user context',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+app.get('/api/user/:userId/transactions', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { limit = 50, offset = 0 } = req.query;
+    
+    const user = getUserById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    const transactions = getUserTransactions(userId);
+    const paginatedTransactions = transactions.slice(
+      parseInt(offset), 
+      parseInt(offset) + parseInt(limit)
+    );
+
+    res.json({
+      success: true,
+      transactions: paginatedTransactions,
+      total: transactions.length,
+      limit: parseInt(limit),
+      offset: parseInt(offset)
+    });
+  } catch (error) {
+    console.error('Get user transactions error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve transactions',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+app.get('/api/user/:userId/goals', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = getUserById(userId);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    const goals = getGoalsByUserId(userId);
+    res.json({
+      success: true,
+      goals: goals,
+      count: goals.length
+    });
+  } catch (error) {
+    console.error('Get user goals error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to retrieve goals',
+      code: 'SERVER_ERROR'
+    });
+  }
+});
+
+// Legacy demo data endpoints (for backward compatibility)
 app.get('/api/user/context', (req, res) => {
   res.json(getUserContext());
 });
@@ -199,6 +520,37 @@ app.get('/api/portfolio/summary', (req, res) => {
 
 app.get('/api/goals/overview', (req, res) => {
   res.json(getGoalsOverview());
+});
+
+// Web search API endpoint for testing
+app.post('/api/search', async (req, res) => {
+  try {
+    const { query, location, num } = req.body;
+    
+    if (!query) {
+      return res.status(400).json({
+        success: false,
+        error: 'Search query is required'
+      });
+    }
+
+    const searchResults = await webSearchService.search(query, {
+      location: location || 'India',
+      num: num || 5
+    });
+
+    res.json({
+      success: !searchResults.error,
+      results: searchResults,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Search API error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Search service unavailable'
+    });
+  }
 });
 
 app.get('/api/transactions/recent', (req, res) => {
@@ -319,14 +671,31 @@ io.on('connection', (socket) => {
     try {
       console.log('Received message:', data);
       
-      const { message: userMessage, conversationId, conversationHistory } = data;
-      const userContext = data.context || null;
+      const { message: userMessage, conversationId, conversationHistory, userId } = data;
+      let userContext = data.context || null;
+      
+      // If userId is provided, get specific user context
+      if (userId) {
+        const user = getUserById(userId);
+        if (user) {
+          userContext = {
+            user_profile: user.user_profile,
+            financial_profile: user.financial_profile,
+            investment_profile: user.investment_profile,
+            portfolio: user.portfolio, // Use user's specific portfolio data
+            financial_goals: {
+              goals: getGoalsByUserId(userId)
+            },
+            recent_transactions: getUserTransactions(userId).slice(0, 10)
+          };
+        }
+      }
       
       // Add user message to conversation (in-memory)
       conversationManager.addMessage(conversationId, userMessage, false);
       
-      // Add user message to persistent history
-      await conversationHistoryService.addMessage(conversationId, userMessage, false);
+      // Add user message to persistent history with userId
+      await conversationHistoryService.addMessage(conversationId, userMessage, false, userId || 'demo-user');
       
       // Get conversation context for AI
       const conversationContext = conversationManager.buildConversationContext(conversationId);
@@ -335,72 +704,110 @@ io.on('connection', (socket) => {
       let aiResponse;
       
       if (userMessage.toLowerCase().includes('portfolio summary')) {
-        const portfolioData = getPortfolioSummary();
+        // Use user-specific portfolio data from userContext
+        const portfolio = userContext?.portfolio || {};
+        const userName = userContext?.user_profile?.name || 'User';
+        
         const contextualIntro = conversationContext.includes('portfolio') ? 
           "As we discussed earlier, let me provide an updated view of your portfolio:" :
-          "Here's a comprehensive overview of your current portfolio:";
+          `Here's a comprehensive overview of your current portfolio, ${userName}:`;
+          
+        // Generate asset allocation display from user's portfolio
+        const assetAllocation = portfolio.summary?.asset_allocation || {};
+        const assetAllocationRows = Object.entries(assetAllocation).map(([key, data]) => {
+          const assetName = key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+          return `| **${assetName}** | ₹${data.value?.toLocaleString() || 'N/A'} | ${data.percentage?.toFixed(1) || 'N/A'}% |`;
+        }).join('\n');
+
+        // Generate top holdings from user's stocks and mutual funds
+        const stocks = portfolio.stocks || [];
+        const mutualFunds = portfolio.mutual_funds || [];
+        const topHoldings = [...stocks.slice(0, 2), ...mutualFunds.slice(0, 2)];
+        
+        const holdingsDisplay = topHoldings.map(holding => {
+          const name = holding.company_name || holding.scheme_name || 'Unknown';
+          const currentValue = holding.current_value || 0;
+          const gainLoss = holding.gain_loss || 0;
+          const gainLossPercent = holding.gain_loss_percentage || 0;
+          return `- **${name}**: ₹${currentValue.toLocaleString()} (${gainLoss >= 0 ? '+' : ''}₹${gainLoss.toLocaleString()}, ${gainLoss >= 0 ? '+' : ''}${gainLossPercent.toFixed(2)}%)`;
+        }).join('\n');
           
         aiResponse = `# 📊 Your Portfolio Summary
 
 ${contextualIntro}
 
-**Total Portfolio Value:** ₹${portfolioData.total_value.toLocaleString()} 
+**Total Portfolio Value:** ₹${portfolio.summary?.total_current_value?.toLocaleString() || 'N/A'} 
 
 **Performance Overview:**
-- **Total Investment:** ₹${portfolioData.total_investment.toLocaleString()}
-- **Current Value:** ₹${portfolioData.total_value.toLocaleString()}
-- **Total Gains:** ₹${portfolioData.total_gains.toLocaleString()} (${portfolioData.gain_percentage}%)
+- **Total Investment:** ₹${portfolio.summary?.total_investment?.toLocaleString() || 'N/A'}
+- **Current Value:** ₹${portfolio.summary?.total_current_value?.toLocaleString() || 'N/A'}
+- **Total Gains:** ₹${portfolio.summary?.total_gain_loss?.toLocaleString() || 'N/A'} (${portfolio.summary?.gain_loss_percentage?.toFixed(1) || 'N/A'}%)
 
 ## Asset Allocation
 
 | Asset Class | Value | Allocation |
 |-------------|--------|------------|
-| **Stocks** | ₹${portfolioData.top_holdings.filter(h => h.symbol).reduce((sum, h) => sum + h.current_value, 0).toLocaleString()} | 17.3% |
-| **Mutual Funds** | ₹${portfolioData.top_holdings.filter(h => h.scheme_name).reduce((sum, h) => sum + h.current_value, 0).toLocaleString()} | 24.8% |
-| **PPF** | ₹1,85,000 | 32.8% |
-| **EPF** | ₹1,25,000 | 22.2% |
+${assetAllocationRows}
 
 ## Top Holdings
-${portfolioData.top_holdings.slice(0, 3).map(holding => 
-  `- **${holding.company_name || holding.scheme_name}**: ₹${holding.current_value.toLocaleString()} (${holding.gain_loss >= 0 ? '+' : ''}₹${holding.gain_loss.toLocaleString()})`
-).join('\n')}
+${holdingsDisplay || 'No holdings data available'}
 
 ## 💡 Key Insights
-- Your portfolio is **well-diversified** across equity and debt
-- **Strong tax-saving component** with PPF and EPF (55% of portfolio)
-- **Consistent SIP discipline** is building wealth systematically
-- Consider increasing equity allocation for higher growth potential
+- Your portfolio shows **${portfolio.summary?.gain_loss_percentage > 15 ? 'strong' : portfolio.summary?.gain_loss_percentage > 5 ? 'good' : 'steady'}** performance with ${portfolio.summary?.gain_loss_percentage?.toFixed(1)}% overall gains
+- **Risk Profile**: ${userContext?.investment_profile?.risk_tolerance || 'Moderate'} investor approach
+- **Investment Experience**: ${userContext?.investment_profile?.investment_experience || 'Developing'} in the market
+- **Monthly SIP Total**: ₹${mutualFunds.reduce((sum, mf) => sum + (mf.sip_amount || 0), 0).toLocaleString()} across ${mutualFunds.length} funds
 
-*Would you like me to analyze any specific aspect of your portfolio?*`;
+*Would you like me to analyze any specific aspect of your portfolio or discuss rebalancing strategies?*`;
       } else if (userMessage.toLowerCase().includes('goals') || userMessage.toLowerCase().includes('goal')) {
-        const goalsData = getGoalsOverview();
+        // Use user-specific goals data from userContext
+        const userGoals = userContext?.financial_goals?.goals || [];
+        const userName = userContext?.user_profile?.name || 'User';
+        
         const contextualIntro = conversationContext.includes('goals') ? 
           "Building on our previous discussion about your financial goals:" :
-          "Let's review your financial goals progress:";
+          `Let's review your financial goals progress, ${userName}:`;
+          
+        // Generate goals table from user's specific goals
+        const goalsRows = userGoals.map(goal => {
+          const progressIcon = goal.progress_percentage >= 50 ? '✅' : goal.progress_percentage >= 25 ? '⚠️' : '🔴';
+          const status = goal.progress_percentage >= 50 ? 'On Track' : goal.progress_percentage >= 25 ? 'Behind' : 'Needs Attention';
+          return `| **${goal.name}** | ${goal.progress_percentage}% | ₹${goal.current_amount?.toLocaleString() || 'N/A'} | ₹${goal.target_amount?.toLocaleString() || 'N/A'} | ${progressIcon} ${status} |`;
+        }).join('\n');
+
+        // Find next milestone (goal with highest priority and reasonable progress)
+        const nextMilestone = userGoals.find(goal => goal.priority === 'High' && goal.progress_percentage < 100) || userGoals[0];
+        
+        // Generate recommendations based on goals
+        const recommendations = userGoals.map(goal => {
+          if (goal.progress_percentage >= 75) {
+            return `- **${goal.name}**: Excellent progress! You're on track to achieve this goal`;
+          } else if (goal.progress_percentage >= 50) {
+            return `- **${goal.name}**: Good progress! Consider increasing monthly contributions to accelerate`;
+          } else if (goal.progress_percentage >= 25) {
+            return `- **${goal.name}**: Behind schedule. Consider increasing SIP by 20-30% to stay on track`;
+          } else {
+            return `- **${goal.name}**: Needs immediate attention. Consider a dedicated investment plan`;
+          }
+        }).join('\n');
           
         aiResponse = `# 🎯 Your Financial Goals Progress
 
 ${contextualIntro}
 
-You have **${goalsData.total_goals} active financial goals** with good progress across priorities.
+You have **${userGoals.length} active financial goals** with varying progress levels.
 
 ## Current Status
 
 | Goal | Progress | Current | Target | Status |
 |------|----------|---------|--------|--------|
-| **Emergency Fund** | 58.3% | ₹3,50,000 | ₹6,00,000 | ✅ On Track |
-| **House Down Payment** | 28.3% | ₹4,25,000 | ₹15,00,000 | ⚠️ Behind |
-| **Retirement Corpus** | 1.6% | ₹7,85,000 | ₹5,00,00,000 | ✅ Early Stage |
-| **Europe Vacation** | 31.3% | ₹1,25,000 | ₹4,00,000 | ✅ On Track |
+${goalsRows || 'No goals data available'}
 
-## 🔥 Next Milestone
-**${goalsData.next_milestone.goal_name}**: ₹${goalsData.next_milestone.amount.toLocaleString()} by ${new Date(goalsData.next_milestone.target_date).toLocaleDateString()}
+${nextMilestone ? `## 🔥 Next Milestone
+**${nextMilestone.name}**: ₹${nextMilestone.target_amount?.toLocaleString()} by ${new Date(nextMilestone.target_date).toLocaleDateString()}` : ''}
 
 ## 📈 Recommendations
-- **Emergency Fund**: Great progress! You'll reach your target by Dec 2024
-- **House Down Payment**: Consider increasing monthly SIP by ₹10,000 to stay on track
-- **Retirement**: Perfect start! Power of compounding will accelerate growth
-- **Vacation Fund**: You're ahead of schedule - well done!
+${recommendations || 'Set up specific financial goals to track your progress better'}
 
 *Need help optimizing your goal strategy? I can suggest specific investment adjustments.*`;
       } else if (userMessage.toLowerCase().includes('market') && 
@@ -450,8 +857,8 @@ ${marketOverview.market_sentiment === 'Positive' || marketOverview.market_sentim
       // Add AI response to conversation (in-memory)
       conversationManager.addMessage(conversationId, aiResponse, true);
       
-      // Add AI response to persistent history
-      await conversationHistoryService.addMessage(conversationId, aiResponse, true);
+      // Add AI response to persistent history with userId
+      await conversationHistoryService.addMessage(conversationId, aiResponse, true, userId || 'demo-user');
       
       const response = {
         id: Date.now(),
@@ -463,7 +870,28 @@ ${marketOverview.market_sentiment === 'Positive' || marketOverview.market_sentim
       socket.emit('chat_response', response);
     } catch (error) {
       console.error('Error processing message:', error);
-      socket.emit('error', { message: 'Failed to process message' });
+      
+      // Provide more detailed error information
+      let errorMessage = 'Failed to process message';
+      if (error.message) {
+        errorMessage = `Processing error: ${error.message}`;
+      }
+      
+      socket.emit('error', { 
+        message: errorMessage,
+        type: 'chat_processing_error',
+        timestamp: new Date().toISOString()
+      });
+      
+      // Send a fallback response to keep the conversation flowing
+      const fallbackResponse = {
+        id: Date.now(),
+        message: "I apologize, but I'm experiencing technical difficulties processing your request. Please try rephrasing your question or try again in a moment.",
+        timestamp: new Date().toISOString(),
+        isBot: true
+      };
+      
+      socket.emit('chat_response', fallbackResponse);
     }
   });
 
