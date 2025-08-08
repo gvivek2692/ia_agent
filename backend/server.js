@@ -3,6 +3,8 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const multer = require('multer');
+const path = require('path');
 
 // Load environment variables FIRST
 const envResult = dotenv.config();
@@ -20,6 +22,7 @@ const authService = require('./services/authService');
 const webSearchService = require('./services/webSearchService');
 const { users, getUserById, getUserByEmail, getGoalsByUserId, getAllUsers } = require('./data/multipleUsers');
 const { getUserTransactions } = require('./data/userTransactions');
+const uploadService = require('./services/uploadService');
 
 const app = express();
 const server = http.createServer(app);
@@ -53,6 +56,38 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = path.join(__dirname, 'uploads');
+    if (!require('fs').existsSync(uploadDir)) {
+      require('fs').mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    // Keep original filename with timestamp
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    // Accept Excel files only
+    if (file.mimetype === 'application/vnd.ms-excel' || 
+        file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+        file.originalname.match(/\.(xls|xlsx)$/)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only Excel files are allowed!'), false);
+    }
+  },
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10MB limit
+  }
+});
 
 // OpenAI client initialization
 const openai = new OpenAI({
@@ -208,9 +243,9 @@ CURRENT PORTFOLIO OVERVIEW:
 - Overall Gains: ₹${fullUserContext.portfolio.summary.total_gain_loss.toLocaleString()} (${fullUserContext.portfolio.summary.gain_loss_percentage}%)
 
 ASSET ALLOCATION:
-- Stocks: ₹${fullUserContext.portfolio.summary.asset_allocation.stocks.value.toLocaleString()} (${fullUserContext.portfolio.summary.asset_allocation.stocks.percentage}%)
-- Mutual Funds: ₹${fullUserContext.portfolio.summary.asset_allocation.mutual_funds.value.toLocaleString()} (${fullUserContext.portfolio.summary.asset_allocation.mutual_funds.percentage}%)
-- PPF: ₹${fullUserContext.portfolio.summary.asset_allocation.ppf.value.toLocaleString()} (${fullUserContext.portfolio.summary.asset_allocation.ppf.percentage}%)
+- Stocks: ₹${fullUserContext.portfolio.summary.asset_allocation.stocks?.value?.toLocaleString() || '0'} (${fullUserContext.portfolio.summary.asset_allocation.stocks?.percentage || '0.0'}%)
+- Mutual Funds: ₹${fullUserContext.portfolio.summary.asset_allocation.mutual_funds?.value?.toLocaleString() || '0'} (${fullUserContext.portfolio.summary.asset_allocation.mutual_funds?.percentage || '0.0'}%)
+- PPF: ₹${fullUserContext.portfolio.summary.asset_allocation.ppf?.value?.toLocaleString() || '0'} (${fullUserContext.portfolio.summary.asset_allocation.ppf?.percentage || '0.0'}%)
 
 FINANCIAL GOALS STATUS:
 ${fullUserContext.financial_goals.goals.map(goal => 
@@ -522,6 +557,127 @@ app.get('/api/goals/overview', (req, res) => {
   res.json(getGoalsOverview());
 });
 
+// Upload and User Registration Endpoints
+app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        error: 'No file uploaded',
+        code: 'NO_FILE'
+      });
+    }
+
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({
+        success: false,
+        error: 'Username and password are required',
+        code: 'MISSING_CREDENTIALS'
+      });
+    }
+
+    // Check if user already exists
+    if (uploadService.checkUserExists(username)) {
+      return res.status(409).json({
+        success: false,
+        error: 'Username already exists',
+        code: 'USER_EXISTS'
+      });
+    }
+
+    console.log('Processing file:', req.file.filename);
+    
+    // Parse Excel file
+    const parseResult = uploadService.parseExcelFile(req.file.path);
+    if (!parseResult.success) {
+      return res.status(400).json({
+        success: false,
+        error: parseResult.error,
+        code: 'PARSE_ERROR'
+      });
+    }
+
+    console.log(`Parsed ${parseResult.validRows} valid transactions from ${parseResult.totalRows} total rows`);
+
+    // Extract user profile
+    const userProfile = uploadService.extractUserProfile(parseResult.transactions);
+    
+    // Generate portfolio
+    const portfolio = uploadService.generatePortfolio(parseResult.transactions);
+    
+    // Create user account
+    const createResult = await uploadService.createUser(userProfile, username, password, portfolio);
+    
+    if (!createResult.success) {
+      return res.status(500).json({
+        success: false,
+        error: createResult.error,
+        code: 'USER_CREATION_ERROR'
+      });
+    }
+
+    // Clean up uploaded file
+    require('fs').unlinkSync(req.file.path);
+
+    res.json({
+      success: true,
+      message: 'Account created successfully',
+      userId: createResult.userId,
+      portfolio: {
+        totalSchemes: portfolio.mutual_funds.length,
+        totalInvestment: portfolio.summary.total_investment,
+        totalCurrentValue: portfolio.summary.total_current_value,
+        totalGainLoss: portfolio.summary.total_gain_loss,
+        gainLossPercentage: portfolio.summary.gain_loss_percentage
+      }
+    });
+
+  } catch (error) {
+    console.error('Upload error:', error);
+    
+    // Clean up file if it exists
+    if (req.file && require('fs').existsSync(req.file.path)) {
+      require('fs').unlinkSync(req.file.path);
+    }
+
+    res.status(500).json({
+      success: false,
+      error: 'File processing failed: ' + error.message,
+      code: 'PROCESSING_ERROR'
+    });
+  }
+});
+
+// Check username availability
+app.post('/api/check-username', (req, res) => {
+  try {
+    const { username } = req.body;
+    
+    if (!username) {
+      return res.status(400).json({
+        success: false,
+        error: 'Username is required'
+      });
+    }
+
+    const exists = uploadService.checkUserExists(username);
+    
+    res.json({
+      success: true,
+      available: !exists,
+      message: exists ? 'Username is already taken' : 'Username is available'
+    });
+  } catch (error) {
+    console.error('Username check error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to check username availability'
+    });
+  }
+});
+
 // Web search API endpoint for testing
 app.post('/api/search', async (req, res) => {
   try {
@@ -716,7 +872,7 @@ io.on('connection', (socket) => {
         const assetAllocation = portfolio.summary?.asset_allocation || {};
         const assetAllocationRows = Object.entries(assetAllocation).map(([key, data]) => {
           const assetName = key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
-          return `| **${assetName}** | ₹${data.value?.toLocaleString() || 'N/A'} | ${data.percentage?.toFixed(1) || 'N/A'}% |`;
+          return `| **${assetName}** | ₹${data?.value?.toLocaleString() || 'N/A'} | ${data?.percentage?.toFixed(1) || 'N/A'}% |`;
         }).join('\n');
 
         // Generate top holdings from user's stocks and mutual funds

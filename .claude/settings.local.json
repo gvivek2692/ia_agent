@@ -15,7 +15,12 @@
       "Bash(ls:*)",
       "Bash(kill:*)",
       "Bash(PORT=3001 node server.js)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm install:*)",
+      "Bash(true)",
+      "Bash(npm start)",
+      "WebFetch(domain:serper.dev)",
+      "Bash(timeout 5s npm start)"
     ],
     "deny": []
   }

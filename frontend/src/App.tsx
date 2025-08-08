@@ -1,11 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatInterface from './components/ChatInterface';
 import ConnectionTest from './components/ConnectionTest';
 import ConversationHistory from './components/ConversationHistory';
+import LoginForm from './components/LoginForm';
+import UserList from './components/UserList';
+import UserProfile from './components/UserProfile';
+import UploadStatement from './components/UploadStatement';
+import { apiService } from './services/apiService';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  profession: string;
+  location: string;
+  age: number;
+  experience_level: string;
+  risk_tolerance: string;
+}
+
+type AppView = 'login' | 'userList' | 'chat' | 'upload';
 
 function App() {
+  const [currentView, setCurrentView] = useState<AppView>('login');
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [sessionId, setSessionId] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentConversationId, setCurrentConversationId] = useState<string>('');
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
+
+  // Check for existing session on app load
+  useEffect(() => {
+    checkExistingSession();
+  }, []);
+
+  const checkExistingSession = async () => {
+    const savedSessionId = localStorage.getItem('wealth_advisor_session');
+    const savedUser = localStorage.getItem('wealth_advisor_user');
+
+    if (savedSessionId && savedUser) {
+      try {
+        const session = await apiService.getSession(savedSessionId) as any;
+        if (session.success) {
+          setCurrentUser(JSON.parse(savedUser));
+          setSessionId(savedSessionId);
+          setCurrentView('chat');
+        } else {
+          // Invalid session, clear storage
+          localStorage.removeItem('wealth_advisor_session');
+          localStorage.removeItem('wealth_advisor_user');
+        }
+      } catch (error) {
+        console.error('Session check error:', error);
+        localStorage.removeItem('wealth_advisor_session');
+        localStorage.removeItem('wealth_advisor_user');
+      }
+    }
+    
+    setIsAuthChecking(false);
+  };
+
+  const handleLoginSuccess = (user: User, newSessionId: string) => {
+    setCurrentUser(user);
+    setSessionId(newSessionId);
+    setCurrentView('chat');
+    
+    // Save to localStorage for persistence
+    localStorage.setItem('wealth_advisor_session', newSessionId);
+    localStorage.setItem('wealth_advisor_user', JSON.stringify(user));
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setSessionId('');
+    setCurrentView('login');
+    setCurrentConversationId('');
+    setSidebarOpen(false);
+    
+    // Clear localStorage
+    localStorage.removeItem('wealth_advisor_session');
+    localStorage.removeItem('wealth_advisor_user');
+  };
+
+  const handleSelectUserFromList = async (email: string) => {
+    try {
+      const response = await apiService.login(email, 'demo123') as any;
+      
+      if (response.success) {
+        handleLoginSuccess(response.user, response.sessionId);
+      }
+    } catch (error) {
+      console.error('Auto-login error:', error);
+      setCurrentView('login');
+    }
+  };
 
   const handleNewConversation = () => {
     setCurrentConversationId('');
@@ -21,6 +109,65 @@ function App() {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleUploadSuccess = (result: any) => {
+    // After successful upload, redirect to login to use the new account
+    alert(`Account created successfully! You can now login with your username.`);
+    setCurrentView('login');
+  };
+
+  // Show loading screen while checking authentication
+  if (isAuthChecking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading Wealth Manager AI...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login form
+  if (currentView === 'login') {
+    return (
+      <LoginForm
+        onLoginSuccess={handleLoginSuccess}
+        onShowUserList={() => setCurrentView('userList')}
+        onShowUpload={() => setCurrentView('upload')}
+      />
+    );
+  }
+
+  // Show user list
+  if (currentView === 'userList') {
+    return (
+      <UserList
+        onSelectUser={handleSelectUserFromList}
+        onBack={() => setCurrentView('login')}
+      />
+    );
+  }
+
+  // Show upload form
+  if (currentView === 'upload') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+        <div className="container mx-auto px-4">
+          <div className="mb-6 text-center">
+            <button
+              onClick={() => setCurrentView('login')}
+              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium mb-4"
+            >
+              ← Back to Login
+            </button>
+          </div>
+          <UploadStatement onSuccess={handleUploadSuccess} />
+        </div>
+      </div>
+    );
+  }
+
+  // Show main chat interface (authenticated)
   return (
     <div className="min-h-screen bg-gray-50 relative">
       {/* Conversation History Sidebar */}
@@ -30,6 +177,7 @@ function App() {
         currentConversationId={currentConversationId}
         onSelectConversation={handleSelectConversation}
         onNewConversation={handleNewConversation}
+        userId={currentUser?.id}
       />
 
       <div className={`transition-all duration-300 ${sidebarOpen ? 'lg:ml-72' : ''}`}>
@@ -46,9 +194,18 @@ function App() {
                 </button>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">Wealth Manager AI</h1>
-                  <p className="text-sm text-gray-600 mt-1">Your personal financial planning assistant</p>
+                  <p className="text-sm text-gray-600 mt-1">Your personalized financial planning assistant</p>
                 </div>
               </div>
+              
+              {/* User Profile Component */}
+              {currentUser && (
+                <UserProfile
+                  user={currentUser}
+                  sessionId={sessionId}
+                  onLogout={handleLogout}
+                />
+              )}
             </div>
           </div>
         </header>
@@ -62,6 +219,8 @@ function App() {
           <ChatInterface 
             selectedConversationId={currentConversationId}
             onConversationChange={setCurrentConversationId}
+            userId={currentUser?.id}
+            userName={currentUser?.name}
           />
         </main>
       </div>

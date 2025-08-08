@@ -85,8 +85,8 @@ class ApiService {
     return this.makeDirectRequest<HealthResponse>('/health');
   }
 
-  // User context
-  async getUserContext() {
+  // Legacy user context (for backward compatibility)
+  async getLegacyUserContext() {
     return this.makeRequest('/user/context');
   }
 
@@ -163,6 +163,97 @@ class ApiService {
     return this.makeRequest(`/conversations/stats?userId=${userId}`);
   }
 
+  // Authentication methods
+  async login(email: string, password: string) {
+    return this.makeRequest('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password })
+    });
+  }
+
+  async logout(sessionId: string) {
+    return this.makeRequest('/auth/logout', {
+      method: 'POST',
+      headers: {
+        'x-session-id': sessionId
+      }
+    });
+  }
+
+  async verifyAuth(token?: string, sessionId?: string) {
+    const headers: Record<string, string> = {};
+    if (token) headers.authorization = `Bearer ${token}`;
+    if (sessionId) headers['x-session-id'] = sessionId;
+
+    return this.makeRequest('/auth/verify', { headers });
+  }
+
+  async getSession(sessionId: string) {
+    return this.makeRequest('/auth/session', {
+      headers: {
+        'x-session-id': sessionId
+      }
+    });
+  }
+
+  // User management methods
+  async getUsers() {
+    return this.makeRequest('/users');
+  }
+
+  async getUser(userId: string) {
+    return this.makeRequest(`/users/${userId}`);
+  }
+
+  async getUserContext(userId: string) {
+    return this.makeRequest(`/user/${userId}/context`);
+  }
+
+  async getUserTransactions(userId: string, limit = 50, offset = 0) {
+    return this.makeRequest(`/user/${userId}/transactions?limit=${limit}&offset=${offset}`);
+  }
+
+  async getUserGoals(userId: string) {
+    return this.makeRequest(`/user/${userId}/goals`);
+  }
+
+  // Upload and registration methods
+  async checkUsernameAvailability(username: string) {
+    return this.makeRequest('/check-username', {
+      method: 'POST',
+      body: JSON.stringify({ username })
+    });
+  }
+
+  async uploadMfStatement(file: File, username: string, password: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('username', username);
+    formData.append('password', password);
+
+    const url = `${this.baseUrl}/upload/mf-statement`;
+    
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+        // Don't set Content-Type header - let browser set it with boundary for FormData
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error(`Upload request failed:`, error);
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Upload request failed');
+    }
+  }
+
   // Test all API endpoints
   async testAllEndpoints() {
     const results = {
@@ -181,7 +272,7 @@ class ApiService {
     }
 
     try {
-      await this.getUserContext();
+      await this.getLegacyUserContext();
       results.userContext.success = true;
     } catch (error) {
       results.userContext.error = error instanceof Error ? error.message : 'Unknown error';

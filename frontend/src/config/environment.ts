@@ -15,7 +15,7 @@ const getEnvironmentConfig = (): EnvironmentConfig => {
   const isProduction = process.env.NODE_ENV === 'production';
   
   // Always use deployed backend for now - change this if you want to use local backend
-  const USE_LOCAL_BACKEND = false; // Set to true if you want to use local backend
+  const USE_LOCAL_BACKEND = true; // Set to true if you want to use local backend
   
   // Use environment variables if available, otherwise use deployed backend
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 

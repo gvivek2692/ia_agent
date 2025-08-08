@@ -1,0 +1,24 @@
+{
+  "id": "conv_1754668180246_5peh30jo8",
+  "title": "Show me my portfolio summary...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-08T15:51:02.305Z",
+  "updatedAt": "2025-08-08T15:51:02.321Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1754668262308_nnpble9s8",
+      "content": "Show me my portfolio summary",
+      "isBot": false,
+      "timestamp": "2025-08-08T15:51:02.308Z"
+    },
+    {
+      "id": "msg_1754668262321_0st18ncfm",
+      "content": "# 📊 Your Portfolio Summary\n\nAs we discussed earlier, let me provide an updated view of your portfolio:\n\n**Total Portfolio Value:** ₹1,650,946.77 \n\n**Performance Overview:**\n- **Total Investment:** ₹1,397,930.1\n- **Current Value:** ₹1,650,946.77\n- **Total Gains:** ₹253,016.67 (18.1%)\n\n## Asset Allocation\n\n| Asset Class | Value | Allocation |\n|-------------|--------|------------|\n| **Mutual Funds** | ₹1,650,946.77 | 100.0% |\n\n## Top Holdings\n- **Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)**: ₹1,650,946.77 (+₹253,016.67, +18.10%)\n\n## 💡 Key Insights\n- Your portfolio shows **strong** performance with 18.1% overall gains\n- **Risk Profile**: Moderate investor approach\n- **Investment Experience**: Intermediate in the market\n- **Monthly SIP Total**: ₹24,963 across 1 funds\n\n*Would you like me to analyze any specific aspect of your portfolio or discuss rebalancing strategies?*",
+      "isBot": true,
+      "timestamp": "2025-08-08T15:51:02.321Z"
+    }
+  ]
+}

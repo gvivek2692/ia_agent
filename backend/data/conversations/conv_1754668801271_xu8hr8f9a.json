@@ -1,0 +1,30 @@
+{
+  "id": "conv_1754668801271_xu8hr8f9a",
+  "title": "hi...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-08T16:00:13.109Z",
+  "updatedAt": "2025-08-08T16:02:09.114Z",
+  "messageCount": 3,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1754668813111_3hjhvajdo",
+      "content": "hi",
+      "isBot": false,
+      "timestamp": "2025-08-08T16:00:13.111Z"
+    },
+    {
+      "id": "msg_1754668927618_lqlpopnzz",
+      "content": "hi",
+      "isBot": false,
+      "timestamp": "2025-08-08T16:02:07.618Z"
+    },
+    {
+      "id": "msg_1754668929114_hz1es1m0x",
+      "content": "Hello, Vivek! How can I assist you today with your financial goals or investments? If you have any specific questions or topics in mind, feel free to share!",
+      "isBot": true,
+      "timestamp": "2025-08-08T16:02:09.114Z"
+    }
+  ]
+}

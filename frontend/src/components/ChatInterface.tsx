@@ -33,11 +33,15 @@ interface ConversationData {
 interface ChatInterfaceProps {
   selectedConversationId?: string;
   onConversationChange?: (conversationId: string) => void;
+  userId?: string;
+  userName?: string;
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ 
   selectedConversationId, 
-  onConversationChange 
+  onConversationChange,
+  userId,
+  userName
 }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -56,7 +60,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     // Welcome message with enhanced formatting
     const welcomeMessage = {
       id: Date.now(),
-      message: `# Welcome to Wealth Manager AI! 👋
+      message: `# Welcome${userName ? ` ${userName}` : ''} to Wealth Manager AI! 👋
 
 I'm your personal AI wealth advisor specializing in **Indian financial markets**. I can help you with:
 
@@ -66,7 +70,7 @@ I'm your personal AI wealth advisor specializing in **Indian financial markets**
 - 💰 **Tax Optimization** - Maximize your savings
 - 📉 **Market Insights** - Current trends and opportunities
 
-I have access to your complete financial profile including your ₹5.6L portfolio, ongoing SIPs, and financial goals.
+${userId ? `I have access to your complete financial profile, portfolio, and transaction history.` : `I have access to demo financial data to showcase my capabilities.`}
 
 **How can I assist you today?**`,
       timestamp: new Date().toISOString(),
@@ -75,7 +79,7 @@ I have access to your complete financial profile including your ₹5.6L portfoli
     
     setMessages([welcomeMessage]);
     return newConversationId;
-  }, [onConversationChange]);
+  }, [onConversationChange, userName, userId]);
 
   const loadConversation = useCallback(async (conversationId: string) => {
     try {
@@ -144,8 +148,17 @@ I have access to your complete financial profile including your ₹5.6L portfoli
     });
 
     newSocket.on('error', (error) => {
-      console.error('Socket error:', error);
+      console.error('Socket error:', error?.message || error);
       setIsTyping(false);
+      // Optionally show user-friendly error message
+      if (error?.message) {
+        setMessages(prev => [...prev, {
+          id: Date.now(),
+          message: `⚠️ Error: ${error.message}. Please try again.`,
+          timestamp: new Date().toISOString(),
+          isBot: true
+        }]);
+      }
     });
 
     // Initialize first conversation
@@ -189,11 +202,12 @@ I have access to your complete financial profile including your ₹5.6L portfoli
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
     
-    // Send message with conversation context
+    // Send message with conversation context and user info
     socket.emit('chat_message', { 
       message: inputMessage,
       conversationId: conversationId,
-      conversationHistory: messages.slice(-10) // Send last 10 messages for context
+      conversationHistory: messages.slice(-10), // Send last 10 messages for context
+      userId: userId // Send userId for personalized responses
     });
     setInputMessage('');
   };
@@ -257,11 +271,15 @@ I have access to your complete financial profile including your ₹5.6L portfoli
         {/* Conversation Info */}
         <div className="px-4 py-1 bg-gray-50 text-xs text-gray-600 border-t border-gray-100">
           <div className="flex justify-between items-center">
-            <span>Conversation: {conversationId.slice(-8)} • Messages: {messages.length}</span>
+            <span>
+              {userName ? `User: ${userName} • ` : ''}
+              Conversation: {conversationId.slice(-8)} • Messages: {messages.length}
+            </span>
             <span className="text-blue-600">Backend: {config.isDevelopment ? 'Local' : 'Render'}</span>
           </div>
-          <div className="mt-0.5">
-            Model: GPT-4.1 Mini with Web Search • Endpoint: {config.backendUrl}
+          <div className="mt-0.5 flex justify-between">
+            <span>Model: GPT-4.1 Mini with Web Search</span>
+            {userId && <span className="text-green-600">Personalized Mode: ON</span>}
           </div>
         </div>
       </div>

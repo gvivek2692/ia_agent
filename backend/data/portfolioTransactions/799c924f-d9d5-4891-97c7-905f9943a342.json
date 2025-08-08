@@ -1,0 +1,55 @@
+{
+  "userId": "799c924f-d9d5-4891-97c7-905f9943a342",
+  "transactions": [
+    {
+      "date": "2019-02-21T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 50000,
+      "units": 1596.424,
+      "price": 31.32,
+      "broker": "PAYTM MONEY LIMITED",
+      "scheme_name": "ABSL ELSS Tax Saver Fund - Direct-Growth",
+      "folio_number": "1038556166",
+      "mf_name": "Aditya Birla Sun Life Mutual Fund",
+      "id": "a7ac7fb9-0224-481a-8ee7-b2eded74953c"
+    },
+    {
+      "date": "2019-02-25T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 44000,
+      "units": 1395.054,
+      "price": 31.54,
+      "broker": "PAYTM MONEY LIMITED",
+      "scheme_name": "ABSL ELSS Tax Saver Fund - Direct-Growth",
+      "folio_number": "1038556166",
+      "mf_name": "Aditya Birla Sun Life Mutual Fund",
+      "id": "3e5398d6-8aab-49e2-96c0-ee4ee79afac7"
+    },
+    {
+      "date": "2019-08-30T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 50000,
+      "units": 1371.129,
+      "price": 36.4663,
+      "broker": "Your Broker/Dealer is : PAYTM MONEY",
+      "scheme_name": "FT Money Mkt -DP-Growth",
+      "folio_number": "22212898",
+      "mf_name": "Franklin Templeton Mutual Fund",
+      "id": "d7f4c90b-8d44-41f6-b81a-b099d5904619"
+    },
+    {
+      "date": "2022-11-21T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 4999.75,
+      "units": 96.111,
+      "price": 52.0208,
+      "broker": "Advisor : INA100009859 / PAYTM MONEY LIMITED",
+      "scheme_name": "Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)",
+      "folio_number": "10148860",
+      "mf_name": "PPFAS Mutual Fund",
+      "id": "de8a20fd-288e-4684-a72a-5e5c0853b99c"
+    }
+  ],
+  "created_at": "2025-08-08T15:02:01.459Z",
+  "updated_at": "2025-08-08T15:02:01.459Z"
+}

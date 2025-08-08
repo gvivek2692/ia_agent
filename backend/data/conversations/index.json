@@ -1,5 +1,45 @@
 [
   {
+    "id": "conv_1754669602056_z6lb39051",
+    "title": "How are my financial goals progressing...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-08T16:13:43.553Z",
+    "updatedAt": "2025-08-08T16:16:50.989Z",
+    "messageCount": 8,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754668801271_xu8hr8f9a",
+    "title": "hi...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-08T16:00:13.109Z",
+    "updatedAt": "2025-08-08T16:02:09.114Z",
+    "messageCount": 3,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754668609154_1kz7fpc16",
+    "title": "Show me my portfolio summary...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-08T15:56:57.535Z",
+    "updatedAt": "2025-08-08T15:57:05.783Z",
+    "messageCount": 3,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754668180246_5peh30jo8",
+    "title": "Show me my portfolio summary...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-08T15:51:02.305Z",
+    "updatedAt": "2025-08-08T15:51:02.321Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
     "id": "conv_1753892183555_bthcracv1",
     "title": "How are my financial goals progressing...",
     "userId": "demo-user",

@@ -16,6 +16,7 @@ interface ConversationHistoryProps {
   currentConversationId: string;
   onSelectConversation: (conversationId: string) => void;
   onNewConversation: () => void;
+  userId?: string;
 }
 
 const ConversationHistory: React.FC<ConversationHistoryProps> = ({
@@ -23,7 +24,8 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
   onToggle,
   currentConversationId,
   onSelectConversation,
-  onNewConversation
+  onNewConversation,
+  userId
 }) => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(false);
@@ -31,17 +33,17 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
 
-  // Load conversations on component mount
+  // Load conversations on component mount and when userId changes
   useEffect(() => {
     if (isOpen) {
       loadConversations();
     }
-  }, [isOpen]);
+  }, [isOpen, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadConversations = async () => {
     setLoading(true);
     try {
-      const data = await apiService.getConversations() as Conversation[];
+      const data = await apiService.getConversations(50, 0, userId || 'demo-user') as Conversation[];
       setConversations(data);
     } catch (error) {
       console.error('Failed to load conversations:', error);
