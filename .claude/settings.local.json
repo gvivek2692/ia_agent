@@ -20,7 +20,8 @@
       "Bash(true)",
       "Bash(npm start)",
       "WebFetch(domain:serper.dev)",
-      "Bash(timeout 5s npm start)"
+      "Bash(timeout 5s npm start)",
+      "Bash(git branch:*)"
     ],
     "deny": []
   }

@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
 import UploadStatement from './components/UploadStatement';
+import PortfolioDashboard from './components/PortfolioDashboard';
 import { apiService } from './services/apiService';
 
 interface User {
@@ -19,7 +20,7 @@ interface User {
   risk_tolerance: string;
 }
 
-type AppView = 'login' | 'userList' | 'chat' | 'upload';
+type AppView = 'login' | 'userList' | 'chat' | 'upload' | 'portfolio';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('login');
@@ -198,6 +199,30 @@ function App() {
                 </div>
               </div>
               
+              {/* Navigation Pills */}
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => setCurrentView('chat')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'chat'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                  }`}
+                >
+                  💬 Chat
+                </button>
+                <button
+                  onClick={() => setCurrentView('portfolio')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'portfolio'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                  }`}
+                >
+                  📊 Portfolio
+                </button>
+              </div>
+              
               {/* User Profile Component */}
               {currentUser && (
                 <UserProfile
@@ -210,18 +235,29 @@ function App() {
           </div>
         </header>
         
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {/* Connection Test - Remove this in production */}
-          <div className="mb-6">
-            <ConnectionTest />
-          </div>
+        <main className={`${currentView === 'portfolio' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'}`}>
+          {currentView === 'chat' && (
+            <>
+              {/* Connection Test - Remove this in production */}
+              <div className="mb-6">
+                <ConnectionTest />
+              </div>
+              
+              <ChatInterface 
+                selectedConversationId={currentConversationId}
+                onConversationChange={setCurrentConversationId}
+                userId={currentUser?.id}
+                userName={currentUser?.name}
+              />
+            </>
+          )}
           
-          <ChatInterface 
-            selectedConversationId={currentConversationId}
-            onConversationChange={setCurrentConversationId}
-            userId={currentUser?.id}
-            userName={currentUser?.name}
-          />
+          {currentView === 'portfolio' && (
+            <PortfolioDashboard 
+              userId={currentUser?.id}
+              userName={currentUser?.name}
+            />
+          )}
         </main>
       </div>
     </div>

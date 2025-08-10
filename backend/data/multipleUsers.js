@@ -1,12 +1,182 @@
 const fs = require('fs');
 const path = require('path');
 const { demoUser } = require('./demoUser');
+const { getUserContext } = require('./index');
 
-// Demo users (existing functionality)
+// Helper function to create demo user with variations
+function createDemoUser(profile, variations = {}) {
+  const baseContext = getUserContext();
+  
+  // Apply variations to the base context
+  const modifiedContext = JSON.parse(JSON.stringify(baseContext)); // deep clone
+  
+  // Update user profile
+  if (variations.user_profile) {
+    Object.assign(modifiedContext.user_profile, variations.user_profile);
+  }
+  
+  // Update financial profile
+  if (variations.financial_profile) {
+    Object.assign(modifiedContext.financial_profile, variations.financial_profile);
+  }
+  
+  // Update investment profile
+  if (variations.investment_profile) {
+    Object.assign(modifiedContext.investment_profile, variations.investment_profile);
+  }
+  
+  // Modify portfolio values based on variations
+  if (variations.portfolio_multiplier) {
+    const multiplier = variations.portfolio_multiplier;
+    modifiedContext.portfolio.summary.total_investment = Math.round(modifiedContext.portfolio.summary.total_investment * multiplier);
+    modifiedContext.portfolio.summary.total_current_value = Math.round(modifiedContext.portfolio.summary.total_current_value * multiplier);
+    modifiedContext.portfolio.summary.total_gain_loss = modifiedContext.portfolio.summary.total_current_value - modifiedContext.portfolio.summary.total_investment;
+    modifiedContext.portfolio.summary.gain_loss_percentage = Math.round(((modifiedContext.portfolio.summary.total_gain_loss / modifiedContext.portfolio.summary.total_investment) * 100) * 100) / 100;
+  }
+  
+  return {
+    id: profile.id,
+    ...modifiedContext,
+    credentials: profile.credentials
+  };
+}
+
+// Demo users with diverse profiles
 const demoUsers = [
+  // Priya Sharma - Conservative Software Engineer (Original profile)
+  createDemoUser({
+    id: 'priya-sharma',
+    credentials: {
+      email: 'priya.sharma@email.com',
+      username: 'priya.sharma',
+      password: 'demo123'
+    }
+  }, {
+    user_profile: {
+      name: 'Priya Sharma',
+      age: 28,
+      profession: 'Software Engineer',
+      location: 'Bangalore, Karnataka'
+    },
+    investment_profile: {
+      risk_tolerance: 'conservative',
+      investment_experience: 'beginner'
+    },
+    portfolio_multiplier: 1.0
+  }),
+  
+  // Rajesh Kumar - Aggressive Business Owner
+  createDemoUser({
+    id: 'rajesh-kumar',
+    credentials: {
+      email: 'rajesh.kumar@email.com',
+      username: 'rajesh.kumar',
+      password: 'demo123'
+    }
+  }, {
+    user_profile: {
+      name: 'Rajesh Kumar',
+      age: 35,
+      profession: 'Business Owner',
+      location: 'Mumbai, Maharashtra'
+    },
+    financial_profile: {
+      monthly_salary: 200000,
+      annual_ctc: 2500000,
+      take_home: 180000
+    },
+    investment_profile: {
+      risk_tolerance: 'aggressive',
+      investment_experience: 'advanced'
+    },
+    portfolio_multiplier: 2.5
+  }),
+  
+  // Dr. Anita Desai - Moderate Medical Professional
+  createDemoUser({
+    id: 'anita-desai',
+    credentials: {
+      email: 'anita.desai@email.com',
+      username: 'anita.desai',
+      password: 'demo123'
+    }
+  }, {
+    user_profile: {
+      name: 'Dr. Anita Desai',
+      age: 32,
+      profession: 'Medical Doctor',
+      location: 'Delhi, NCR'
+    },
+    financial_profile: {
+      monthly_salary: 150000,
+      annual_ctc: 2000000,
+      take_home: 130000
+    },
+    investment_profile: {
+      risk_tolerance: 'moderate',
+      investment_experience: 'intermediate'
+    },
+    portfolio_multiplier: 1.8
+  }),
+  
+  // Arjun Singh - Young Tech Professional
+  createDemoUser({
+    id: 'arjun-singh',
+    credentials: {
+      email: 'arjun.singh@email.com',
+      username: 'arjun.singh',
+      password: 'demo123'
+    }
+  }, {
+    user_profile: {
+      name: 'Arjun Singh',
+      age: 26,
+      profession: 'Software Developer',
+      location: 'Pune, Maharashtra'
+    },
+    financial_profile: {
+      monthly_salary: 95000,
+      annual_ctc: 1300000,
+      take_home: 80000
+    },
+    investment_profile: {
+      risk_tolerance: 'moderate',
+      investment_experience: 'beginner'
+    },
+    portfolio_multiplier: 0.6
+  }),
+  
+  // Meera Patel - Senior Manager
+  createDemoUser({
+    id: 'meera-patel',
+    credentials: {
+      email: 'meera.patel@email.com',
+      username: 'meera.patel',
+      password: 'demo123'
+    }
+  }, {
+    user_profile: {
+      name: 'Meera Patel',
+      age: 38,
+      profession: 'Senior Manager',
+      location: 'Ahmedabad, Gujarat'
+    },
+    financial_profile: {
+      monthly_salary: 175000,
+      annual_ctc: 2300000,
+      take_home: 145000
+    },
+    investment_profile: {
+      risk_tolerance: 'moderate',
+      investment_experience: 'advanced'
+    },
+    portfolio_multiplier: 2.2
+  }),
+  
+  // Keep the original demo user for backward compatibility
   {
     id: 'demo-user',
-    ...demoUser,
+    ...getUserContext(),
     credentials: {
       email: 'demo@example.com',
       username: 'demo',

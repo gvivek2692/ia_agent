@@ -225,38 +225,38 @@ const calculatePortfolioSummary = () => {
     total_investment: totalInvestment,
     total_current_value: totalCurrentValue,
     total_gain_loss: totalGainLoss,
-    gain_loss_percentage: ((totalGainLoss / totalInvestment) * 100).toFixed(2),
+    gain_loss_percentage: Math.round(((totalGainLoss / totalInvestment) * 100) * 100) / 100,
     asset_allocation: {
       stocks: {
         value: stocksValue,
-        percentage: ((stocksValue / totalCurrentValue) * 100).toFixed(2)
+        percentage: Math.round(((stocksValue / totalCurrentValue) * 100) * 100) / 100
       },
       mutual_funds: {
         value: mfValue,
-        percentage: ((mfValue / totalCurrentValue) * 100).toFixed(2)
+        percentage: Math.round(((mfValue / totalCurrentValue) * 100) * 100) / 100
       },
       elss: {
         value: elssValue,
-        percentage: ((elssValue / totalCurrentValue) * 100).toFixed(2)
+        percentage: Math.round(((elssValue / totalCurrentValue) * 100) * 100) / 100
       },
       ppf: {
         value: ppfValue,
-        percentage: ((ppfValue / totalCurrentValue) * 100).toFixed(2)
+        percentage: Math.round(((ppfValue / totalCurrentValue) * 100) * 100) / 100
       },
       epf: {
         value: epfValue,
-        percentage: ((epfValue / totalCurrentValue) * 100).toFixed(2)
+        percentage: Math.round(((epfValue / totalCurrentValue) * 100) * 100) / 100
       }
     },
     sector_allocation: {
-      technology: ((portfolioHoldings.stocks.filter(s => s.sector === "Information Technology")
-        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100).toFixed(2),
-      banking: ((portfolioHoldings.stocks.filter(s => s.sector === "Banking")
-        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100).toFixed(2),
-      financial_services: ((portfolioHoldings.stocks.filter(s => s.sector === "Financial Services")
-        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100).toFixed(2),
-      oil_gas: ((portfolioHoldings.stocks.filter(s => s.sector === "Oil & Gas")
-        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100).toFixed(2)
+      technology: Math.round(((portfolioHoldings.stocks.filter(s => s.sector === "Information Technology")
+        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100) * 100) / 100,
+      banking: Math.round(((portfolioHoldings.stocks.filter(s => s.sector === "Banking")
+        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100) * 100) / 100,
+      financial_services: Math.round(((portfolioHoldings.stocks.filter(s => s.sector === "Financial Services")
+        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100) * 100) / 100,
+      oil_gas: Math.round(((portfolioHoldings.stocks.filter(s => s.sector === "Oil & Gas")
+        .reduce((sum, s) => sum + s.current_value, 0) / stocksValue) * 100) * 100) / 100
     }
   };
 };

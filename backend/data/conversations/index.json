@@ -1,5 +1,55 @@
 [
   {
+    "id": "conv_1754812189645_oug1852iq",
+    "title": "what were my expenses last month...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-10T07:49:57.503Z",
+    "updatedAt": "2025-08-10T07:50:53.186Z",
+    "messageCount": 4,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754802315938_okl6xwd92",
+    "title": "which stocks and sectors does ppfas invest in ...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-10T05:05:41.071Z",
+    "updatedAt": "2025-08-10T05:06:49.195Z",
+    "messageCount": 4,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754802172832_3x0v7b2bs",
+    "title": "Compare the latest earnings report of all my stock...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-10T05:03:19.889Z",
+    "updatedAt": "2025-08-10T05:03:30.933Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754801731809_nlewlpz6y",
+    "title": "hi...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-10T04:55:38.913Z",
+    "updatedAt": "2025-08-10T04:55:40.489Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1754669988319_3xggpps1j",
+    "title": "show my total portfolio value...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-08T16:20:13.299Z",
+    "updatedAt": "2025-08-08T16:21:29.371Z",
+    "messageCount": 4,
+    "tags": [],
+    "archived": false
+  },
+  {
     "id": "conv_1754669602056_z6lb39051",
     "title": "How are my financial goals progressing...",
     "userId": "demo-user",
