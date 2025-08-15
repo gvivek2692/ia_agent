@@ -114,6 +114,12 @@ class ApiService {
     return this.makeRequest('/market/portfolio-impact');
   }
 
+  // AI Insights
+  async getAIInsights(userId?: string) {
+    const params = userId ? `?userId=${userId}` : '';
+    return this.makeRequest(`/ai-insights${params}`);
+  }
+
   // Test connection to deployed backend
   async testConnection(): Promise<TestConnectionResult> {
     try {

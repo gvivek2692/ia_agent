@@ -7,6 +7,7 @@ import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
 import UploadStatement from './components/UploadStatement';
 import PortfolioDashboard from './components/PortfolioDashboard';
+import AIInsights from './components/AIInsights';
 import { apiService } from './services/apiService';
 
 interface User {
@@ -20,7 +21,7 @@ interface User {
   risk_tolerance: string;
 }
 
-type AppView = 'login' | 'userList' | 'chat' | 'upload' | 'portfolio';
+type AppView = 'login' | 'userList' | 'chat' | 'upload' | 'portfolio' | 'insights';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('login');
@@ -221,6 +222,16 @@ function App() {
                 >
                   📊 Portfolio
                 </button>
+                <button
+                  onClick={() => setCurrentView('insights')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    currentView === 'insights'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                  }`}
+                >
+                  🧠 AI Insights
+                </button>
               </div>
               
               {/* User Profile Component */}
@@ -235,7 +246,7 @@ function App() {
           </div>
         </header>
         
-        <main className={`${currentView === 'portfolio' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'}`}>
+        <main className={`${currentView === 'portfolio' || currentView === 'insights' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'}`}>
           {currentView === 'chat' && (
             <>
               {/* Connection Test - Remove this in production */}
@@ -254,6 +265,13 @@ function App() {
           
           {currentView === 'portfolio' && (
             <PortfolioDashboard 
+              userId={currentUser?.id}
+              userName={currentUser?.name}
+            />
+          )}
+          
+          {currentView === 'insights' && (
+            <AIInsights 
               userId={currentUser?.id}
               userName={currentUser?.name}
             />

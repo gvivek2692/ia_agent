@@ -23,6 +23,10 @@ const webSearchService = require('./services/webSearchService');
 const { users, getUserById, getUserByEmail, getGoalsByUserId, getAllUsers } = require('./data/multipleUsers');
 const { getUserTransactions } = require('./data/userTransactions');
 const uploadService = require('./services/uploadService');
+const { generateCompleteAIInsights } = require('./data/aiInsights');
+const { calculateRiskAnalysis } = require('./data/riskCalculations');
+const { generatePortfolioRecommendations } = require('./data/portfolioRecommendations');
+const { generateMarketAnalysis } = require('./data/marketAnalysis');
 
 const app = express();
 const server = http.createServer(app);
@@ -816,6 +820,220 @@ app.get('/api/conversations/stats', async (req, res) => {
   } catch (error) {
     console.error('Failed to get conversation stats:', error);
     res.status(500).json({ error: 'Failed to get stats' });
+  }
+});
+
+// AI Insights API endpoint - Now fully personalized
+app.get('/api/ai-insights', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    if (userId) {
+      // Get user-specific personalized insights
+      const user = getUserById(userId);
+      if (user) {
+        // Build complete user context for AI insights generation
+        const userContext = {
+          user_profile: user.user_profile,
+          financial_profile: user.financial_profile,
+          investment_profile: user.investment_profile,
+          portfolio: user.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(userId)
+          },
+          recent_transactions: getUserTransactions(userId).slice(0, 10)
+        };
+        
+        // Generate completely personalized insights based on user's actual data
+        const personalizedInsights = generateCompleteAIInsights(userContext);
+        
+        res.json(personalizedInsights);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } else {
+      // For demo without userId, use first demo user's data
+      const demoUser = users.find(u => u.credentials?.email === 'demo@example.com');
+      if (demoUser) {
+        const userContext = {
+          user_profile: demoUser.user_profile,
+          financial_profile: demoUser.financial_profile,
+          investment_profile: demoUser.investment_profile,
+          portfolio: demoUser.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(demoUser.id)
+          },
+          recent_transactions: getUserTransactions(demoUser.id).slice(0, 10)
+        };
+        
+        const personalizedInsights = generateCompleteAIInsights(userContext);
+        res.json(personalizedInsights);
+      } else {
+        res.status(404).json({ error: 'Demo user not found' });
+      }
+    }
+  } catch (error) {
+    console.error('Failed to get AI insights:', error);
+    res.status(500).json({ error: 'Failed to get AI insights' });
+  }
+});
+
+// Risk analysis endpoint
+app.get('/api/risk-analysis', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    if (userId) {
+      // Get user-specific risk analysis
+      const user = getUserById(userId);
+      if (user) {
+        // Build complete user context for risk analysis
+        const userContext = {
+          user_profile: user.user_profile,
+          financial_profile: user.financial_profile,
+          investment_profile: user.investment_profile,
+          portfolio: user.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(userId)
+          }
+        };
+        
+        // Generate personalized risk analysis based on user's actual portfolio
+        const riskAnalysis = calculateRiskAnalysis(userContext);
+        
+        res.json(riskAnalysis);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } else {
+      // For demo without userId, use first demo user's data
+      const demoUser = users.find(u => u.credentials?.email === 'demo@example.com');
+      if (demoUser) {
+        const userContext = {
+          user_profile: demoUser.user_profile,
+          financial_profile: demoUser.financial_profile,
+          investment_profile: demoUser.investment_profile,
+          portfolio: demoUser.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(demoUser.id)
+          }
+        };
+        
+        const riskAnalysis = calculateRiskAnalysis(userContext);
+        res.json(riskAnalysis);
+      } else {
+        res.status(404).json({ error: 'Demo user not found' });
+      }
+    }
+  } catch (error) {
+    console.error('Failed to get risk analysis:', error);
+    res.status(500).json({ error: 'Failed to get risk analysis' });
+  }
+});
+
+// Portfolio recommendations endpoint
+app.get('/api/portfolio-recommendations', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    if (userId) {
+      // Get user-specific portfolio recommendations
+      const user = getUserById(userId);
+      if (user) {
+        // Build complete user context for recommendations
+        const userContext = {
+          user_profile: user.user_profile,
+          financial_profile: user.financial_profile,
+          investment_profile: user.investment_profile,
+          portfolio: user.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(userId)
+          }
+        };
+        
+        // Generate personalized recommendations based on user's actual portfolio
+        const recommendations = generatePortfolioRecommendations(userContext);
+        
+        res.json(recommendations);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } else {
+      // For demo without userId, use first demo user's data
+      const demoUser = users.find(u => u.credentials?.email === 'demo@example.com');
+      if (demoUser) {
+        const userContext = {
+          user_profile: demoUser.user_profile,
+          financial_profile: demoUser.financial_profile,
+          investment_profile: demoUser.investment_profile,
+          portfolio: demoUser.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(demoUser.id)
+          }
+        };
+        
+        const recommendations = generatePortfolioRecommendations(userContext);
+        res.json(recommendations);
+      } else {
+        res.status(404).json({ error: 'Demo user not found' });
+      }
+    }
+  } catch (error) {
+    console.error('Failed to get portfolio recommendations:', error);
+    res.status(500).json({ error: 'Failed to get portfolio recommendations' });
+  }
+});
+
+// Market analysis endpoint
+app.get('/api/market-analysis', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    if (userId) {
+      // Get user-specific market analysis
+      const user = getUserById(userId);
+      if (user) {
+        // Build complete user context for market analysis
+        const userContext = {
+          user_profile: user.user_profile,
+          financial_profile: user.financial_profile,
+          investment_profile: user.investment_profile,
+          portfolio: user.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(userId)
+          }
+        };
+        
+        // Generate personalized market analysis based on user's actual portfolio
+        const marketAnalysis = generateMarketAnalysis(userContext);
+        
+        res.json(marketAnalysis);
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } else {
+      // For demo without userId, use first demo user's data
+      const demoUser = users.find(u => u.credentials?.email === 'demo@example.com');
+      if (demoUser) {
+        const userContext = {
+          user_profile: demoUser.user_profile,
+          financial_profile: demoUser.financial_profile,
+          investment_profile: demoUser.investment_profile,
+          portfolio: demoUser.portfolio,
+          financial_goals: {
+            goals: getGoalsByUserId(demoUser.id)
+          }
+        };
+        
+        const marketAnalysis = generateMarketAnalysis(userContext);
+        res.json(marketAnalysis);
+      } else {
+        res.status(404).json({ error: 'Demo user not found' });
+      }
+    }
+  } catch (error) {
+    console.error('Failed to get market analysis:', error);
+    res.status(500).json({ error: 'Failed to get market analysis' });
   }
 });
 

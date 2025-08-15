@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { demoUser } = require('./demoUser');
 const { getUserContext } = require('./index');
+const { generatePersonalizedPortfolio, calculatePortfolioSummary } = require('./personalizedPortfolios');
 
-// Helper function to create demo user with variations
+// Helper function to create demo user with personalized portfolio
 function createDemoUser(profile, variations = {}) {
   const baseContext = getUserContext();
   
@@ -25,8 +26,25 @@ function createDemoUser(profile, variations = {}) {
     Object.assign(modifiedContext.investment_profile, variations.investment_profile);
   }
   
-  // Modify portfolio values based on variations
-  if (variations.portfolio_multiplier) {
+  // Generate personalized portfolio based on risk profile and target amount
+  if (variations.portfolio_target_amount && variations.risk_profile) {
+    const portfolioHoldings = generatePersonalizedPortfolio(
+      variations.risk_profile, 
+      variations.portfolio_target_amount
+    );
+    
+    // Calculate portfolio summary
+    const portfolioSummary = calculatePortfolioSummary(
+      portfolioHoldings.stocks, 
+      portfolioHoldings.mutual_funds
+    );
+    
+    // Update portfolio data
+    modifiedContext.portfolio.stocks = portfolioHoldings.stocks;
+    modifiedContext.portfolio.mutual_funds = portfolioHoldings.mutual_funds;
+    modifiedContext.portfolio.summary = portfolioSummary;
+  } else if (variations.portfolio_multiplier) {
+    // Fallback to old method for backward compatibility
     const multiplier = variations.portfolio_multiplier;
     modifiedContext.portfolio.summary.total_investment = Math.round(modifiedContext.portfolio.summary.total_investment * multiplier);
     modifiedContext.portfolio.summary.total_current_value = Math.round(modifiedContext.portfolio.summary.total_current_value * multiplier);
@@ -41,9 +59,9 @@ function createDemoUser(profile, variations = {}) {
   };
 }
 
-// Demo users with diverse profiles
+// Demo users with diverse profiles and personalized portfolios
 const demoUsers = [
-  // Priya Sharma - Conservative Software Engineer (Original profile)
+  // Priya Sharma - Conservative Software Engineer
   createDemoUser({
     id: 'priya-sharma',
     credentials: {
@@ -62,7 +80,8 @@ const demoUsers = [
       risk_tolerance: 'conservative',
       investment_experience: 'beginner'
     },
-    portfolio_multiplier: 1.0
+    risk_profile: 'conservative',
+    portfolio_target_amount: 550000
   }),
   
   // Rajesh Kumar - Aggressive Business Owner
@@ -89,7 +108,8 @@ const demoUsers = [
       risk_tolerance: 'aggressive',
       investment_experience: 'advanced'
     },
-    portfolio_multiplier: 2.5
+    risk_profile: 'aggressive',
+    portfolio_target_amount: 1400000
   }),
   
   // Dr. Anita Desai - Moderate Medical Professional
@@ -116,10 +136,11 @@ const demoUsers = [
       risk_tolerance: 'moderate',
       investment_experience: 'intermediate'
     },
-    portfolio_multiplier: 1.8
+    risk_profile: 'moderate',
+    portfolio_target_amount: 980000
   }),
   
-  // Arjun Singh - Young Tech Professional
+  // Arjun Singh - Young Aggressive Tech Professional
   createDemoUser({
     id: 'arjun-singh',
     credentials: {
@@ -140,13 +161,14 @@ const demoUsers = [
       take_home: 80000
     },
     investment_profile: {
-      risk_tolerance: 'moderate',
-      investment_experience: 'beginner'
+      risk_tolerance: 'aggressive',
+      investment_experience: 'intermediate'
     },
-    portfolio_multiplier: 0.6
+    risk_profile: 'aggressive',
+    portfolio_target_amount: 320000
   }),
   
-  // Meera Patel - Senior Manager
+  // Meera Patel - Conservative Senior Manager
   createDemoUser({
     id: 'meera-patel',
     credentials: {
@@ -167,10 +189,11 @@ const demoUsers = [
       take_home: 145000
     },
     investment_profile: {
-      risk_tolerance: 'moderate',
+      risk_tolerance: 'conservative',
       investment_experience: 'advanced'
     },
-    portfolio_multiplier: 2.2
+    risk_profile: 'conservative',
+    portfolio_target_amount: 1200000
   }),
   
   // Keep the original demo user for backward compatibility
