@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Edit3, Trash2, Target, Calendar, TrendingUp, DollarSign, CheckCircle2, Clock, AlertTriangle } from 'lucide-react';
+import DefaultGoalSetup from './DefaultGoalSetup';
 
 interface Goal {
   id: string;
@@ -18,6 +19,7 @@ interface GoalsDashboardProps {
   onGoalsChange: (goals: Goal[]) => void;
   userId?: string;
   formatCurrency: (amount: number) => string;
+  portfolioValue?: number;
 }
 
 interface GoalFormData {
@@ -33,10 +35,19 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
   goals,
   onGoalsChange,
   userId,
-  formatCurrency
+  formatCurrency,
+  portfolioValue = 0
 }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingGoal, setEditingGoal] = useState<Goal | null>(null);
+  const [showDefaultSetup, setShowDefaultSetup] = useState(goals.length === 0);
+
+  // Watch for changes in goals array and show default setup when empty
+  React.useEffect(() => {
+    if (goals.length === 0 && !showAddForm) {
+      setShowDefaultSetup(true);
+    }
+  }, [goals.length, showAddForm]);
   const [formData, setFormData] = useState<GoalFormData>({
     name: '',
     description: '',
@@ -137,6 +148,11 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
     setShowAddForm(false);
   };
 
+  const handleDefaultGoalsGenerated = (defaultGoals: Goal[]) => {
+    onGoalsChange(defaultGoals);
+    setShowDefaultSetup(false);
+  };
+
   const calculateOverallProgress = () => {
     if (goals.length === 0) return { achieved: 0, inProgress: 0, total: 0 };
     
@@ -220,14 +236,34 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
       {/* Goals Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-900">Financial Goals</h2>
-        <button
-          onClick={() => setShowAddForm(true)}
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Add Goal
-        </button>
+        <div className="flex items-center space-x-3">
+          {goals.length > 0 && (
+            <button
+              onClick={() => setShowDefaultSetup(true)}
+              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+            >
+              Setup Default Goals
+            </button>
+          )}
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Goal
+          </button>
+        </div>
       </div>
+
+      {/* Default Goal Setup */}
+      {showDefaultSetup && (
+        <DefaultGoalSetup
+          onGoalsGenerated={handleDefaultGoalsGenerated}
+          userId={userId}
+          portfolioValue={portfolioValue}
+          formatCurrency={formatCurrency}
+        />
+      )}
 
       {/* Add/Edit Goal Form */}
       {showAddForm && (
@@ -352,7 +388,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
 
       {/* Goals List */}
       <div className="space-y-4">
-        {goals.length === 0 ? (
+        {goals.length === 0 && !showDefaultSetup ? (
           <div className="text-center py-12 bg-white rounded-lg shadow-md">
             <Target className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No Goals Yet</h3>
@@ -367,7 +403,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
               Create Your First Goal
             </button>
           </div>
-        ) : (
+        ) : goals.length > 0 ? (
           goals.map((goal) => {
             const timeInfo = getTimeToGoal(goal.target_date);
             const TimeIcon = timeInfo.icon;
@@ -457,7 +493,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
               </div>
             );
           })
-        )}
+        ) : null}
       </div>
     </div>
   );

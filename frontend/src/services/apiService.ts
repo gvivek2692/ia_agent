@@ -320,6 +320,33 @@ class ApiService {
       body: JSON.stringify({ userId })
     });
   }
+
+  // Default goals generation
+  async generateDefaultGoals(userId: string, yearlyIncome: number, age: number) {
+    return this.makeRequest('/generate-default-goals', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, yearlyIncome, age })
+    });
+  }
+
+  // Get user financial information
+  async getUserFinancialInfo(userId: string) {
+    return this.makeRequest(`/user-financial-info/${userId}`);
+  }
+
+  // Update user goals
+  async updateUserGoals(userId: string, goals: any[]) {
+    return this.makeRequest('/update-user-goals', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, goals })
+    });
+  }
 }
 
 export const apiService = new ApiService();

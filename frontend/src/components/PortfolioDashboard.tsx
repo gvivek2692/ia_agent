@@ -83,6 +83,21 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }
   };
 
+  const handleGoalsUpdate = async (updatedGoals: GoalData[]) => {
+    setGoals(updatedGoals);
+    
+    // If userId is available, save goals to backend for AI insights
+    if (userId) {
+      try {
+        await apiService.updateUserGoals(userId, updatedGoals);
+        console.log('Goals updated in backend for AI insights');
+      } catch (error) {
+        console.error('Failed to update goals in backend:', error);
+        // Don't show error to user as the goals are still updated locally
+      }
+    }
+  };
+
   const handleRefreshPortfolio = async () => {
     if (!userId || !userId.startsWith('kite-') || refreshing) {
       return;
@@ -270,9 +285,10 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
         {activeTab === 'goals' && (
           <GoalsDashboard 
             goals={goals}
-            onGoalsChange={setGoals}
+            onGoalsChange={handleGoalsUpdate}
             userId={userId}
             formatCurrency={formatCurrency}
+            portfolioValue={portfolioData?.summary?.total_current_value || 0}
           />
         )}
       </div>

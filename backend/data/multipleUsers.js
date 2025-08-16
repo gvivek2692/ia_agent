@@ -293,7 +293,10 @@ function getUserByEmail(email) {
 function getGoalsByUserId(userId) {
   // Check if it's a Kite user first
   if (userId.startsWith('kite-')) {
-    return generateDefaultGoalsForKiteUser(userId);
+    // For Kite users, we need to check their session data
+    // This requires access to the kiteUserSessions from server.js
+    // For now, return empty array to let the frontend handle goal setup
+    return [];
   }
   
   const user = getUserById(userId);

@@ -467,7 +467,7 @@ app.get('/api/user/:userId/context', (req, res) => {
       investment_profile: user.investment_profile,
       portfolio: user.portfolio,
       financial_goals: {
-        goals: getGoalsByUserId(userId)
+        goals: getGoalsForUser(userId)
       },
       recent_transactions: getUserTransactions(userId).slice(0, 10)
     };
@@ -837,6 +837,197 @@ function getAnyUserById(userId) {
   return getUserById(userId);
 }
 
+// Helper function to get goals for any user (Kite or demo)
+function getGoalsForUser(userId) {
+  const user = getAnyUserById(userId);
+  if (!user) {
+    return [];
+  }
+  
+  // For Kite users, get goals from their session data
+  if (userId.startsWith('kite-')) {
+    return user.financial_goals?.goals || [];
+  }
+  
+  // For demo/uploaded users, use the existing function
+  return getGoalsByUserId(userId);
+}
+
+// Default goal generation logic
+function generateDefaultGoals(yearlyIncome, age, portfolioValue = 0) {
+  // Emergency Fund: 6 months of expenses (assuming expenses are 70% of income)
+  const monthlyExpenses = (yearlyIncome * 0.7) / 12;
+  const emergencyFundTarget = monthlyExpenses * 6;
+  const emergencyFundCurrent = Math.min(portfolioValue * 0.1, emergencyFundTarget); // Assume 10% of portfolio is liquid
+  
+  // Retirement Planning: Based on age and income
+  const retirementAge = 60;
+  const yearsToRetirement = Math.max(retirementAge - age, 5); // Minimum 5 years
+  const retirementCorpusMultiplier = yearlyIncome * 25; // 25x annual income for retirement
+  const retirementCurrent = Math.max(portfolioValue * 0.8, 0); // Assume 80% of portfolio is for retirement
+  
+  const goals = [
+    {
+      id: `emergency-fund-${Date.now()}`,
+      name: 'Emergency Fund',
+      description: `Build emergency fund covering 6 months of expenses (₹${Math.round(monthlyExpenses).toLocaleString('en-IN')} per month)`,
+      target_amount: Math.round(emergencyFundTarget),
+      current_amount: Math.round(emergencyFundCurrent),
+      target_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 1 year from now
+      priority: 'High',
+      category: 'Emergency',
+      progress_percentage: emergencyFundTarget > 0 ? Math.round((emergencyFundCurrent / emergencyFundTarget) * 100) : 0
+    },
+    {
+      id: `retirement-${Date.now()}`,
+      name: 'Retirement Planning',
+      description: `Build retirement corpus for financial independence by age ${retirementAge}`,
+      target_amount: Math.round(retirementCorpusMultiplier),
+      current_amount: Math.round(retirementCurrent),
+      target_date: new Date(Date.now() + yearsToRetirement * 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      priority: 'High',
+      category: 'Long-term',
+      progress_percentage: retirementCorpusMultiplier > 0 ? Math.round((retirementCurrent / retirementCorpusMultiplier) * 100) : 0
+    }
+  ];
+  
+  return goals;
+}
+
+// Store user financial information (in memory for demo, use database in production)
+const userFinancialInfo = new Map();
+
+// Generate default goals endpoint
+app.post('/api/generate-default-goals', (req, res) => {
+  try {
+    const { userId, yearlyIncome, age } = req.body;
+    
+    if (!userId || !yearlyIncome || !age) {
+      return res.status(400).json({ error: 'Missing required fields: userId, yearlyIncome, age' });
+    }
+    
+    if (yearlyIncome <= 0 || age <= 0 || age > 100) {
+      return res.status(400).json({ error: 'Invalid financial information provided' });
+    }
+    
+    // Get user's portfolio value
+    const user = getAnyUserById(userId);
+    const portfolioValue = user?.portfolio?.summary?.total_current_value || 0;
+    
+    // Generate default goals
+    const defaultGoals = generateDefaultGoals(yearlyIncome, age, portfolioValue);
+    
+    // Store user financial information
+    userFinancialInfo.set(userId, {
+      yearlyIncome,
+      age,
+      updatedAt: new Date().toISOString()
+    });
+    
+    // Update user's goals in their context (for AI insights)
+    if (user) {
+      if (!user.financial_goals) {
+        user.financial_goals = {};
+      }
+      user.financial_goals.goals = defaultGoals;
+      
+      // Update financial profile with the provided income information
+      if (user.financial_profile) {
+        user.financial_profile.annual_income_after_tax = yearlyIncome;
+        user.financial_profile.monthly_income_after_tax = Math.round(yearlyIncome / 12);
+      }
+      
+      // Update user profile age
+      if (user.user_profile) {
+        user.user_profile.age = age;
+      }
+      
+      // For Kite users, update the session
+      if (userId.startsWith('kite-')) {
+        const kiteUserId = userId.replace('kite-', '');
+        kiteUserSessions.set(kiteUserId, user);
+      }
+    }
+    
+    console.log(`Generated default goals for user ${userId}:`, defaultGoals);
+    
+    res.json({
+      success: true,
+      goals: defaultGoals,
+      userFinancialInfo: {
+        yearlyIncome,
+        age,
+        portfolioValue
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error generating default goals:', error);
+    res.status(500).json({ error: 'Failed to generate default goals' });
+  }
+});
+
+// Get user financial information endpoint
+app.get('/api/user-financial-info/:userId', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const financialInfo = userFinancialInfo.get(userId);
+    
+    if (!financialInfo) {
+      return res.status(404).json({ error: 'Financial information not found for user' });
+    }
+    
+    res.json({
+      success: true,
+      financialInfo
+    });
+    
+  } catch (error) {
+    console.error('Error fetching user financial info:', error);
+    res.status(500).json({ error: 'Failed to fetch financial information' });
+  }
+});
+
+// Update user goals endpoint
+app.post('/api/update-user-goals', (req, res) => {
+  try {
+    const { userId, goals } = req.body;
+    
+    if (!userId || !goals) {
+      return res.status(400).json({ error: 'Missing required fields: userId, goals' });
+    }
+    
+    // Get user and update their goals
+    const user = getAnyUserById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Update user's goals in their context (for AI insights)
+    if (!user.financial_goals) {
+      user.financial_goals = {};
+    }
+    user.financial_goals.goals = goals;
+    
+    // For Kite users, update the session
+    if (userId.startsWith('kite-')) {
+      const kiteUserId = userId.replace('kite-', '');
+      kiteUserSessions.set(kiteUserId, user);
+    }
+    
+    console.log(`Updated goals for user ${userId}:`, goals.length, 'goals');
+    
+    res.json({
+      success: true,
+      message: 'Goals updated successfully'
+    });
+    
+  } catch (error) {
+    console.error('Error updating user goals:', error);
+    res.status(500).json({ error: 'Failed to update goals' });
+  }
+});
+
 app.get('/api/ai-insights', async (req, res) => {
   try {
     const { userId } = req.query;
@@ -852,7 +1043,7 @@ app.get('/api/ai-insights', async (req, res) => {
           investment_profile: user.investment_profile,
           portfolio: user.portfolio,
           financial_goals: {
-            goals: getGoalsByUserId(userId)
+            goals: getGoalsForUser(userId)
           },
           recent_transactions: getUserTransactions(userId).slice(0, 10)
         };
@@ -907,7 +1098,7 @@ app.get('/api/risk-analysis', async (req, res) => {
           investment_profile: user.investment_profile,
           portfolio: user.portfolio,
           financial_goals: {
-            goals: getGoalsByUserId(userId)
+            goals: getGoalsForUser(userId)
           }
         };
         
@@ -960,7 +1151,7 @@ app.get('/api/portfolio-recommendations', async (req, res) => {
           investment_profile: user.investment_profile,
           portfolio: user.portfolio,
           financial_goals: {
-            goals: getGoalsByUserId(userId)
+            goals: getGoalsForUser(userId)
           }
         };
         
@@ -1013,7 +1204,7 @@ app.get('/api/market-analysis', async (req, res) => {
           investment_profile: user.investment_profile,
           portfolio: user.portfolio,
           financial_goals: {
-            goals: getGoalsByUserId(userId)
+            goals: getGoalsForUser(userId)
           }
         };
         
@@ -1320,13 +1511,24 @@ app.get('/api/user-context', (req, res) => {
     }
     
     // Build complete user context with financial goals
+    let goals = [];
+    
+    // Handle goals differently for Kite vs demo users
+    if (userId.startsWith('kite-')) {
+      // For Kite users, get goals from their session data
+      goals = user.financial_goals?.goals || [];
+    } else {
+      // For demo/uploaded users, use the existing function
+      goals = getGoalsForUser(userId);
+    }
+    
     const userContext = {
       user_profile: user.user_profile,
       financial_profile: user.financial_profile,
       investment_profile: user.investment_profile,
       portfolio: user.portfolio,
       financial_goals: {
-        goals: getGoalsByUserId(userId)
+        goals: goals
       },
       recent_transactions: getUserTransactions(userId).slice(0, 10)
     };
@@ -1425,7 +1627,7 @@ io.on('connection', (socket) => {
             investment_profile: user.investment_profile,
             portfolio: user.portfolio, // Use user's specific portfolio data
             financial_goals: {
-              goals: getGoalsByUserId(userId)
+              goals: getGoalsForUser(userId)
             },
             recent_transactions: getUserTransactions(userId).slice(0, 10)
           };
