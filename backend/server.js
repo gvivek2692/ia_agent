@@ -27,6 +27,7 @@ const { generateCompleteAIInsights } = require('./data/aiInsights');
 const { calculateRiskAnalysis } = require('./data/riskCalculations');
 const { generatePortfolioRecommendations } = require('./data/portfolioRecommendations');
 const { generateMarketAnalysis } = require('./data/marketAnalysis');
+const KiteService = require('./services/kiteService');
 
 const app = express();
 const server = http.createServer(app);
@@ -824,13 +825,25 @@ app.get('/api/conversations/stats', async (req, res) => {
 });
 
 // AI Insights API endpoint - Now fully personalized
+// Helper function to get user by ID (supports both demo and Kite users)
+function getAnyUserById(userId) {
+  // Check if it's a Kite user
+  if (userId.startsWith('kite-')) {
+    const kiteUserId = userId.replace('kite-', '');
+    return kiteUserSessions.get(kiteUserId);
+  }
+  
+  // Handle demo users
+  return getUserById(userId);
+}
+
 app.get('/api/ai-insights', async (req, res) => {
   try {
     const { userId } = req.query;
     
     if (userId) {
       // Get user-specific personalized insights
-      const user = getUserById(userId);
+      const user = getAnyUserById(userId);
       if (user) {
         // Build complete user context for AI insights generation
         const userContext = {
@@ -885,7 +898,7 @@ app.get('/api/risk-analysis', async (req, res) => {
     
     if (userId) {
       // Get user-specific risk analysis
-      const user = getUserById(userId);
+      const user = getAnyUserById(userId);
       if (user) {
         // Build complete user context for risk analysis
         const userContext = {
@@ -938,7 +951,7 @@ app.get('/api/portfolio-recommendations', async (req, res) => {
     
     if (userId) {
       // Get user-specific portfolio recommendations
-      const user = getUserById(userId);
+      const user = getAnyUserById(userId);
       if (user) {
         // Build complete user context for recommendations
         const userContext = {
@@ -991,7 +1004,7 @@ app.get('/api/market-analysis', async (req, res) => {
     
     if (userId) {
       // Get user-specific market analysis
-      const user = getUserById(userId);
+      const user = getAnyUserById(userId);
       if (user) {
         // Build complete user context for market analysis
         const userContext = {
@@ -1037,6 +1050,360 @@ app.get('/api/market-analysis', async (req, res) => {
   }
 });
 
+// Kite Connect Integration
+let kiteService;
+try {
+  kiteService = new KiteService();
+} catch (error) {
+  console.error('Failed to initialize Kite service:', error);
+}
+
+// Store active Kite sessions in memory (in production, use a proper database)
+const kiteUserSessions = new Map();
+
+// Kite login endpoint - starts OAuth flow
+app.get('/api/kite/login', (req, res) => {
+  try {
+    if (!kiteService) {
+      return res.status(500).json({ error: 'Kite service not available' });
+    }
+    
+    const loginUrl = kiteService.getLoginUrl();
+    res.json({ loginUrl });
+  } catch (error) {
+    console.error('Error generating Kite login URL:', error);
+    res.status(500).json({ error: 'Failed to generate login URL' });
+  }
+});
+
+// Kite callback endpoint - completes OAuth flow
+app.post('/api/kite/callback', async (req, res) => {
+  try {
+    const { request_token } = req.body;
+    
+    if (!request_token) {
+      return res.status(400).json({ error: 'Request token is required' });
+    }
+
+    if (!kiteService) {
+      return res.status(500).json({ error: 'Kite service not available' });
+    }
+
+    console.log('Processing Kite callback with request token:', request_token);
+
+    // Generate session
+    const sessionData = await kiteService.generateSession(request_token);
+    
+    // Set access token for this instance
+    kiteService.setAccessToken(sessionData.accessToken);
+    
+    // Fetch user profile
+    const kiteProfile = await kiteService.getUserProfile();
+    
+    // Fetch portfolio data
+    const [holdings, mfHoldings] = await Promise.all([
+      kiteService.getPortfolioHoldings(),
+      kiteService.getMutualFundHoldings()
+    ]);
+
+    // Transform to our portfolio format
+    const portfolio = kiteService.transformKiteToPortfolio(holdings, mfHoldings, kiteProfile);
+    
+    // Create user profile
+    const userProfile = kiteService.createUserProfile(kiteProfile, sessionData);
+    
+    // Create complete user context
+    const kiteUser = {
+      id: `kite-${sessionData.userId}`,
+      ...userProfile,
+      portfolio,
+      kite_session: {
+        access_token: sessionData.accessToken,
+        public_token: sessionData.publicToken,
+        user_id: sessionData.userId,
+        login_time: sessionData.loginTime
+      },
+      credentials: {
+        email: kiteProfile.email || sessionData.email,
+        username: sessionData.userShortname,
+        provider: 'kite'
+      }
+    };
+
+    // Store user session
+    kiteUserSessions.set(sessionData.userId, kiteUser);
+    
+    console.log('Kite user authenticated successfully:', sessionData.userId);
+    console.log('Portfolio summary:', portfolio.summary);
+
+    res.json({
+      success: true,
+      user: {
+        id: kiteUser.id,
+        name: kiteUser.user_profile.name,
+        email: kiteUser.user_profile.email,
+        kite_user_id: sessionData.userId
+      },
+      portfolio_summary: portfolio.summary
+    });
+
+  } catch (error) {
+    console.error('Error in Kite callback:', error);
+    res.status(500).json({ 
+      error: 'Authentication failed', 
+      details: error.message 
+    });
+  }
+});
+
+// Refresh Kite portfolio endpoint
+app.post('/api/kite/refresh-portfolio', async (req, res) => {
+  try {
+    const { userId } = req.body;
+    
+    if (!userId || !userId.startsWith('kite-')) {
+      return res.status(400).json({ error: 'Valid Kite user ID is required' });
+    }
+    
+    const kiteUserId = userId.replace('kite-', '');
+    const existingUser = kiteUserSessions.get(kiteUserId);
+    
+    if (!existingUser) {
+      return res.status(404).json({ error: 'Kite user session not found. Please login again.' });
+    }
+    
+    if (!kiteService) {
+      return res.status(500).json({ error: 'Kite service not available' });
+    }
+    
+    console.log('Refreshing portfolio for Kite user:', kiteUserId);
+    
+    // Set access token from stored session
+    kiteService.setAccessToken(existingUser.kite_session.access_token);
+    
+    // Fetch fresh portfolio data
+    const [holdings, mfHoldings] = await Promise.all([
+      kiteService.getPortfolioHoldings(),
+      kiteService.getMutualFundHoldings()
+    ]);
+    
+    // Transform to our portfolio format
+    const portfolio = kiteService.transformKiteToPortfolio(holdings, mfHoldings, existingUser.user_profile);
+    
+    // Update user's portfolio in session
+    existingUser.portfolio = portfolio;
+    existingUser.portfolio.summary.updated_at = new Date().toISOString();
+    
+    // Update session
+    kiteUserSessions.set(kiteUserId, existingUser);
+    
+    console.log('Portfolio refreshed successfully for user:', kiteUserId);
+    
+    res.json({
+      success: true,
+      message: 'Portfolio refreshed successfully',
+      portfolio_summary: portfolio.summary,
+      updated_at: portfolio.summary.updated_at
+    });
+    
+  } catch (error) {
+    console.error('Error refreshing Kite portfolio:', error);
+    
+    // Handle specific Kite API errors
+    if (error.message && error.message.includes('TokenException')) {
+      res.status(401).json({ 
+        error: 'Session expired', 
+        details: 'Please login again to refresh your portfolio.',
+        requires_reauth: true
+      });
+    } else {
+      res.status(500).json({ 
+        error: 'Failed to refresh portfolio', 
+        details: error.message 
+      });
+    }
+  }
+});
+
+// Get Kite user data endpoint
+app.get('/api/kite/user/:kiteUserId', (req, res) => {
+  try {
+    const { kiteUserId } = req.params;
+    const user = kiteUserSessions.get(kiteUserId);
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Return user without sensitive session data
+    const { kite_session, ...safeUser } = user;
+    res.json(safeUser);
+  } catch (error) {
+    console.error('Error fetching Kite user:', error);
+    res.status(500).json({ error: 'Failed to fetch user data' });
+  }
+});
+
+// Refresh Kite portfolio endpoint
+app.post('/api/kite/refresh-portfolio/:kiteUserId', async (req, res) => {
+  try {
+    const { kiteUserId } = req.params;
+    const user = kiteUserSessions.get(kiteUserId);
+    
+    if (!user || !user.kite_session) {
+      return res.status(404).json({ error: 'User session not found' });
+    }
+
+    if (!kiteService) {
+      return res.status(500).json({ error: 'Kite service not available' });
+    }
+
+    // Set access token for this user
+    kiteService.setAccessToken(user.kite_session.access_token);
+    
+    // Fetch fresh portfolio data
+    const [holdings, mfHoldings] = await Promise.all([
+      kiteService.getPortfolioHoldings(),
+      kiteService.getMutualFundHoldings()
+    ]);
+
+    // Transform to our portfolio format
+    const portfolio = kiteService.transformKiteToPortfolio(holdings, mfHoldings, user.user_profile);
+    
+    // Update user's portfolio
+    user.portfolio = portfolio;
+    user.portfolio.summary.updated_at = new Date().toISOString();
+    
+    // Update stored session
+    kiteUserSessions.set(kiteUserId, user);
+    
+    console.log('Portfolio refreshed for user:', kiteUserId);
+    
+    res.json({
+      success: true,
+      portfolio_summary: portfolio.summary,
+      updated_at: portfolio.summary.updated_at
+    });
+
+  } catch (error) {
+    console.error('Error refreshing Kite portfolio:', error);
+    
+    // Handle specific Kite API errors
+    if (error.message && error.message.includes('TokenException')) {
+      res.status(401).json({ 
+        error: 'Session expired', 
+        details: 'Please login again to refresh your portfolio.',
+        requires_reauth: true
+      });
+    } else {
+      res.status(500).json({ 
+        error: 'Failed to refresh portfolio', 
+        details: error.message 
+      });
+    }
+  }
+});
+
+// Get user context endpoint (supports both demo and Kite users)
+app.get('/api/user-context', (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+    
+    const user = getAnyUserById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Build complete user context with financial goals
+    const userContext = {
+      user_profile: user.user_profile,
+      financial_profile: user.financial_profile,
+      investment_profile: user.investment_profile,
+      portfolio: user.portfolio,
+      financial_goals: {
+        goals: getGoalsByUserId(userId)
+      },
+      recent_transactions: getUserTransactions(userId).slice(0, 10)
+    };
+    
+    res.json(userContext);
+    
+  } catch (error) {
+    console.error('Error getting user context:', error);
+    res.status(500).json({ error: 'Failed to get user context' });
+  }
+});
+
+// Get all users (including Kite users) - enhanced endpoint
+app.get('/api/users', (req, res) => {
+  try {
+    const demoUsers = getAllUsers();
+    const kiteUsers = Array.from(kiteUserSessions.values()).map(user => ({
+      id: user.id,
+      name: user.user_profile.name,
+      email: user.user_profile.email,
+      profession: user.user_profile.profession,
+      location: user.user_profile.location,
+      age: user.user_profile.age,
+      experience_level: user.investment_profile.investment_experience,
+      risk_tolerance: user.investment_profile.risk_tolerance,
+      provider: 'kite'
+    }));
+    
+    const allUsers = [...demoUsers.map(user => ({
+      id: user.id,
+      name: user.user_profile.name,
+      email: user.user_profile.email,
+      profession: user.user_profile.profession,
+      location: user.user_profile.location,
+      age: user.user_profile.age,
+      experience_level: user.investment_profile.investment_experience,
+      risk_tolerance: user.investment_profile.risk_tolerance,
+      provider: 'demo'
+    })), ...kiteUsers];
+    
+    res.json(allUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
+// Enhanced user context endpoint to support Kite users
+app.get('/api/user/:userId/context', (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    // Check if it's a Kite user
+    if (userId.startsWith('kite-')) {
+      const kiteUserId = userId.replace('kite-', '');
+      const user = kiteUserSessions.get(kiteUserId);
+      
+      if (user) {
+        const { kite_session, ...userContext } = user;
+        res.json(userContext);
+        return;
+      }
+    }
+    
+    // Handle demo users
+    const user = getUserById(userId);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching user context:', error);
+    res.status(500).json({ error: 'Failed to fetch user context' });
+  }
+});
+
 // Socket.io connection handling
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
@@ -1050,7 +1417,7 @@ io.on('connection', (socket) => {
       
       // If userId is provided, get specific user context
       if (userId) {
-        const user = getUserById(userId);
+        const user = getAnyUserById(userId);
         if (user) {
           userContext = {
             user_profile: user.user_profile,

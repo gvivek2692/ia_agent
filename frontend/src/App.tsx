@@ -33,8 +33,63 @@ function App() {
 
   // Check for existing session on app load
   useEffect(() => {
+    checkKiteCallback();
     checkExistingSession();
   }, []);
+
+  // Check if this is a Kite callback
+  const checkKiteCallback = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestToken = urlParams.get('request_token');
+    const status = urlParams.get('status');
+    const action = urlParams.get('action');
+
+    if (requestToken && status === 'success' && action === 'login') {
+      console.log('Detected Kite callback with token:', requestToken);
+      
+      // Clear URL parameters
+      window.history.replaceState({}, document.title, window.location.pathname);
+      
+      // Process the Kite authentication
+      handleKiteCallback(requestToken);
+    }
+  };
+
+  const handleKiteCallback = async (requestToken: string) => {
+    try {
+      setIsAuthChecking(true);
+      
+      // Send request token to backend for authentication
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001/api'}/kite/callback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          request_token: requestToken
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.details || data.error || 'Authentication failed');
+      }
+
+      if (data.success) {
+        console.log('Kite authentication successful:', data.user);
+        const sessionId = `kite-session-${data.user.kite_user_id}`;
+        handleLoginSuccess(data.user, sessionId);
+      } else {
+        throw new Error('Authentication failed');
+      }
+    } catch (error) {
+      console.error('Kite callback error:', error);
+      setCurrentView('login');
+    } finally {
+      setIsAuthChecking(false);
+    }
+  };
 
   const checkExistingSession = async () => {
     const savedSessionId = localStorage.getItem('wealth_advisor_session');
@@ -46,7 +101,13 @@ function App() {
         if (session.success) {
           setCurrentUser(JSON.parse(savedUser));
           setSessionId(savedSessionId);
-          setCurrentView('chat');
+          
+          // Redirect Kite users to portfolio page, demo users to chat
+          if (savedSessionId.startsWith('kite-session-')) {
+            setCurrentView('portfolio');
+          } else {
+            setCurrentView('chat');
+          }
         } else {
           // Invalid session, clear storage
           localStorage.removeItem('wealth_advisor_session');
@@ -65,7 +126,13 @@ function App() {
   const handleLoginSuccess = (user: User, newSessionId: string) => {
     setCurrentUser(user);
     setSessionId(newSessionId);
-    setCurrentView('chat');
+    
+    // Redirect Kite users to portfolio page, demo users to chat
+    if (newSessionId.startsWith('kite-session-')) {
+      setCurrentView('portfolio');
+    } else {
+      setCurrentView('chat');
+    }
     
     // Save to localStorage for persistence
     localStorage.setItem('wealth_advisor_session', newSessionId);
@@ -267,6 +334,7 @@ function App() {
             <PortfolioDashboard 
               userId={currentUser?.id}
               userName={currentUser?.name}
+              onSessionExpired={handleLogout}
             />
           )}
           
@@ -274,6 +342,7 @@ function App() {
             <AIInsights 
               userId={currentUser?.id}
               userName={currentUser?.name}
+              onSessionExpired={handleLogout}
             />
           )}
         </main>

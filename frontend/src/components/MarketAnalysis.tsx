@@ -47,6 +47,8 @@ interface MarketData {
     date: string;
     nifty: number;
     sensex: number;
+    nifty_bank: number;
+    nifty_it: number;
     portfolio?: number;
   }[];
   news_summary: {
@@ -62,6 +64,7 @@ interface MarketData {
 const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
   const [marketData, setMarketData] = useState<MarketData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState<string>('nifty50');
   
   useEffect(() => {
     const loadMarketData = async () => {
@@ -97,7 +100,7 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
             factors: ['Unable to load market sentiment']
           },
           chart_data: [
-            { date: '2024-01-29', nifty: 19856, sensex: 66598 }
+            { date: '2024-01-29', nifty: 19856, sensex: 66598, nifty_bank: 44234, nifty_it: 29567 }
           ],
           news_summary: [
             { title: 'Unable to load personalized market news', impact: 'neutral', source: 'System' }
@@ -122,6 +125,27 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
     if (change > 0) return 'text-green-600';
     if (change < 0) return 'text-red-600';
     return 'text-gray-600';
+  };
+
+  const getIndexDisplayName = (key: string): string => {
+    const displayNames: { [key: string]: string } = {
+      'nifty50': 'Nifty 50',
+      'sensex': 'Sensex',
+      'nifty_bank': 'Nifty Bank',
+      'nifty_it': 'Nifty IT'
+    };
+    return displayNames[key] || key;
+  };
+
+  const getChartDataKey = (indexKey: string): string => {
+    // Map index keys to chart data keys
+    const chartKeyMapping: { [key: string]: string } = {
+      'nifty50': 'nifty',
+      'sensex': 'sensex',
+      'nifty_bank': 'nifty_bank',
+      'nifty_it': 'nifty_it'
+    };
+    return chartKeyMapping[indexKey] || 'nifty';
   };
 
   const getSentimentColor = (trend: string) => {
@@ -182,8 +206,17 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         {Object.entries(marketData.indices).map(([key, data]) => {
           const ChangeIcon = getChangeIcon(data.change);
+          const isSelected = selectedIndex === key;
           return (
-            <div key={key} className="bg-gray-50 rounded-lg p-4">
+            <button
+              key={key}
+              onClick={() => setSelectedIndex(key)}
+              className={`${
+                isSelected 
+                  ? 'bg-blue-50 border-2 border-blue-200 ring-2 ring-blue-100' 
+                  : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+              } rounded-lg p-4 text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            >
               <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
                 {key.replace('_', ' ').replace('nifty', 'Nifty ')}
               </div>
@@ -195,14 +228,21 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
                 <span>{Math.abs(data.change).toFixed(2)}</span>
                 <span>({data.change_percent >= 0 ? '+' : ''}{data.change_percent.toFixed(2)}%)</span>
               </div>
-            </div>
+              {isSelected && (
+                <div className="mt-2 text-xs text-blue-600 font-medium">
+                  Showing in chart
+                </div>
+              )}
+            </button>
           );
         })}
       </div>
 
       {/* Market Chart */}
       <div className="mb-6">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">Market Trend (Last 30 Days)</h4>
+        <h4 className="text-sm font-medium text-gray-700 mb-3">
+          {getIndexDisplayName(selectedIndex)} Trend (Last 30 Days)
+        </h4>
         <div className="h-48">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={marketData.chart_data}>
@@ -227,27 +267,19 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
                   borderRadius: '6px',
                   fontSize: '12px'
                 }}
-                formatter={(value: number, name: string) => [
+                formatter={(value: number) => [
                   value.toLocaleString(),
-                  name === 'nifty' ? 'Nifty 50' : 'Sensex'
+                  getIndexDisplayName(selectedIndex)
                 ]}
                 labelFormatter={(label) => new Date(label).toLocaleDateString()}
               />
               <Line 
                 type="monotone" 
-                dataKey="nifty" 
+                dataKey={getChartDataKey(selectedIndex)}
                 stroke="#3B82F6" 
                 strokeWidth={2}
                 dot={{ fill: '#3B82F6', strokeWidth: 2, r: 4 }}
                 activeDot={{ r: 6, stroke: '#3B82F6', strokeWidth: 2, fill: 'white' }}
-              />
-              <Line 
-                type="monotone" 
-                dataKey="sensex" 
-                stroke="#10B981" 
-                strokeWidth={2}
-                dot={{ fill: '#10B981', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#10B981', strokeWidth: 2, fill: 'white' }}
               />
             </LineChart>
           </ResponsiveContainer>

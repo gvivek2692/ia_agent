@@ -4,6 +4,49 @@ const { demoUser } = require('./demoUser');
 const { getUserContext } = require('./index');
 const { generatePersonalizedPortfolio, calculatePortfolioSummary } = require('./personalizedPortfolios');
 
+// Generate default goals for Kite users based on their portfolio value
+function generateDefaultGoalsForKiteUser(userId) {
+  // In a real implementation, you'd fetch the Kite user's portfolio value
+  // For now, we'll create generic goals
+  const portfolioValue = 500000; // Default assumption
+  
+  return [
+    {
+      id: 'emergency-fund',
+      name: 'Emergency Fund',
+      description: 'Build emergency fund for 6 months expenses',
+      target_amount: 300000,
+      current_amount: Math.min(50000, portfolioValue * 0.1),
+      target_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+      priority: 'High',
+      category: 'Safety',
+      progress_percentage: Math.min(16.67, (portfolioValue * 0.1 / 300000) * 100)
+    },
+    {
+      id: 'retirement',
+      name: 'Retirement Planning',
+      description: 'Build corpus for comfortable retirement',
+      target_amount: 50000000,
+      current_amount: Math.min(portfolioValue, portfolioValue * 0.8),
+      target_date: new Date(Date.now() + 10950 * 24 * 60 * 60 * 1000).toISOString(),
+      priority: 'Medium',
+      category: 'Long-term',
+      progress_percentage: Math.min(100, (portfolioValue * 0.8 / 50000000) * 100)
+    },
+    {
+      id: 'wealth-creation',
+      name: 'Wealth Creation',
+      description: 'Grow investments for financial freedom',
+      target_amount: 2000000,
+      current_amount: portfolioValue,
+      target_date: new Date(Date.now() + 1825 * 24 * 60 * 60 * 1000).toISOString(),
+      priority: 'High',
+      category: 'Investment',
+      progress_percentage: Math.min(100, (portfolioValue / 2000000) * 100)
+    }
+  ];
+}
+
 // Helper function to create demo user with personalized portfolio
 function createDemoUser(profile, variations = {}) {
   const baseContext = getUserContext();
@@ -246,8 +289,13 @@ function getUserByEmail(email) {
   );
 }
 
-// Get goals for a specific user
+// Get goals for a specific user (supports both demo and Kite users)
 function getGoalsByUserId(userId) {
+  // Check if it's a Kite user first
+  if (userId.startsWith('kite-')) {
+    return generateDefaultGoalsForKiteUser(userId);
+  }
+  
   const user = getUserById(userId);
   
   if (!user) {
@@ -299,8 +347,118 @@ function getGoalsByUserId(userId) {
   return user.financial_goals.goals || [];
 }
 
-// Generate transaction history for uploaded users
+// Generate default transactions for Kite users based on their portfolio
+function generateDefaultTransactionsForKiteUser(userId) {
+  // Generate sample transactions for the last 6 months for Kite users
+  const transactions = [];
+  const currentDate = new Date();
+  
+  // Generate monthly salary credits
+  for (let i = 0; i < 6; i++) {
+    const date = new Date(currentDate);
+    date.setMonth(date.getMonth() - i);
+    date.setDate(1); // First day of the month
+    
+    transactions.push({
+      id: `kite-salary-${userId}-${i}`,
+      date: date.toISOString(),
+      description: 'Salary Credit',
+      amount: 120000 + Math.random() * 20000, // Random salary between 120k-140k
+      category: 'Income',
+      type: 'credit',
+      balance: 0
+    });
+  }
+  
+  // Generate investment transactions (SIPs)
+  const sipFunds = [
+    'HDFC Top 100 Fund',
+    'SBI Bluechip Fund',
+    'ICICI Pru Value Discovery Fund',
+    'Axis Bluechip Fund'
+  ];
+  
+  sipFunds.forEach((fund, fundIndex) => {
+    for (let i = 0; i < 6; i++) {
+      const date = new Date(currentDate);
+      date.setMonth(date.getMonth() - i);
+      date.setDate(10 + fundIndex); // Different dates for different funds
+      
+      transactions.push({
+        id: `kite-sip-${userId}-${fundIndex}-${i}`,
+        date: date.toISOString(),
+        description: `SIP Investment - ${fund}`,
+        amount: -(5000 + Math.random() * 5000), // Random SIP between 5k-10k
+        category: 'Investment',
+        type: 'debit',
+        balance: 0
+      });
+    }
+  });
+  
+  // Generate some stock purchase transactions
+  const stocks = ['TCS', 'INFY', 'HDFCBANK', 'RELIANCE', 'ICICIBANK'];
+  stocks.forEach((stock, stockIndex) => {
+    // Random number of transactions per stock (0-3)
+    const numTransactions = Math.floor(Math.random() * 4);
+    
+    for (let i = 0; i < numTransactions; i++) {
+      const date = new Date(currentDate);
+      date.setMonth(date.getMonth() - Math.floor(Math.random() * 6));
+      date.setDate(Math.floor(Math.random() * 28) + 1);
+      
+      transactions.push({
+        id: `kite-stock-${userId}-${stockIndex}-${i}`,
+        date: date.toISOString(),
+        description: `Stock Purchase - ${stock}`,
+        amount: -(10000 + Math.random() * 40000), // Random purchase between 10k-50k
+        category: 'Investment',
+        type: 'debit',
+        balance: 0
+      });
+    }
+  });
+  
+  // Generate some expense transactions
+  const expenses = [
+    { desc: 'Rent Payment', amount: 25000, category: 'Housing' },
+    { desc: 'Grocery Shopping', amount: 8000, category: 'Food' },
+    { desc: 'Fuel/Transportation', amount: 5000, category: 'Transport' },
+    { desc: 'Utilities (Electricity, Water)', amount: 3000, category: 'Utilities' },
+    { desc: 'Mobile/Internet Bill', amount: 2000, category: 'Communication' },
+    { desc: 'Dining Out', amount: 4000, category: 'Food' },
+    { desc: 'Entertainment', amount: 3000, category: 'Entertainment' }
+  ];
+  
+  expenses.forEach((expense, expenseIndex) => {
+    for (let i = 0; i < 6; i++) {
+      const date = new Date(currentDate);
+      date.setMonth(date.getMonth() - i);
+      date.setDate(Math.floor(Math.random() * 28) + 1);
+      
+      transactions.push({
+        id: `kite-expense-${userId}-${expenseIndex}-${i}`,
+        date: date.toISOString(),
+        description: expense.desc,
+        amount: -(expense.amount + Math.random() * expense.amount * 0.3), // +/- 30% variation
+        category: expense.category,
+        type: 'debit',
+        balance: 0
+      });
+    }
+  });
+  
+  // Sort by date (newest first)
+  return transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+// Generate transaction history for users (supports both demo and Kite users)
 function getUserTransactions(userId) {
+  // Check if it's a Kite user first
+  if (userId.startsWith('kite-')) {
+    return generateDefaultTransactionsForKiteUser(userId);
+  }
+  
   const user = getUserById(userId);
   
   if (!user) {

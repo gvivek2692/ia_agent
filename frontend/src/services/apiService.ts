@@ -114,6 +114,11 @@ class ApiService {
     return this.makeRequest('/market/portfolio-impact');
   }
 
+  // User context data
+  async getUserContext(userId: string) {
+    return this.makeRequest(`/user-context?userId=${userId}`);
+  }
+
   // AI Insights
   async getAIInsights(userId?: string) {
     const params = userId ? `?userId=${userId}` : '';
@@ -211,9 +216,6 @@ class ApiService {
     return this.makeRequest(`/users/${userId}`);
   }
 
-  async getUserContext(userId: string) {
-    return this.makeRequest(`/user/${userId}/context`);
-  }
 
   async getUserTransactions(userId: string, limit = 50, offset = 0) {
     return this.makeRequest(`/user/${userId}/transactions?limit=${limit}&offset=${offset}`);
@@ -306,6 +308,17 @@ class ApiService {
     }
 
     return results;
+  }
+
+  // Kite portfolio refresh
+  async refreshKitePortfolio(userId: string) {
+    return this.makeRequest('/kite/refresh-portfolio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId })
+    });
   }
 }
 

@@ -298,6 +298,8 @@ const generateChartData = (userContext) => {
   
   let niftyBase = 19350;
   let sensexBase = 65000;
+  let niftyBankBase = 44500;
+  let niftyItBase = 30200;
   let portfolioBase = 100; // Portfolio index starting at 100
   
   for (let i = 0; i < 30; i++) {
@@ -309,6 +311,13 @@ const generateChartData = (userContext) => {
     niftyBase *= (1 + marketMovement / 100);
     sensexBase *= (1 + marketMovement / 100);
     
+    // Sector indices with different correlations to main market
+    const bankMovement = marketMovement * 1.2 + (Math.random() - 0.5) * 1; // Banking more volatile
+    const itMovement = marketMovement * 0.9 + (Math.random() - 0.5) * 1.5; // IT with tech-specific volatility
+    
+    niftyBankBase *= (1 + bankMovement / 100);
+    niftyItBase *= (1 + itMovement / 100);
+    
     // Portfolio movement correlated but with user's beta
     const portfolioBeta = 1.1; // Slightly more volatile than market
     const portfolioMovement = marketMovement * portfolioBeta + (Math.random() - 0.5) * 0.5;
@@ -318,6 +327,8 @@ const generateChartData = (userContext) => {
       date: date.toISOString().split('T')[0],
       nifty: Math.round(niftyBase),
       sensex: Math.round(sensexBase),
+      nifty_bank: Math.round(niftyBankBase),
+      nifty_it: Math.round(niftyItBase),
       portfolio: Math.round(portfolioBase * 100) / 100
     });
   }
