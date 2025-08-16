@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { apiService } from '../services/apiService';
 import KiteLogin from './KiteLogin';
+import { User, Upload, LogIn, Shield, Zap } from 'lucide-react';
 
 interface LoginFormProps {
   onLoginSuccess: (user: any, sessionId: string) => void;
@@ -14,6 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showKiteLogin, setShowKiteLogin] = useState(false);
+  const [activeTab, setActiveTab] = useState<'signin' | 'signup' | 'demo'>('signup');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,209 +76,308 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="max-w-md w-full">
-        {/* Logo and Title */}
-        <div className="text-center mb-8">
-          <div className="bg-white p-3 rounded-full w-16 h-16 mx-auto mb-4 shadow-lg">
-            <div className="text-2xl">💰</div>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Wealth Manager AI</h1>
-          <p className="text-gray-600">Your personal financial planning assistant</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex">
+      {/* Left Panel - Hero Section */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 to-purple-700 p-12 flex-col justify-center relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-white rounded-full"></div>
+          <div className="absolute bottom-20 right-20 w-24 h-24 bg-white rounded-full"></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white rounded-full"></div>
         </div>
-
-        {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Welcome to Wealth Manager AI</h2>
+        
+        <div className="relative z-10">
+          <h1 className="text-5xl font-bold text-white mb-6">
+            WealthWise
+          </h1>
+          <p className="text-xl text-blue-100 mb-8">
+            Your intelligent companion for smart financial decisions and portfolio management
+          </p>
           
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3 text-blue-100">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span>AI-powered investment insights</span>
+            </div>
+            <div className="flex items-center space-x-3 text-blue-100">
+              <Shield className="w-6 h-6" />
+              <span>Goal-based financial planning</span>
+            </div>
+            <div className="flex items-center space-x-3 text-blue-100">
+              <Zap className="w-6 h-6" />
+              <span>Improve overall financial health</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Panel - Auth Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          {/* Logo for mobile */}
+          <div className="text-center mb-8 lg:hidden">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+              <span className="text-2xl">💰</span>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900">WealthWise</h1>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="flex space-x-1 bg-gray-100 rounded-lg p-1 mb-8">
+            <button
+              onClick={() => setActiveTab('signup')}
+              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'signup'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={() => setActiveTab('signin')}
+              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'signin'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => setActiveTab('demo')}
+              className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                activeTab === 'demo'
+                  ? 'bg-white text-blue-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Try Demo
+            </button>
+          </div>
+
+          {/* Error Message */}
           {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
               {error}
             </div>
           )}
 
-          {/* New User Section - Top */}
-          {onShowUpload && (
-            <div className="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-2 border-green-200">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-2xl">🆕</span>
-                </div>
-                <h3 className="text-lg font-semibold text-green-800 mb-2">New User?</h3>
-                <p className="text-sm text-green-700 mb-4">Get started by uploading your mutual fund statement</p>
-                <button
-                  onClick={onShowUpload}
-                  className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-md"
-                >
-                  📊 Upload MF Statement & Create Account
-                </button>
+          {/* Sign Up Tab */}
+          {activeTab === 'signup' && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Started</h2>
+                <p className="text-gray-600">Choose how you'd like to create your account</p>
               </div>
-            </div>
-          )}
 
-          {/* Kite Login Section - Prominent */}
-          <div className="mb-8 p-6 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg border-2 border-orange-200">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl">🚀</span>
-              </div>
-              <h3 className="text-lg font-semibold text-orange-800 mb-2">Connect Real Portfolio</h3>
-              <p className="text-sm text-orange-700 mb-4">Import your actual stocks and mutual funds from Zerodha Kite</p>
+              {/* Kite Connect Option */}
               <button
                 onClick={() => setShowKiteLogin(true)}
                 disabled={isLoading}
-                className="w-full flex items-center justify-center px-4 py-3 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-md"
+                className="w-full flex items-center justify-center space-x-3 p-4 bg-orange-50 border-2 border-orange-200 rounded-lg hover:bg-orange-100 transition-colors disabled:opacity-50 group"
               >
-                <span className="text-sm font-medium">🔗 Connect with Kite</span>
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                  <img src="/zerodha-kite-seeklogo.png" alt="Kite Logo" className="w-6 h-6" />
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-gray-900 group-hover:text-orange-700">Connect with Kite</div>
+                  <div className="text-sm text-gray-600">Import your real portfolio from Zerodha</div>
+                </div>
               </button>
-            </div>
-          </div>
 
-          {/* OR Divider */}
-          <div className="mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">OR</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Existing User Login Form */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-4 text-center">Existing User Login</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email or Username
-                </label>
-                <input
-                  type="text"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your email or username"
-                  required
+              {/* Upload Statement Option */}
+              {onShowUpload && (
+                <button
+                  onClick={onShowUpload}
                   disabled={isLoading}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Enter your password"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {isLoading ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Signing In...
+                  className="w-full flex items-center justify-center space-x-3 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg hover:bg-blue-100 transition-colors disabled:opacity-50 group"
+                >
+                  <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <Upload className="w-5 h-5 text-white" />
                   </div>
-                ) : (
-                  'Sign In'
-                )}
-              </button>
-            </form>
-          </div>
-
-          {/* Demo Users Section */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <h3 className="text-sm font-medium text-gray-700 mb-4 text-center">Try Demo Accounts</h3>
-            <div className="space-y-2">
-              <button
-                onClick={() => handleDemoLogin('priya.sharma@email.com')}
-                disabled={isLoading}
-                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-sm text-gray-900">Priya Sharma</div>
-                <div className="text-xs text-gray-600">Software Engineer • Conservative Investor</div>
-              </button>
-
-              <button
-                onClick={() => handleDemoLogin('rajesh.kumar@email.com')}
-                disabled={isLoading}
-                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-sm text-gray-900">Rajesh Kumar</div>
-                <div className="text-xs text-gray-600">Business Owner • Aggressive Investor</div>
-              </button>
-
-              <button
-                onClick={() => handleDemoLogin('anita.desai@email.com')}
-                disabled={isLoading}
-                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-sm text-gray-900">Dr. Anita Desai</div>
-                <div className="text-xs text-gray-600">Medical Doctor • Moderate Investor</div>
-              </button>
-
-              <button
-                onClick={() => handleDemoLogin('arjun.singh@email.com')}
-                disabled={isLoading}
-                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-sm text-gray-900">Arjun Singh</div>
-                <div className="text-xs text-gray-600">Software Developer • Beginner Investor</div>
-              </button>
-
-              <button
-                onClick={() => handleDemoLogin('meera.patel@email.com')}
-                disabled={isLoading}
-                className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
-              >
-                <div className="font-medium text-sm text-gray-900">Meera Patel</div>
-                <div className="text-xs text-gray-600">Senior Manager • Balanced Investor</div>
-              </button>
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-900 group-hover:text-blue-700">Upload MF Statement</div>
+                    <div className="text-sm text-gray-600">Create account with your mutual fund data</div>
+                  </div>
+                </button>
+              )}
             </div>
+          )}
 
-            <button
-              onClick={onShowUserList}
-              className="w-full mt-4 text-sm text-blue-600 hover:text-blue-800 font-medium"
-            >
-              View All Demo Users →
-            </button>
-          </div>
+          {/* Sign In Tab */}
+          {activeTab === 'signin' && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+                <p className="text-gray-600">Sign in to your account</p>
+              </div>
 
-          {/* Demo Info */}
-          <div className="mt-6 p-3 bg-blue-50 rounded-lg">
-            <p className="text-xs text-blue-800">
-              <strong>Demo Mode:</strong> All users use password "demo123". 
-              Each user has different investment profiles and 3 months of transaction history.
-            </p>
-          </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email or Username
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your email or username"
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <LogIn className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter your password"
+                      required
+                      disabled={isLoading}
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                      Signing In...
+                    </div>
+                  ) : (
+                    'Sign In'
+                  )}
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* Demo Tab */}
+          {activeTab === 'demo' && (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Try Demo</h2>
+                <p className="text-gray-600">Explore with sample investment portfolios</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3">
+                <button
+                  onClick={() => handleDemoLogin('priya.sharma@email.com')}
+                  disabled={isLoading}
+                  className="flex items-center space-x-3 p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 group"
+                >
+                  <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center text-white font-bold">
+                    P
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="font-medium text-gray-900 group-hover:text-blue-700">Priya Sharma</div>
+                    <div className="text-sm text-gray-600">Software Engineer • Conservative Portfolio</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => handleDemoLogin('rajesh.kumar@email.com')}
+                  disabled={isLoading}
+                  className="flex items-center space-x-3 p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 group"
+                >
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
+                    R
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="font-medium text-gray-900 group-hover:text-blue-700">Rajesh Kumar</div>
+                    <div className="text-sm text-gray-600">Business Owner • Aggressive Portfolio</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => handleDemoLogin('anita.desai@email.com')}
+                  disabled={isLoading}
+                  className="flex items-center space-x-3 p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 group"
+                >
+                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
+                    A
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="font-medium text-gray-900 group-hover:text-blue-700">Dr. Anita Desai</div>
+                    <div className="text-sm text-gray-600">Medical Doctor • Moderate Portfolio</div>
+                  </div>
+                </button>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => handleDemoLogin('arjun.singh@email.com')}
+                    disabled={isLoading}
+                    className="flex flex-col items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 group"
+                  >
+                    <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-violet-500 rounded-full flex items-center justify-center text-white font-bold text-sm mb-2">
+                      A
+                    </div>
+                    <div className="text-center">
+                      <div className="font-medium text-xs text-gray-900 group-hover:text-blue-700">Arjun Singh</div>
+                      <div className="text-xs text-gray-600">Developer</div>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => handleDemoLogin('meera.patel@email.com')}
+                    disabled={isLoading}
+                    className="flex flex-col items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 group"
+                  >
+                    <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm mb-2">
+                      M
+                    </div>
+                    <div className="text-center">
+                      <div className="font-medium text-xs text-gray-900 group-hover:text-blue-700">Meera Patel</div>
+                      <div className="text-xs text-gray-600">Manager</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+
+              <div className="p-4 bg-blue-50 rounded-lg">
+                <p className="text-xs text-blue-800">
+                  <strong>Demo Info:</strong> All demo accounts use password "demo123". 
+                  Each profile features different investment strategies and portfolio compositions.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Kite Login Modal */}
       {showKiteLogin && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">Connect with Kite</h3>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4 z-50">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-gray-900">Connect with Kite</h3>
               <button
                 onClick={() => {
                   setShowKiteLogin(false);
                   setError('');
                 }}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
