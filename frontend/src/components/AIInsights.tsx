@@ -22,6 +22,7 @@ import { apiService } from '../services/apiService';
 interface AIInsightsProps {
   userId?: string;
   userName?: string;
+  onSessionExpired?: () => void;
 }
 
 interface InsightData {
@@ -47,7 +48,7 @@ interface AIInsightsData {
   last_updated: string;
 }
 
-const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName }) => {
+const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpired }) => {
   const [insightsData, setInsightsData] = useState<AIInsightsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -65,9 +66,18 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName }) => {
     try {
       const response = await apiService.getAIInsights(userId);
       setInsightsData(response as AIInsightsData);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error loading AI insights:', err);
-      setError('Failed to load AI insights. Please try again.');
+      if (err.requires_reauth) {
+        // Session expired, redirect to login
+        if (onSessionExpired) {
+          onSessionExpired();
+        } else {
+          setError('Session expired. Please login again to refresh your insights.');
+        }
+      } else {
+        setError('Failed to load AI insights. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { apiService } from '../services/apiService';
+import KiteLogin from './KiteLogin';
 
 interface LoginFormProps {
   onLoginSuccess: (user: any, sessionId: string) => void;
@@ -12,6 +13,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showKiteLogin, setShowKiteLogin] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +59,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         setIsLoading(false);
       }
     }, 100);
+  };
+
+  const handleKiteSuccess = (user: any) => {
+    console.log('Kite login successful:', user);
+    // For Kite users, we'll use a different session ID format
+    const sessionId = `kite-session-${user.kite_user_id}`;
+    onLoginSuccess(user, sessionId);
+  };
+
+  const handleKiteError = (error: string) => {
+    setError(error);
+    setShowKiteLogin(false);
   };
 
   return (
@@ -129,6 +143,32 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               )}
             </button>
           </form>
+
+          {/* OR Divider */}
+          <div className="mt-6 mb-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">OR</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Kite Login Section */}
+          <div className="mb-6">
+            <button
+              onClick={() => setShowKiteLogin(true)}
+              disabled={isLoading}
+              className="w-full flex items-center justify-center px-4 py-3 border border-orange-300 rounded-lg shadow-sm bg-orange-50 text-orange-700 hover:bg-orange-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <span className="text-sm font-medium">🔗 Connect Real Portfolio from Kite</span>
+            </button>
+            <p className="mt-2 text-xs text-gray-500 text-center">
+              Import your actual stocks and mutual funds from Zerodha Kite
+            </p>
+          </div>
 
           {/* Demo Users Section */}
           <div className="mt-8 pt-6 border-t border-gray-200">
@@ -213,6 +253,34 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
           </div>
         </div>
       </div>
+
+      {/* Kite Login Modal */}
+      {showKiteLogin && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-gray-900">Connect with Kite</h3>
+              <button
+                onClick={() => {
+                  setShowKiteLogin(false);
+                  setError('');
+                }}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              <KiteLogin
+                onSuccess={handleKiteSuccess}
+                onError={handleKiteError}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

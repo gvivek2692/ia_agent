@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingDown, Target, PieChart, Settings } from 'lucide-react';
+import { TrendingDown, Target, PieChart, Settings, RefreshCw } from 'lucide-react';
 import PortfolioOverview from './PortfolioOverview';
 import AssetAllocation from './AssetAllocation';
 import HoldingsTable from './HoldingsTable';
@@ -9,6 +9,7 @@ import { apiService } from '../services/apiService';
 interface PortfolioDashboardProps {
   userId?: string;
   userName?: string;
+  onSessionExpired?: () => void;
 }
 
 interface PortfolioData {
@@ -41,12 +42,13 @@ interface GoalData {
   progress_percentage: number;
 }
 
-const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName }) => {
+const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName, onSessionExpired }) => {
   const [activeTab, setActiveTab] = useState<'portfolio' | 'goals'>('portfolio');
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
   const [goals, setGoals] = useState<GoalData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     loadDashboardData();
@@ -78,6 +80,35 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
       setError('Failed to load portfolio data. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRefreshPortfolio = async () => {
+    if (!userId || !userId.startsWith('kite-') || refreshing) {
+      return;
+    }
+
+    setRefreshing(true);
+    setError(null);
+
+    try {
+      await apiService.refreshKitePortfolio(userId);
+      // Reload dashboard data after successful refresh
+      await loadDashboardData();
+    } catch (err: any) {
+      console.error('Error refreshing portfolio:', err);
+      if (err.requires_reauth) {
+        // Session expired, redirect to login
+        if (onSessionExpired) {
+          onSessionExpired();
+        } else {
+          setError('Session expired. Please login again to refresh your portfolio.');
+        }
+      } else {
+        setError('Failed to refresh portfolio. Please try again.');
+      }
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -144,13 +175,25 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
               <div className="text-sm text-gray-500">
                 Last updated: {portfolioData ? new Date(portfolioData.updated_at).toLocaleDateString() : 'N/A'}
               </div>
-              <button
-                onClick={loadDashboardData}
-                className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors"
-                title="Refresh Data"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
+              {userId && userId.startsWith('kite-') ? (
+                <button
+                  onClick={handleRefreshPortfolio}
+                  disabled={refreshing}
+                  className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 border border-orange-200 rounded-md hover:bg-orange-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  title="Refresh from Kite"
+                >
+                  <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+                  <span>{refreshing ? 'Syncing...' : 'Sync from Kite'}</span>
+                </button>
+              ) : (
+                <button
+                  onClick={loadDashboardData}
+                  className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors"
+                  title="Refresh Data"
+                >
+                  <Settings className="w-5 h-5" />
+                </button>
+              )}
             </div>
           </div>
 
