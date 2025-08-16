@@ -27,6 +27,7 @@ class KiteService {
       const loginUrl = `https://kite.zerodha.com/connect/login?api_key=${this.apiKey}&v=3`;
       console.log('Generated Kite login URL:', loginUrl);
       console.log('Using redirect URL:', this.redirectUrl);
+      console.log('Note: Make sure to configure this redirect URL in your Kite Connect app settings');
       return loginUrl;
     } catch (error) {
       console.error('Error generating Kite login URL:', error);
