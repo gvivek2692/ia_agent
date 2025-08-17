@@ -41,3 +41,17 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Test files and sample data
+*.ipynb
+*.xls
+*.xlsx
+test.*
+sample_*
+*.csv
+*.pdf
+
+# Temporary files
+temp/
+tmp/
+*.tmp

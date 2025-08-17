@@ -31,7 +31,8 @@
       "Bash(cp:*)",
       "Bash(git stash:*)",
       "Bash(timeout:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "additionalDirectories": [
