@@ -149,7 +149,8 @@ const analyzeMutualFundPerformance = (userContext) => {
   
   // Find underperforming funds (negative returns or very low returns)
   const underperformingFunds = mutualFunds.filter(fund => 
-    fund.gain_loss_percentage < 5 && fund.investment_amount > 50000
+    (fund.gain_loss_percentage !== null && fund.gain_loss_percentage !== undefined && fund.gain_loss_percentage < 5) && 
+    (fund.investment_amount || 0) > 50000
   );
   
   underperformingFunds.forEach(fund => {
@@ -158,8 +159,8 @@ const analyzeMutualFundPerformance = (userContext) => {
     recommendations.push({
       id: `fund_performance_${fund.scheme_code}_${Date.now()}`,
       type: 'reduce',
-      title: `Review ${fund.category} Fund Performance`,
-      description: `Your ${fund.scheme_name.split(' - ')[0]} fund ${isNegative ? 'has negative returns' : 'is underperforming'} at ${fund.gain_loss_percentage.toFixed(1)}%. Consider switching to better alternatives.`,
+      title: `Review ${fund.category || 'Mutual'} Fund Performance`,
+      description: `Your ${(fund.scheme_name || 'mutual').split(' - ')[0]} fund ${isNegative ? 'has negative returns' : 'is underperforming'} at ${fund.gain_loss_percentage.toFixed(1)}%. Consider switching to better alternatives.`,
       priority: isNegative ? 'high' : 'medium',
       impact_score: Math.min(100, Math.abs(fund.gain_loss_percentage) * 8 + 30),
       current_allocation: fund.gain_loss_percentage,
@@ -175,14 +176,14 @@ const analyzeMutualFundPerformance = (userContext) => {
   });
   
   // High expense ratio recommendations
-  const highExpenseFunds = mutualFunds.filter(fund => fund.expense_ratio > 1.0);
+  const highExpenseFunds = mutualFunds.filter(fund => (fund.expense_ratio || 0) > 1.0);
   
   highExpenseFunds.forEach(fund => {
     recommendations.push({
       id: `fund_expense_${fund.scheme_code}_${Date.now()}`,
       type: 'reduce',
-      title: `Switch to Lower Cost ${fund.category} Fund`,
-      description: `Your ${fund.scheme_name.split(' - ')[0]} fund has a high expense ratio of ${fund.expense_ratio}%. Consider switching to direct plans or lower-cost alternatives.`,
+      title: `Switch to Lower Cost ${fund.category || 'Mutual'} Fund`,
+      description: `Your ${(fund.scheme_name || 'mutual').split(' - ')[0]} fund has a high expense ratio of ${fund.expense_ratio}%. Consider switching to direct plans or lower-cost alternatives.`,
       priority: 'medium',
       impact_score: 60,
       timeframe: '1-3 months',
@@ -288,7 +289,7 @@ const calculateRebalanceData = (userContext) => {
   // Analyze mutual fund holdings
   mutualFunds.forEach(fund => {
     const value = fund.current_value;
-    const category = fund.category.toLowerCase();
+    const category = (fund.category || 'Unknown').toLowerCase();
     
     if (category.includes('large')) largeCap += value;
     else if (category.includes('mid')) midCap += value;

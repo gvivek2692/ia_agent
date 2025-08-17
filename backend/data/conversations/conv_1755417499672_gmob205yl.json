@@ -1,0 +1,24 @@
+{
+  "id": "conv_1755417499672_gmob205yl",
+  "title": "tell me top holdings of my mutual funds...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-17T07:58:31.548Z",
+  "updatedAt": "2025-08-17T07:58:31.550Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755417511549_uup3kuc5z",
+      "content": "tell me top holdings of my mutual funds",
+      "isBot": false,
+      "timestamp": "2025-08-17T07:58:31.549Z"
+    },
+    {
+      "id": "msg_1755417511550_rwj18985f",
+      "content": "# 📊 Your Mutual Fund Investments\n\nHi Meera Patel, here's the current status of your mutual fund portfolio:\n\n| Mutual Fund | Current Value (₹) | Investment (₹) | Gain/Loss (₹) |\n|-------------|-------------------|----------------|---------------|\n| SBI Bluechip Fund - Direct Growth | ₹385,264 | ₹360,000 | ₹+25,264 (+7.02%) |\n| SBI Magnum Medium Duration Fund - Direct Growth | ₹205,901 | ₹216,000 | ₹-10,099 (-4.68%) |\n| ICICI Prudential Equity & Debt Fund - Direct Growth | ₹148,841 | ₹144,000 | ₹+4,841 (+3.36%) |\n\n## Summary\n- **Total Current Value**: ₹740,006\n- **Total Investment**: ₹720,000  \n- **Total Gain/Loss**: ₹+20,006 (+2.78%)\n- **Monthly SIP**: ₹16,000 across 3 funds\n\n## Performance Insights\n🟠 **Moderate Performance**: Your mutual funds are generating modest returns.\n\nYour portfolio is well-diversified across 3 different mutual fund schemes.\n\n*Would you like detailed analysis of any specific fund or recommendations for optimization?*",
+      "isBot": true,
+      "timestamp": "2025-08-17T07:58:31.550Z"
+    }
+  ]
+}

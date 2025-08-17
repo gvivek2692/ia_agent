@@ -2356,5 +2356,752 @@
     },
     "created_at": "2025-08-10T07:20:44.789Z",
     "updated_at": "2025-08-10T07:20:44.789Z"
+  },
+  {
+    "id": "0e0fc7fd-045a-43bf-86bc-03187ae6fac9",
+    "credentials": {
+      "email": "abctest",
+      "username": "abctest",
+      "password": "$2b$10$r6R81je4VtSEY9RRuiHIPeNUrneDXR5ZofTePpkpLKXktA2755ZQe"
+    },
+    "user_profile": {
+      "name": "Manisha",
+      "pan": "PAN NO:AGUPM6063F",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "Mumbai, Maharashtra",
+      "phone": "",
+      "email": "",
+      "created_at": "2025-08-17T09:18:49.609Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 759962,
+        "total_current_value": 868733.62,
+        "total_gain_loss": 108771.62,
+        "gain_loss_percentage": 14.31,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 868733.62,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Strategic Bond Fund - Dir - G-(formerly DSP Strategic Bond Fund)",
+          "scheme_code": "D791",
+          "folio_number": "8997480/41",
+          "mf_name": "DSP Mutual Fund",
+          "type": "Bond",
+          "units": 15.585,
+          "investment_amount": 49997.5,
+          "transactions": [
+            {
+              "date": "2024-02-20T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 15.585,
+              "price": 3208.0903,
+              "broker": "Your Broker/Dealer is : Zerodha Broking Limited"
+            }
+          ],
+          "avg_purchase_price": 3208.0526,
+          "current_price": 3590.9457,
+          "current_value": 55964.89,
+          "gain_loss": 5967.39,
+          "gain_loss_percentage": 11.94
+        },
+        {
+          "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+          "scheme_code": "P8017",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Balanced",
+          "units": 669.881,
+          "investment_amount": 249987.5,
+          "transactions": [
+            {
+              "date": "2023-11-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 156.84,
+              "price": 318.78,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-02-09T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 139.908,
+              "price": 357.36,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-11-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 125.872,
+              "price": 397.21,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 247.261,
+              "price": 404.41,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 373.182,
+          "current_price": 434.5758,
+          "current_value": 291114.07,
+          "gain_loss": 41126.57,
+          "gain_loss_percentage": 16.45,
+          "sip_amount": 62497,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Equity Arbitrage Fund - Drt Growth",
+          "scheme_code": "P8178",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Arbitrage Fund",
+          "units": 3944.628,
+          "investment_amount": 59997,
+          "transactions": [
+            {
+              "date": "2023-01-02T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 59997,
+              "units": 1972.314,
+              "price": 30.4196,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2023-09-25T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": -63386.98,
+              "units": -1972.314,
+              "price": 32.1387,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 15.2098,
+          "current_price": 16.8067,
+          "current_value": 66296.18,
+          "gain_loss": 6299.18,
+          "gain_loss_percentage": 10.5
+        },
+        {
+          "scheme_name": "Kotak Arbitrage Fund Dir- Gr",
+          "scheme_code": "K179D",
+          "folio_number": "11644599",
+          "mf_name": "Kotak Mutual Fund",
+          "type": "Arbitrage Fund",
+          "units": 1820.612,
+          "investment_amount": 0,
+          "transactions": [
+            {
+              "date": "2023-09-25T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": -63466.63,
+              "units": -1820.612,
+              "price": 34.8604,
+              "broker": "Advisor/Distributor : INZ000031633 / INZ000031633"
+            }
+          ],
+          "avg_purchase_price": 0,
+          "current_price": 0,
+          "current_value": 0,
+          "gain_loss": 0,
+          "gain_loss_percentage": null
+        },
+        {
+          "scheme_name": "Navi Nifty 50 Index Fund DG",
+          "scheme_code": "PLFNIGDG",
+          "folio_number": "9776458920",
+          "mf_name": "NAVI MF",
+          "type": "Index Fund",
+          "units": 7908.807,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2023-09-27T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 7908.807,
+              "price": 12.6435,
+              "broker": "Your Broker/Dealer is : ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 12.6435,
+          "current_price": 15.1946,
+          "current_value": 120171.16,
+          "gain_loss": 20176.16,
+          "gain_loss_percentage": 20.18
+        },
+        {
+          "scheme_name": "Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)",
+          "scheme_code": "PP001ZG",
+          "folio_number": "16130095",
+          "mf_name": "PPFAS Mutual Fund",
+          "type": "Equity",
+          "units": 2273.895,
+          "investment_amount": 199990,
+          "transactions": [
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 199990,
+              "units": 2273.895,
+              "price": 87.9504,
+              "broker": "Advisor : INZ000031633 / INZ000031633"
+            }
+          ],
+          "avg_purchase_price": 87.9504,
+          "current_price": 93.5161,
+          "current_value": 212645.79,
+          "gain_loss": 12655.79,
+          "gain_loss_percentage": 6.33
+        },
+        {
+          "scheme_name": "Tata Digital India Dir Pl Gr",
+          "scheme_code": "TDIFGZ",
+          "folio_number": "6938838/74",
+          "mf_name": "Tata Mutual Fund",
+          "type": "Equity",
+          "units": 2271.235,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2021-12-24T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 2271.235,
+              "price": 44.0267,
+              "broker": "RIA DISTRIBUTOR"
+            }
+          ],
+          "avg_purchase_price": 44.0267,
+          "current_price": 53.9537,
+          "current_value": 122541.53,
+          "gain_loss": 22546.53,
+          "gain_loss_percentage": 22.55
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-17T09:18:49.609Z"
+    },
+    "created_at": "2025-08-17T09:18:49.678Z",
+    "updated_at": "2025-08-17T09:18:49.678Z"
+  },
+  {
+    "id": "f6f6ebe5-7c09-4b41-8909-835f8f0231b4",
+    "credentials": {
+      "email": "manisha2",
+      "username": "manisha2",
+      "password": "$2b$10$Lv/OP9xbyHwsyLl31Ag12eTuVI.eJFUszRY6htZVvdZ2MR2q1JlPy"
+    },
+    "user_profile": {
+      "name": "Manisha",
+      "pan": "PAN NO:AGUPM6063F",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "Mumbai, Maharashtra",
+      "phone": "",
+      "email": "",
+      "created_at": "2025-08-17T09:38:08.222Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 759962,
+        "total_current_value": 861979.95,
+        "total_gain_loss": 102017.95,
+        "gain_loss_percentage": 13.42,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 861979.95,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Strategic Bond Fund - Dir - G-(formerly DSP Strategic Bond Fund)",
+          "scheme_code": "D791",
+          "folio_number": "8997480/41",
+          "mf_name": "DSP Mutual Fund",
+          "type": "Bond",
+          "units": 15.585,
+          "investment_amount": 49997.5,
+          "transactions": [
+            {
+              "date": "2024-02-20T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 15.585,
+              "price": 3208.0903,
+              "broker": "Your Broker/Dealer is : Zerodha Broking Limited"
+            }
+          ],
+          "avg_purchase_price": 3208.0526,
+          "current_price": 3478.8168,
+          "current_value": 54217.36,
+          "gain_loss": 4219.86,
+          "gain_loss_percentage": 8.44
+        },
+        {
+          "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+          "scheme_code": "P8017",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Balanced",
+          "units": 669.881,
+          "investment_amount": 249987.5,
+          "transactions": [
+            {
+              "date": "2023-11-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 156.84,
+              "price": 318.78,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-02-09T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 139.908,
+              "price": 357.36,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-11-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 125.872,
+              "price": 397.21,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 247.261,
+              "price": 404.41,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 373.182,
+          "current_price": 412.798,
+          "current_value": 276525.54,
+          "gain_loss": 26538.04,
+          "gain_loss_percentage": 10.62,
+          "sip_amount": 62497,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Equity Arbitrage Fund - Drt Growth",
+          "scheme_code": "P8178",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Arbitrage Fund",
+          "units": 3944.628,
+          "investment_amount": 59997,
+          "transactions": [
+            {
+              "date": "2023-01-02T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 59997,
+              "units": 1972.314,
+              "price": 30.4196,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2023-09-25T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": -63386.98,
+              "units": -1972.314,
+              "price": 32.1387,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 15.2098,
+          "current_price": 17.9757,
+          "current_value": 70907.45,
+          "gain_loss": 10910.45,
+          "gain_loss_percentage": 18.18
+        },
+        {
+          "scheme_name": "Kotak Arbitrage Fund Dir- Gr",
+          "scheme_code": "K179D",
+          "folio_number": "11644599",
+          "mf_name": "Kotak Mutual Fund",
+          "type": "Arbitrage Fund",
+          "units": 1820.612,
+          "investment_amount": 0,
+          "transactions": [
+            {
+              "date": "2023-09-25T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": -63466.63,
+              "units": -1820.612,
+              "price": 34.8604,
+              "broker": "Advisor/Distributor : INZ000031633 / INZ000031633"
+            }
+          ],
+          "avg_purchase_price": 0,
+          "current_price": 0,
+          "current_value": 0,
+          "gain_loss": 0,
+          "gain_loss_percentage": null
+        },
+        {
+          "scheme_name": "Navi Nifty 50 Index Fund DG",
+          "scheme_code": "PLFNIGDG",
+          "folio_number": "9776458920",
+          "mf_name": "NAVI MF",
+          "type": "Index Fund",
+          "units": 7908.807,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2023-09-27T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 7908.807,
+              "price": 12.6435,
+              "broker": "Your Broker/Dealer is : ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 12.6435,
+          "current_price": 15.0201,
+          "current_value": 118791.07,
+          "gain_loss": 18796.07,
+          "gain_loss_percentage": 18.8
+        },
+        {
+          "scheme_name": "Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)",
+          "scheme_code": "PP001ZG",
+          "folio_number": "16130095",
+          "mf_name": "PPFAS Mutual Fund",
+          "type": "Equity",
+          "units": 2273.895,
+          "investment_amount": 199990,
+          "transactions": [
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 199990,
+              "units": 2273.895,
+              "price": 87.9504,
+              "broker": "Advisor : INZ000031633 / INZ000031633"
+            }
+          ],
+          "avg_purchase_price": 87.9504,
+          "current_price": 97.4129,
+          "current_value": 221506.71,
+          "gain_loss": 21516.71,
+          "gain_loss_percentage": 10.76
+        },
+        {
+          "scheme_name": "Tata Digital India Dir Pl Gr",
+          "scheme_code": "TDIFGZ",
+          "folio_number": "6938838/74",
+          "mf_name": "Tata Mutual Fund",
+          "type": "Equity",
+          "units": 2271.235,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2021-12-24T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 2271.235,
+              "price": 44.0267,
+              "broker": "RIA DISTRIBUTOR"
+            }
+          ],
+          "avg_purchase_price": 44.0267,
+          "current_price": 52.8487,
+          "current_value": 120031.82,
+          "gain_loss": 20036.82,
+          "gain_loss_percentage": 20.04
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-17T09:38:08.223Z"
+    },
+    "created_at": "2025-08-17T09:38:08.293Z",
+    "updated_at": "2025-08-17T09:38:08.293Z"
+  },
+  {
+    "id": "59d86093-833b-4ba0-99ed-96058de11bba",
+    "credentials": {
+      "email": "manisha22",
+      "username": "manisha22",
+      "password": "$2b$10$iFBUJDbX0HvjRaDuiF78SuKuzfwaBtHDkVSBJk6/eRdbcS8L4hWYa"
+    },
+    "user_profile": {
+      "name": "Manisha22",
+      "pan": "PAN NO:AGUPM6063F",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "Mumbai, Maharashtra",
+      "phone": "",
+      "email": "",
+      "created_at": "2025-08-17T09:44:45.262Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 759962,
+        "total_current_value": 881396.84,
+        "total_gain_loss": 121434.84,
+        "gain_loss_percentage": 15.98,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 881396.84,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Strategic Bond Fund - Dir - G-(formerly DSP Strategic Bond Fund)",
+          "scheme_code": "D791",
+          "folio_number": "8997480/41",
+          "mf_name": "DSP Mutual Fund",
+          "type": "Bond",
+          "units": 15.585,
+          "investment_amount": 49997.5,
+          "transactions": [
+            {
+              "date": "2024-02-20T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 15.585,
+              "price": 3208.0903,
+              "broker": "Your Broker/Dealer is : Zerodha Broking Limited"
+            }
+          ],
+          "avg_purchase_price": 3208.0526,
+          "current_price": 3665.4125,
+          "current_value": 57125.45,
+          "gain_loss": 7127.95,
+          "gain_loss_percentage": 14.26
+        },
+        {
+          "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+          "scheme_code": "P8017",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Balanced",
+          "units": 669.881,
+          "investment_amount": 249987.5,
+          "transactions": [
+            {
+              "date": "2023-11-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 156.84,
+              "price": 318.78,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-02-09T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 139.908,
+              "price": 357.36,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-11-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 49997.5,
+              "units": 125.872,
+              "price": 397.21,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 247.261,
+              "price": 404.41,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 373.182,
+          "current_price": 423.2598,
+          "current_value": 283533.7,
+          "gain_loss": 33546.2,
+          "gain_loss_percentage": 13.42,
+          "sip_amount": 62497,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Equity Arbitrage Fund - Drt Growth",
+          "scheme_code": "P8178",
+          "folio_number": "24723809/11",
+          "mf_name": "ICICI Prudential Mutual Fund",
+          "type": "Arbitrage Fund",
+          "units": 3944.628,
+          "investment_amount": 59997,
+          "transactions": [
+            {
+              "date": "2023-01-02T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 59997,
+              "units": 1972.314,
+              "price": 30.4196,
+              "broker": "ZERODHA BROKING LIMITED"
+            },
+            {
+              "date": "2023-09-25T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": -63386.98,
+              "units": -1972.314,
+              "price": 32.1387,
+              "broker": "ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 15.2098,
+          "current_price": 17.6288,
+          "current_value": 69539.06,
+          "gain_loss": 9542.06,
+          "gain_loss_percentage": 15.9
+        },
+        {
+          "scheme_name": "Navi Nifty 50 Index Fund DG",
+          "scheme_code": "PLFNIGDG",
+          "folio_number": "9776458920",
+          "mf_name": "NAVI MF",
+          "type": "Index Fund",
+          "units": 7908.807,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2023-09-27T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 7908.807,
+              "price": 12.6435,
+              "broker": "Your Broker/Dealer is : ZERODHA BROKING LIMITED"
+            }
+          ],
+          "avg_purchase_price": 12.6435,
+          "current_price": 15.3466,
+          "current_value": 121373.3,
+          "gain_loss": 21378.3,
+          "gain_loss_percentage": 21.38
+        },
+        {
+          "scheme_name": "Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)",
+          "scheme_code": "PP001ZG",
+          "folio_number": "16130095",
+          "mf_name": "PPFAS Mutual Fund",
+          "type": "Equity",
+          "units": 2273.895,
+          "investment_amount": 199990,
+          "transactions": [
+            {
+              "date": "2024-12-19T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 199990,
+              "units": 2273.895,
+              "price": 87.9504,
+              "broker": "Advisor : INZ000031633 / INZ000031633"
+            }
+          ],
+          "avg_purchase_price": 87.9504,
+          "current_price": 99.1989,
+          "current_value": 225567.88,
+          "gain_loss": 25577.88,
+          "gain_loss_percentage": 12.79
+        },
+        {
+          "scheme_name": "Tata Digital India Dir Pl Gr",
+          "scheme_code": "TDIFGZ",
+          "folio_number": "6938838/74",
+          "mf_name": "Tata Mutual Fund",
+          "type": "Equity",
+          "units": 2271.235,
+          "investment_amount": 99995,
+          "transactions": [
+            {
+              "date": "2021-12-24T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 99995,
+              "units": 2271.235,
+              "price": 44.0267,
+              "broker": "RIA DISTRIBUTOR"
+            }
+          ],
+          "avg_purchase_price": 44.0267,
+          "current_price": 54.7092,
+          "current_value": 124257.45,
+          "gain_loss": 24262.45,
+          "gain_loss_percentage": 24.26
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-17T09:44:45.262Z"
+    },
+    "created_at": "2025-08-17T09:44:45.331Z",
+    "updated_at": "2025-08-17T09:44:45.331Z"
   }
 ]

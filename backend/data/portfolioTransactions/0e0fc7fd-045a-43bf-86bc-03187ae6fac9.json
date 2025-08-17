@@ -1,0 +1,139 @@
+{
+  "userId": "0e0fc7fd-045a-43bf-86bc-03187ae6fac9",
+  "transactions": [
+    {
+      "date": "2024-02-20T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 49997.5,
+      "units": 15.585,
+      "price": 3208.0903,
+      "broker": "Your Broker/Dealer is : Zerodha Broking Limited",
+      "scheme_name": "Strategic Bond Fund - Dir - G-(formerly DSP Strategic Bond Fund)",
+      "folio_number": "8997480/41",
+      "mf_name": "DSP Mutual Fund",
+      "id": "08808e12-18b0-482c-9d02-71f689c639c9"
+    },
+    {
+      "date": "2023-11-28T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 49997.5,
+      "units": 156.84,
+      "price": 318.78,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "63841794-d8dd-40b0-8d95-f8742bf19c19"
+    },
+    {
+      "date": "2024-02-09T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 49997.5,
+      "units": 139.908,
+      "price": 357.36,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "03262dc5-10c9-4b60-8038-82a3b0bf94e6"
+    },
+    {
+      "date": "2024-11-21T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 49997.5,
+      "units": 125.872,
+      "price": 397.21,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "11fa8310-31d0-41b8-9325-9bec46ff395d"
+    },
+    {
+      "date": "2024-12-19T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 99995,
+      "units": 247.261,
+      "price": 404.41,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity&Debt Fund - DP - Growth-(formerly ICICI Prudential Balanced Fund)",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "14d04c3b-2bea-4645-9b90-38effac8ac98"
+    },
+    {
+      "date": "2023-01-02T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 59997,
+      "units": 1972.314,
+      "price": 30.4196,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity Arbitrage Fund - Drt Growth",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "d9f6d2f2-dfa2-4b31-8f25-328bd7c0368f"
+    },
+    {
+      "date": "2023-09-25T00:00:00.000Z",
+      "transaction_type": "Redemption",
+      "amount": -63386.98,
+      "units": -1972.314,
+      "price": 32.1387,
+      "broker": "ZERODHA BROKING LIMITED",
+      "scheme_name": "Equity Arbitrage Fund - Drt Growth",
+      "folio_number": "24723809/11",
+      "mf_name": "ICICI Prudential Mutual Fund",
+      "id": "c5aeea8a-c619-409e-8702-26cff9e68b31"
+    },
+    {
+      "date": "2023-09-25T00:00:00.000Z",
+      "transaction_type": "Redemption",
+      "amount": -63466.63,
+      "units": -1820.612,
+      "price": 34.8604,
+      "broker": "Advisor/Distributor : INZ000031633 / INZ000031633",
+      "scheme_name": "Kotak Arbitrage Fund Dir- Gr",
+      "folio_number": "11644599",
+      "mf_name": "Kotak Mutual Fund",
+      "id": "934d55eb-7724-4522-9d5d-409692c265d9"
+    },
+    {
+      "date": "2023-09-27T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 99995,
+      "units": 7908.807,
+      "price": 12.6435,
+      "broker": "Your Broker/Dealer is : ZERODHA BROKING LIMITED",
+      "scheme_name": "Navi Nifty 50 Index Fund DG",
+      "folio_number": "9776458920",
+      "mf_name": "NAVI MF",
+      "id": "dd7eab1f-5a4d-497d-8998-7b84149d15a3"
+    },
+    {
+      "date": "2024-12-19T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 199990,
+      "units": 2273.895,
+      "price": 87.9504,
+      "broker": "Advisor : INZ000031633 / INZ000031633",
+      "scheme_name": "Parag Parikh Flexi Cap - Dir Plan-(formerly Parag Parikh Long Term Value Fund)",
+      "folio_number": "16130095",
+      "mf_name": "PPFAS Mutual Fund",
+      "id": "7edfb370-0680-4792-937c-e52371dcfc54"
+    },
+    {
+      "date": "2021-12-24T00:00:00.000Z",
+      "transaction_type": "Purchase",
+      "amount": 99995,
+      "units": 2271.235,
+      "price": 44.0267,
+      "broker": "RIA DISTRIBUTOR",
+      "scheme_name": "Tata Digital India Dir Pl Gr",
+      "folio_number": "6938838/74",
+      "mf_name": "Tata Mutual Fund",
+      "id": "9f89e6ef-1e09-4772-880f-b96c9ace0a96"
+    }
+  ],
+  "created_at": "2025-08-17T09:18:49.680Z",
+  "updated_at": "2025-08-17T09:18:49.680Z"
+}

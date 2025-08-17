@@ -110,8 +110,9 @@ class ApiService {
     return this.makeRequest('/market/overview');
   }
 
-  async getPortfolioMarketImpact() {
-    return this.makeRequest('/market/portfolio-impact');
+  async getPortfolioMarketImpact(userId?: string) {
+    const params = userId ? `?userId=${userId}` : '';
+    return this.makeRequest(`/market/portfolio-impact${params}`);
   }
 
   // User context data

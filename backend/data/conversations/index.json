@@ -1,5 +1,95 @@
 [
   {
+    "id": "conv_1755417954041_09hu73bjk",
+    "title": "who are the CEOs of the stocks in my portfolio...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T08:06:24.499Z",
+    "updatedAt": "2025-08-17T08:06:29.385Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "test_conv_market_1755417870077",
+    "title": "What is todays market update and how does it affec...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T08:04:30.080Z",
+    "updatedAt": "2025-08-17T08:04:30.082Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "test_conv_mf_1755417857033",
+    "title": "List all mutual funds in my portfolio with their c...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T08:04:17.034Z",
+    "updatedAt": "2025-08-17T08:04:17.036Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "test_conv_1755417841687",
+    "title": "How is my SBI Bluechip Fund performing compared to...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T08:04:01.689Z",
+    "updatedAt": "2025-08-17T08:04:08.920Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1755417499672_gmob205yl",
+    "title": "tell me top holdings of my mutual funds...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T07:58:31.548Z",
+    "updatedAt": "2025-08-17T07:58:31.550Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1755417167779_wjb70wedf",
+    "title": "date today...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T07:52:53.681Z",
+    "updatedAt": "2025-08-17T07:55:32.655Z",
+    "messageCount": 6,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1755416628246_c7wjebdpx",
+    "title": "which mutual funds are there in my portfolio...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T07:44:04.066Z",
+    "updatedAt": "2025-08-17T07:48:21.721Z",
+    "messageCount": 12,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1755416183938_ltn85phkx",
+    "title": "my MF investments current value...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T07:36:51.525Z",
+    "updatedAt": "2025-08-17T07:37:38.686Z",
+    "messageCount": 4,
+    "tags": [],
+    "archived": false
+  },
+  {
+    "id": "conv_1755415163859_v591gzm18",
+    "title": "which mfs in my portfolio...",
+    "userId": "demo-user",
+    "createdAt": "2025-08-17T07:19:36.094Z",
+    "updatedAt": "2025-08-17T07:19:42.871Z",
+    "messageCount": 2,
+    "tags": [],
+    "archived": false
+  },
+  {
     "id": "conv_1755320527432_7f7uouabv",
     "title": "hi...",
     "userId": "demo-user",

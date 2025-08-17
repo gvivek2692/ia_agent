@@ -99,6 +99,172 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+// Using imported portfolio recommendation functions from ./data/portfolioRecommendations.js
+// Removed local duplicate function to avoid naming conflict
+const generatePortfolioRecommendationsLocal = (userContext) => {
+  const portfolio = userContext.portfolio;
+  const goals = userContext.financial_goals?.goals || [];
+  const riskTolerance = userContext.investment_profile?.risk_tolerance || 'Moderate';
+  const recommendations = [];
+
+  // Calculate current allocations
+  const totalValue = portfolio.summary?.total_current_value || 0;
+  const assetAllocation = portfolio.summary?.asset_allocation || {};
+  
+  // Asset allocation recommendations
+  const equityPercentage = assetAllocation.stocks?.percentage || 0;
+  const mfPercentage = assetAllocation.mutual_funds?.percentage || 0;
+  const debtPercentage = assetAllocation.ppf?.percentage || 0;
+  
+  // Recommend based on risk tolerance
+  let idealEquity = 60; // Default moderate
+  if (riskTolerance === 'Conservative') idealEquity = 40;
+  if (riskTolerance === 'Aggressive') idealEquity = 80;
+  
+  const currentEquity = equityPercentage + mfPercentage;
+  
+  if (Math.abs(currentEquity - idealEquity) > 10) {
+    recommendations.push({
+      id: 'asset_rebalance_1',
+      type: 'rebalance',
+      title: currentEquity > idealEquity ? 'Reduce Equity Exposure' : 'Increase Equity Allocation',
+      description: `Your current equity allocation (${currentEquity.toFixed(1)}%) ${currentEquity > idealEquity ? 'exceeds' : 'is below'} the recommended ${idealEquity}% for your ${riskTolerance.toLowerCase()} risk profile.`,
+      priority: Math.abs(currentEquity - idealEquity) > 20 ? 'high' : 'medium',
+      impact_score: Math.min(Math.abs(currentEquity - idealEquity) * 2, 90),
+      current_allocation: currentEquity,
+      recommended_allocation: idealEquity,
+      timeframe: '3-6 months',
+      reasoning: [
+        `${riskTolerance} investors typically maintain ${idealEquity}% equity allocation`,
+        'Proper asset allocation reduces portfolio volatility',
+        'Rebalancing helps maintain target risk levels'
+      ],
+      risk_level: 'medium'
+    });
+  }
+
+  // Emergency fund check
+  const monthlyExpenses = userContext.monthly_expenses?.total || 50000;
+  const emergencyGoal = goals.find(g => g.name.toLowerCase().includes('emergency'));
+  const emergencyFundRatio = emergencyGoal ? emergencyGoal.progress_percentage / 100 : 0;
+  
+  if (emergencyFundRatio < 0.8) {
+    recommendations.push({
+      id: 'emergency_fund_1',
+      type: 'add',
+      title: 'Build Emergency Fund',
+      description: `Your emergency fund covers only ${(emergencyFundRatio * 6).toFixed(1)} months of expenses. Aim for 6 months coverage.`,
+      priority: 'high',
+      impact_score: 85,
+      amount_suggestion: monthlyExpenses * (6 - emergencyFundRatio * 6),
+      timeframe: '12-18 months',
+      reasoning: [
+        'Emergency fund provides financial security',
+        'Reduces need to liquidate investments during crises',
+        'Essential foundation for any investment strategy'
+      ],
+      risk_level: 'low'
+    });
+  }
+
+  // SIP increase recommendations
+  const mutualFunds = portfolio.mutual_funds || [];
+  const totalSip = mutualFunds.reduce((sum, mf) => sum + (mf.sip_amount || 0), 0);
+  const income = userContext.financial_profile?.take_home || 80000;
+  const sipRatio = totalSip / income;
+  
+  if (sipRatio < 0.15 && totalSip > 0) {
+    recommendations.push({
+      id: 'sip_increase_1',
+      type: 'add',
+      title: 'Increase SIP Contributions',
+      description: `Your current SIP (₹${totalSip.toLocaleString()}) is ${(sipRatio * 100).toFixed(1)}% of income. Consider increasing to 15-20%.`,
+      priority: 'medium',
+      impact_score: 70,
+      amount_suggestion: income * 0.15 - totalSip,
+      timeframe: '1-3 months',
+      reasoning: [
+        'Higher SIP contributions accelerate wealth building',
+        'Rupee cost averaging reduces market timing risk',
+        'Disciplined investing builds long-term corpus'
+      ],
+      risk_level: 'low'
+    });
+  }
+
+  // Diversification check
+  if (mutualFunds.length > 0 && mutualFunds.length < 3) {
+    recommendations.push({
+      id: 'diversify_1',
+      type: 'diversify',
+      title: 'Diversify Mutual Fund Portfolio',
+      description: `You have only ${mutualFunds.length} mutual fund${mutualFunds.length === 1 ? '' : 's'}. Consider adding funds from different categories.`,
+      priority: 'medium',
+      impact_score: 60,
+      timeframe: '2-4 months',
+      reasoning: [
+        'Diversification across fund categories reduces risk',
+        'Different fund types perform well in different market cycles',
+        'Balanced exposure to large-cap, mid-cap, and debt'
+      ],
+      risk_level: 'medium'
+    });
+  }
+
+  return recommendations.slice(0, 5); // Return top 5 recommendations
+};
+
+const generateRebalanceRecommendationsLocal = (userContext) => {
+  const portfolio = userContext.portfolio;
+  const assetAllocation = portfolio.summary?.asset_allocation || {};
+  const riskTolerance = userContext.investment_profile?.risk_tolerance || 'Moderate';
+  
+  // Current allocation
+  const current = {
+    'Equity (Stocks)': assetAllocation.stocks?.percentage || 0,
+    'Mutual Funds': assetAllocation.mutual_funds?.percentage || 0,
+    'Debt/PPF': assetAllocation.ppf?.percentage || 0,
+    'Other': assetAllocation.epf?.percentage || 0
+  };
+  
+  // Recommended allocation based on risk tolerance
+  let recommended;
+  if (riskTolerance === 'Conservative') {
+    recommended = {
+      'Equity (Stocks)': 20,
+      'Mutual Funds': 40,
+      'Debt/PPF': 35,
+      'Other': 5
+    };
+  } else if (riskTolerance === 'Aggressive') {
+    recommended = {
+      'Equity (Stocks)': 40,
+      'Mutual Funds': 45,
+      'Debt/PPF': 10,
+      'Other': 5
+    };
+  } else { // Moderate
+    recommended = {
+      'Equity (Stocks)': 30,
+      'Mutual Funds': 45,
+      'Debt/PPF': 20,
+      'Other': 5
+    };
+  }
+  
+  // Calculate differences
+  const difference = {};
+  Object.keys(current).forEach(key => {
+    difference[key] = recommended[key] - current[key];
+  });
+  
+  return {
+    current,
+    recommended,
+    difference
+  };
+};
+
 // Wealth advisor response function with web search integration
 const getWealthAdvisorResponse = async (userMessage, userContext = null, customSystemPrompt = null) => {
   try {
@@ -227,6 +393,36 @@ WEB SEARCH INTEGRATION:
 - Use the exact figures and details provided in the search results
 - Do NOT provide generic market information when current search results are available
 
+CURRENT DATE AND TIME:
+- Today's Date: ${new Date().toLocaleDateString('en-IN', { 
+  weekday: 'long', 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric',
+  timeZone: 'Asia/Kolkata'
+})}
+- Current Time: ${new Date().toLocaleTimeString('en-IN', { 
+  timeZone: 'Asia/Kolkata',
+  hour12: true 
+})} IST
+- Market Status: ${(() => {
+  const now = new Date();
+  const currentHour = now.getHours();
+  const dayOfWeek = now.getDay(); // 0=Sunday, 6=Saturday
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  const isMarketHours = currentHour >= 9 && currentHour < 15; // 9 AM to 3 PM
+  
+  if (isWeekend) {
+    return 'Markets are closed (Weekend)';
+  } else if (isMarketHours) {
+    return 'Markets are OPEN (9:15 AM - 3:30 PM IST)';
+  } else if (currentHour < 9) {
+    return 'Markets will open at 9:15 AM IST';
+  } else {
+    return 'Markets are closed (After hours)';
+  }
+})()}
+
 INDIAN MARKET FOCUS:
 - NSE and BSE listed stocks
 - Indian mutual funds (equity, debt, hybrid)
@@ -252,6 +448,16 @@ ASSET ALLOCATION:
 - Mutual Funds: ₹${fullUserContext.portfolio.summary.asset_allocation.mutual_funds?.value?.toLocaleString() || '0'} (${fullUserContext.portfolio.summary.asset_allocation.mutual_funds?.percentage || '0.0'}%)
 - PPF: ₹${fullUserContext.portfolio.summary.asset_allocation.ppf?.value?.toLocaleString() || '0'} (${fullUserContext.portfolio.summary.asset_allocation.ppf?.percentage || '0.0'}%)
 
+DETAILED STOCK HOLDINGS:
+${fullUserContext.portfolio.stocks?.map(stock => 
+  `- ${stock.company_name} (${stock.symbol}): ${stock.quantity} shares @ ₹${stock.current_price} = ₹${stock.current_value.toLocaleString()} (${stock.gain_loss_percentage > 0 ? '+' : ''}${stock.gain_loss_percentage.toFixed(2)}%)`
+).join('\n') || 'No stock holdings'}
+
+DETAILED MUTUAL FUND HOLDINGS:
+${fullUserContext.portfolio.mutual_funds?.map(mf => 
+  `- ${mf.scheme_name}: ${mf.units.toFixed(2)} units @ ₹${mf.nav} NAV = ₹${mf.current_value.toLocaleString()} (${mf.gain_loss_percentage > 0 ? '+' : ''}${mf.gain_loss_percentage.toFixed(2)}%) | SIP: ₹${mf.sip_amount}/month`
+).join('\n') || 'No mutual fund holdings'}
+
 FINANCIAL GOALS STATUS:
 ${fullUserContext.financial_goals.goals.map(goal => 
   `- ${goal.name}: ₹${goal.current_amount.toLocaleString()}/₹${goal.target_amount.toLocaleString()} (${goal.progress_percentage.toFixed(1)}% complete)`
@@ -265,6 +471,15 @@ ${fullUserContext.recent_transactions.slice(0, 5).map(txn =>
 ${marketDataService.generateMarketInsights(fullUserContext)}
 
 IMPORTANT: Always provide specific, personalized advice based on the user's actual financial situation shown above. Reference specific holdings, goals, and transactions when relevant.
+
+CRITICAL DATA USAGE INSTRUCTION:
+- ALWAYS use the EXACT VALUES from the portfolio data provided above
+- NEVER use placeholder values like "XXX,XXX" or generic amounts
+- When showing mutual fund values, use the specific current_value, investment_amount, and gain_loss from the detailed holdings
+- When showing stock values, use the specific current_value, quantity, and current_price from the detailed holdings
+- All monetary amounts should be the ACTUAL numbers from the user's portfolio data
+- When asked about "today", "current date", or time-related queries, ALWAYS refer to the CURRENT DATE AND TIME provided above
+- Use the exact date format provided above when mentioning today's date in responses
 
 RESPONSE FORMATTING:
 - Use markdown formatting for better readability
@@ -558,6 +773,7 @@ app.get('/api/portfolio/summary', (req, res) => {
   res.json(getPortfolioSummary());
 });
 
+
 app.get('/api/goals/overview', (req, res) => {
   res.json(getGoalsOverview());
 });
@@ -723,7 +939,25 @@ app.get('/api/market/overview', (req, res) => {
 });
 
 app.get('/api/market/portfolio-impact', (req, res) => {
-  const userContext = getUserContext();
+  const { userId } = req.query;
+  let userContext;
+  
+  if (userId) {
+    const user = getAnyUserById(userId);
+    if (user) {
+      userContext = {
+        user_profile: user.user_profile,
+        financial_profile: user.financial_profile,
+        investment_profile: user.investment_profile,
+        portfolio: user.portfolio
+      };
+    } else {
+      userContext = getUserContext(); // fallback to demo data
+    }
+  } else {
+    userContext = getUserContext(); // fallback to demo data
+  }
+  
   const portfolioMarketData = marketDataService.getPortfolioMarketData(userContext.portfolio.stocks);
   res.json(portfolioMarketData);
 });
@@ -1756,11 +1990,17 @@ ${recommendations || 'Set up specific financial goals to track your progress bet
       } else if (userMessage.toLowerCase().includes('market') && 
                  (userMessage.toLowerCase().includes('today') || userMessage.toLowerCase().includes('update'))) {
         const marketOverview = marketDataService.getMarketOverview();
-        const userContext = getUserContext();
-        const portfolioMarketData = marketDataService.getPortfolioMarketData(userContext.portfolio.stocks);
-        const relevantNews = marketDataService.getRelevantNews(userContext);
+        const currentUserContext = userContext || getUserContext(); // Use user-specific context if available
+        const portfolioMarketData = marketDataService.getPortfolioMarketData(currentUserContext.portfolio.stocks);
+        const relevantNews = marketDataService.getRelevantNews(currentUserContext);
         
-        aiResponse = `# 📈 Today's Market Update
+        aiResponse = `# 📈 Market Update - ${new Date().toLocaleDateString('en-IN', { 
+  weekday: 'long', 
+  month: 'long', 
+  day: 'numeric', 
+  year: 'numeric',
+  timeZone: 'Asia/Kolkata'
+})}
 
 ## Market Overview
 | Index | Current | Change | % Change |

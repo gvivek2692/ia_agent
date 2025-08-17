@@ -1,0 +1,24 @@
+{
+  "id": "test_conv_market_1755417870077",
+  "title": "What is todays market update and how does it affec...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-17T08:04:30.080Z",
+  "updatedAt": "2025-08-17T08:04:30.082Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755417870081_l65d9iwc0",
+      "content": "What is todays market update and how does it affect my portfolio?",
+      "isBot": false,
+      "timestamp": "2025-08-17T08:04:30.081Z"
+    },
+    {
+      "id": "msg_1755417870082_06godmfjg",
+      "content": "# 📈 Market Update - Sunday, 17 August 2025\n\n## Market Overview\n| Index | Current | Change | % Change |\n|-------|---------|--------|----------|\n| **Nifty 50** | 24865 | +125.50 | +0.51% |\n| **Sensex** | 81622 | +220.75 | +0.27% |\n\n**Market Sentiment:** Neutral\n\n## Your Portfolio Performance Today\n| Stock | Current Price | Today's Change | Your Impact |\n|-------|---------------|----------------|-------------|\n| **INFY** | ₹1367.62 | +15.20 (+1.01%) | 15 shares |\n| **HDFCBANK** | ₹1756.17 | +22.50 (+1.30%) | 8 shares |\n| **RELIANCE** | ₹3017.43 | -18.75 (-0.64%) | 6 shares |\n| **TCS** | ₹4032.44 | +45.80 (+1.13%) | 5 shares |\n| **BAJFINANCE** | ₹7538.03 | +125.00 (+1.66%) | 3 shares |\n\n## 📰 Key Market News\n### RBI keeps repo rate unchanged at 6.5% in latest monetary policy review\nCentral bank maintains status quo on interest rates, citing balanced inflation concerns\n\n**Impact on your portfolio:** Positive for debt funds, neutral for equity markets\n\n### IT sector shows strong Q2 results with double-digit growth\nMajor IT companies report robust earnings driven by AI and digital transformation deals\n\n**Impact on your portfolio:** Positive for IT stocks like INFY, TCS in your portfolio\n\n## 💡 Today's Insight\nMixed market conditions today. This is normal volatility - stick to your long-term investment plan.\n\n*Would you like me to analyze any specific impact on your portfolio?*",
+      "isBot": true,
+      "timestamp": "2025-08-17T08:04:30.082Z"
+    }
+  ]
+}

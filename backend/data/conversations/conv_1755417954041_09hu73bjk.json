@@ -1,0 +1,24 @@
+{
+  "id": "conv_1755417954041_09hu73bjk",
+  "title": "who are the CEOs of the stocks in my portfolio...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-17T08:06:24.499Z",
+  "updatedAt": "2025-08-17T08:06:29.385Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755417984501_y4ll1xw32",
+      "content": "who are the CEO's of the stocks in my portfolio",
+      "isBot": false,
+      "timestamp": "2025-08-17T08:06:24.501Z"
+    },
+    {
+      "id": "msg_1755417989385_86vmxsxp3",
+      "content": "Here are the current CEOs of the companies in your portfolio:\n\n| **Stock**                  | **Company Name**                 | **CEO**                         |\n|---------------------------|----------------------------------|----------------------------------|\n| ITC Limited               | ITC Limited                      | Sanjiv Puri                     |\n| Tata Consultancy Services  | Tata Consultancy Services (TCS) | K. Krithivasan                  |\n| HDFC Bank Limited         | HDFC Bank Limited                | Sashidhar Jagdishan             |\n| Infosys Limited           | Infosys Limited                  | Salil Parekh                    |\n\n### Key Details:\n- **ITC Limited**: Sanjiv Puri has been serving as the CEO since April 2017. He has been with the company for over three decades.\n- **Tata Consultancy Services (TCS)**: K. Krithivasan took over as CEO in 2022, succeeding Rajesh Gopinathan.\n- **HDFC Bank**: Sashidhar Jagdishan became the CEO in October 2020, focusing on digital transformation and customer engagement.\n- **Infosys**: Salil Parekh has been the CEO since January 2018, leading the company through significant digital services growth.\n\nIf you have any further questions or need insights about these companies, feel free to ask!",
+      "isBot": true,
+      "timestamp": "2025-08-17T08:06:29.385Z"
+    }
+  ]
+}

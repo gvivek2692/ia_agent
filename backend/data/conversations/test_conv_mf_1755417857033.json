@@ -1,0 +1,24 @@
+{
+  "id": "test_conv_mf_1755417857033",
+  "title": "List all mutual funds in my portfolio with their c...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-17T08:04:17.034Z",
+  "updatedAt": "2025-08-17T08:04:17.036Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755417857035_ibf2vrmxr",
+      "content": "List all mutual funds in my portfolio with their current values and SIP amounts",
+      "isBot": false,
+      "timestamp": "2025-08-17T08:04:17.035Z"
+    },
+    {
+      "id": "msg_1755417857036_oxujg1y1v",
+      "content": "# 📊 Your Mutual Fund Investments\n\nHi Priya Sharma, here's the current status of your mutual fund portfolio:\n\n| Mutual Fund | Current Value (₹) | Investment (₹) | Gain/Loss (₹) |\n|-------------|-------------------|----------------|---------------|\n| SBI Bluechip Fund - Direct Growth | ₹35,384 | ₹32,000 | ₹+3,384 (+10.58%) |\n| Axis Midcap Fund - Direct Growth | ₹24,792 | ₹22,000 | ₹+2,792 (+12.69%) |\n| Mirae Asset Large & Midcap Fund - Direct Growth | ₹35,928 | ₹30,000 | ₹+5,928 (+19.76%) |\n| HDFC Hybrid Equity Fund - Direct Growth | ₹30,678 | ₹28,000 | ₹+2,678 (+9.56%) |\n| Parag Parikh Flexi Cap Fund - Direct Growth | ₹14,238 | ₹12,000 | ₹+2,238 (+18.65%) |\n\n## Summary\n- **Total Current Value**: ₹141,020\n- **Total Investment**: ₹124,000  \n- **Total Gain/Loss**: ₹+17,020 (+13.73%)\n- **Monthly SIP**: ₹29,000 across 5 funds\n\n## Performance Insights\n🟢 **Excellent Performance**: Your mutual funds are performing very well!\n\nYour portfolio is well-diversified across 5 different mutual fund schemes.\n\n*Would you like detailed analysis of any specific fund or recommendations for optimization?*",
+      "isBot": true,
+      "timestamp": "2025-08-17T08:04:17.036Z"
+    }
+  ]
+}
