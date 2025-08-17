@@ -127,7 +127,11 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }
   };
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount: number | null | undefined) => {
+    if (amount === null || amount === undefined || isNaN(amount)) {
+      return '₹0';
+    }
+    
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -136,8 +140,17 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }).format(amount);
   };
 
-  const formatPercentage = (percentage: number | string) => {
+  const formatPercentage = (percentage: number | string | null | undefined) => {
+    if (percentage === null || percentage === undefined || percentage === '') {
+      return 'N/A';
+    }
+    
     const numPercentage = typeof percentage === 'string' ? parseFloat(percentage) : percentage;
+    
+    if (isNaN(numPercentage)) {
+      return 'N/A';
+    }
+    
     const sign = numPercentage >= 0 ? '+' : '';
     return `${sign}${numPercentage.toFixed(2)}%`;
   };

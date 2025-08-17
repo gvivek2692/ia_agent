@@ -21,8 +21,21 @@
       "Bash(npm start)",
       "WebFetch(domain:serper.dev)",
       "Bash(timeout 5s npm start)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "WebFetch(domain:preview--my-fin-advisor.lovable.app)",
+      "Bash(git pull:*)",
+      "Bash(npx tsc:*)",
+      "Bash(grep:*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "Bash(cp:*)",
+      "Bash(git stash:*)",
+      "Bash(timeout:*)",
+      "Bash(find:*)"
     ],
-    "deny": []
+    "deny": [],
+    "additionalDirectories": [
+      "/Users/vivekgupta/Documents/vibe-coding"
+    ]
   }
 }

@@ -10,7 +10,7 @@ interface Holding {
   current_value: number;
   investment_amount: number;
   gain_loss: number;
-  gain_loss_percentage: number;
+  gain_loss_percentage: number | null;
   current_price?: number;
   avg_purchase_price?: number;
   type?: string;
@@ -20,8 +20,8 @@ interface Holding {
 interface HoldingsTableProps {
   mutualFunds: Holding[];
   stocks: Holding[];
-  formatCurrency: (amount: number) => string;
-  formatPercentage: (percentage: number) => string;
+  formatCurrency: (amount: number | null | undefined) => string;
+  formatPercentage: (percentage: number | string | null | undefined) => string;
 }
 
 type SortField = 'name' | 'currentValue' | 'investmentAmount' | 'gainLoss' | 'gainLossPercentage';
@@ -89,8 +89,8 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
         bValue = b.gain_loss;
         break;
       case 'gainLossPercentage':
-        aValue = a.gain_loss_percentage;
-        bValue = b.gain_loss_percentage;
+        aValue = a.gain_loss_percentage ?? 0;
+        bValue = b.gain_loss_percentage ?? 0;
         break;
       default:
         aValue = a.current_value;
@@ -126,12 +126,14 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const calculateTotals = () => {
     const totals = filteredHoldings.reduce((acc, holding) => ({
-      currentValue: acc.currentValue + holding.current_value,
-      investmentAmount: acc.investmentAmount + holding.investment_amount,
-      gainLoss: acc.gainLoss + holding.gain_loss,
+      currentValue: acc.currentValue + (holding.current_value || 0),
+      investmentAmount: acc.investmentAmount + (holding.investment_amount || 0),
+      gainLoss: acc.gainLoss + (holding.gain_loss || 0),
     }), { currentValue: 0, investmentAmount: 0, gainLoss: 0 });
 
-    const gainLossPercentage = (totals.gainLoss / totals.investmentAmount) * 100;
+    const gainLossPercentage = totals.investmentAmount > 0 
+      ? (totals.gainLoss / totals.investmentAmount) * 100 
+      : 0;
     return { ...totals, gainLossPercentage };
   };
 
@@ -340,11 +342,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end space-x-1">
                     <span className={`text-sm font-medium ${
-                      holding.gain_loss_percentage >= 0 ? 'text-green-600' : 'text-red-600'
+                      (holding.gain_loss_percentage ?? 0) >= 0 ? 'text-green-600' : 'text-red-600'
                     }`}>
                       {formatPercentage(holding.gain_loss_percentage)}
                     </span>
-                    {holding.gain_loss_percentage >= 0 ? (
+                    {(holding.gain_loss_percentage ?? 0) >= 0 ? (
                       <TrendingUp className="w-3 h-3 text-green-600" />
                     ) : (
                       <TrendingDown className="w-3 h-3 text-red-600" />
