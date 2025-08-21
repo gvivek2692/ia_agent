@@ -136,18 +136,24 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }).format(amount);
   };
 
-  const formatPercentage = (percentage: number | string) => {
+  const formatPercentage = (percentage: number | string | null | undefined) => {
+    if (percentage === null || percentage === undefined || percentage === '') {
+      return '0.00%';
+    }
     const numPercentage = typeof percentage === 'string' ? parseFloat(percentage) : percentage;
+    if (isNaN(numPercentage)) {
+      return '0.00%';
+    }
     const sign = numPercentage >= 0 ? '+' : '';
     return `${sign}${numPercentage.toFixed(2)}%`;
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your portfolio...</p>
+          <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">Loading your portfolio...</p>
         </div>
       </div>
     );
@@ -155,15 +161,15 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingDown className="w-8 h-8 text-red-600" />
+          <div className="w-16 h-16 bg-red-500/20 backdrop-blur-sm border border-red-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <TrendingDown className="w-8 h-8 text-red-400" />
           </div>
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={loadDashboardData}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-6 py-3 rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
           >
             Try Again
           </button>
@@ -173,28 +179,48 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-rose-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
+      </div>
+
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="relative z-10 bg-black/50 backdrop-blur-lg shadow-lg border-b border-pink-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                {userName ? `${userName}'s Portfolio` : 'Portfolio Dashboard'}
+              <h1 className="text-3xl font-bold text-white">
+                {userName ? (
+                  <>
+                    <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                      {userName}'s
+                    </span>{' '}
+                    Portfolio
+                  </>
+                ) : (
+                  <>
+                    <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                      Portfolio
+                    </span>{' '}
+                    Dashboard
+                  </>
+                )}
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-gray-300 mt-1">
                 Track your investments, monitor performance, and manage your financial goals
               </p>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="text-sm text-gray-500">
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-400">
                 Last updated: {portfolioData ? new Date(portfolioData.updated_at).toLocaleDateString() : 'N/A'}
               </div>
               {userId && userId.startsWith('kite-') ? (
                 <button
                   onClick={handleRefreshPortfolio}
                   disabled={refreshing}
-                  className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 border border-orange-200 rounded-md hover:bg-orange-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-orange-300 bg-orange-500/20 border border-orange-400/30 rounded-2xl hover:bg-orange-500/30 hover:text-orange-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
                   title="Refresh from Kite"
                 >
                   <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
@@ -203,7 +229,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
               ) : (
                 <button
                   onClick={loadDashboardData}
-                  className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors"
+                  className="p-3 text-gray-400 hover:text-pink-400 rounded-2xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
                   title="Refresh Data"
                 >
                   <Settings className="w-5 h-5" />
@@ -214,15 +240,15 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
 
           {/* Tab Navigation */}
           <div className="mt-6">
-            <div className="border-b border-gray-200">
+            <div className="border-b border-pink-500/20">
               <nav className="-mb-px flex space-x-8">
                 <button
                   onClick={() => setActiveTab('portfolio')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-4 border-b-2 font-medium text-sm rounded-t-lg transition-all duration-300 ${
                     activeTab === 'portfolio'
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } transition-colors`}
+                      ? 'border-pink-500 text-pink-400 bg-pink-500/10 backdrop-blur-sm'
+                      : 'border-transparent text-gray-400 hover:text-pink-300 hover:border-pink-500/30 hover:bg-white/5'
+                  }`}
                 >
                   <div className="flex items-center space-x-2">
                     <PieChart className="w-4 h-4" />
@@ -231,11 +257,11 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
                 </button>
                 <button
                   onClick={() => setActiveTab('goals')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-4 border-b-2 font-medium text-sm rounded-t-lg transition-all duration-300 ${
                     activeTab === 'goals'
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } transition-colors`}
+                      ? 'border-pink-500 text-pink-400 bg-pink-500/10 backdrop-blur-sm'
+                      : 'border-transparent text-gray-400 hover:text-pink-300 hover:border-pink-500/30 hover:bg-white/5'
+                  }`}
                 >
                   <div className="flex items-center space-x-2">
                     <Target className="w-4 h-4" />
@@ -249,7 +275,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {activeTab === 'portfolio' && portfolioData && (
           <div className="space-y-8">
             {/* Portfolio Overview Cards */}

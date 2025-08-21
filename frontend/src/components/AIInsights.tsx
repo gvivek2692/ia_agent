@@ -90,15 +90,15 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 80) return 'text-green-400';
+    if (score >= 60) return 'text-yellow-400';
+    return 'text-red-400';
   };
 
   const getScoreBackground = (score: number) => {
-    if (score >= 80) return 'bg-green-50 border-green-200';
-    if (score >= 60) return 'bg-yellow-50 border-yellow-200';
-    return 'bg-red-50 border-red-200';
+    if (score >= 80) return 'bg-green-500/20 border-green-400/30 backdrop-blur-sm';
+    if (score >= 60) return 'bg-yellow-500/20 border-yellow-400/30 backdrop-blur-sm';
+    return 'bg-red-500/20 border-red-400/30 backdrop-blur-sm';
   };
 
   const filterInsightsByTab = (insights: InsightData[]) => {
@@ -119,10 +119,10 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Analyzing your portfolio...</p>
+          <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">Analyzing your portfolio...</p>
         </div>
       </div>
     );
@@ -130,15 +130,15 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <AlertTriangle className="w-8 h-8 text-red-600" />
+          <div className="w-16 h-16 bg-red-500/20 backdrop-blur-sm border border-red-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <AlertTriangle className="w-8 h-8 text-red-400" />
           </div>
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={loadInsightsData}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-6 py-3 rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
           >
             Try Again
           </button>
@@ -149,10 +149,10 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
 
   if (!insightsData) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
           <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600">No insights data available</p>
+          <p className="text-gray-300">No insights data available</p>
         </div>
       </div>
     );
@@ -161,32 +161,41 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
   const filteredInsights = filterInsightsByTab(insightsData.insights);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-rose-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
+      </div>
+
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="relative z-10 bg-black/50 backdrop-blur-lg shadow-lg border-b border-pink-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Brain className="w-6 h-6 text-blue-600" />
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl shadow-lg">
+                <Brain className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  AI Insights
+                <h1 className="text-3xl font-bold text-white">
+                  <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                    AI
+                  </span>{' '}
+                  Insights
                 </h1>
-                <p className="text-gray-600 mt-1">
+                <p className="text-gray-300 mt-1">
                   Personalized recommendations powered by advanced analytics
                 </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-400">
                 Last updated: {new Date(insightsData.last_updated).toLocaleString()}
               </div>
               <button
                 onClick={handleRefresh}
                 disabled={refreshing}
-                className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-50"
+                className="p-3 text-gray-400 hover:text-pink-400 rounded-2xl hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
                 title="Refresh Insights"
               >
                 <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />

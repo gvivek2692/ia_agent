@@ -116,31 +116,31 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
           onClick={onToggle}
         />
       )}
 
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 h-full bg-white border-r border-gray-200 z-50 transform transition-transform duration-300 ease-in-out
+        fixed top-0 left-0 h-full bg-black/80 backdrop-blur-xl border-r border-pink-500/20 z-50 transform transition-transform duration-300 ease-in-out shadow-2xl
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         w-80 lg:w-72
       `}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Chat History</h2>
+        <div className="flex items-center justify-between p-4 border-b border-pink-500/20 bg-black/20 backdrop-blur-sm">
+          <h2 className="text-lg font-semibold text-white">Chat History</h2>
           <div className="flex items-center space-x-2">
             <button
               onClick={onNewConversation}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 text-gray-300 hover:text-pink-300 hover:bg-white/10 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
               title="New Conversation"
             >
               ✏️
             </button>
             <button
               onClick={onToggle}
-              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"
+              className="p-2 text-gray-300 hover:text-pink-300 hover:bg-white/10 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm lg:hidden"
             >
               ✕
             </button>
@@ -148,31 +148,31 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
         </div>
 
         {/* Search */}
-        <div className="p-4 border-b border-gray-100">
+        <div className="p-4 border-b border-pink-500/10">
           <input
             type="text"
             placeholder="Search conversations..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-sm text-white placeholder-gray-400 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500/50 transition-all duration-300"
           />
         </div>
 
         {/* Conversations List */}
         <div className="flex-1 overflow-y-auto">
           {loading ? (
-            <div className="p-4 text-center text-gray-500">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary-500 mx-auto"></div>
+            <div className="p-4 text-center text-gray-300">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-pink-500 mx-auto"></div>
               <p className="mt-2 text-sm">Loading conversations...</p>
             </div>
           ) : filteredConversations.length === 0 ? (
-            <div className="p-4 text-center text-gray-500">
+            <div className="p-4 text-center text-gray-300">
               <p className="text-sm">
                 {searchQuery ? 'No conversations found' : 'No conversations yet'}
               </p>
               <button
                 onClick={onNewConversation}
-                className="mt-2 px-4 py-2 text-sm bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                className="mt-4 px-6 py-3 text-sm bg-gradient-to-r from-pink-600 to-rose-600 text-white rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25 backdrop-blur-sm"
               >
                 Start New Chat
               </button>
@@ -183,10 +183,10 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
                 <div
                   key={conversation.id}
                   className={`
-                    group relative px-4 py-3 hover:bg-gray-50 cursor-pointer border-l-2 transition-colors
+                    group relative px-4 py-3 hover:bg-white/10 cursor-pointer border-l-2 transition-all duration-300 backdrop-blur-sm
                     ${conversation.id === currentConversationId 
-                      ? 'bg-primary-50 border-primary-500' 
-                      : 'border-transparent hover:border-gray-300'
+                      ? 'bg-pink-500/20 border-pink-500 shadow-lg' 
+                      : 'border-transparent hover:border-pink-500/30'
                     }
                   `}
                   onClick={() => onSelectConversation(conversation.id)}
@@ -199,12 +199,12 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
                         onChange={(e) => setEditTitle(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && saveEdit()}
                         onBlur={saveEdit}
-                        className="flex-1 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500"
+                        className="flex-1 px-3 py-2 text-sm bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-400 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500/50"
                         autoFocus
                       />
                       <button
                         onClick={cancelEdit}
-                        className="p-1 text-gray-400 hover:text-gray-600"
+                        className="p-1 text-gray-400 hover:text-red-400 transition-colors"
                       >
                         ✕
                       </button>
@@ -214,28 +214,28 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
                       <div className="flex items-start justify-between">
                         <div className="flex-1 min-w-0">
                           <p className={`text-sm font-medium truncate ${
-                            conversation.id === currentConversationId ? 'text-primary-900' : 'text-gray-900'
+                            conversation.id === currentConversationId ? 'text-pink-200' : 'text-white'
                           }`}>
                             {conversation.title}
                           </p>
                           <div className="flex items-center justify-between mt-1">
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-400">
                               {formatDate(conversation.updatedAt)}
                             </p>
-                            <p className="text-xs text-gray-400">
+                            <p className="text-xs text-gray-500">
                               {conversation.messageCount} messages
                             </p>
                           </div>
                         </div>
                         
                         {/* Action buttons - show on hover */}
-                        <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
+                        <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-all duration-300 ml-2">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               startEdit(conversation);
                             }}
-                            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded"
+                            className="p-1 text-gray-400 hover:text-pink-300 hover:bg-white/20 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
                             title="Rename"
                           >
                             ✏️
@@ -245,7 +245,7 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
                               e.stopPropagation();
                               deleteConversation(conversation.id);
                             }}
-                            className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-100 rounded"
+                            className="p-1 text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
                             title="Delete"
                           >
                             🗑️
@@ -261,8 +261,8 @@ const ConversationHistory: React.FC<ConversationHistoryProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-gray-200 bg-gray-50">
-          <div className="text-xs text-gray-500">
+        <div className="p-4 border-t border-pink-500/20 bg-black/20 backdrop-blur-sm">
+          <div className="text-xs text-gray-400">
             {conversations.length} conversation{conversations.length !== 1 ? 's' : ''}
           </div>
         </div>

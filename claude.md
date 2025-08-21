@@ -1,13 +1,14 @@
 # Claude Code Instructions: AI Wealth Advisor Demo
 
 ## Project Overview
-Create a comprehensive demo of an AI wealth advisor that uses realistic simulated financial data to showcase intelligent, multi-turn conversations with web search capabilities, market analysis, and personalized financial planning for Indian investors.
+Create a comprehensive demo of an AI wealth advisor that uses realistic simulated financial data to showcase intelligent, multi-turn conversations with web search capabilities, market analysis, and personalized financial planning for Indian investors. The system now supports both demo data and live portfolio data from Kite Connect integration.
 
 ## Technology Stack
 - **Backend**: Node.js with Express.js, Socket.io for real-time chat
 - **Frontend**: React with TypeScript, Tailwind CSS, Recharts for visualizations
 - **AI**: OpenAI GPT-4.1 Mini with web search preview tool
-- **Data**: In-memory simulated financial data (no database required)
+- **Data**: In-memory simulated financial data + Live data from Kite Connect API
+- **Integration**: Kite Connect API for real portfolio data, Serper API for web search
 
 ## GPT-4.1 Mini with Web Search Integration
 
@@ -50,6 +51,12 @@ Create .env file in backend folder with:
 ```
 OPENAI_API_KEY=your_openai_api_key_here
 PORT=3001
+SERPER_API_KEY=your_serper_api_key_here
+
+# Kite Connect API Credentials
+KITE_API_KEY=your_kite_api_key_here
+KITE_API_SECRET=your_kite_api_secret_here
+KITE_REDIRECT_URL=https://your-production-url.com/
 ```
 
 ### 1.3 Socket.io Integration
@@ -304,3 +311,73 @@ Optimize for:
 - Professional appearance suitable for financial services
 
 This phased approach ensures systematic development of a comprehensive AI wealth advisor demo that effectively showcases the potential of GPT-4.1 Mini with web search capabilities for personalized financial planning and investment advice.
+
+---
+
+## Current Implementation Status (Updated)
+
+### Completed Features
+✅ **Phase 1-3**: All foundation features completed
+✅ **Phase 4-6**: Core functionality and UI/UX completed
+✅ **Kite Connect Integration**: Live portfolio data from Zerodha Kite
+✅ **Mutual Fund Statement Upload**: Support for CAS/statement processing
+✅ **Real-time Chat**: AI-powered conversations with portfolio context
+✅ **Portfolio Recommendations**: Dynamic AI-generated investment advice
+✅ **Goal Management**: Financial goals tracking and planning
+
+### Key Implementation Notes
+
+#### Kite Connect Authentication
+- **Important**: Redirect URL must be configured in Kite Connect dashboard, not in backend code
+- Backend uses KiteConnect SDK without forcing redirect URLs
+- Production URL should be configured in Kite dashboard: `https://ia-agent-wine.vercel.app/`
+- Authentication errors typically indicate redirect URL mismatch or app not in production mode
+
+#### Data Flow Architecture
+- **Demo Users**: Use simulated portfolio data from `backend/data/demoPortfolios.js`
+- **Kite Users**: Live data fetched from Kite Connect API and cached locally
+- **MF Upload Users**: Portfolio data parsed from uploaded mutual fund statements
+- AI chat system accesses user-specific portfolio data dynamically (no hardcoded responses)
+
+#### Error Handling Patterns
+- **Null Safety**: All formatting functions handle null/undefined values gracefully
+- **API Failures**: Comprehensive error handling with user-friendly messages  
+- **Session Management**: Automatic re-authentication flow for expired Kite sessions
+- **Portfolio Sync**: Real-time refresh capability for Kite-connected portfolios
+
+#### Critical Files for Maintenance
+- `backend/services/kiteService.js`: Kite Connect integration and data transformation
+- `backend/server.js`: Main API routes and AI chat system (lines 102-265, 610-654, 1489-1597)  
+- `backend/data/portfolioRecommendations.js`: AI recommendation engine
+- `frontend/src/components/PortfolioDashboard.tsx`: Main portfolio UI with null safety
+- `frontend/src/components/HoldingsTable.tsx`: Portfolio data display with error handling
+
+#### Testing Commands
+```bash
+# Backend testing
+cd backend && npm run dev
+
+# Frontend testing  
+cd frontend && npm start
+
+# Full system test
+npm run dev  # (if root package.json has concurrently setup)
+```
+
+#### Deployment Configuration
+- **Backend**: Deployed to production with Kite Connect credentials
+- **Frontend**: Deployed with correct API endpoints
+- **Environment**: Production URLs configured in Kite Connect dashboard
+- **CORS**: Properly configured for cross-origin requests between frontend/backend
+
+#### Recent Fixes Applied
+- ✅ Fixed Kite Connect authentication redirect URL issues
+- ✅ Resolved null reference errors in portfolio formatting functions
+- ✅ Added comprehensive null safety to mutual fund data handling
+- ✅ Implemented missing portfolio recommendations API endpoint  
+- ✅ Enhanced AI system prompt with dynamic user context and current date/time
+- ✅ Removed hardcoded responses to ensure AI accesses live portfolio data
+- ✅ Added proper error handling for session expiry and re-authentication
+- ✅ Implemented portfolio refresh functionality for real-time sync
+
+This implementation successfully demonstrates a production-ready AI wealth advisor with both simulated and live financial data integration.
