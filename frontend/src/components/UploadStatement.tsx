@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, FileSpreadsheet, User, Lock, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { Upload, FileText, User, Lock, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
 import { apiService } from '../services/apiService';
 
 interface UploadResult {
@@ -34,8 +34,8 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
     const selectedFile = event.target.files?.[0];
     if (selectedFile) {
       // Validate file type
-      if (!selectedFile.name.match(/\.(xls|xlsx)$/)) {
-        alert('Please select an Excel file (.xls or .xlsx)');
+      if (!selectedFile.name.match(/\.pdf$/i)) {
+        alert('Please select a PDF file (.pdf)');
         return;
       }
       setFile(selectedFile);
@@ -124,10 +124,10 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="text-center mb-8">
-        <FileSpreadsheet className="mx-auto h-16 w-16 text-blue-600 mb-4" />
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Upload MF Statement</h2>
+        <FileText className="mx-auto h-16 w-16 text-blue-600 mb-4" />
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Upload CAS Statement</h2>
         <p className="text-gray-600">
-          Upload your mutual fund statement to create your personalized investment profile
+          Upload your Consolidated Account Statement (CAS) PDF to create your personalized investment profile
         </p>
       </div>
 
@@ -136,13 +136,13 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
           {/* File Upload */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mutual Fund Statement (Excel File) *
+              Mutual Fund Statement (PDF File) *
             </label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
               <input
                 id="file-upload"
                 type="file"
-                accept=".xls,.xlsx"
+                accept=".pdf"
                 onChange={handleFileChange}
                 className="hidden"
               />
@@ -151,13 +151,13 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
                 <div className="text-sm text-gray-600">
                   {file ? (
                     <div className="flex items-center justify-center space-x-2">
-                      <FileSpreadsheet className="h-5 w-5 text-green-600" />
+                      <FileText className="h-5 w-5 text-green-600" />
                       <span className="font-medium text-green-600">{file.name}</span>
                     </div>
                   ) : (
                     <div>
                       <span className="font-medium text-blue-600">Click to upload</span> or drag and drop
-                      <p className="text-xs text-gray-500 mt-1">Excel files only (.xls, .xlsx)</p>
+                      <p className="text-xs text-gray-500 mt-1">PDF files only (.pdf)</p>
                     </div>
                   )}
                 </div>
@@ -324,9 +324,9 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
           <div className="text-sm text-blue-800">
             <p className="font-medium mb-1">Supported Format:</p>
             <ul className="space-y-1 text-xs">
-              <li>• Excel files (.xls, .xlsx) with mutual fund transaction data</li>
-              <li>• Columns should include: Scheme Name, Transaction Type, Amount, Units, Price, Date</li>
-              <li>• All transaction types: Purchase, Redemption, Switch In/Out, Dividend Reinvestment</li>
+              <li>• CAS PDF files from CAMS/KFintech with mutual fund transaction data</li>
+              <li>• Should include: Portfolio Summary, Fund Details, Transaction History</li>
+              <li>• Supports all major fund houses: HDFC, SBI, Axis, Mirae, PPFAS, etc.</li>
             </ul>
           </div>
         </div>

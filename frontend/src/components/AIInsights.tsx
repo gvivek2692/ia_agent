@@ -4,13 +4,10 @@ import {
   TrendingUp, 
   TrendingDown, 
   AlertTriangle, 
-  CheckCircle2, 
   Target, 
   BarChart3, 
   PieChart, 
-  Calendar,
   Lightbulb,
-  Settings,
   RefreshCw,
   MessageSquare
 } from 'lucide-react';
@@ -131,7 +128,6 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
     if (userId) {
       try {
         await apiService.updateUserGoals(userId, updatedGoals);
-        console.log('Goals updated in backend for AI insights');
       } catch (error) {
         console.error('Failed to update goals in backend:', error);
         // Don't show error to user as the goals are still updated locally

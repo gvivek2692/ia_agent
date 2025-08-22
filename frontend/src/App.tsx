@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { MessageSquare, BarChart3, Brain } from 'lucide-react';
 import LandingPage from './components/LandingPage';
-import ChatInterface from './components/ChatInterface';
-import ConnectionTest from './components/ConnectionTest';
-import ConversationHistory from './components/ConversationHistory';
+import AIChatSidebar from './components/AIChatSidebar';
 import LoginForm from './components/LoginForm';
 import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
@@ -22,14 +21,13 @@ interface User {
   risk_tolerance: string;
 }
 
-type AppView = 'landing' | 'login' | 'userList' | 'chat' | 'upload' | 'portfolio' | 'insights';
+type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sessionId, setSessionId] = useState<string>('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentConversationId, setCurrentConversationId] = useState<string>('');
+  const [aiChatOpen, setAiChatOpen] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   // Check for existing session on app load
@@ -103,12 +101,8 @@ function App() {
           setCurrentUser(JSON.parse(savedUser));
           setSessionId(savedSessionId);
           
-          // Redirect Kite users to portfolio page, demo users to chat
-          if (savedSessionId.startsWith('kite-session-')) {
-            setCurrentView('portfolio');
-          } else {
-            setCurrentView('chat');
-          }
+          // Redirect all users to portfolio page
+          setCurrentView('portfolio');
         } else {
           // Invalid session, clear storage and show landing page
           localStorage.removeItem('wealth_advisor_session');
@@ -133,12 +127,8 @@ function App() {
     setCurrentUser(user);
     setSessionId(newSessionId);
     
-    // Redirect Kite users to portfolio page, demo users to chat
-    if (newSessionId.startsWith('kite-session-')) {
-      setCurrentView('portfolio');
-    } else {
-      setCurrentView('chat');
-    }
+    // Redirect all users to portfolio page
+    setCurrentView('portfolio');
     
     // Save to localStorage for persistence
     localStorage.setItem('wealth_advisor_session', newSessionId);
@@ -149,8 +139,7 @@ function App() {
     setCurrentUser(null);
     setSessionId('');
     setCurrentView('landing');
-    setCurrentConversationId('');
-    setSidebarOpen(false);
+    setAiChatOpen(false);
     
     // Clear localStorage
     localStorage.removeItem('wealth_advisor_session');
@@ -170,24 +159,40 @@ function App() {
     }
   };
 
-  const handleNewConversation = () => {
-    setCurrentConversationId('');
-    setSidebarOpen(false);
+  const toggleAIChat = () => {
+    setAiChatOpen(!aiChatOpen);
   };
 
-  const handleSelectConversation = (conversationId: string) => {
-    setCurrentConversationId(conversationId);
-    setSidebarOpen(false);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const handleUploadSuccess = (result: any) => {
-    // After successful upload, redirect to login to use the new account
-    alert(`Account created successfully! You can now login with your username.`);
-    setCurrentView('login');
+  const handleUploadSuccess = async (result: any) => {
+    try {
+      if (result.success && result.userId) {
+        // Automatically fetch the newly created user and log them in
+        const response = await apiService.getUser(result.userId) as any;
+        
+        if (response.success && response.user) {
+          // Auto-login the newly created user
+          handleLoginSuccess(response.user, result.userId);
+          
+          // Set view to portfolio to show their uploaded data
+          setCurrentView('portfolio');
+          
+          // Show success message
+          alert(`Welcome ${response.user.user_profile?.name || 'User'}! Your portfolio has been created from your CAS statement.`);
+        } else {
+          // Fallback to manual login if auto-login fails
+          alert(`Account created successfully! Please login with your username.`);
+          setCurrentView('login');
+        }
+      } else {
+        alert(`Account creation failed. Please try again.`);
+        setCurrentView('upload');
+      }
+    } catch (error) {
+      console.error('Auto-login error after upload:', error);
+      // Fallback to manual login
+      alert(`Account created successfully! Please login with your username.`);
+      setCurrentView('login');
+    }
   };
 
   // Show loading screen while checking authentication
@@ -258,27 +263,28 @@ function App() {
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Conversation History Sidebar */}
-      <ConversationHistory
-        isOpen={sidebarOpen}
-        onToggle={toggleSidebar}
-        currentConversationId={currentConversationId}
-        onSelectConversation={handleSelectConversation}
-        onNewConversation={handleNewConversation}
+      {/* AI Chat Sidebar */}
+      <AIChatSidebar
+        isOpen={aiChatOpen}
+        onToggle={toggleAIChat}
         userId={currentUser?.id}
+        userName={currentUser?.name}
       />
 
-      <div className={`relative z-10 transition-all duration-300 ${sidebarOpen ? 'lg:ml-72' : ''}`}>
-        <header className="bg-black/50 backdrop-blur-lg border-b border-pink-500/20 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between">
+      <div className={`relative z-10 transition-all duration-300 ${aiChatOpen ? 'lg:ml-[500px]' : ''}`}>
+        <header 
+          className="bg-black/50 backdrop-blur-lg border-b border-pink-500/20 shadow-lg overflow-visible relative"
+          style={{ zIndex: 'var(--z-dropdown)' }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 overflow-visible relative">
+            <div className="flex items-center justify-between overflow-visible relative">
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={toggleSidebar}
-                  className="p-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-xl backdrop-blur-sm"
-                  title="Toggle Chat History"
+                  onClick={toggleAIChat}
+                  className="p-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors backdrop-blur-sm"
+                  title="Toggle AI Chat"
                 >
-                  ☰
+                  <MessageSquare className="w-5 h-5" />
                 </button>
                 <div>
                   <h1 className="text-2xl font-bold text-white">
@@ -294,16 +300,6 @@ function App() {
               {/* Navigation Pills */}
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => setCurrentView('chat')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                    currentView === 'chat'
-                      ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg'
-                      : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
-                  }`}
-                >
-                  💬 Chat
-                </button>
-                <button
                   onClick={() => setCurrentView('portfolio')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'portfolio'
@@ -311,7 +307,10 @@ function App() {
                       : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >
-                  📊 Portfolio
+                  <span className="flex items-center space-x-2">
+                    <BarChart3 className="w-4 h-4" />
+                    <span>Portfolio</span>
+                  </span>
                 </button>
                 <button
                   onClick={() => setCurrentView('insights')}
@@ -321,7 +320,10 @@ function App() {
                       : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >
-                  🧠 AI Insights
+                  <span className="flex items-center space-x-2">
+                    <Brain className="w-4 h-4" />
+                    <span>AI Insights</span>
+                  </span>
                 </button>
               </div>
               
@@ -337,28 +339,13 @@ function App() {
           </div>
         </header>
         
-        <main className={`${currentView === 'portfolio' || currentView === 'insights' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'}`}>
-          {currentView === 'chat' && (
-            <>
-              {/* Connection Test - Remove this in production */}
-              <div className="mb-6">
-                <ConnectionTest />
-              </div>
-              
-              <ChatInterface 
-                selectedConversationId={currentConversationId}
-                onConversationChange={setCurrentConversationId}
-                userId={currentUser?.id}
-                userName={currentUser?.name}
-              />
-            </>
-          )}
-          
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {currentView === 'portfolio' && (
             <PortfolioDashboard 
               userId={currentUser?.id}
               userName={currentUser?.name}
               onSessionExpired={handleLogout}
+              onToggleAIChat={toggleAIChat}
             />
           )}
           
@@ -367,6 +354,7 @@ function App() {
               userId={currentUser?.id}
               userName={currentUser?.name}
               onSessionExpired={handleLogout}
+              onToggleAIChat={toggleAIChat}
             />
           )}
         </main>

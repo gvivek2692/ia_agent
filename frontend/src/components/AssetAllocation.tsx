@@ -36,9 +36,9 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-3 rounded-lg shadow-lg border">
-          <p className="font-semibold text-gray-900">{data.name}</p>
-          <p className="text-blue-600">
+        <div className="bg-black/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-white/20">
+          <p className="font-semibold text-white">{data.name}</p>
+          <p className="text-blue-400">
             {formatCurrency(data.amount)} ({data.value.toFixed(1)}%)
           </p>
         </div>
@@ -69,10 +69,10 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Asset Allocation</h3>
-        <div className="text-sm text-gray-500">
+        <h3 className="text-lg font-semibold text-white">Asset Allocation</h3>
+        <div className="text-sm text-gray-400">
           {Object.keys(assetAllocation).length} asset classes
         </div>
       </div>
@@ -108,10 +108,10 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
       ) : (
         <div className="flex items-center justify-center h-80">
           <div className="text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <PieChart className="w-8 h-8 text-gray-400" />
             </div>
-            <p className="text-gray-500">No allocation data available</p>
+            <p className="text-gray-400">No allocation data available</p>
           </div>
         </div>
       )}
@@ -119,23 +119,23 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
       {/* Asset Breakdown Cards */}
       {chartData.length > 0 && (
         <div className="mt-6 space-y-3">
-          <h4 className="text-sm font-medium text-gray-700 uppercase tracking-wide">
+          <h4 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
             Asset Breakdown
           </h4>
           {chartData.map((asset, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div key={index} className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg">
               <div className="flex items-center space-x-3">
                 <div
                   className="w-4 h-4 rounded-full"
                   style={{ backgroundColor: asset.color }}
                 />
-                <span className="font-medium text-gray-900">{asset.name}</span>
+                <span className="font-medium text-white">{asset.name}</span>
               </div>
               <div className="text-right">
-                <div className="font-semibold text-gray-900">
+                <div className="font-semibold text-white">
                   {formatCurrency(asset.amount)}
                 </div>
-                <div className="text-sm text-gray-600">{asset.value.toFixed(1)}%</div>
+                <div className="text-sm text-gray-300">{asset.value.toFixed(1)}%</div>
               </div>
             </div>
           ))}

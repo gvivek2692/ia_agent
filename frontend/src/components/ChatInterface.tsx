@@ -234,10 +234,10 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   };
 
   return (
-    <div className="bg-black/20 backdrop-blur-lg border border-pink-500/20 rounded-2xl shadow-2xl h-[700px] flex flex-col">
+    <div className="bg-black/20 backdrop-blur-lg border border-pink-500/20 rounded-2xl shadow-2xl h-full flex flex-col">
       {/* Header with Connection Status and Controls */}
       <div className="border-b border-pink-500/20">
-        <div className="flex items-center justify-between px-6 py-3">
+        <div className="flex items-center justify-between px-4 py-2">
           <div className={`text-sm flex items-center ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
             {isConnected ? (
               <span>🟢 Connected to WealthWise AI</span>
@@ -269,7 +269,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
         </div>
         
         {/* Conversation Info */}
-        <div className="px-6 py-2 bg-white/5 backdrop-blur-sm text-xs text-gray-300 border-t border-pink-500/10">
+        <div className="px-4 py-2 bg-white/5 backdrop-blur-sm text-xs text-gray-300 border-t border-pink-500/10">
           <div className="flex justify-between items-center">
             <span>
               {userName ? `User: ${userName} • ` : ''}
@@ -285,14 +285,14 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       </div>
 
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-transparent to-black/10">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-transparent to-black/10">
         {messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
           >
             <div
-              className={`max-w-2xl px-6 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
+              className={`max-w-sm px-4 py-3 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
                 message.isBot
                   ? 'bg-white/20 border border-white/30 shadow-lg'
                   : 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg hover:shadow-pink-500/25'
@@ -329,7 +329,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       </div>
 
       {/* Input Section */}
-      <div className="border-t border-pink-500/20 p-6 bg-black/30 backdrop-blur-lg">
+      <div className="border-t border-pink-500/20 p-4 bg-black/30 backdrop-blur-lg">
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap gap-2 mb-4">
           <button

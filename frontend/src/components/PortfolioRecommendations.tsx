@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Target, 
-  TrendingUp, 
-  TrendingDown, 
-  BarChart3, 
-  PieChart, 
+  TrendingUp,
+  TrendingDown,
+  BarChart3,
+  PieChart,
   DollarSign,
-  AlertTriangle,
-  CheckCircle2,
   ArrowRight,
   Lightbulb,
   Shield

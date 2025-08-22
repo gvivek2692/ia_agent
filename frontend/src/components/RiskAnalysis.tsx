@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
   AlertTriangle, 
-  TrendingUp, 
-  TrendingDown, 
-  Activity,
   Target,
-  BarChart3,
   CheckCircle2,
-  XCircle,
-  Clock
+  XCircle
 } from 'lucide-react';
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 
 interface RiskAnalysisProps {
   userId?: string;

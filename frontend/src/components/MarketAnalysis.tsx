@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   TrendingUp, 
   TrendingDown, 
-  Activity, 
-  Globe, 
-  BarChart3,
+  Activity,
   ArrowUp,
   ArrowDown,
   Minus

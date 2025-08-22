@@ -1,17 +1,13 @@
 import React from 'react';
 import { 
-  TrendingUp, 
-  TrendingDown, 
-  AlertTriangle, 
-  CheckCircle2, 
-  Target, 
-  BarChart3, 
-  PieChart, 
-  DollarSign,
-  Clock,
-  Lightbulb,
+  TrendingUp,
   Shield,
-  Activity
+  AlertTriangle,
+  Target,
+  Activity,
+  BarChart3,
+  Clock,
+  Lightbulb
 } from 'lucide-react';
 
 interface InsightData {

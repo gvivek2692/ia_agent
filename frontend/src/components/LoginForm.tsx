@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { apiService } from '../services/apiService';
 import KiteLogin from './KiteLogin';
-import { User, Upload, LogIn, Shield, Zap } from 'lucide-react';
+import { User, Upload, LogIn, Shield, Zap, ExternalLink } from 'lucide-react';
 
 interface LoginFormProps {
   onLoginSuccess: (user: any, sessionId: string) => void;
@@ -206,6 +206,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                   <div className="text-sm text-gray-300">Import your real portfolio from Zerodha</div>
                 </div>
               </button>
+
+              {/* Get CAS PDF Option - Subtle Helper Link */}
+              <div className="text-center mb-4">
+                <button
+                  onClick={() => window.open('https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement', '_blank')}
+                  disabled={isLoading}
+                  className="inline-flex items-center space-x-2 px-3 py-2 text-sm text-gray-400 hover:text-gray-300 border border-gray-600/30 hover:border-gray-500/50 rounded-md transition-colors disabled:opacity-50 backdrop-blur-sm"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Get CAS PDF from CAMS</span>
+                </button>
+              </div>
 
               {/* Upload Statement Option */}
               {onShowUpload && (
