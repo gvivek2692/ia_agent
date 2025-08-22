@@ -122,9 +122,9 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
   };
 
   const getChangeColor = (change: number) => {
-    if (change > 0) return 'text-green-600';
-    if (change < 0) return 'text-red-600';
-    return 'text-gray-600';
+    if (change > 0) return 'text-green-400';
+    if (change < 0) return 'text-red-400';
+    return 'text-gray-400';
   };
 
   const getIndexDisplayName = (key: string): string => {
@@ -150,26 +150,26 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
   const getSentimentColor = (trend: string) => {
     switch (trend) {
-      case 'bullish': return 'text-green-600 bg-green-100';
-      case 'bearish': return 'text-red-600 bg-red-100';
-      case 'neutral': return 'text-yellow-600 bg-yellow-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'bullish': return 'text-green-300 bg-green-500/20 border border-green-400/30';
+      case 'bearish': return 'text-red-300 bg-red-500/20 border border-red-400/30';
+      case 'neutral': return 'text-yellow-300 bg-yellow-500/20 border border-yellow-400/30';
+      default: return 'text-gray-300 bg-gray-500/20 border border-gray-400/30';
     }
   };
 
   if (loading) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
         <div className="flex items-center space-x-3 mb-6">
-          <Activity className="w-6 h-6 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Market Analysis</h3>
+          <Activity className="w-6 h-6 text-blue-400" />
+          <h3 className="text-lg font-semibold text-white">Market Analysis</h3>
         </div>
         <div className="animate-pulse space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="h-20 bg-gray-200 rounded"></div>
-            <div className="h-20 bg-gray-200 rounded"></div>
+            <div className="h-20 bg-white/10 rounded"></div>
+            <div className="h-20 bg-white/10 rounded"></div>
           </div>
-          <div className="h-32 bg-gray-200 rounded"></div>
+          <div className="h-32 bg-white/10 rounded"></div>
         </div>
       </div>
     );
@@ -177,25 +177,25 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
   if (!marketData) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
         <div className="flex items-center space-x-3 mb-6">
-          <Activity className="w-6 h-6 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Market Analysis</h3>
+          <Activity className="w-6 h-6 text-blue-400" />
+          <h3 className="text-lg font-semibold text-white">Market Analysis</h3>
         </div>
-        <p className="text-gray-600">Unable to load market data</p>
+        <p className="text-gray-300">Unable to load market data</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Activity className="w-6 h-6 text-blue-600" />
+          <div className="p-2 bg-blue-500/20 border border-blue-400/30 rounded-lg backdrop-blur-sm">
+            <Activity className="w-6 h-6 text-blue-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">Market Analysis</h3>
+          <h3 className="text-lg font-semibold text-white">Market Analysis</h3>
         </div>
         <div className={`px-3 py-1 rounded-full text-sm font-medium ${getSentimentColor(marketData.market_sentiment.trend)}`}>
           {marketData.market_sentiment.trend.toUpperCase()}
@@ -213,14 +213,14 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
               onClick={() => setSelectedIndex(key)}
               className={`${
                 isSelected 
-                  ? 'bg-blue-50 border-2 border-blue-200 ring-2 ring-blue-100' 
-                  : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+                  ? 'bg-blue-500/20 border-2 border-blue-400/30 ring-2 ring-blue-400/20 backdrop-blur-sm' 
+                  : 'bg-white/5 border-2 border-transparent hover:bg-white/10 backdrop-blur-sm'
               } rounded-lg p-4 text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             >
-              <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
+              <div className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">
                 {key.replace('_', ' ').replace('nifty', 'Nifty ')}
               </div>
-              <div className="text-lg font-bold text-gray-900 mb-1">
+              <div className="text-lg font-bold text-white mb-1">
                 {data.value.toLocaleString()}
               </div>
               <div className={`flex items-center space-x-1 text-sm ${getChangeColor(data.change)}`}>
@@ -229,7 +229,7 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
                 <span>({data.change_percent >= 0 ? '+' : ''}{data.change_percent.toFixed(2)}%)</span>
               </div>
               {isSelected && (
-                <div className="mt-2 text-xs text-blue-600 font-medium">
+                <div className="mt-2 text-xs text-blue-400 font-medium">
                   Showing in chart
                 </div>
               )}
@@ -240,7 +240,7 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
       {/* Market Chart */}
       <div className="mb-6">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">
+        <h4 className="text-sm font-medium text-gray-300 mb-3">
           {getIndexDisplayName(selectedIndex)} Trend (Last 30 Days)
         </h4>
         <div className="h-48">
@@ -251,21 +251,22 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
                 dataKey="date" 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#6B7280' }}
+                tick={{ fontSize: 12, fill: '#D1D5DB' }}
                 tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               />
               <YAxis 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: '#6B7280' }}
+                tick={{ fontSize: 12, fill: '#D1D5DB' }}
                 tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
               />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: 'white', 
-                  border: '1px solid #e5e7eb', 
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)', 
+                  border: '1px solid rgba(255, 255, 255, 0.2)', 
                   borderRadius: '6px',
-                  fontSize: '12px'
+                  fontSize: '12px',
+                  color: 'white'
                 }}
                 formatter={(value: number) => [
                   value.toLocaleString(),
@@ -288,13 +289,13 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
       {/* Sector Performance */}
       <div className="mb-6">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">Sector Performance</h4>
+        <h4 className="text-sm font-medium text-gray-300 mb-3">Sector Performance</h4>
         <div className="space-y-2">
           {marketData.sectors.map((sector, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div key={index} className="flex items-center justify-between p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
               <div className="flex-1">
-                <div className="font-medium text-gray-900">{sector.name}</div>
-                <div className="text-xs text-gray-500">{sector.recommendation}</div>
+                <div className="font-medium text-white">{sector.name}</div>
+                <div className="text-xs text-gray-400">{sector.recommendation}</div>
               </div>
               <div className={`flex items-center space-x-2 ${getChangeColor(sector.performance)}`}>
                 <span className="font-semibold">
@@ -313,13 +314,13 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
       {/* Market Sentiment */}
       <div className="mb-6">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">Market Sentiment</h4>
-        <div className="bg-gray-50 rounded-lg p-4">
+        <h4 className="text-sm font-medium text-gray-300 mb-3">Market Sentiment</h4>
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm text-gray-600">Sentiment Score</span>
-            <span className="font-bold text-lg">{marketData.market_sentiment.score}/100</span>
+            <span className="text-sm text-gray-400">Sentiment Score</span>
+            <span className="font-bold text-lg text-white">{marketData.market_sentiment.score}/100</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
+          <div className="w-full bg-white/10 backdrop-blur-sm rounded-full h-2 mb-3">
             <div 
               className={`h-2 rounded-full transition-all duration-500 ${
                 marketData.market_sentiment.score >= 70 ? 'bg-green-500' : 
@@ -329,9 +330,9 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
             />
           </div>
           <div className="space-y-1">
-            <div className="text-xs font-medium text-gray-600 mb-2">Key Factors:</div>
+            <div className="text-xs font-medium text-gray-400 mb-2">Key Factors:</div>
             {marketData.market_sentiment.factors.map((factor, index) => (
-              <div key={index} className="flex items-center space-x-2 text-xs text-gray-700">
+              <div key={index} className="flex items-center space-x-2 text-xs text-gray-300">
                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
                 <span>{factor}</span>
               </div>
@@ -342,17 +343,17 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
       {/* Market News */}
       <div>
-        <h4 className="text-sm font-medium text-gray-700 mb-3">Market News</h4>
+        <h4 className="text-sm font-medium text-gray-300 mb-3">Market News</h4>
         <div className="space-y-2">
           {marketData.news_summary.map((news, index) => (
-            <div key={index} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+            <div key={index} className="flex items-start space-x-3 p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
               <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
                 news.impact === 'positive' ? 'bg-green-500' : 
                 news.impact === 'negative' ? 'bg-red-500' : 'bg-yellow-500'
               }`}></div>
               <div className="flex-1">
-                <div className="text-sm font-medium text-gray-900">{news.title}</div>
-                <div className="text-xs text-gray-500 mt-1">Source: {news.source}</div>
+                <div className="text-sm font-medium text-white">{news.title}</div>
+                <div className="text-xs text-gray-400 mt-1">Source: {news.source}</div>
               </div>
             </div>
           ))}

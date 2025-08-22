@@ -171,11 +171,11 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
           <h3 className="text-lg font-semibold text-gray-900">Risk Analysis</h3>
         </div>
         <div className="animate-pulse space-y-4">
-          <div className="h-20 bg-gray-200 rounded-lg"></div>
-          <div className="h-32 bg-gray-200 rounded-lg"></div>
+          <div className="h-20 bg-white/10 rounded-lg"></div>
+          <div className="h-32 bg-white/10 rounded-lg"></div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="h-16 bg-gray-200 rounded-lg"></div>
-            <div className="h-16 bg-gray-200 rounded-lg"></div>
+            <div className="h-16 bg-white/10 rounded-lg"></div>
+            <div className="h-16 bg-white/10 rounded-lg"></div>
           </div>
         </div>
       </div>
@@ -184,40 +184,40 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
 
   if (!riskData) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
         <div className="flex items-center space-x-3 mb-6">
-          <Shield className="w-6 h-6 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Risk Analysis</h3>
+          <Shield className="w-6 h-6 text-blue-400" />
+          <h3 className="text-lg font-semibold text-white">Risk Analysis</h3>
         </div>
-        <p className="text-gray-600">Unable to load risk analysis data</p>
+        <p className="text-gray-300">Unable to load risk analysis data</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Shield className="w-6 h-6 text-blue-600" />
+          <div className="p-2 bg-blue-500/20 border border-blue-400/30 rounded-lg backdrop-blur-sm">
+            <Shield className="w-6 h-6 text-blue-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">Risk Analysis</h3>
+          <h3 className="text-lg font-semibold text-white">Risk Analysis</h3>
         </div>
-        <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRiskBackground(riskData.metrics.overall_score)} border`}>
+        <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRiskBackground(riskData.metrics.overall_score)} backdrop-blur-sm`}>
           {riskData.metrics.risk_level.toUpperCase()} RISK
         </div>
       </div>
 
       {/* Overall Risk Score */}
-      <div className={`rounded-lg border p-4 mb-6 ${getRiskBackground(riskData.metrics.overall_score)}`}>
+      <div className={`rounded-lg p-4 mb-6 ${getRiskBackground(riskData.metrics.overall_score)} backdrop-blur-sm`}>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-600 mb-1">Overall Risk Score</p>
+            <p className="text-sm font-medium text-gray-400 mb-1">Overall Risk Score</p>
             <p className={`text-3xl font-bold ${getRiskColor(riskData.metrics.overall_score)}`}>
               {riskData.metrics.overall_score}/100
             </p>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-400 mt-1">
               {riskData.metrics.overall_score <= 40 ? 'Low Risk - Conservative' :
                riskData.metrics.overall_score <= 70 ? 'Moderate Risk - Balanced' : 'High Risk - Aggressive'}
             </p>
@@ -229,7 +229,7 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
                   cx="40"
                   cy="40"
                   r="30"
-                  stroke="#e5e7eb"
+                  stroke="rgba(255, 255, 255, 0.2)"
                   strokeWidth="8"
                   fill="none"
                 />
@@ -247,7 +247,7 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
                 />
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-bold text-gray-900">{riskData.metrics.overall_score}</span>
+                <span className="text-sm font-bold text-white">{riskData.metrics.overall_score}</span>
               </div>
             </div>
           </div>
@@ -256,7 +256,7 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
 
       {/* Tab Navigation */}
       <div className="mb-6">
-        <div className="border-b border-gray-200">
+        <div className="border-b border-white/20">
           <nav className="-mb-px flex space-x-6">
             {[
               { id: 'overview', label: 'Overview' },
@@ -268,8 +268,8 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
                 onClick={() => setActiveTab(id as any)}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === id
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-blue-400 text-blue-400'
+                    : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-white/30'
                 }`}
               >
                 {label}
@@ -285,14 +285,14 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
           {/* Risk Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {Object.entries(riskData.metrics).filter(([key]) => key !== 'overall_score' && key !== 'risk_level').map(([key, value]) => (
-              <div key={key} className="bg-gray-50 rounded-lg p-3">
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
+              <div key={key} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3">
+                <div className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-1">
                   {key.replace(/_/g, ' ')}
                 </div>
                 <div className={`text-lg font-bold ${getRiskColor(value)}`}>
                   {value}/100
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                <div className="w-full bg-white/10 backdrop-blur-sm rounded-full h-1.5 mt-2">
                   <div 
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       value <= 40 ? 'bg-green-500' : value <= 70 ? 'bg-yellow-500' : 'bg-red-500'
@@ -306,29 +306,29 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
 
           {/* VaR Analysis */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Value at Risk (VaR) Analysis</h4>
+            <h4 className="font-semibold text-white mb-3">Value at Risk (VaR) Analysis</h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <div className="text-sm font-medium text-blue-900">Daily VaR (95%)</div>
-                <div className="text-xl font-bold text-blue-600">{riskData.var_analysis.daily_var_95}%</div>
-                <div className="text-xs text-blue-700">Maximum daily loss</div>
+              <div className="bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 backdrop-blur-sm">
+                <div className="text-sm font-medium text-blue-300">Daily VaR (95%)</div>
+                <div className="text-xl font-bold text-blue-400">{riskData.var_analysis.daily_var_95}%</div>
+                <div className="text-xs text-blue-200">Maximum daily loss</div>
               </div>
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
-                <div className="text-sm font-medium text-purple-900">Sharpe Ratio</div>
-                <div className="text-xl font-bold text-purple-600">{riskData.var_analysis.sharpe_ratio}</div>
-                <div className="text-xs text-purple-700">Risk-adjusted return</div>
+              <div className="bg-purple-500/20 border border-purple-400/30 rounded-lg p-3 backdrop-blur-sm">
+                <div className="text-sm font-medium text-purple-300">Sharpe Ratio</div>
+                <div className="text-xl font-bold text-purple-400">{riskData.var_analysis.sharpe_ratio}</div>
+                <div className="text-xs text-purple-200">Risk-adjusted return</div>
               </div>
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                <div className="text-sm font-medium text-orange-900">Beta</div>
-                <div className="text-xl font-bold text-orange-600">{riskData.var_analysis.beta}</div>
-                <div className="text-xs text-orange-700">Market correlation</div>
+              <div className="bg-orange-500/20 border border-orange-400/30 rounded-lg p-3 backdrop-blur-sm">
+                <div className="text-sm font-medium text-orange-300">Beta</div>
+                <div className="text-xl font-bold text-orange-400">{riskData.var_analysis.beta}</div>
+                <div className="text-xs text-orange-200">Market correlation</div>
               </div>
             </div>
           </div>
 
           {/* Risk Radar Chart */}
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Risk Profile Radar</h4>
+            <h4 className="font-semibold text-white mb-3">Risk Profile Radar</h4>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={riskData.radar_data}>
@@ -357,11 +357,11 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
             <div className="flex justify-center space-x-6 text-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                <span>Current Risk</span>
+                <span className="text-gray-300">Current Risk</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                <span>Optimal Risk</span>
+                <span className="text-gray-300">Optimal Risk</span>
               </div>
             </div>
           </div>
@@ -373,30 +373,30 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
           {riskData.factors.map((factor, index) => {
             const StatusIcon = getStatusIcon(factor.status);
             return (
-              <div key={index} className="border rounded-lg p-4">
+              <div key={index} className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-start space-x-3">
                     <StatusIcon className={`w-5 h-5 mt-0.5 ${getStatusColor(factor.status)}`} />
                     <div>
-                      <h5 className="font-semibold text-gray-900">{factor.name}</h5>
-                      <p className="text-sm text-gray-700 mt-1">{factor.description}</p>
+                      <h5 className="font-semibold text-white">{factor.name}</h5>
+                      <p className="text-sm text-gray-300 mt-1">{factor.description}</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className={`text-lg font-bold ${getRiskColor(factor.score)}`}>
                       {factor.score}
                     </div>
-                    <div className="text-xs text-gray-500">Risk Score</div>
+                    <div className="text-xs text-gray-400">Risk Score</div>
                   </div>
                 </div>
                 
                 {factor.recommendation && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
+                  <div className="bg-blue-500/20 border border-blue-400/30 rounded-lg p-3 mt-3 backdrop-blur-sm">
                     <div className="flex items-start space-x-2">
-                      <Target className="w-4 h-4 text-blue-600 mt-0.5" />
+                      <Target className="w-4 h-4 text-blue-400 mt-0.5" />
                       <div>
-                        <p className="text-sm font-medium text-blue-900">Recommendation</p>
-                        <p className="text-sm text-blue-800 mt-1">{factor.recommendation}</p>
+                        <p className="text-sm font-medium text-blue-300">Recommendation</p>
+                        <p className="text-sm text-blue-200 mt-1">{factor.recommendation}</p>
                       </div>
                     </div>
                   </div>
@@ -410,18 +410,18 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
       {activeTab === 'stress' && (
         <div className="space-y-6">
           <div>
-            <h4 className="font-semibold text-gray-900 mb-3">Stress Test Scenarios</h4>
-            <p className="text-sm text-gray-600 mb-4">
+            <h4 className="font-semibold text-white mb-3">Stress Test Scenarios</h4>
+            <p className="text-sm text-gray-300 mb-4">
               How your portfolio might perform under various market stress conditions
             </p>
           </div>
           
           <div className="space-y-3">
             {riskData.stress_test.map((test, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900">{test.scenario}</div>
-                  <div className="text-sm text-gray-600 mt-1">
+                  <div className="font-medium text-white">{test.scenario}</div>
+                  <div className="text-sm text-gray-400 mt-1">
                     Probability: {test.probability}
                   </div>
                 </div>
@@ -432,18 +432,18 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
                   }`}>
                     {test.impact}%
                   </div>
-                  <div className="text-xs text-gray-500">Portfolio Impact</div>
+                  <div className="text-xs text-gray-400">Portfolio Impact</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <div className="bg-yellow-500/20 border border-yellow-400/30 rounded-lg p-4 backdrop-blur-sm">
             <div className="flex items-start space-x-3">
-              <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-yellow-400 mt-0.5" />
               <div>
-                <h5 className="font-medium text-yellow-900">Risk Management Tip</h5>
-                <p className="text-sm text-yellow-800 mt-1">
+                <h5 className="font-medium text-yellow-300">Risk Management Tip</h5>
+                <p className="text-sm text-yellow-200 mt-1">
                   Your portfolio shows moderate resilience to market stress. Consider increasing emergency fund 
                   allocation and diversifying across uncorrelated assets to improve downside protection.
                 </p>
