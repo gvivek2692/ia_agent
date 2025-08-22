@@ -18,10 +18,10 @@
     "kiteconnect": "^5.1.0",
     "multer": "^2.0.2",
     "openai": "^4.20.1",
+    "pdf-parse": "^1.1.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.8.1",
-    "uuid": "^11.1.0",
-    "xlsx": "^0.18.5"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

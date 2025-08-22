@@ -80,13 +80,12 @@ const storage = multer.diskStorage({
 const upload = multer({ 
   storage: storage,
   fileFilter: function (req, file, cb) {
-    // Accept Excel files only
-    if (file.mimetype === 'application/vnd.ms-excel' || 
-        file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
-        file.originalname.match(/\.(xls|xlsx)$/)) {
+    // Accept PDF files only
+    if (file.mimetype === 'application/pdf' ||
+        file.originalname.match(/\.pdf$/i)) {
       cb(null, true);
     } else {
-      cb(new Error('Only Excel files are allowed!'), false);
+      cb(new Error('Only PDF files are allowed!'), false);
     }
   },
   limits: {
@@ -810,8 +809,8 @@ app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => 
 
     console.log('Processing file:', req.file.filename);
     
-    // Parse Excel file
-    const parseResult = uploadService.parseExcelFile(req.file.path);
+    // Parse PDF file
+    const parseResult = await uploadService.parsePDFFile(req.file.path);
     if (!parseResult.success) {
       return res.status(400).json({
         success: false,
@@ -820,10 +819,10 @@ app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => 
       });
     }
 
-    console.log(`Parsed ${parseResult.validRows} valid transactions from ${parseResult.totalRows} total rows`);
+    console.log(`Parsed ${parseResult.totalTransactions} transactions from PDF`);
 
     // Extract user profile
-    const userProfile = uploadService.extractUserProfile(parseResult.transactions);
+    const userProfile = uploadService.extractUserProfile(parseResult.investorInfo, parseResult.transactions);
     
     // Generate portfolio
     const portfolio = uploadService.generatePortfolio(parseResult.transactions);
@@ -1486,6 +1485,43 @@ try {
 // Store active Kite sessions in memory (in production, use a proper database)
 const kiteUserSessions = new Map();
 
+// Kite configuration check endpoint
+app.get('/api/kite/status', (req, res) => {
+  try {
+    const status = {
+      kite_service_available: !!kiteService,
+      api_key: process.env.KITE_API_KEY ? process.env.KITE_API_KEY : 'Not configured',
+      api_secret_configured: !!process.env.KITE_API_SECRET,
+      redirect_url_note: 'Redirect URL is configured in Kite Connect dashboard, not in backend code',
+      kite_dashboard_config: {
+        dashboard_url: 'https://developers.kite.trade/',
+        app_api_key: process.env.KITE_API_KEY,
+        current_redirect_url: 'https://ia-agent-wine.vercel.app/',
+        note: 'After Kite login, user will be redirected to the production URL configured in dashboard'
+      },
+      instructions: {
+        development_mode_access: [
+          '1. Login to https://developers.kite.trade/',
+          '2. Go to your app settings (API Key: ' + (process.env.KITE_API_KEY || 'YOUR_API_KEY') + ')',
+          '3. Add test users to "Test Users" list',
+          '4. Use the Zerodha User ID (not client ID)',
+          '5. User must have active Zerodha account'
+        ],
+        production_mode: [
+          '1. Submit app for review to Zerodha',
+          '2. Wait for approval',
+          '3. App will work for all users after approval'
+        ]
+      }
+    };
+    
+    res.json(status);
+  } catch (error) {
+    console.error('Error checking Kite status:', error);
+    res.status(500).json({ error: 'Failed to check Kite status' });
+  }
+});
+
 // Kite login endpoint - starts OAuth flow
 app.get('/api/kite/login', (req, res) => {
   try {
@@ -1574,9 +1610,25 @@ app.post('/api/kite/callback', async (req, res) => {
 
   } catch (error) {
     console.error('Error in Kite callback:', error);
-    res.status(500).json({ 
-      error: 'Authentication failed', 
-      details: error.message 
+    
+    // Provide specific error messages for common issues
+    let errorMessage = 'Authentication failed';
+    let statusCode = 500;
+    
+    if (error.message && error.message.includes('user is not enabled')) {
+      errorMessage = 'User not enabled for this app';
+      statusCode = 403;
+    } else if (error.message && error.message.includes('Invalid token')) {
+      errorMessage = 'Invalid request token';
+      statusCode = 400;
+    }
+    
+    res.status(statusCode).json({ 
+      status: 'error',
+      message: errorMessage,
+      details: error.message,
+      error_type: error.name || 'KiteConnectError',
+      data: null
     });
   }
 });

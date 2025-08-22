@@ -3103,5 +3103,1946 @@
     },
     "created_at": "2025-08-17T09:44:45.331Z",
     "updated_at": "2025-08-17T09:44:45.331Z"
+  },
+  {
+    "id": "aff13704-fb43-4cc7-99f7-ba5aaded7cb5",
+    "credentials": {
+      "email": "testuser123",
+      "username": "testuser123",
+      "password": "$2b$10$jD1p1ZaH/DZSU8gzoE6yeOdtnL4lVRBNJ81eN0/XMXcY8NTjmlmwm"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:09:09.537Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:09:09.537Z"
+    },
+    "created_at": "2025-08-21T17:09:09.607Z",
+    "updated_at": "2025-08-21T17:09:09.607Z"
+  },
+  {
+    "id": "452061a5-0b3f-4309-85f3-370dbdb2956b",
+    "credentials": {
+      "email": "testuser456",
+      "username": "testuser456",
+      "password": "$2b$10$0PdyMhWmajwEeRmX42mRx.WMflT0q2bccLOT11TVG2/LocOqoEM4e"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:09:36.574Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:09:36.574Z"
+    },
+    "created_at": "2025-08-21T17:09:36.644Z",
+    "updated_at": "2025-08-21T17:09:36.644Z"
+  },
+  {
+    "id": "e4207a61-51fb-4930-9fb2-d0ce54d08875",
+    "credentials": {
+      "email": "testuser789",
+      "username": "testuser789",
+      "password": "$2b$10$6ROUXJDADl/CnoToAMuz0.B/9pAUVOxFEpfplTjsFRVupF/iDfh/q"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:10:28.129Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:10:28.129Z"
+    },
+    "created_at": "2025-08-21T17:10:28.199Z",
+    "updated_at": "2025-08-21T17:10:28.199Z"
+  },
+  {
+    "id": "2aa07f53-5dd8-4ca5-b2f6-a6ed577a10d6",
+    "credentials": {
+      "email": "testuser000",
+      "username": "testuser000",
+      "password": "$2b$10$2K61wy/HA0H/VGRTU5wptuZKYsgaX586WH8qItMGr9GOh89G3aNLu"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:10:52.063Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:10:52.064Z"
+    },
+    "created_at": "2025-08-21T17:10:52.133Z",
+    "updated_at": "2025-08-21T17:10:52.133Z"
+  },
+  {
+    "id": "93365297-e2a7-4314-9ae5-d131078456bb",
+    "credentials": {
+      "email": "testuserfinal",
+      "username": "testuserfinal",
+      "password": "$2b$10$/ybueBtNJT7VU2nRJuW73.CWJPSGz6Z4/P0.RASARmHGeeDkMoLdq"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:11:55.042Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:11:55.042Z"
+    },
+    "created_at": "2025-08-21T17:11:55.113Z",
+    "updated_at": "2025-08-21T17:11:55.113Z"
+  },
+  {
+    "id": "12b92719-63b1-4e3b-94ea-dea5097cca55",
+    "credentials": {
+      "email": "finaltest123",
+      "username": "finaltest123",
+      "password": "$2b$10$CMze1WI3zI8QxfR9cOOC1OU/MutrsEf8QUioVUISD1dO4WzCggWrO"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:12:32.235Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:12:32.235Z"
+    },
+    "created_at": "2025-08-21T17:12:32.305Z",
+    "updated_at": "2025-08-21T17:12:32.305Z"
+  },
+  {
+    "id": "aed5282e-8d0b-49d7-b410-241ba7222096",
+    "credentials": {
+      "email": "abcd123",
+      "username": "abcd123",
+      "password": "$2b$10$wgJDoEvNMGk43qr2XYag/ecDJzg.5ABTOEUhnhxveYUoBYYgqz4tm"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:14:28.416Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:14:28.416Z"
+    },
+    "created_at": "2025-08-21T17:14:28.487Z",
+    "updated_at": "2025-08-21T17:14:28.487Z"
+  },
+  {
+    "id": "66f4c18c-3f15-4aed-a564-0475ff5cc2b2",
+    "credentials": {
+      "email": "testcomplete",
+      "username": "testcomplete",
+      "password": "$2b$10$miRpL4D3EfE90zuj5PTivu3ibCahwBpdUqAjK9.o0OD2gzFlhsyDu"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:21:48.814Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 492997.93,
+        "total_current_value": 558539.01,
+        "total_gain_loss": 65541.08,
+        "gain_loss_percentage": 13.29,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 558539.01,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund- (ELSS U/S 80C of IT ACT) - Growth-Direct Plan (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "1038556166",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 862991.478,
+          "investment_amount": 94000.0062,
+          "transactions": [
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000.0031,
+              "units": 321596.424,
+              "price": 0.155474375237456,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 44000.0031,
+              "units": 541395.054,
+              "price": 0.0812715276486438,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.1089,
+          "current_price": 0.1256,
+          "current_value": 108391.73,
+          "gain_loss": 14391.72,
+          "gain_loss_percentage": 15.31,
+          "sip_amount": 47000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Axis Large Cap Fund - Direct Growth -",
+          "scheme_code": "",
+          "folio_number": "91055870525",
+          "mf_name": "AXIS Mutual Fund",
+          "type": "Equity",
+          "units": 273617.398,
+          "investment_amount": 43000.028999999995,
+          "transactions": [
+            {
+              "date": "2019-01-03T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.003,
+              "units": 8397.308,
+              "price": 0.3572577068746317,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0029,
+              "units": 85100.503,
+              "price": 0.035252469659315645,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0031,
+              "units": 53190.295,
+              "price": 0.11280259114938167,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0031,
+              "units": 8193.05,
+              "price": 0.7323283880850233,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0031,
+              "units": 34159.541,
+              "price": 0.14637208093633344,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0033,
+              "units": 40149.701,
+              "price": 0.12453401085103971,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0034,
+              "units": 19146.242,
+              "price": 0.2611480310339752,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0035,
+              "units": 12142.369,
+              "price": 0.411781547735866,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0036,
+              "units": 13138.389,
+              "price": 0.3805644360202762,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.1572,
+          "current_price": 0.1741,
+          "current_value": 47636.79,
+          "gain_loss": 4636.76,
+          "gain_loss_percentage": 10.78,
+          "sip_amount": 4778,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Franklin India Money Market Fund - Direct Plan - Growth (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "22212898",
+          "mf_name": "Franklin Templeton Mutual Fund",
+          "type": "Equity",
+          "units": 46630000,
+          "investment_amount": 50000.0036,
+          "transactions": [
+            {
+              "date": "2019-01-30T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000.0036,
+              "units": 46631371.129,
+              "price": 0.0010722396187253659,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-28T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 50918.11,
+              "units": 1371.129,
+              "price": 37.1359,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0011,
+          "current_price": 0.0011,
+          "current_value": 51293,
+          "gain_loss": 1293,
+          "gain_loss_percentage": 2.59
+        },
+        {
+          "scheme_name": "HDFC Small Cap Fund - Direct Growth Plan (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "14789663",
+          "mf_name": "HDFC Mutual Fund",
+          "type": "Equity",
+          "units": 568336.7860000001,
+          "investment_amount": 33000.048800000004,
+          "transactions": [
+            {
+              "date": "2018-01-18T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0047,
+              "units": 70162.892,
+              "price": 0.0427577115834963,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-12T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0044,
+              "units": 56867.313,
+              "price": 0.05275446019403097,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 63368.755,
+              "price": 0.04734201105892013,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0045,
+              "units": 46565.985,
+              "price": 0.06442480493003638,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 13969.543,
+              "price": 0.21475321705226866,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0046,
+              "units": 70864.229,
+              "price": 0.042334540886629836,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0047,
+              "units": 30863.414,
+              "price": 0.09720261990458995,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 92868.294,
+              "price": 0.032303859269774034,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0046,
+              "units": 35364.721,
+              "price": 0.08483043313136841,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0044,
+              "units": 22867.83,
+              "price": 0.13118885351167991,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.004,
+              "units": 64573.81,
+              "price": 0.04645852552296357,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0581,
+          "current_price": 0.0712,
+          "current_value": 40465.58,
+          "gain_loss": 7465.53,
+          "gain_loss_percentage": 22.62,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "HSBC Midcap Fund - Direct Growth (Formerly known as L&T Midcap Fund Direct Plan - Growth ) (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "5009366",
+          "mf_name": "HSBC Mutual Fund",
+          "type": "Equity",
+          "units": 4640221.869,
+          "investment_amount": 30000.01349,
+          "transactions": [
+            {
+              "date": "2018-01-14T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00136,
+              "units": 420021.991,
+              "price": 0.007142486403765465,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 380022.325,
+              "price": 0.007894276579671997,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00138,
+              "units": 790021.615,
+              "price": 0.0037973662024424486,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00129,
+              "units": 410023.182,
+              "price": 0.007316662622261198,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00138,
+              "units": 450021.668,
+              "price": 0.006666348741234389,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00141,
+              "units": 660021.177,
+              "price": 0.0045453108393217504,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 620022.285,
+              "price": 0.004838537924487666,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00139,
+              "units": 30021.578,
+              "price": 0.09992817133063424,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 740022.265,
+              "price": 0.004053933890759354,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00126,
+              "units": 140023.783,
+              "price": 0.021424940790237042,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0065,
+          "current_price": 0.0076,
+          "current_value": 35265.69,
+          "gain_loss": 5265.68,
+          "gain_loss_percentage": 17.55,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset ELSS Tax Saver Fund (formerly Mirae Asset Tax Saver Fund ) - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 5376033.11,
+          "investment_amount": 130997.95449999999,
+          "transactions": [
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 90000.002,
+              "units": 4644397.967,
+              "price": 0.019378184780778927,
+              "broker": ""
+            },
+            {
+              "date": "2021-01-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 40997.9525,
+              "units": 731635.143,
+              "price": 0.05603606236284907,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0244,
+          "current_price": 0.0271,
+          "current_value": 145690.5,
+          "gain_loss": 14692.55,
+          "gain_loss_percentage": 11.22,
+          "sip_amount": 65499,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 242991.55,
+          "investment_amount": 23000.029,
+          "transactions": [
+            {
+              "date": "2019-01-06T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0054,
+              "units": 13355.419,
+              "price": 0.22462832502671762,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-23T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0057,
+              "units": 82686.466,
+              "price": 0.0604694569967472,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0057,
+              "units": 60786.795,
+              "price": 0.08225480056976191,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.006,
+              "units": 4583.271,
+              "price": 1.0909252365832176,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0062,
+              "units": 81579.599,
+              "price": 0.06128990901266872,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0947,
+          "current_price": 0.1159,
+          "current_value": 28162.72,
+          "gain_loss": 5162.69,
+          "gain_loss_percentage": 22.45,
+          "sip_amount": 4600,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large Cap Fund - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 1191890.169,
+          "investment_amount": 21000.026599999997,
+          "transactions": [
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 26456.323,
+              "price": 0.11339464293658645,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 71355.852,
+              "price": 0.04204287687574664,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 78855.775,
+              "price": 0.03804420538635249,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0054,
+              "units": 611109.868,
+              "price": 0.009818210626570997,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0053,
+              "units": 404112.351,
+              "price": 0.014847369265385307,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0176,
+          "current_price": 0.0211,
+          "current_value": 25148.88,
+          "gain_loss": 4148.85,
+          "gain_loss_percentage": 19.76,
+          "sip_amount": 4200,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan (formerly Parag Parikh Long Term Value Fund) (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "10148860",
+          "mf_name": "Unknown Mutual Fund",
+          "type": "Equity",
+          "units": 80447650.01799999,
+          "investment_amount": 49999.793,
+          "transactions": [
+            {
+              "date": "2018-01-14T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0023,
+              "units": 5227127.536,
+              "price": 0.0005739294247822615,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0023,
+              "units": 8208125.94,
+              "price": 0.000365491748290597,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0024,
+              "units": 2230123.849,
+              "price": 0.0013452178457914873,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0024,
+              "units": 7042121.437,
+              "price": 0.00042600833098925154,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 3690118.255,
+              "price": 0.0008129827535838686,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 7843116.35,
+              "price": 0.0003825013382595045,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 4072118.077,
+              "price": 0.0007367179544582739,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 9311115.691,
+              "price": 0.00032219581407411384,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 8704115.963,
+              "price": 0.0003446648129175436,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 1758119.162,
+              "price": 0.0017063704013027532,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 9175115.752,
+              "price": 0.0003269716242376623,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 8340116.126,
+              "price": 0.00035970752141539184,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0027,
+              "units": 3940109.513,
+              "price": 0.00076140084180447,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0028,
+              "units": 776106.847,
+              "price": 0.003865450757967608,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0029,
+              "units": 109103.409,
+              "price": 0.027496875922547938,
+              "broker": ""
+            },
+            {
+              "date": "2022-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 4999.7552,
+              "units": 20896.111,
+              "price": 0.23926725886936567,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0006,
+          "current_price": 0.0007,
+          "current_value": 56313.36,
+          "gain_loss": 6313.57,
+          "gain_loss_percentage": 12.63,
+          "sip_amount": 3125,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "SBI Large Cap Fund - Direct Plan - Growth (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "21462546",
+          "mf_name": "SBI Mutual Fund",
+          "type": "Equity",
+          "units": 1769364.778,
+          "investment_amount": 18000.0231,
+          "transactions": [
+            {
+              "date": "2018-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0036,
+              "units": 223882.818,
+              "price": 0.01339988314779922,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0037,
+              "units": 811079.342,
+              "price": 0.0036987795701989416,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0039,
+              "units": 216576.498,
+              "price": 0.013851936510673473,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0038,
+              "units": 270378.39,
+              "price": 0.01109557535274916,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.004,
+              "units": 26474.951,
+              "price": 0.1133148084013451,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0041,
+              "units": 220972.779,
+              "price": 0.013576351411139198,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0102,
+          "current_price": 0.0114,
+          "current_value": 20170.76,
+          "gain_loss": 2170.74,
+          "gain_loss_percentage": 12.06,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:21:48.815Z"
+    },
+    "created_at": "2025-08-21T17:21:48.884Z",
+    "updated_at": "2025-08-21T17:21:48.884Z"
+  },
+  {
+    "id": "78435901-4628-40a8-a52f-c8ec0c1017b5",
+    "credentials": {
+      "email": "123456",
+      "username": "123456",
+      "password": "$2b$10$C570lbe/TtXDqWX5oW5GeeQC5n55nTdDelGfIMAEo4Ry/uJf5jiei"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23, PANCHKULA PANCHKULA SECTOR 4, PANCHKULA - 134112, Haryana",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23",
+      "created_at": "2025-08-21T17:24:12.396Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 492997.93,
+        "total_current_value": 568036.79,
+        "total_gain_loss": 75038.86,
+        "gain_loss_percentage": 15.22,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 568036.79,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund- (ELSS U/S 80C of IT ACT) - Growth-Direct Plan (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "1038556166",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 862991.478,
+          "investment_amount": 94000.0062,
+          "transactions": [
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000.0031,
+              "units": 321596.424,
+              "price": 0.155474375237456,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 44000.0031,
+              "units": 541395.054,
+              "price": 0.0812715276486438,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.1089,
+          "current_price": 0.1276,
+          "current_value": 110117.71,
+          "gain_loss": 16117.7,
+          "gain_loss_percentage": 17.15,
+          "sip_amount": 47000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Axis Large Cap Fund - Direct Growth -",
+          "scheme_code": "",
+          "folio_number": "91055870525",
+          "mf_name": "AXIS Mutual Fund",
+          "type": "Equity",
+          "units": 273617.398,
+          "investment_amount": 43000.028999999995,
+          "transactions": [
+            {
+              "date": "2019-01-03T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.003,
+              "units": 8397.308,
+              "price": 0.3572577068746317,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0029,
+              "units": 85100.503,
+              "price": 0.035252469659315645,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0031,
+              "units": 53190.295,
+              "price": 0.11280259114938167,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0031,
+              "units": 8193.05,
+              "price": 0.7323283880850233,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0031,
+              "units": 34159.541,
+              "price": 0.14637208093633344,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0033,
+              "units": 40149.701,
+              "price": 0.12453401085103971,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0034,
+              "units": 19146.242,
+              "price": 0.2611480310339752,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0035,
+              "units": 12142.369,
+              "price": 0.411781547735866,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0036,
+              "units": 13138.389,
+              "price": 0.3805644360202762,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.1572,
+          "current_price": 0.1836,
+          "current_value": 50236.15,
+          "gain_loss": 7236.12,
+          "gain_loss_percentage": 16.83,
+          "sip_amount": 4778,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Franklin India Money Market Fund - Direct Plan - Growth (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "22212898",
+          "mf_name": "Franklin Templeton Mutual Fund",
+          "type": "Equity",
+          "units": 46630000,
+          "investment_amount": 50000.0036,
+          "transactions": [
+            {
+              "date": "2019-01-30T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000.0036,
+              "units": 46631371.129,
+              "price": 0.0010722396187253659,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-28T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 50918.11,
+              "units": 1371.129,
+              "price": 37.1359,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0011,
+          "current_price": 0.0013,
+          "current_value": 60619,
+          "gain_loss": 10619,
+          "gain_loss_percentage": 21.24
+        },
+        {
+          "scheme_name": "HDFC Small Cap Fund - Direct Growth Plan (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "14789663",
+          "mf_name": "HDFC Mutual Fund",
+          "type": "Equity",
+          "units": 568336.7860000001,
+          "investment_amount": 33000.048800000004,
+          "transactions": [
+            {
+              "date": "2018-01-18T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0047,
+              "units": 70162.892,
+              "price": 0.0427577115834963,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-12T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0044,
+              "units": 56867.313,
+              "price": 0.05275446019403097,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 63368.755,
+              "price": 0.04734201105892013,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0045,
+              "units": 46565.985,
+              "price": 0.06442480493003638,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 13969.543,
+              "price": 0.21475321705226866,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0046,
+              "units": 70864.229,
+              "price": 0.042334540886629836,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0047,
+              "units": 30863.414,
+              "price": 0.09720261990458995,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0043,
+              "units": 92868.294,
+              "price": 0.032303859269774034,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0046,
+              "units": 35364.721,
+              "price": 0.08483043313136841,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0044,
+              "units": 22867.83,
+              "price": 0.13118885351167991,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.004,
+              "units": 64573.81,
+              "price": 0.04645852552296357,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0581,
+          "current_price": 0.0698,
+          "current_value": 39669.91,
+          "gain_loss": 6669.86,
+          "gain_loss_percentage": 20.21,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "HSBC Midcap Fund - Direct Growth (Formerly known as L&T Midcap Fund Direct Plan - Growth ) (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "5009366",
+          "mf_name": "HSBC Mutual Fund",
+          "type": "Equity",
+          "units": 4640221.869,
+          "investment_amount": 30000.01349,
+          "transactions": [
+            {
+              "date": "2018-01-14T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00136,
+              "units": 420021.991,
+              "price": 0.007142486403765465,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 380022.325,
+              "price": 0.007894276579671997,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00138,
+              "units": 790021.615,
+              "price": 0.0037973662024424486,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00129,
+              "units": 410023.182,
+              "price": 0.007316662622261198,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00138,
+              "units": 450021.668,
+              "price": 0.006666348741234389,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00141,
+              "units": 660021.177,
+              "price": 0.0045453108393217504,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 620022.285,
+              "price": 0.004838537924487666,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00139,
+              "units": 30021.578,
+              "price": 0.09992817133063424,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00134,
+              "units": 740022.265,
+              "price": 0.004053933890759354,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.00126,
+              "units": 140023.783,
+              "price": 0.021424940790237042,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0065,
+          "current_price": 0.0078,
+          "current_value": 36193.73,
+          "gain_loss": 6193.72,
+          "gain_loss_percentage": 20.65,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset ELSS Tax Saver Fund (formerly Mirae Asset Tax Saver Fund ) - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 5376033.11,
+          "investment_amount": 130997.95449999999,
+          "transactions": [
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 90000.002,
+              "units": 4644397.967,
+              "price": 0.019378184780778927,
+              "broker": ""
+            },
+            {
+              "date": "2021-01-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 40997.9525,
+              "units": 731635.143,
+              "price": 0.05603606236284907,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0244,
+          "current_price": 0.0269,
+          "current_value": 144615.29,
+          "gain_loss": 13617.34,
+          "gain_loss_percentage": 10.4,
+          "sip_amount": 65499,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 242991.55,
+          "investment_amount": 23000.029,
+          "transactions": [
+            {
+              "date": "2019-01-06T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0054,
+              "units": 13355.419,
+              "price": 0.22462832502671762,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-23T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0057,
+              "units": 82686.466,
+              "price": 0.0604694569967472,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0057,
+              "units": 60786.795,
+              "price": 0.08225480056976191,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.006,
+              "units": 4583.271,
+              "price": 1.0909252365832176,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 5000.0062,
+              "units": 81579.599,
+              "price": 0.06128990901266872,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0947,
+          "current_price": 0.1159,
+          "current_value": 28162.72,
+          "gain_loss": 5162.69,
+          "gain_loss_percentage": 22.45,
+          "sip_amount": 4600,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large Cap Fund - Direct Plan -",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 1191890.169,
+          "investment_amount": 21000.026599999997,
+          "transactions": [
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 26456.323,
+              "price": 0.11339464293658645,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 71355.852,
+              "price": 0.04204287687574664,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0053,
+              "units": 78855.775,
+              "price": 0.03804420538635249,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0054,
+              "units": 611109.868,
+              "price": 0.009818210626570997,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 6000.0053,
+              "units": 404112.351,
+              "price": 0.014847369265385307,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0176,
+          "current_price": 0.019,
+          "current_value": 22645.91,
+          "gain_loss": 1645.88,
+          "gain_loss_percentage": 7.84,
+          "sip_amount": 4200,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan (formerly Parag Parikh Long Term Value Fund) (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "10148860",
+          "mf_name": "Unknown Mutual Fund",
+          "type": "Equity",
+          "units": 80447650.01799999,
+          "investment_amount": 49999.793,
+          "transactions": [
+            {
+              "date": "2018-01-14T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0023,
+              "units": 5227127.536,
+              "price": 0.0005739294247822615,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0023,
+              "units": 8208125.94,
+              "price": 0.000365491748290597,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0024,
+              "units": 2230123.849,
+              "price": 0.0013452178457914873,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0024,
+              "units": 7042121.437,
+              "price": 0.00042600833098925154,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 3690118.255,
+              "price": 0.0008129827535838686,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 7843116.35,
+              "price": 0.0003825013382595045,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 4072118.077,
+              "price": 0.0007367179544582739,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 9311115.691,
+              "price": 0.00032219581407411384,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 8704115.963,
+              "price": 0.0003446648129175436,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 1758119.162,
+              "price": 0.0017063704013027532,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 9175115.752,
+              "price": 0.0003269716242376623,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0025,
+              "units": 8340116.126,
+              "price": 0.00035970752141539184,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0027,
+              "units": 3940109.513,
+              "price": 0.00076140084180447,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0028,
+              "units": 776106.847,
+              "price": 0.003865450757967608,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0029,
+              "units": 109103.409,
+              "price": 0.027496875922547938,
+              "broker": ""
+            },
+            {
+              "date": "2022-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 4999.7552,
+              "units": 20896.111,
+              "price": 0.23926725886936567,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0006,
+          "current_price": 0.0007,
+          "current_value": 56313.36,
+          "gain_loss": 6313.57,
+          "gain_loss_percentage": 12.63,
+          "sip_amount": 3125,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "SBI Large Cap Fund - Direct Plan - Growth (Non-Demat) -",
+          "scheme_code": "",
+          "folio_number": "21462546",
+          "mf_name": "SBI Mutual Fund",
+          "type": "Equity",
+          "units": 1769364.778,
+          "investment_amount": 18000.0231,
+          "transactions": [
+            {
+              "date": "2018-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0036,
+              "units": 223882.818,
+              "price": 0.01339988314779922,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0037,
+              "units": 811079.342,
+              "price": 0.0036987795701989416,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0039,
+              "units": 216576.498,
+              "price": 0.013851936510673473,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0038,
+              "units": 270378.39,
+              "price": 0.01109557535274916,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.004,
+              "units": 26474.951,
+              "price": 0.1133148084013451,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000.0041,
+              "units": 220972.779,
+              "price": 0.013576351411139198,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 0.0102,
+          "current_price": 0.011,
+          "current_value": 19463.01,
+          "gain_loss": 1462.99,
+          "gain_loss_percentage": 8.13,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-21T17:24:12.396Z"
+    },
+    "created_at": "2025-08-21T17:24:12.468Z",
+    "updated_at": "2025-08-21T17:24:12.468Z"
   }
 ]
