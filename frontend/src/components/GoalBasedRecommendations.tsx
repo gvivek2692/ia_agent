@@ -13,7 +13,7 @@ import {
   Shield
 } from 'lucide-react';
 
-interface PortfolioRecommendationsProps {
+interface GoalBasedRecommendationsProps {
   userId?: string;
 }
 
@@ -32,24 +32,17 @@ interface Recommendation {
   risk_level: 'low' | 'medium' | 'high';
 }
 
-interface RebalanceData {
-  current: { [key: string]: number };
-  recommended: { [key: string]: number };
-  difference: { [key: string]: number };
-}
-
-const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ userId }) => {
+const GoalBasedRecommendations: React.FC<GoalBasedRecommendationsProps> = ({ userId }) => {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [rebalanceData, setRebalanceData] = useState<RebalanceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedRecommendation, setSelectedRecommendation] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadRecommendations = async () => {
+    const loadGoalBasedRecommendations = async () => {
       setLoading(true);
       
       try {
-        // Fetch real portfolio recommendations from API
+        // Fetch portfolio recommendations from API and filter for goal_based
         const response = await fetch(`${process.env.REACT_APP_API_URL}/portfolio-recommendations?userId=${userId || ''}`);
         
         if (!response.ok) {
@@ -58,65 +51,57 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
         
         const recommendationsData = await response.json();
         
-        // Filter out goal_based recommendations as they are shown in the Goals section
-        const portfolioRecommendations = (recommendationsData.recommendations || []).filter(
-          (rec: Recommendation) => rec.type !== 'goal_based'
+        // Filter for goal_based recommendations only
+        const goalBasedRecs = (recommendationsData.recommendations || []).filter(
+          (rec: Recommendation) => rec.type === 'goal_based'
         );
-        setRecommendations(portfolioRecommendations);
-        setRebalanceData(recommendationsData.rebalance_data || null);
+        
+        setRecommendations(goalBasedRecs);
       } catch (error) {
-        console.error('Error loading recommendations:', error);
-        // Fallback to sample data if API fails
+        console.error('Error loading goal-based recommendations:', error);
+        // Fallback to sample goal-based recommendations if API fails
         const fallbackRecommendations: Recommendation[] = [
           {
-            id: 'fallback_1',
-            type: 'rebalance',
-            title: 'Rebalance Large Cap Allocation',
-            description: 'Consider increasing your large cap allocation for better stability and risk management.',
-            priority: 'medium',
-            impact_score: 65,
-            current_allocation: 45,
-            recommended_allocation: 55,
-            timeframe: '2-3 months',
+            id: 'goal_fallback_1',
+            type: 'goal_based',
+            title: 'Increase SIP for Emergency Fund Goal',
+            description: 'Your emergency fund goal is behind target. Consider increasing monthly SIP to get back on track.',
+            priority: 'high',
+            impact_score: 85,
+            amount_suggestion: 5000,
+            timeframe: '1-2 months',
             reasoning: [
-              'Current large cap allocation is below optimal range',
-              'Market volatility suggests need for more stability',
-              'Large cap stocks provide better downside protection'
+              'Emergency fund is only 58% complete with target date approaching',
+              'Increasing SIP by ₹5,000 will help achieve target on time',
+              'Emergency fund provides crucial financial security'
             ],
             risk_level: 'low'
           },
           {
-            id: 'fallback_2',
-            type: 'diversify',
-            title: 'Add International Exposure',
-            description: 'Consider adding international funds to improve diversification and reduce country-specific risks.',
-            priority: 'low',
-            impact_score: 45,
-            amount_suggestion: 50000,
-            timeframe: '6-12 months',
+            id: 'goal_fallback_2',
+            type: 'goal_based',
+            title: 'Optimize House Down Payment Strategy',
+            description: 'Consider shifting some low-performing investments to accelerate your house purchase goal.',
+            priority: 'medium',
+            impact_score: 72,
+            amount_suggestion: 25000,
+            timeframe: '3-6 months',
             reasoning: [
-              'Portfolio lacks international diversification',
-              'Global markets can provide hedge against domestic risks',
-              'Long-term currency diversification benefits'
+              'House down payment goal needs ₹10.75L more to complete',
+              'Some current investments are underperforming',
+              'Real estate prices are expected to rise next year'
             ],
             risk_level: 'medium'
           }
         ];
         
-        const fallbackRebalanceData: RebalanceData = {
-          current: { 'Portfolio': 100 },
-          recommended: { 'Portfolio': 100 },
-          difference: { 'Portfolio': 0 }
-        };
-        
         setRecommendations(fallbackRecommendations);
-        setRebalanceData(fallbackRebalanceData);
       } finally {
         setLoading(false);
       }
     };
 
-    loadRecommendations();
+    loadGoalBasedRecommendations();
   }, [userId]);
 
   const getPriorityColor = (priority: string) => {
@@ -128,39 +113,35 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
     }
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'rebalance': return BarChart3;
-      case 'add': return TrendingUp;
-      case 'reduce': return TrendingDown;
-      case 'diversify': return PieChart;
-      case 'goal_based': return Target;
-      default: return DollarSign;
-    }
-  };
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'rebalance': return 'text-blue-400 bg-blue-500/20 border border-blue-400/30';
-      case 'add': return 'text-green-400 bg-green-500/20 border border-green-400/30';
-      case 'reduce': return 'text-red-400 bg-red-500/20 border border-red-400/30';
-      case 'diversify': return 'text-purple-400 bg-purple-500/20 border border-purple-400/30';
-      case 'goal_based': return 'text-indigo-400 bg-indigo-500/20 border border-indigo-400/30';
-      default: return 'text-gray-400 bg-gray-500/20 border border-gray-400/30';
-    }
-  };
-
   if (loading) {
     return (
       <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
         <div className="flex items-center space-x-3 mb-6">
-          <Target className="w-6 h-6 text-blue-400" />
-          <h3 className="text-lg font-semibold text-white">Portfolio Recommendations</h3>
+          <Target className="w-6 h-6 text-indigo-400" />
+          <h3 className="text-lg font-semibold text-white">Goal-Based Recommendations</h3>
         </div>
         <div className="animate-pulse space-y-4">
-          {[1, 2, 3].map(i => (
+          {[1, 2].map(i => (
             <div key={i} className="h-24 bg-white/10 rounded-lg"></div>
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (recommendations.length === 0) {
+    return (
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
+        <div className="flex items-center space-x-3 mb-6">
+          <Target className="w-6 h-6 text-indigo-400" />
+          <h3 className="text-lg font-semibold text-white">Goal-Based Recommendations</h3>
+        </div>
+        <div className="text-center py-8">
+          <CheckCircle2 className="w-12 h-12 text-green-400 mx-auto mb-4" />
+          <h4 className="text-white font-medium mb-2">All Goals on Track!</h4>
+          <p className="text-gray-300 text-sm">
+            Your financial goals are progressing well. Keep up the great work!
+          </p>
         </div>
       </div>
     );
@@ -171,10 +152,10 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-blue-500/20 border border-blue-400/30 rounded-lg backdrop-blur-sm">
-            <Target className="w-6 h-6 text-blue-400" />
+          <div className="p-2 bg-indigo-500/20 border border-indigo-400/30 rounded-lg backdrop-blur-sm">
+            <Target className="w-6 h-6 text-indigo-400" />
           </div>
-          <h3 className="text-lg font-semibold text-white">Portfolio Recommendations</h3>
+          <h3 className="text-lg font-semibold text-white">Goal-Based Recommendations</h3>
         </div>
         <div className="text-sm text-gray-400">
           {recommendations.length} recommendations
@@ -184,21 +165,20 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
       {/* Recommendations List */}
       <div className="space-y-4">
         {recommendations.map((rec) => {
-          const TypeIcon = getTypeIcon(rec.type);
           const isExpanded = selectedRecommendation === rec.id;
           
           return (
             <div 
               key={rec.id} 
               className={`border rounded-lg p-4 transition-all cursor-pointer backdrop-blur-sm ${
-                isExpanded ? 'border-blue-400/30 bg-blue-500/20' : 'border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10'
+                isExpanded ? 'border-indigo-400/30 bg-indigo-500/20' : 'border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10'
               }`}
               onClick={() => setSelectedRecommendation(isExpanded ? null : rec.id)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-3 flex-1">
-                  <div className={`p-2 rounded-lg ${getTypeColor(rec.type)}`}>
-                    <TypeIcon className="w-5 h-5" />
+                  <div className="p-2 rounded-lg text-indigo-400 bg-indigo-500/20 border border-indigo-400/30">
+                    <Target className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
@@ -228,10 +208,10 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  {rec.current_allocation && rec.recommended_allocation && (
+                  {rec.amount_suggestion && (
                     <div className="text-right text-sm">
-                      <div className="text-gray-400">
-                        {rec.current_allocation}% → {rec.recommended_allocation}%
+                      <div className="text-indigo-400 font-medium">
+                        +₹{rec.amount_suggestion.toLocaleString()}
                       </div>
                     </div>
                   )}
@@ -243,7 +223,7 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
 
               {/* Expanded Content */}
               {isExpanded && (
-                <div className="mt-4 pt-4 border-t border-blue-400/30">
+                <div className="mt-4 pt-4 border-t border-indigo-400/30">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Reasoning */}
                     <div>
@@ -254,7 +234,7 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
                       <ul className="space-y-1">
                         {rec.reasoning.map((reason, index) => (
                           <li key={index} className="text-sm text-gray-300 flex items-start">
-                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-2 flex-shrink-0"></div>
+                            <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mt-2 mr-2 flex-shrink-0"></div>
                             {reason}
                           </li>
                         ))}
@@ -278,16 +258,7 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
                           </div>
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-400">Target:</span>
-                            <span className="font-medium text-blue-400">{rec.recommended_allocation}%</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-400">Adjustment:</span>
-                            <span className={`font-medium ${
-                              rec.recommended_allocation > rec.current_allocation ? 'text-green-400' : 'text-red-400'
-                            }`}>
-                              {rec.recommended_allocation > rec.current_allocation ? '+' : ''}
-                              {rec.recommended_allocation - rec.current_allocation}%
-                            </span>
+                            <span className="font-medium text-indigo-400">{rec.recommended_allocation}%</span>
                           </div>
                         </div>
                       )}
@@ -299,7 +270,7 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
                     <button className="text-sm text-gray-400 hover:text-gray-300">
                       Remind Later
                     </button>
-                    <button className="text-sm font-medium text-blue-400 hover:text-blue-300">
+                    <button className="text-sm font-medium text-indigo-400 hover:text-indigo-300">
                       Take Action
                     </button>
                   </div>
@@ -309,42 +280,8 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
           );
         })}
       </div>
-
-      {/* Rebalance Visualization */}
-      {rebalanceData && (
-        <div className="mt-6 pt-6 border-t border-white/20">
-          <h4 className="font-semibold text-white mb-4 flex items-center">
-            <PieChart className="w-5 h-5 mr-2" />
-            Rebalancing Overview
-          </h4>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {Object.entries(rebalanceData.current).map(([asset, currentValue]) => {
-              const recommended = rebalanceData.recommended[asset];
-              const difference = rebalanceData.difference[asset];
-              
-              return (
-                <div key={asset} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-3">
-                  <div className="font-medium text-sm text-white mb-1">{asset}</div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-400">{currentValue}%</span>
-                    <ArrowRight className="w-3 h-3 text-gray-300" />
-                    <span className="font-medium">{recommended}%</span>
-                  </div>
-                  {difference !== 0 && (
-                    <div className={`text-xs mt-1 ${
-                      difference > 0 ? 'text-green-400' : 'text-red-400'
-                    }`}>
-                      {difference > 0 ? '+' : ''}{difference}%
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default PortfolioRecommendations;
+export default GoalBasedRecommendations;
