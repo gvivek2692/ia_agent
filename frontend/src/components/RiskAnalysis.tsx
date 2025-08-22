@@ -135,9 +135,15 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
   };
 
   const getRiskBackground = (score: number) => {
-    if (score <= 40) return 'bg-green-50 border-green-200';
-    if (score <= 70) return 'bg-yellow-50 border-yellow-200';
-    return 'bg-red-50 border-red-200';
+    if (score <= 40) return 'bg-green-500/20 border border-green-400/30';
+    if (score <= 70) return 'bg-yellow-500/20 border border-yellow-400/30';
+    return 'bg-red-500/20 border border-red-400/30';
+  };
+
+  const getRiskTextColor = (score: number) => {
+    if (score <= 40) return 'text-green-300';
+    if (score <= 70) return 'text-yellow-300';
+    return 'text-red-300';
   };
 
   const getStatusIcon = (status: string) => {
@@ -199,7 +205,7 @@ const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ userId }) => {
           </div>
           <h3 className="text-lg font-semibold text-white">Risk Analysis</h3>
         </div>
-        <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRiskBackground(riskData.metrics.overall_score)} backdrop-blur-sm`}>
+        <div className={`px-3 py-1 rounded-full text-sm font-medium ${getRiskBackground(riskData.metrics.overall_score)} ${getRiskTextColor(riskData.metrics.overall_score)} backdrop-blur-sm`}>
           {riskData.metrics.risk_level.toUpperCase()} RISK
         </div>
       </div>

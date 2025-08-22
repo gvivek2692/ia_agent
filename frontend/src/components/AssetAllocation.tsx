@@ -47,26 +47,6 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
     return null;
   };
 
-  // Custom legend
-  const CustomLegend = (props: any) => {
-    const { payload } = props;
-    return (
-      <div className="flex flex-col space-y-2 mt-4">
-        {payload?.map((entry: any, index: number) => (
-          <div key={index} className="flex items-center space-x-2">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: entry.color }}
-            />
-            <span className="text-sm text-gray-700 flex-1">{entry.value}</span>
-            <span className="text-sm font-medium text-gray-900">
-              {entry.payload.value.toFixed(1)}%
-            </span>
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
@@ -97,13 +77,6 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
-          
-          {/* Custom Legend */}
-          <CustomLegend payload={chartData.map(item => ({ 
-            value: item.name, 
-            color: item.color,
-            payload: item
-          }))} />
         </div>
       ) : (
         <div className="flex items-center justify-center h-80">
@@ -141,28 +114,6 @@ const AssetAllocation: React.FC<AssetAllocationProps> = ({ assetAllocation, form
           ))}
         </div>
       )}
-
-      {/* Allocation Insights */}
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">💡 Insights</h4>
-        <div className="space-y-2 text-sm">
-          {chartData.length === 1 && (
-            <p className="text-amber-700 bg-amber-50 p-2 rounded">
-              Consider diversifying across multiple asset classes to reduce risk
-            </p>
-          )}
-          {chartData.find(item => item.value > 70) && (
-            <p className="text-orange-700 bg-orange-50 p-2 rounded">
-              {chartData.find(item => item.value > 70)?.name} allocation seems high - consider rebalancing
-            </p>
-          )}
-          {chartData.length >= 3 && !chartData.find(item => item.value > 70) && (
-            <p className="text-green-700 bg-green-50 p-2 rounded">
-              Good diversification across asset classes
-            </p>
-          )}
-        </div>
-      </div>
     </div>
   );
 };

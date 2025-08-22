@@ -17,6 +17,9 @@ import PortfolioRecommendations from './PortfolioRecommendations';
 import RiskAnalysis from './RiskAnalysis';
 import GoalsDashboard from './GoalsDashboard';
 import GoalBasedRecommendations from './GoalBasedRecommendations';
+import GoalsProgress from './GoalsProgress';
+import PortfolioHealthCard from './PortfolioHealthCard';
+import ActionableInsights from './ActionableInsights';
 import { apiService } from '../services/apiService';
 
 interface AIInsightsProps {
@@ -68,6 +71,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'portfolio' | 'market' | 'goals'>('overview');
+  const [portfolioSummary, setPortfolioSummary] = useState<any>(null);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
@@ -89,6 +93,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
         const userContext = await apiService.getUserContext(userId) as any;
         setGoals(userContext.financial_goals?.goals || []);
         setPortfolioValue(userContext.portfolio?.summary?.total_current_value || 0);
+        setPortfolioSummary(userContext.portfolio?.summary || null);
       } else {
         // Load demo data
         const [goalsResponse, portfolioResponse] = await Promise.all([
@@ -97,6 +102,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
         ]);
         setGoals((goalsResponse as any).goals || []);
         setPortfolioValue((portfolioResponse as any).summary?.total_current_value || 0);
+        setPortfolioSummary((portfolioResponse as any).summary || null);
       }
     } catch (err: any) {
       console.error('Error loading AI insights:', err);
@@ -260,67 +266,8 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
         </div>
       </div>
 
-      {/* AI Scores Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className={`rounded-lg border-2 p-4 ${getScoreBackground(insightsData.portfolio_score)}`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-300">Portfolio Score</p>
-              <p className={`text-2xl font-bold ${getScoreColor(insightsData.portfolio_score)}`}>
-                {insightsData.portfolio_score}/100
-              </p>
-            </div>
-            <BarChart3 className={`w-8 h-8 ${getScoreColor(insightsData.portfolio_score)}`} />
-          </div>
-        </div>
-
-        <div className={`rounded-lg border-2 p-4 ${getScoreBackground(insightsData.risk_score)}`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-300">Risk Score</p>
-              <p className={`text-2xl font-bold ${getScoreColor(100 - insightsData.risk_score)}`}>
-                {insightsData.risk_score}/100
-              </p>
-            </div>
-            <AlertTriangle className={`w-8 h-8 ${getScoreColor(100 - insightsData.risk_score)}`} />
-          </div>
-        </div>
-
-        <div className={`rounded-lg border-2 p-4 ${getScoreBackground(insightsData.diversification_score)}`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-300">Diversification</p>
-              <p className={`text-2xl font-bold ${getScoreColor(insightsData.diversification_score)}`}>
-                {insightsData.diversification_score}/100
-              </p>
-            </div>
-            <PieChart className={`w-8 h-8 ${getScoreColor(insightsData.diversification_score)}`} />
-          </div>
-        </div>
-
-        <div className="rounded-lg border-2 border-blue-400/30 bg-blue-500/20 backdrop-blur-sm p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-300">Market Outlook</p>
-              <p className="text-2xl font-bold text-blue-400 capitalize">
-                {insightsData.market_outlook}
-              </p>
-            </div>
-            <div className="p-2 bg-blue-500/30 backdrop-blur-sm border border-blue-400/30 rounded-full">
-              {insightsData.market_outlook === 'bullish' ? (
-                <TrendingUp className="w-6 h-6 text-green-400" />
-              ) : insightsData.market_outlook === 'bearish' ? (
-                <TrendingDown className="w-6 h-6 text-red-400" />
-              ) : (
-                <BarChart3 className="w-6 h-6 text-blue-400" />
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Tab Navigation */}
-      <div className="mt-8">
+      <div className="mt-6">
         <div className="border-b border-pink-500/20">
           <nav className="-mb-px flex space-x-8">
             {[
@@ -349,36 +296,113 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
       </div>
 
       {/* Content */}
-      <div className="mt-8">
+      <div className="mt-6">
         {activeTab === 'overview' && (
           <div className="space-y-8">
-            {/* Key Insights Grid */}
-            <div>
-              <h2 className="text-xl font-semibold text-white mb-6">Key Insights</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredInsights.map((insight) => (
-                  <InsightCard key={insight.id} insight={insight} />
-                ))}
+            {/* Dashboard Grid */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+              {/* Left Column */}
+              <div className="space-y-6">
+                {/* Portfolio Health */}
+                {portfolioSummary && (
+                  <PortfolioHealthCard
+                    portfolioScore={insightsData.portfolio_score}
+                    riskScore={insightsData.risk_score}
+                    diversificationScore={insightsData.diversification_score}
+                    totalValue={portfolioValue}
+                    dayChange={portfolioSummary.day_change || 0}
+                    dayChangePercent={portfolioSummary.day_change_percent || 0}
+                    formatCurrency={formatCurrency}
+                    onViewDetails={() => setActiveTab('portfolio')}
+                  />
+                )}
+                
+                {/* Goals Progress */}
+                <GoalsProgress
+                  goals={goals}
+                  formatCurrency={formatCurrency}
+                  onViewAllGoals={() => setActiveTab('goals')}
+                />
+              </div>
+              
+              {/* Right Column */}
+              <div className="space-y-6">
+                {/* Actionable Insights */}
+                <ActionableInsights
+                  insights={insightsData.insights}
+                  onViewAllInsights={() => setActiveTab('portfolio')}
+                />
+                
+                {/* Market Snapshot */}
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-purple-500/20 border border-purple-400/30 rounded-lg backdrop-blur-sm">
+                        <TrendingUp className="w-5 h-5 text-purple-400" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white">Market Outlook</h3>
+                        <p className="text-sm text-gray-400">Current sentiment</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab('market')}
+                      className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className={`p-3 rounded-lg border backdrop-blur-sm ${
+                      insightsData.market_outlook === 'bullish' ? 'bg-green-500/20 border-green-400/30' :
+                      insightsData.market_outlook === 'bearish' ? 'bg-red-500/20 border-red-400/30' :
+                      'bg-yellow-500/20 border-yellow-400/30'
+                    }`}>
+                      {insightsData.market_outlook === 'bullish' ? (
+                        <TrendingUp className="w-6 h-6 text-green-400" />
+                      ) : insightsData.market_outlook === 'bearish' ? (
+                        <TrendingDown className="w-6 h-6 text-red-400" />
+                      ) : (
+                        <BarChart3 className="w-6 h-6 text-yellow-400" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-white capitalize">
+                        {insightsData.market_outlook}
+                      </div>
+                      <div className="text-sm text-gray-400">
+                        Market sentiment is {insightsData.market_outlook}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* Quick Analysis Components */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <MarketAnalysis userId={userId} />
-              <RiskAnalysis userId={userId} />
-            </div>
-
-            <PortfolioRecommendations userId={userId} />
           </div>
         )}
 
         {activeTab === 'portfolio' && (
           <div className="space-y-8">
+            {/* Portfolio Health Details */}
+            {portfolioSummary && (
+              <PortfolioHealthCard
+                portfolioScore={insightsData.portfolio_score}
+                riskScore={insightsData.risk_score}
+                diversificationScore={insightsData.diversification_score}
+                totalValue={portfolioValue}
+                dayChange={portfolioSummary.day_change || 0}
+                dayChangePercent={portfolioSummary.day_change_percent || 0}
+                formatCurrency={formatCurrency}
+              />
+            )}
+            
+            {/* Portfolio Analysis */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <PortfolioRecommendations userId={userId} />
               <RiskAnalysis userId={userId} />
             </div>
             
+            {/* Portfolio Insights */}
             <div>
               <h2 className="text-xl font-semibold text-white mb-6">Portfolio Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

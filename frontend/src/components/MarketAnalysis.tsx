@@ -5,7 +5,8 @@ import {
   Activity,
   ArrowUp,
   ArrowDown,
-  Minus
+  Minus,
+  RefreshCw
 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -62,10 +63,18 @@ interface MarketData {
 const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
   const [marketData, setMarketData] = useState<MarketData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshingNews, setRefreshingNews] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [newsLastUpdated, setNewsLastUpdated] = useState<Date | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<string>('nifty50');
   
-  useEffect(() => {
-    const loadMarketData = async () => {
+  const loadMarketData = async (isRefresh = false) => {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
       setLoading(true);
       
       try {
@@ -79,6 +88,7 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
         const marketAnalysisData = await response.json();
         
         setMarketData(marketAnalysisData);
+        setLastUpdated(new Date());
       } catch (error) {
         console.error('Error loading market data:', error);
         // Fallback to sample data if API fails
@@ -105,12 +115,52 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
           ]
         };
         setMarketData(fallbackData);
+        setLastUpdated(new Date());
       } finally {
-        setLoading(false);
+        if (isRefresh) {
+          setRefreshing(false);
+        } else {
+          setLoading(false);
+        }
       }
     };
 
-    loadMarketData();
+  const handleRefresh = async () => {
+    if (refreshing) return;
+    await loadMarketData(true);
+  };
+
+  const handleNewsRefresh = async () => {
+    if (refreshingNews) return;
+    setRefreshingNews(true);
+    
+    try {
+      // Fetch only news data
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/market-news?userId=${userId || ''}`);
+      
+      if (response.ok) {
+        const newsData = await response.json();
+        // Update only the news section of marketData
+        setMarketData(prevData => {
+          if (!prevData) return prevData;
+          return {
+            ...prevData,
+            news_summary: newsData.news_summary || []
+          };
+        });
+        setNewsLastUpdated(new Date());
+      }
+    } catch (error) {
+      console.error('Error refreshing news:', error);
+      // Fallback: refresh the entire market data if news-specific endpoint fails
+      await loadMarketData(true);
+    } finally {
+      setRefreshingNews(false);
+    }
+  };
+
+  useEffect(() => {
+    loadMarketData(false);
   }, [userId]);
 
   const getChangeIcon = (change: number) => {
@@ -193,10 +243,27 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
           <div className="p-2 bg-blue-500/20 border border-blue-400/30 rounded-lg backdrop-blur-sm">
             <Activity className="w-6 h-6 text-blue-400" />
           </div>
-          <h3 className="text-lg font-semibold text-white">Market Analysis</h3>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Market Analysis</h3>
+            {lastUpdated && (
+              <p className="text-xs text-gray-400">
+                Updated {lastUpdated.toLocaleTimeString()}
+              </p>
+            )}
+          </div>
         </div>
-        <div className={`px-3 py-1 rounded-full text-sm font-medium ${getSentimentColor(marketData.market_sentiment.trend)}`}>
-          {marketData.market_sentiment.trend.toUpperCase()}
+        <div className="flex items-center space-x-3">
+          <div className={`px-3 py-1 rounded-full text-sm font-medium ${getSentimentColor(marketData.market_sentiment.trend)}`}>
+            {marketData.market_sentiment.trend.toUpperCase()}
+          </div>
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="p-2 text-gray-400 hover:text-blue-400 rounded-lg hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
+            title="Refresh Market Data"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+          </button>
         </div>
       </div>
 
@@ -341,8 +408,25 @@ const MarketAnalysis: React.FC<MarketAnalysisProps> = ({ userId }) => {
 
       {/* Market News */}
       <div>
-        <h4 className="text-sm font-medium text-gray-300 mb-3">Market News</h4>
-        <div className="space-y-2">
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="text-sm font-medium text-gray-300">Market News</h4>
+          <div className="flex items-center space-x-2">
+            {newsLastUpdated && (
+              <span className="text-xs text-gray-500">
+                {newsLastUpdated.toLocaleTimeString()}
+              </span>
+            )}
+            <button
+              onClick={handleNewsRefresh}
+              disabled={refreshingNews}
+              className="p-1.5 text-gray-400 hover:text-blue-400 rounded-lg hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
+              title="Refresh News"
+            >
+              <RefreshCw className={`w-3 h-3 ${refreshingNews ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
+        </div>
+        <div className={`space-y-2 transition-opacity duration-300 ${refreshingNews ? 'opacity-50' : 'opacity-100'}`}>
           {marketData.news_summary.map((news, index) => (
             <div key={index} className="flex items-start space-x-3 p-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg">
               <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${

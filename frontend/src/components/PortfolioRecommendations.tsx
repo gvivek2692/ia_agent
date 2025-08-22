@@ -8,7 +8,8 @@ import {
   DollarSign,
   ArrowRight,
   Lightbulb,
-  Shield
+  Shield,
+  RefreshCw
 } from 'lucide-react';
 
 interface PortfolioRecommendationsProps {
@@ -40,11 +41,16 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [rebalanceData, setRebalanceData] = useState<RebalanceData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [selectedRecommendation, setSelectedRecommendation] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadRecommendations = async () => {
-      setLoading(true);
+  const loadRecommendations = async (isRefresh = false) => {
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
+      }
       
       try {
         // Fetch real portfolio recommendations from API
@@ -62,6 +68,7 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
         );
         setRecommendations(portfolioRecommendations);
         setRebalanceData(recommendationsData.rebalance_data || null);
+        setLastUpdated(new Date());
       } catch (error) {
         console.error('Error loading recommendations:', error);
         // Fallback to sample data if API fails
@@ -109,12 +116,23 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
         
         setRecommendations(fallbackRecommendations);
         setRebalanceData(fallbackRebalanceData);
+        setLastUpdated(new Date());
       } finally {
-        setLoading(false);
+        if (isRefresh) {
+          setRefreshing(false);
+        } else {
+          setLoading(false);
+        }
       }
     };
 
-    loadRecommendations();
+  const handleRefresh = async () => {
+    if (refreshing) return;
+    await loadRecommendations(true);
+  };
+
+  useEffect(() => {
+    loadRecommendations(false);
   }, [userId]);
 
   const getPriorityColor = (priority: string) => {
@@ -172,10 +190,27 @@ const PortfolioRecommendations: React.FC<PortfolioRecommendationsProps> = ({ use
           <div className="p-2 bg-blue-500/20 border border-blue-400/30 rounded-lg backdrop-blur-sm">
             <Target className="w-6 h-6 text-blue-400" />
           </div>
-          <h3 className="text-lg font-semibold text-white">Portfolio Recommendations</h3>
+          <div>
+            <h3 className="text-lg font-semibold text-white">Portfolio Recommendations</h3>
+            {lastUpdated && (
+              <p className="text-xs text-gray-400">
+                Updated {lastUpdated.toLocaleTimeString()}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="text-sm text-gray-400">
-          {recommendations.length} recommendations
+        <div className="flex items-center space-x-3">
+          <div className="text-sm text-gray-400">
+            {recommendations.length} recommendations
+          </div>
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="p-2 text-gray-400 hover:text-blue-400 rounded-lg hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
+            title="Refresh Recommendations"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+          </button>
         </div>
       </div>
 
