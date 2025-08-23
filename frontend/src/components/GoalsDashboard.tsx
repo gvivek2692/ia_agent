@@ -247,7 +247,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
           )}
           <button
             onClick={() => setShowAddForm(true)}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-gold-600 to-amber-600 hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Goal
@@ -284,7 +284,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                     placeholder="e.g., House Down Payment"
                   />
                 </div>
@@ -296,7 +296,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                     rows={3}
                     placeholder="Brief description of your goal"
                   />
@@ -311,7 +311,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                     required
                     value={formData.target_amount || ''}
                     onChange={(e) => setFormData({ ...formData, target_amount: Number(e.target.value) })}
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                     placeholder="1000000"
                   />
                 </div>
@@ -325,7 +325,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                     required
                     value={formData.target_date}
                     onChange={(e) => setFormData({ ...formData, target_date: e.target.value })}
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                   />
                 </div>
 
@@ -337,7 +337,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                     <select
                       value={formData.priority}
                       onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                     >
                       <option value="high" className="bg-gray-800 text-white">High</option>
                       <option value="medium" className="bg-gray-800 text-white">Medium</option>
@@ -352,7 +352,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm"
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm"
                     >
                       <option value="house" className="bg-gray-800 text-white">House</option>
                       <option value="retirement" className="bg-gray-800 text-white">Retirement</option>
@@ -375,7 +375,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-gradient-to-r from-pink-600 to-rose-600 text-white rounded-md text-sm font-medium hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="px-4 py-2 bg-gradient-to-r from-gold-600 to-amber-600 text-white rounded-md text-sm font-medium hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
                   >
                     {editingGoal ? 'Update Goal' : 'Create Goal'}
                   </button>
@@ -397,7 +397,7 @@ const GoalsDashboard: React.FC<GoalsDashboardProps> = ({
             </p>
             <button
               onClick={() => setShowAddForm(true)}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-gold-600 to-amber-600 hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105"
             >
               <Plus className="w-4 h-4 mr-2" />
               Create Your First Goal

@@ -182,7 +182,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-gold-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-300">Analyzing your portfolio...</p>
         </div>
       </div>
@@ -199,7 +199,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
           <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={loadInsightsData}
-            className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-6 py-3 rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
+            className="bg-gradient-to-r from-gold-600 to-amber-600 text-white px-6 py-3 rounded-2xl hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold-500/25"
           >
             Try Again
           </button>
@@ -226,12 +226,12 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
       {/* AI Insights Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <div className="p-3 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl shadow-lg">
+          <div className="p-3 bg-gradient-to-r from-gold-500 to-amber-500 rounded-2xl shadow-lg">
             <Brain className="w-6 h-6 text-white" />
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
                 AI
               </span>{' '}
               Insights
@@ -248,7 +248,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
           {onToggleAIChat && (
             <button
               onClick={onToggleAIChat}
-              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-pink-300 bg-pink-500/20 border border-pink-400/30 rounded-2xl hover:bg-pink-500/30 hover:text-pink-200 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gold-300 bg-gold-500/20 border border-gold-400/30 rounded-2xl hover:bg-gold-500/30 hover:text-gold-200 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
               title="Open AI Chat"
             >
               <MessageSquare className="w-4 h-4" />
@@ -258,7 +258,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="p-3 text-gray-400 hover:text-pink-400 rounded-2xl hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
+            className="p-3 text-gray-400 hover:text-gold-400 rounded-2xl hover:bg-white/10 transition-all duration-300 disabled:opacity-50 backdrop-blur-sm transform hover:scale-105"
             title="Refresh Insights"
           >
             <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
@@ -268,7 +268,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
 
       {/* Tab Navigation */}
       <div className="mt-6">
-        <div className="border-b border-pink-500/20">
+        <div className="border-b border-gold-500/20">
           <nav className="-mb-px flex space-x-8">
             {[
               { id: 'overview', label: 'Overview', icon: Lightbulb },
@@ -281,8 +281,8 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
                 onClick={() => setActiveTab(id as any)}
                 className={`py-3 px-4 border-b-2 font-medium text-sm rounded-t-lg transition-all duration-300 ${
                   activeTab === id
-                    ? 'border-pink-500 text-pink-400 bg-pink-500/10 backdrop-blur-sm'
-                    : 'border-transparent text-gray-400 hover:text-pink-300 hover:border-pink-500/30 hover:bg-white/5'
+                    ? 'border-gold-500 text-gold-400 bg-gold-500/10 backdrop-blur-sm'
+                    : 'border-transparent text-gray-400 hover:text-gold-300 hover:border-gold-500/30 hover:bg-white/5'
                 }`}
               >
                 <div className="flex items-center space-x-2">

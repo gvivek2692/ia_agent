@@ -234,9 +234,9 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   };
 
   return (
-    <div className="bg-black/20 backdrop-blur-lg border border-pink-500/20 rounded-2xl shadow-2xl h-full flex flex-col">
+    <div className="bg-black/20 backdrop-blur-lg border border-gold-500/20 rounded-2xl shadow-2xl h-full flex flex-col">
       {/* Header with Connection Status and Controls */}
-      <div className="border-b border-pink-500/20">
+      <div className="border-b border-gold-500/20">
         <div className="flex items-center justify-between px-4 py-2">
           <div className={`text-sm flex items-center ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
             {isConnected ? (
@@ -252,7 +252,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
             <button
               onClick={startNewConversation}
               disabled={!isConnected}
-              className="px-4 py-2 text-xs bg-gradient-to-r from-pink-500/20 to-rose-500/20 text-pink-300 rounded-full hover:from-pink-500/30 hover:to-rose-500/30 border border-pink-500/30 backdrop-blur-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+              className="px-4 py-2 text-xs bg-gradient-to-r from-gold-500/20 to-amber-500/20 text-gold-300 rounded-full hover:from-gold-500/30 hover:to-amber-500/30 border border-gold-500/30 backdrop-blur-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
               title="Start New Conversation"
             >
               🔄 New Chat
@@ -260,7 +260,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
             <button
               onClick={clearConversation}
               disabled={!isConnected || messages.length <= 1}
-              className="px-4 py-2 text-xs bg-gradient-to-r from-red-500/20 to-pink-500/20 text-red-300 rounded-full hover:from-red-500/30 hover:to-pink-500/30 border border-red-500/30 backdrop-blur-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+              className="px-4 py-2 text-xs bg-gradient-to-r from-red-500/20 to-gold-500/20 text-red-300 rounded-full hover:from-red-500/30 hover:to-gold-500/30 border border-red-500/30 backdrop-blur-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
               title="Clear Conversation"
             >
               🗑️ Clear
@@ -269,13 +269,13 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
         </div>
         
         {/* Conversation Info */}
-        <div className="px-4 py-2 bg-white/5 backdrop-blur-sm text-xs text-gray-300 border-t border-pink-500/10">
+        <div className="px-4 py-2 bg-white/5 backdrop-blur-sm text-xs text-gray-300 border-t border-gold-500/10">
           <div className="flex justify-between items-center">
             <span>
               {userName ? `User: ${userName} • ` : ''}
               Conversation: {conversationId.slice(-8)} • Messages: {messages.length}
             </span>
-            <span className="text-pink-400">Backend: {config.isDevelopment ? 'Local' : 'Render'}</span>
+            <span className="text-gold-400">Backend: {config.isDevelopment ? 'Local' : 'Render'}</span>
           </div>
           <div className="mt-1 flex justify-between">
             <span>Model: GPT-4.1 Mini with Web Search</span>
@@ -295,14 +295,14 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
               className={`max-w-sm px-4 py-3 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
                 message.isBot
                   ? 'bg-white/20 border border-white/30 shadow-lg'
-                  : 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg hover:shadow-pink-500/25'
+                  : 'bg-gradient-to-r from-gold-600 to-amber-600 text-white shadow-lg hover:shadow-gold-500/25'
               }`}
             >
               <div className={message.isBot ? 'text-white' : 'text-white'}>
                 <MessageRenderer content={message.message} isBot={message.isBot} />
               </div>
               <div className={`text-xs mt-3 ${
-                message.isBot ? 'text-gray-400' : 'text-pink-100'
+                message.isBot ? 'text-gray-400' : 'text-gold-100'
               }`}>
                 {new Date(message.timestamp).toLocaleTimeString()}
               </div>
@@ -315,9 +315,9 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
             <div className="bg-white/10 border border-white/20 px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm">
               <div className="flex items-center space-x-3">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                 </div>
                 <span className="text-xs text-gray-300 ml-2">AI is analyzing...</span>
               </div>
@@ -329,30 +329,30 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       </div>
 
       {/* Input Section */}
-      <div className="border-t border-pink-500/20 p-4 bg-black/30 backdrop-blur-lg">
+      <div className="border-t border-gold-500/20 p-4 bg-black/30 backdrop-blur-lg">
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap gap-2 mb-4">
           <button
             onClick={() => setInputMessage("Show me my portfolio summary")}
-            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-pink-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-gold-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
           >
             📊 Portfolio Summary
           </button>
           <button
             onClick={() => setInputMessage("How are my financial goals progressing?")}
-            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-pink-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-gold-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
           >
             🎯 Goal Progress
           </button>
           <button
             onClick={() => setInputMessage("Should I rebalance my investments?")}
-            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-pink-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-gold-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
           >
             ⚖️ Rebalancing
           </button>
           <button
             onClick={() => setInputMessage("What's happening in the markets today?")}
-            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-pink-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+            className="px-4 py-2 text-xs bg-white/10 text-gray-300 rounded-full hover:bg-white/20 hover:text-gold-300 border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
           >
             📈 Market Update
           </button>
@@ -364,14 +364,14 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask me about your investments, financial planning, or market insights..."
-            className="flex-1 p-4 bg-white/10 border border-white/20 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500/50 transition-all text-white placeholder-gray-400 backdrop-blur-sm"
+            className="flex-1 p-4 bg-white/10 border border-white/20 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500/50 transition-all text-white placeholder-gray-400 backdrop-blur-sm"
             rows={2}
             disabled={!isConnected}
           />
           <button
             onClick={sendMessage}
             disabled={!inputMessage.trim() || !isConnected || isTyping}
-            className="px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-600 text-white rounded-2xl hover:from-pink-500 hover:to-rose-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
+            className="px-8 py-4 bg-gradient-to-r from-gold-600 to-amber-600 text-white rounded-2xl hover:from-gold-500 hover:to-amber-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center transform hover:scale-105 shadow-lg hover:shadow-gold-500/25"
           >
             {isTyping ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

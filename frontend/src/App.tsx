@@ -200,7 +200,7 @@ function App() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-gold-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-300">Loading WealthWise AI...</p>
         </div>
       </div>
@@ -244,7 +244,7 @@ function App() {
           <div className="mb-6 text-center">
             <button
               onClick={() => setCurrentView('login')}
-              className="inline-flex items-center text-pink-400 hover:text-pink-300 font-medium mb-4 transition-colors"
+              className="inline-flex items-center text-gold-400 hover:text-gold-300 font-medium mb-4 transition-colors"
             >
               ← Back to Login
             </button>
@@ -260,8 +260,8 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-rose-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-gold-600/10 to-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-amber-600/10 to-gold-600/10 rounded-full blur-3xl"></div>
       </div>
 
       {/* AI Chat Sidebar */}
@@ -274,7 +274,7 @@ function App() {
 
       <div className={`relative z-10 transition-all duration-300 ${aiChatOpen ? 'lg:ml-[500px]' : ''}`}>
         <header 
-          className="bg-black/50 backdrop-blur-lg border-b border-pink-500/20 shadow-lg overflow-visible relative"
+          className="bg-black/50 backdrop-blur-lg border-b border-gold-500/20 shadow-lg overflow-visible relative"
           style={{ zIndex: 'var(--z-dropdown)' }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 overflow-visible relative">
@@ -289,7 +289,7 @@ function App() {
                 </button>
                 <div>
                   <h1 className="text-2xl font-bold text-white">
-                    <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
                       WealthWise
                     </span>{' '}
                     AI
@@ -304,7 +304,7 @@ function App() {
                   onClick={() => setCurrentView('portfolio')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'portfolio'
-                      ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
                       : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >
@@ -317,7 +317,7 @@ function App() {
                   onClick={() => setCurrentView('insights')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'insights'
-                      ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
                       : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >

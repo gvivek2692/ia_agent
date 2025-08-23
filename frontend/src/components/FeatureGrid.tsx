@@ -13,33 +13,33 @@ const FeatureGrid: React.FC = () => {
       icon: Brain,
       title: "AI Financial Health Coach",
       description: "Get personalized guidance on building emergency funds, improving savings habits, and achieving financial independence.",
-      gradient: "from-pink-500 to-rose-500",
-      bgGradient: "from-pink-500/10 to-rose-500/10",
-      borderGradient: "from-pink-500/20 to-rose-500/20"
+      gradient: "from-gold-500 to-amber-500",
+      bgGradient: "from-gold-500/10 to-amber-500/10",
+      borderGradient: "from-gold-500/20 to-amber-500/20"
     },
     {
       icon: PieChart,
       title: "Comprehensive Tracking",
       description: "Monitor investments, track spending patterns, and visualize your financial health journey in one unified dashboard.",
-      gradient: "from-rose-500 to-pink-500",
-      bgGradient: "from-rose-500/10 to-pink-500/10",
-      borderGradient: "from-rose-500/20 to-pink-500/20"
+      gradient: "from-amber-500 to-gold-500",
+      bgGradient: "from-amber-500/10 to-gold-500/10",
+      borderGradient: "from-amber-500/20 to-gold-500/20"
     },
     {
       icon: Shield,
       title: "Risk Mitigation & Emergency Planning",
       description: "Build robust emergency funds, assess financial risks, and protect your financial stability during uncertain times.",
-      gradient: "from-rose-600 to-pink-600",
-      bgGradient: "from-rose-600/10 to-pink-600/10",
-      borderGradient: "from-rose-600/20 to-pink-600/20"
+      gradient: "from-amber-600 to-gold-600",
+      bgGradient: "from-amber-600/10 to-gold-600/10",
+      borderGradient: "from-amber-600/20 to-gold-600/20"
     },
     {
       icon: Smartphone,
       title: "Smart Financial News (Coming Soon)",
       description: "Stay informed with AI-curated financial news relevant to your goals, plus expense tracking and bank connections.",
-      gradient: "from-rose-500 to-purple-600",
-      bgGradient: "from-rose-500/10 to-purple-600/10",
-      borderGradient: "from-rose-500/20 to-purple-600/20"
+      gradient: "from-amber-500 to-yellow-600",
+      bgGradient: "from-amber-500/10 to-yellow-600/10",
+      borderGradient: "from-amber-500/20 to-yellow-600/20"
     }
   ];
 
@@ -48,21 +48,21 @@ const FeatureGrid: React.FC = () => {
     <section className="relative py-24 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-pink-600/10 to-rose-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-gold-600/10 to-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-amber-600/10 to-gold-600/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500/10 to-rose-500/10 border border-pink-500/20 rounded-full text-pink-300 text-sm font-medium mb-6 backdrop-blur-sm">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
             <CheckCircle className="w-4 h-4 mr-2" />
             Powerful Features
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
             Everything You Need for{' '}
-            <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
               Financial Health
             </span>
           </h2>
@@ -94,7 +94,7 @@ const FeatureGrid: React.FC = () => {
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-pink-300 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gold-300 transition-colors">
                     {feature.title}
                   </h3>
                   

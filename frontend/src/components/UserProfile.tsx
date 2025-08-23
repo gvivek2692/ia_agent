@@ -79,10 +79,10 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
       {/* User Avatar/Button */}
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        className="flex items-center space-x-3 p-3 rounded-2xl bg-white/10 hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 backdrop-blur-sm border border-white/20 transform hover:scale-105"
+        className="flex items-center space-x-3 p-3 rounded-2xl bg-white/10 hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold-500 backdrop-blur-sm border border-white/20 transform hover:scale-105"
       >
         {/* Avatar */}
-        <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-lg">
+        <div className="w-8 h-8 bg-gradient-to-r from-gold-500 to-amber-500 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-lg">
           {getInitials(user.name)}
         </div>
         
@@ -106,13 +106,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
         <div 
-          className="fixed right-4 top-20 w-72 sm:w-80 max-w-[calc(100vw-2rem)] bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-pink-500/30 animate-in slide-in-from-top-2 duration-300"
+          className="fixed right-4 top-20 w-72 sm:w-80 max-w-[calc(100vw-2rem)] bg-black/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gold-500/30 animate-in slide-in-from-top-2 duration-300"
           style={{ zIndex: 'var(--z-dropdown)' }}
         >
           {/* User Info Header */}
-          <div className="p-3 sm:p-4 border-b border-pink-500/20 bg-white/5 backdrop-blur-sm rounded-t-2xl">
+          <div className="p-3 sm:p-4 border-b border-gold-500/20 bg-white/5 backdrop-blur-sm rounded-t-2xl">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full flex items-center justify-center text-sm sm:text-lg font-semibold shadow-lg flex-shrink-0">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-gold-500 to-amber-500 text-white rounded-full flex items-center justify-center text-sm sm:text-lg font-semibold shadow-lg flex-shrink-0">
                 {getInitials(user.name)}
               </div>
               <div className="flex-1 min-w-0">
@@ -145,7 +145,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
           </div>
 
           {/* Actions */}
-          <div className="p-3 sm:p-4 border-t border-pink-500/20 bg-white/5 backdrop-blur-sm">
+          <div className="p-3 sm:p-4 border-t border-gold-500/20 bg-white/5 backdrop-blur-sm">
             <button
               onClick={handleLogout}
               disabled={isLoggingOut}
@@ -170,7 +170,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
           {/* Session Info */}
           <div className="px-3 sm:px-4 pb-3 sm:pb-4">
             <div className="text-xs text-gray-400 bg-white/10 rounded-xl p-2 sm:p-3 backdrop-blur-sm border border-white/20">
-              <span className="text-gray-300">Session ID:</span> <span className="font-mono text-pink-300 break-all">{sessionId.slice(-8)}...</span>
+              <span className="text-gray-300">Session ID:</span> <span className="font-mono text-gold-300 break-all">{sessionId.slice(-8)}...</span>
             </div>
           </div>
         </div>

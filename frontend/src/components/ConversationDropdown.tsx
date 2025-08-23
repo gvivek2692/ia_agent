@@ -93,7 +93,7 @@ const ConversationDropdown: React.FC<ConversationDropdownProps> = ({
         className="w-full flex items-center justify-between px-3 py-2 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-sm text-white transition-all duration-200 backdrop-blur-sm"
       >
         <div className="flex items-center space-x-2 min-w-0">
-          <MessageCircle size={16} className="text-pink-400 flex-shrink-0" />
+          <MessageCircle size={16} className="text-gold-400 flex-shrink-0" />
           <span className="truncate">{getCurrentConversationTitle()}</span>
         </div>
         <ChevronDown 
@@ -106,20 +106,20 @@ const ConversationDropdown: React.FC<ConversationDropdownProps> = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-black/90 backdrop-blur-xl border border-pink-500/20 rounded-lg shadow-2xl z-50 overflow-hidden">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-black/90 backdrop-blur-xl border border-gold-500/20 rounded-lg shadow-2xl z-50 overflow-hidden">
           {/* New Chat Option */}
           <button
             onClick={handleNewChat}
-            className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-white hover:bg-pink-500/20 transition-colors border-b border-white/10"
+            className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-white hover:bg-gold-500/20 transition-colors border-b border-white/10"
           >
-            <Plus size={16} className="text-pink-400" />
+            <Plus size={16} className="text-gold-400" />
             <span>New Chat</span>
           </button>
 
           {/* Recent Conversations */}
           {loading ? (
             <div className="px-3 py-4 text-center">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-500 mx-auto"></div>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gold-500 mx-auto"></div>
               <p className="mt-2 text-xs text-gray-400">Loading...</p>
             </div>
           ) : conversations.length > 0 ? (
@@ -130,7 +130,7 @@ const ConversationDropdown: React.FC<ConversationDropdownProps> = ({
                   onClick={() => handleConversationSelect(conversation.id)}
                   className={`
                     w-full flex flex-col px-3 py-2 text-sm text-left hover:bg-white/10 transition-colors
-                    ${conversation.id === currentConversationId ? 'bg-pink-500/20 text-pink-200' : 'text-white'}
+                    ${conversation.id === currentConversationId ? 'bg-gold-500/20 text-gold-200' : 'text-white'}
                   `}
                 >
                   <div className="flex items-center justify-between w-full">

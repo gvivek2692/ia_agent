@@ -44,21 +44,21 @@ const AIChatSidebar: React.FC<AIChatSidebarProps> = ({
       {/* Sidebar */}
       <div 
         className={`
-          fixed top-0 left-0 h-full bg-black/80 backdrop-blur-xl border-r border-pink-500/20 transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col
+          fixed top-0 left-0 h-full bg-black/80 backdrop-blur-xl border-r border-gold-500/20 transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           w-[420px] lg:w-[500px]
         `}
         style={{ zIndex: 'var(--z-sidebar)' }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-pink-500/20 bg-black/20 backdrop-blur-sm flex-shrink-0">
+        <div className="flex items-center justify-between p-4 border-b border-gold-500/20 bg-black/20 backdrop-blur-sm flex-shrink-0">
           <div className="flex items-center space-x-2">
-            <MessageSquare size={20} className="text-pink-400" />
+            <MessageSquare size={20} className="text-gold-400" />
             <h2 className="text-lg font-semibold text-white">AI Chat</h2>
           </div>
           <button
             onClick={onToggle}
-            className="p-2 text-gray-300 hover:text-pink-300 hover:bg-white/10 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+            className="p-2 text-gray-300 hover:text-gold-300 hover:bg-white/10 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
             title="Close AI Chat"
           >
             <X size={18} />
@@ -66,7 +66,7 @@ const AIChatSidebar: React.FC<AIChatSidebarProps> = ({
         </div>
 
         {/* Conversation Dropdown */}
-        <div className="p-4 border-b border-pink-500/10 flex-shrink-0">
+        <div className="p-4 border-b border-gold-500/10 flex-shrink-0">
           <ConversationDropdown
             currentConversationId={currentConversationId}
             onSelectConversation={handleSelectConversation}

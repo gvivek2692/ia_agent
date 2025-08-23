@@ -120,7 +120,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-pink-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-gold-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-300">Loading your portfolio...</p>
         </div>
       </div>
@@ -137,7 +137,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
           <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={loadDashboardData}
-            className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-6 py-3 rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
+            className="bg-gradient-to-r from-gold-600 to-amber-600 text-white px-6 py-3 rounded-2xl hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold-500/25"
           >
             Try Again
           </button>
@@ -154,14 +154,14 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
           <h2 className="text-2xl font-bold text-white">
             {userName ? (
               <>
-                <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
                   {userName}'s
                 </span>{' '}
                 Portfolio
               </>
             ) : (
               <>
-                <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
                   Portfolio
                 </span>{' '}
                 Dashboard
@@ -179,7 +179,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
           {onToggleAIChat && (
             <button
               onClick={onToggleAIChat}
-              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-pink-300 bg-pink-500/20 border border-pink-400/30 rounded-2xl hover:bg-pink-500/30 hover:text-pink-200 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gold-300 bg-gold-500/20 border border-gold-400/30 rounded-2xl hover:bg-gold-500/30 hover:text-gold-200 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
               title="Open AI Chat"
             >
               <MessageSquare className="w-4 h-4" />
@@ -199,7 +199,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
           ) : (
             <button
               onClick={loadDashboardData}
-              className="p-3 text-gray-400 hover:text-pink-400 rounded-2xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              className="p-3 text-gray-400 hover:text-gold-400 rounded-2xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
               title="Refresh Data"
             >
               <Settings className="w-5 h-5" />

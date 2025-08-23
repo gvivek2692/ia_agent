@@ -79,24 +79,24 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex">
       {/* Left Panel - Hero Section */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-black via-gray-900 to-pink-900 p-12 flex-col justify-center relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-black via-gray-900 to-amber-900 p-12 flex-col justify-center relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-rose-500 to-pink-500 rounded-full blur-2xl"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full blur-xl"></div>
+          <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-amber-500 to-gold-500 rounded-full blur-2xl"></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-gradient-to-r from-gold-400 to-amber-400 rounded-full blur-xl"></div>
         </div>
 
         {/* Floating Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-4 h-4 bg-pink-500/60 rounded-full animate-bounce delay-300"></div>
-          <div className="absolute top-40 right-20 w-3 h-3 bg-rose-500/60 rounded-full animate-bounce delay-700"></div>
-          <div className="absolute bottom-32 left-20 w-2 h-2 bg-pink-400/60 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute top-20 left-10 w-4 h-4 bg-gold-500/60 rounded-full animate-bounce delay-300"></div>
+          <div className="absolute top-40 right-20 w-3 h-3 bg-amber-500/60 rounded-full animate-bounce delay-700"></div>
+          <div className="absolute bottom-32 left-20 w-2 h-2 bg-gold-400/60 rounded-full animate-bounce delay-1000"></div>
         </div>
         
         <div className="relative z-10">
           <h1 className="text-5xl font-bold text-white mb-6">
-            <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
               WealthWise
             </span>
           </h1>
@@ -106,7 +106,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
           
           <div className="space-y-4">
             <div className="flex items-center space-x-3 text-gray-300">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-gold-500 to-amber-500 rounded-lg flex items-center justify-center">
                 <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
@@ -114,13 +114,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               <span>AI-powered investment insights</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-300">
-              <div className="w-8 h-8 bg-gradient-to-r from-rose-500 to-pink-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-gold-500 rounded-lg flex items-center justify-center">
                 <Shield className="w-4 h-4 text-white" />
               </div>
               <span>Goal-based financial planning</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-300">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-600 to-rose-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-gold-600 to-amber-600 rounded-lg flex items-center justify-center">
                 <Zap className="w-4 h-4 text-white" />
               </div>
               <span>Build better financial habits</span>
@@ -135,7 +135,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         {onBackToLanding && (
           <button
             onClick={onBackToLanding}
-            className="absolute top-6 left-6 flex items-center text-gray-400 hover:text-pink-400 transition-colors"
+            className="absolute top-6 left-6 flex items-center text-gray-400 hover:text-gold-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             <span className="text-sm">Back to Home</span>
@@ -145,11 +145,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         <div className="w-full max-w-md">
           {/* Logo for mobile */}
           <div className="text-center mb-8 lg:hidden">
-            <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-rose-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-gold-600 to-amber-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
               <span className="text-2xl font-bold text-white">W</span>
             </div>
             <h1 className="text-2xl font-bold text-white">
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
                 WealthWise
               </span>
             </h1>
@@ -161,7 +161,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               onClick={() => setActiveTab('signup')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'signup'
-                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-sm'
+                  ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-sm'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
@@ -171,7 +171,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               onClick={() => setActiveTab('signin')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'signin'
-                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-sm'
+                  ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-sm'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
@@ -181,7 +181,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               onClick={() => setActiveTab('demo')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 activeTab === 'demo'
-                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-sm'
+                  ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-sm'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
@@ -236,13 +236,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                 <button
                   onClick={onShowUpload}
                   disabled={isLoading}
-                  className="w-full flex items-center justify-center space-x-3 p-4 bg-gradient-to-r from-pink-500/10 to-rose-500/10 border-2 border-pink-400/30 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/20 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                  className="w-full flex items-center justify-center space-x-3 p-4 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border-2 border-gold-400/30 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/20 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                 >
-                  <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-to-r from-gold-500 to-amber-500 rounded-lg flex items-center justify-center">
                     <Upload className="w-5 h-5 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-white group-hover:text-pink-300">Upload MF Statement</div>
+                    <div className="font-semibold text-white group-hover:text-gold-300">Upload MF Statement</div>
                     <div className="text-sm text-gray-300">Create account with your mutual fund data</div>
                   </div>
                 </button>
@@ -270,7 +270,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                       id="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white placeholder-gray-400 backdrop-blur-sm"
+                      className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent text-white placeholder-gray-400 backdrop-blur-sm"
                       placeholder="Enter your email or username"
                       required
                       disabled={isLoading}
@@ -289,7 +289,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                       id="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white placeholder-gray-400 backdrop-blur-sm"
+                      className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent text-white placeholder-gray-400 backdrop-blur-sm"
                       placeholder="Enter your password"
                       required
                       disabled={isLoading}
@@ -300,7 +300,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-pink-600 to-rose-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-pink-500 hover:to-rose-500 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors transform hover:scale-105"
+                  className="w-full bg-gradient-to-r from-gold-600 to-amber-600 text-black py-3 px-4 rounded-lg font-semibold hover:from-gold-500 hover:to-amber-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors transform hover:scale-105"
                 >
                   {isLoading ? (
                     <div className="flex items-center justify-center">
@@ -327,13 +327,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                 <button
                   onClick={() => handleDemoLogin('priya.sharma@email.com')}
                   disabled={isLoading}
-                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 bg-gradient-to-br from-gold-400 to-amber-500 rounded-full flex items-center justify-center text-white font-bold">
                     P
                   </div>
                   <div className="text-left flex-1">
-                    <div className="font-medium text-white group-hover:text-pink-300">Priya Sharma</div>
+                    <div className="font-medium text-white group-hover:text-gold-300">Priya Sharma</div>
                     <div className="text-sm text-gray-300">Software Engineer • Conservative Portfolio</div>
                   </div>
                 </button>
@@ -341,13 +341,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                 <button
                   onClick={() => handleDemoLogin('rajesh.kumar@email.com')}
                   disabled={isLoading}
-                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                 >
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
                     R
                   </div>
                   <div className="text-left flex-1">
-                    <div className="font-medium text-white group-hover:text-pink-300">Rajesh Kumar</div>
+                    <div className="font-medium text-white group-hover:text-gold-300">Rajesh Kumar</div>
                     <div className="text-sm text-gray-300">Business Owner • Aggressive Portfolio</div>
                   </div>
                 </button>
@@ -355,13 +355,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                 <button
                   onClick={() => handleDemoLogin('anita.desai@email.com')}
                   disabled={isLoading}
-                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                  className="flex items-center space-x-3 p-4 bg-white/10 border border-white/20 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                 >
                   <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
                     A
                   </div>
                   <div className="text-left flex-1">
-                    <div className="font-medium text-white group-hover:text-pink-300">Dr. Anita Desai</div>
+                    <div className="font-medium text-white group-hover:text-gold-300">Dr. Anita Desai</div>
                     <div className="text-sm text-gray-300">Medical Doctor • Moderate Portfolio</div>
                   </div>
                 </button>
@@ -370,13 +370,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                   <button
                     onClick={() => handleDemoLogin('arjun.singh@email.com')}
                     disabled={isLoading}
-                    className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                    className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                   >
                     <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-violet-500 rounded-full flex items-center justify-center text-white font-bold text-sm mb-2">
                       A
                     </div>
                     <div className="text-center">
-                      <div className="font-medium text-xs text-white group-hover:text-pink-300">Arjun Singh</div>
+                      <div className="font-medium text-xs text-white group-hover:text-gold-300">Arjun Singh</div>
                       <div className="text-xs text-gray-300">Developer</div>
                     </div>
                   </button>
@@ -384,13 +384,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                   <button
                     onClick={() => handleDemoLogin('meera.patel@email.com')}
                     disabled={isLoading}
-                    className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg hover:border-pink-400/50 hover:bg-pink-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
+                    className="flex flex-col items-center p-3 bg-white/10 border border-white/20 rounded-lg hover:border-gold-400/50 hover:bg-gold-500/10 transition-colors disabled:opacity-50 group backdrop-blur-sm"
                   >
                     <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm mb-2">
                       M
                     </div>
                     <div className="text-center">
-                      <div className="font-medium text-xs text-white group-hover:text-pink-300">Meera Patel</div>
+                      <div className="font-medium text-xs text-white group-hover:text-gold-300">Meera Patel</div>
                       <div className="text-xs text-gray-300">Manager</div>
                     </div>
                   </button>
@@ -398,8 +398,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               </div>
 
 
-              <div className="p-4 bg-gradient-to-r from-pink-500/10 to-rose-500/10 rounded-lg border border-pink-500/20 backdrop-blur-sm">
-                <p className="text-xs text-pink-300">
+              <div className="p-4 bg-gradient-to-r from-gold-500/10 to-amber-500/10 rounded-lg border border-gold-500/20 backdrop-blur-sm">
+                <p className="text-xs text-gold-300">
                   <strong>Demo Info:</strong> All demo accounts use password "demo123". 
                   Each profile features different investment strategies and portfolio compositions.
                 </p>
@@ -412,15 +412,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
       {/* Kite Login Modal */}
       {showKiteLogin && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4 z-50">
-          <div className="bg-gradient-to-br from-gray-900 to-black border border-pink-500/20 rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto backdrop-blur-sm">
-            <div className="p-6 border-b border-pink-500/20 flex items-center justify-between">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-gold-500/20 rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto backdrop-blur-sm">
+            <div className="p-6 border-b border-gold-500/20 flex items-center justify-between">
               <h3 className="text-xl font-semibold text-white">Connect Portfolio</h3>
               <button
                 onClick={() => {
                   setShowKiteLogin(false);
                   setError('');
                 }}
-                className="text-gray-400 hover:text-pink-400 transition-colors p-2 hover:bg-white/10 rounded-full"
+                className="text-gray-400 hover:text-gold-400 transition-colors p-2 hover:bg-white/10 rounded-full"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

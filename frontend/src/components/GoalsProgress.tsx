@@ -99,7 +99,7 @@ const GoalsProgress: React.FC<GoalsProgressProps> = ({
           {onViewAllGoals && (
             <button
               onClick={onViewAllGoals}
-              className="bg-gradient-to-r from-pink-600 to-rose-600 text-white px-6 py-3 rounded-2xl hover:from-pink-500 hover:to-rose-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/25"
+              className="bg-gradient-to-r from-gold-600 to-amber-600 text-white px-6 py-3 rounded-2xl hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold-500/25"
             >
               Set Your Goals
             </button>

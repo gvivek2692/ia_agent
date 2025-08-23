@@ -157,7 +157,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'all'
-                ? 'bg-pink-500/20 text-pink-400 shadow-sm backdrop-blur-sm border border-pink-400/30'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
                 : 'text-gray-400 hover:text-gray-300'
             }`}
           >
@@ -167,7 +167,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             onClick={() => setActiveTab('mutualFunds')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'mutualFunds'
-                ? 'bg-pink-500/20 text-pink-400 shadow-sm backdrop-blur-sm border border-pink-400/30'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
                 : 'text-gray-400 hover:text-gray-300'
             }`}
           >
@@ -177,7 +177,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             onClick={() => setActiveTab('stocks')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'stocks'
-                ? 'bg-pink-500/20 text-pink-400 shadow-sm backdrop-blur-sm border border-pink-400/30'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
                 : 'text-gray-400 hover:text-gray-300'
             }`}
           >
@@ -197,7 +197,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                     placeholder="Search holdings..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent backdrop-blur-sm"
+                    className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
               </div>
@@ -364,7 +364,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="mt-2 text-pink-400 hover:text-pink-300 text-sm transition-colors"
+                className="mt-2 text-gold-400 hover:text-gold-300 text-sm transition-colors"
               >
                 Clear search
               </button>

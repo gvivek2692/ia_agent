@@ -51,21 +51,21 @@ const ProductShowcase: React.FC = () => {
     <section id="product-demo" className="py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-rose-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-rose-600/10 to-pink-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-gold-600/10 to-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-amber-600/10 to-gold-600/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-pink-500/10 to-rose-500/10 border border-pink-500/20 rounded-full text-pink-300 text-sm font-medium mb-6 backdrop-blur-sm">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
             <TrendingUp className="w-4 h-4 mr-2" />
             See It In Action
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
             Experience{' '}
-            <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
               Real-Time
             </span>{' '}
             Portfolio Management
@@ -88,7 +88,7 @@ const ProductShowcase: React.FC = () => {
                 {/* Content Side */}
                 <div className="flex-1 space-y-6">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-gold-500 to-amber-500 rounded-xl flex items-center justify-center">
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-3xl font-bold text-white">{feature.title}</h3>
@@ -101,13 +101,13 @@ const ProductShowcase: React.FC = () => {
                   <ul className="space-y-3">
                     {feature.features.map((item, itemIndex) => (
                       <li key={itemIndex} className="flex items-center text-gray-300">
-                        <div className="w-2 h-2 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full mr-3"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full mr-3"></div>
                         {item}
                       </li>
                     ))}
                   </ul>
                   
-                  <button className="inline-flex items-center text-pink-400 hover:text-pink-300 font-semibold transition-colors group">
+                  <button className="inline-flex items-center text-gold-400 hover:text-gold-300 font-semibold transition-colors group">
                     Try This Feature
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -116,8 +116,8 @@ const ProductShowcase: React.FC = () => {
                 {/* Screenshot Side */}
                 <div className="flex-1">
                   <div className="relative group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-rose-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                    <div className="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-pink-500/20 p-4 shadow-2xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gold-600/20 to-amber-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                    <div className="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl border border-gold-500/20 p-4 shadow-2xl">
                       <img 
                         src={feature.image} 
                         alt={feature.title}
@@ -137,14 +137,14 @@ const ProductShowcase: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-20 pt-20 border-t border-pink-500/20">
+        <div className="text-center mt-20 pt-20 border-t border-gold-500/20">
           <h3 className="text-2xl font-bold text-white mb-4">
             Ready to Experience AI-Powered Investing?
           </h3>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
             See how our platform can transform your investment strategy with personalized insights and intelligent portfolio management.
           </p>
-          <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-pink-600 to-rose-600 text-white font-semibold rounded-2xl hover:from-pink-500 hover:to-rose-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-pink-500/25">
+          <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-gold-600 to-amber-600 text-white font-semibold rounded-2xl hover:from-gold-500 hover:to-amber-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gold-500/25">
             Start Free Demo
             <ArrowRight className="w-5 h-5 ml-2" />
           </button>

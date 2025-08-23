@@ -53,14 +53,14 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     code: ({ inline, children }: any) => {
       if (inline) {
         return (
-          <code className="bg-white/20 px-1 py-0.5 rounded text-sm font-mono text-pink-200">
+          <code className="bg-white/20 px-1 py-0.5 rounded text-sm font-mono text-gold-200">
             {children}
           </code>
         );
       }
       return (
         <pre className="bg-white/20 p-3 rounded-lg overflow-x-auto mb-3">
-          <code className="text-sm font-mono text-pink-200">{children}</code>
+          <code className="text-sm font-mono text-gold-200">{children}</code>
         </pre>
       );
     },
@@ -95,14 +95,14 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     
     // Style blockquotes
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-pink-500 pl-4 py-2 mb-3 bg-white/10 text-white italic">
+      <blockquote className="border-l-4 border-gold-500 pl-4 py-2 mb-3 bg-white/10 text-white italic">
         {children}
       </blockquote>
     ),
     
     // Style strong and emphasis
     strong: ({ children }: any) => (
-      <strong className="font-semibold text-pink-200">{children}</strong>
+      <strong className="font-semibold text-gold-200">{children}</strong>
     ),
     em: ({ children }: any) => (
       <em className="italic text-gray-200">{children}</em>
@@ -119,7 +119,7 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
   }
 
   return (
-    <div className="prose prose-sm max-w-none">
+    <div className="prose pamber-sm max-w-none">
       <ReactMarkdown
         components={components}
         remarkPlugins={[remarkGfm]}
