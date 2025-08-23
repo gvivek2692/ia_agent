@@ -32,22 +32,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
           </div>
           
           <div className="mb-8">
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-4 leading-relaxed tracking-wide">
-              Get financially
+            <p className="text-3xl sm:text-3xl lg:text-4xl font-medium text-white mb-4 leading-relaxed tracking-wide">
+              Become Financially
             </p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
               <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
-                Healthy 
-              </span>
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent"> , </span>
-              <br className="sm:hidden" />
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent drop-shadow-lg">
-                Wealthy
-              </span>
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent drop-shadow-lg"> & </span>
-              <br className="sm:hidden" />
-              <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent drop-shadow-lg">
-                Wise
+                Healthy, Wealthy & Wise 
               </span>
             </h1>
           </div>
