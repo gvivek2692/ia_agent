@@ -7,6 +7,9 @@ node_modules/
 backend/.env
 frontend/.env.local
 
+# Claude Code settings
+.claude/settings.local.json
+
 # Keep production .env files for reference
 !frontend/.env
 
