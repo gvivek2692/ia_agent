@@ -135,10 +135,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         {onBackToLanding && (
           <button
             onClick={onBackToLanding}
-            className="absolute top-6 left-6 flex items-center text-gray-400 hover:text-pink-400 transition-colors"
+            className="absolute top-6 right-6 flex items-center text-gray-400 hover:text-pink-400 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            <span className="text-sm">Back to Home</span>
+            <ArrowLeft className="w-5 h-5 mr-3" />
           </button>
         )}
         
@@ -319,8 +318,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
           {activeTab === 'demo' && (
             <div className="space-y-6">
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-white mb-2">Try Demo</h2>
-                <p className="text-gray-300">Explore with sample investment portfolios</p>
+                <h2 className="text-xl text-white mb-2">Explore with sample investment portfolios</h2>
               </div>
 
               <div className="grid grid-cols-1 gap-3">
@@ -395,14 +393,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                     </div>
                   </button>
                 </div>
-              </div>
-
-
-              <div className="p-4 bg-gradient-to-r from-pink-500/10 to-rose-500/10 rounded-lg border border-pink-500/20 backdrop-blur-sm">
-                <p className="text-xs text-pink-300">
-                  <strong>Demo Info:</strong> All demo accounts use password "demo123". 
-                  Each profile features different investment strategies and portfolio compositions.
-                </p>
               </div>
             </div>
           )}
