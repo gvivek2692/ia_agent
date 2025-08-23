@@ -50,7 +50,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                   <button
                     key={item.label}
                     onClick={() => scrollToSection(item.href)}
-                    className="text-gray-300 hover:text-pink-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-gray-300 hover:text-pink-400 px-3 py-2 rounded-md text-xl font-medium transition-colors"
                   >
                     {item.label}
                   </button>
