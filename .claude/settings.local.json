@@ -21,7 +21,14 @@
       "Bash(npm start)",
       "WebFetch(domain:serper.dev)",
       "Bash(timeout 5s npm start)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "mcp__playwright__browser_press_key",
+      "Bash(npm run dev:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_click",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

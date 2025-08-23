@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { apiService } from '../services/apiService';
 import KiteLogin from './KiteLogin';
-import { User, Upload, LogIn, Shield, Zap, ExternalLink } from 'lucide-react';
+import { User, Upload, LogIn, Shield, Zap, ExternalLink, ArrowLeft } from 'lucide-react';
 
 interface LoginFormProps {
   onLoginSuccess: (user: any, sessionId: string) => void;
   onShowUserList: () => void;
   onShowUpload?: () => void;
+  onBackToLanding?: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, onShowUpload }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, onShowUpload, onBackToLanding }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -122,14 +123,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
               <div className="w-8 h-8 bg-gradient-to-r from-pink-600 to-rose-600 rounded-lg flex items-center justify-center">
                 <Zap className="w-4 h-4 text-white" />
               </div>
-              <span>Improve overall financial health</span>
+              <span>Build better financial habits</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Right Panel - Auth Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-gray-900 to-black">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-gray-900 to-black relative">
+        {/* Back Button */}
+        {onBackToLanding && (
+          <button
+            onClick={onBackToLanding}
+            className="absolute top-6 left-6 flex items-center text-gray-400 hover:text-pink-400 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            <span className="text-sm">Back to Home</span>
+          </button>
+        )}
+        
         <div className="w-full max-w-md">
           {/* Logo for mobile */}
           <div className="text-center mb-8 lg:hidden">
@@ -202,8 +214,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
                   <img src="/zerodha-kite-seeklogo.png" alt="Kite Logo" className="w-6 h-6" />
                 </div>
                 <div className="text-left">
-                  <div className="font-semibold text-white group-hover:text-orange-300">Connect with Kite</div>
-                  <div className="text-sm text-gray-300">Import your real portfolio from Zerodha</div>
+                  <div className="font-semibold text-white group-hover:text-orange-300">Connect Portfolio</div>
+                  <div className="text-sm text-gray-300">Import your real portfolio data</div>
                 </div>
               </button>
 
@@ -402,7 +414,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4 z-50">
           <div className="bg-gradient-to-br from-gray-900 to-black border border-pink-500/20 rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto backdrop-blur-sm">
             <div className="p-6 border-b border-pink-500/20 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-white">Connect with Kite</h3>
+              <h3 className="text-xl font-semibold text-white">Connect Portfolio</h3>
               <button
                 onClick={() => {
                   setShowKiteLogin(false);

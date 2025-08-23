@@ -1,0 +1,18 @@
+{
+  "id": "conv_1755882969505_9t5cjxwhu",
+  "title": "How is my portfolio performing...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-22T17:17:52.489Z",
+  "updatedAt": "2025-08-22T17:17:52.491Z",
+  "messageCount": 1,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755883072491_miqkze1cu",
+      "content": "How is my portfolio performing?",
+      "isBot": false,
+      "timestamp": "2025-08-22T17:17:52.491Z"
+    }
+  ]
+}
