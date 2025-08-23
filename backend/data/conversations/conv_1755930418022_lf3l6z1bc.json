@@ -1,0 +1,24 @@
+{
+  "id": "conv_1755930418022_lf3l6z1bc",
+  "title": "hi...",
+  "userId": "demo-user",
+  "createdAt": "2025-08-23T06:27:16.037Z",
+  "updatedAt": "2025-08-23T06:27:17.316Z",
+  "messageCount": 2,
+  "tags": [],
+  "archived": false,
+  "messages": [
+    {
+      "id": "msg_1755930436038_0dhv7mabu",
+      "content": "hi",
+      "isBot": false,
+      "timestamp": "2025-08-23T06:27:16.038Z"
+    },
+    {
+      "id": "msg_1755930437316_943t692tx",
+      "content": "Hello Priya! How can I assist you today with your financial planning or investment queries? If you have any specific questions or need advice on your portfolio, feel free to ask!",
+      "isBot": true,
+      "timestamp": "2025-08-23T06:27:17.316Z"
+    }
+  ]
+}

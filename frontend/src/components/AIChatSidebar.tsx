@@ -41,49 +41,64 @@ const AIChatSidebar: React.FC<AIChatSidebarProps> = ({
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar - Enhanced Glassmorphism Chat Pod */}
       <div 
         className={`
-          fixed top-0 left-0 h-full bg-black/80 backdrop-blur-xl border-r border-pink-500/20 transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col
+          fixed top-0 left-0 h-full transform transition-transform duration-300 ease-in-out flex flex-col
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           w-[420px] lg:w-[500px]
         `}
         style={{ zIndex: 'var(--z-sidebar)' }}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-pink-500/20 bg-black/20 backdrop-blur-sm flex-shrink-0">
-          <div className="flex items-center space-x-2">
-            <MessageSquare size={20} className="text-pink-400" />
-            <h2 className="text-lg font-semibold text-white">AI Chat</h2>
+        {/* Glassmorphism Background with Enhanced Visual Separation */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-800/90 to-gray-900/95 backdrop-blur-2xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/5 via-transparent to-rose-500/5"></div>
+        <div className="absolute inset-0 border-r-2 border-pink-400/30 shadow-2xl shadow-pink-500/20"></div>
+        
+        {/* Content Container */}
+        <div className="relative z-10 h-full flex flex-col">
+          {/* Header - Enhanced with better visual hierarchy */}
+          <div className="flex items-center justify-between p-4 border-b border-pink-400/30 bg-white/5 backdrop-blur-sm flex-shrink-0 shadow-lg shadow-black/20">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-lg border border-pink-400/20">
+                <MessageSquare size={20} className="text-pink-300" />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold text-white drop-shadow-sm">AI Chat</h2>
+                <p className="text-xs text-pink-200/70">WealthWise Assistant</p>
+              </div>
+            </div>
+            <button
+              onClick={onToggle}
+              className="p-2.5 text-gray-300 hover:text-white hover:bg-pink-500/20 rounded-xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-white/10 hover:border-pink-400/30 shadow-md"
+              title="Close AI Chat"
+            >
+              <X size={18} />
+            </button>
           </div>
-          <button
-            onClick={onToggle}
-            className="p-2 text-gray-300 hover:text-pink-300 hover:bg-white/10 rounded-lg transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
-            title="Close AI Chat"
-          >
-            <X size={18} />
-          </button>
-        </div>
 
-        {/* Conversation Dropdown */}
-        <div className="p-4 border-b border-pink-500/10 flex-shrink-0">
-          <ConversationDropdown
-            currentConversationId={currentConversationId}
-            onSelectConversation={handleSelectConversation}
-            onNewConversation={handleNewConversation}
-            userId={userId}
-          />
-        </div>
-
-        {/* Chat Interface Container */}
-        <div className="flex-1 min-h-0 relative">
-          <div className="absolute inset-0">
-            <ChatInterface
-              selectedConversationId={currentConversationId}
-              onConversationChange={handleConversationChange}
+          {/* Conversation Dropdown - Enhanced styling */}
+          <div className="p-4 border-b border-pink-400/20 flex-shrink-0 bg-white/[0.02]">
+            <ConversationDropdown
+              currentConversationId={currentConversationId}
+              onSelectConversation={handleSelectConversation}
+              onNewConversation={handleNewConversation}
               userId={userId}
-              userName={userName}
             />
+          </div>
+
+          {/* Chat Interface Container - Enhanced with better visual separation */}
+          <div className="flex-1 min-h-0 relative">
+            <div className="absolute inset-0 p-3">
+              <div className="h-full rounded-2xl overflow-hidden border border-pink-400/10 bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-sm shadow-inner">
+                <ChatInterface
+                  selectedConversationId={currentConversationId}
+                  onConversationChange={handleConversationChange}
+                  userId={userId}
+                  userName={userName}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
