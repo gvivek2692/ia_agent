@@ -788,7 +788,7 @@ app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => 
       });
     }
 
-    const { username, password } = req.body;
+    const { username, password, pdfPassword } = req.body;
     
     if (!username || !password) {
       return res.status(400).json({
@@ -809,13 +809,15 @@ app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => 
 
     console.log('Processing file:', req.file.filename);
     
-    // Parse PDF file
-    const parseResult = await uploadService.parsePDFFile(req.file.path);
+    // Parse PDF file (with optional password)
+    const parseResult = await uploadService.parsePDFFile(req.file.path, pdfPassword);
     if (!parseResult.success) {
-      return res.status(400).json({
+      // Use specific error codes from uploadService
+      const statusCode = parseResult.code === 'WRONG_PASSWORD' || parseResult.code === 'PASSWORD_REQUIRED' ? 400 : 400;
+      return res.status(statusCode).json({
         success: false,
         error: parseResult.error,
-        code: 'PARSE_ERROR'
+        code: parseResult.code || 'PARSE_ERROR'
       });
     }
 
@@ -824,8 +826,8 @@ app.post('/api/upload/mf-statement', upload.single('file'), async (req, res) => 
     // Extract user profile
     const userProfile = uploadService.extractUserProfile(parseResult.investorInfo, parseResult.transactions);
     
-    // Generate portfolio
-    const portfolio = uploadService.generatePortfolio(parseResult.transactions);
+    // Generate portfolio using real NAV data from PDF
+    const portfolio = uploadService.generatePortfolio(parseResult.transactions, parseResult.fullText);
     
     // Create user account
     const createResult = await uploadService.createUser(userProfile, username, password, portfolio);

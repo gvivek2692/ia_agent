@@ -5044,5 +5044,2413 @@
     },
     "created_at": "2025-08-21T17:24:12.468Z",
     "updated_at": "2025-08-21T17:24:12.468Z"
+  },
+  {
+    "id": "d39d4917-9811-442e-86e4-86451caf989f",
+    "credentials": {
+      "email": "testuser1755999631",
+      "username": "testuser1755999631",
+      "password": "$2b$10$kv24Vmi5Woi3C6i//13Ix.BimkapCF4okLuAykHMiMigBp1e0IfiG"
+    },
+    "user_profile": {
+      "name": "Unknown",
+      "pan": "BMEPG1090F",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "Mumbai, Maharashtra",
+      "created_at": "2025-08-24T01:40:32.156Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": null,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-24T01:40:32.156Z"
+    },
+    "created_at": "2025-08-24T01:40:32.227Z",
+    "updated_at": "2025-08-24T01:40:32.227Z"
+  },
+  {
+    "id": "5191ea30-2a35-4800-96cb-41c3e07b9ab4",
+    "credentials": {
+      "email": "finaltest1756000169",
+      "username": "finaltest1756000169",
+      "password": "$2b$10$mpUqWiPvaP/PPtkix2Qp1uJ1LmYLY.H2RpcfW10Nyeq6qNB7RE.fe"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T01:49:29.750Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 339997.7,
+        "total_current_value": 402369.77,
+        "total_gain_loss": 62372.07,
+        "gain_loss_percentage": 18.34,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 402369.77,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Parag Parikh Flexi Cap Fund",
+          "scheme_code": "",
+          "folio_number": "22212898",
+          "mf_name": "Unknown Mutual Fund",
+          "type": "Equity",
+          "units": 1232.129,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 498.762,
+              "price": 121.437,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 733.367,
+              "price": 116.35,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 4.8696,
+          "current_price": 6.0231,
+          "current_value": 7421.24,
+          "gain_loss": 1421.24,
+          "gain_loss_percentage": 23.69,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Franklin India Money Market Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Franklin Templeton Mutual Fund",
+          "type": "Equity",
+          "units": 851.444,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 851.444,
+              "price": 118.077,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 3.5234,
+          "current_price": 3.9878,
+          "current_value": 3395.39,
+          "gain_loss": 395.39,
+          "gain_loss_percentage": 13.18
+        },
+        {
+          "scheme_name": "Mirae Asset ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 22554.69,
+          "investment_amount": 203997.7,
+          "transactions": [
+            {
+              "date": "2019-01-30T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1371.129,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1202.26,
+              "price": 119.162,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1318.012,
+              "price": 115.752,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-28T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 50918.11,
+              "units": 0,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1434.138,
+              "price": 116.126,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1543.651,
+              "price": 109.513,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1650.498,
+              "price": 106.847,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 90000,
+              "units": 4397.967,
+              "price": 4397.967,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1753.907,
+              "price": 103.409,
+              "broker": ""
+            },
+            {
+              "date": "2021-01-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 40997.95,
+              "units": 6033.11,
+              "price": 1635.143,
+              "broker": ""
+            },
+            {
+              "date": "2022-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 4999.75,
+              "units": 1850.018,
+              "price": 96.111,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 9.0446,
+          "current_price": 10.9404,
+          "current_value": 246757.33,
+          "gain_loss": 42759.63,
+          "gain_loss_percentage": 20.96,
+          "sip_amount": 20400,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large and Midcap Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 143.541,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-06T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 0,
+              "units": 55.419,
+              "price": 0,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 198.96,
+              "price": 68.755,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 20.9,
+          "current_price": 22.8228,
+          "current_value": 3276.01,
+          "gain_loss": 276.01,
+          "gain_loss_percentage": 9.2
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 315.63399999999996,
+          "investment_amount": 9000,
+          "transactions": [
+            {
+              "date": "2019-01-23T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 141.885,
+              "price": 480,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 264.945,
+              "price": 65.985,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 228.68,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 334.488,
+              "price": 69.543,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 311.951,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 398.717,
+              "price": 64.229,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 28.514,
+          "current_price": 34.0945,
+          "current_value": 10761.38,
+          "gain_loss": 1761.38,
+          "gain_loss_percentage": 19.57,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 2197.43,
+          "investment_amount": 56000,
+          "transactions": [
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 391.55,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 462.131,
+              "price": 63.414,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1596.424,
+              "price": 1596.424,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 530.425,
+              "price": 68.294,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 25.4843,
+          "current_price": 27.5426,
+          "current_value": 60522.94,
+          "gain_loss": 4522.94,
+          "gain_loss_percentage": 8.08,
+          "sip_amount": 18667,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Jun",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "SBI Mutual Fund",
+          "type": "Equity",
+          "units": 4474.058,
+          "investment_amount": 53000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 662.976,
+              "price": 67.83,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 44000,
+              "units": 2991.478,
+              "price": 1395.054,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 736.786,
+              "price": 73.81,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 82.818,
+              "price": 82.818,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 11.8461,
+          "current_price": 14.2008,
+          "current_value": 63535.2,
+          "gain_loss": 10535.2,
+          "gain_loss_percentage": 19.88,
+          "sip_amount": 13250,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large Cap Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 652.724,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 317.048,
+              "price": 78.39,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 391.999,
+              "price": 74.951,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 10,
+              "units": 56.323,
+              "price": 2019,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 9.1922,
+          "current_price": 10.2651,
+          "current_value": 6700.28,
+          "gain_loss": 700.28,
+          "gain_loss_percentage": 11.67,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T01:49:29.750Z"
+    },
+    "created_at": "2025-08-24T01:49:29.819Z",
+    "updated_at": "2025-08-24T01:49:29.819Z"
+  },
+  {
+    "id": "b1b3ac84-d7ec-45f8-812c-8aceaa30c657",
+    "credentials": {
+      "email": "vivekg",
+      "username": "vivekg",
+      "password": "$2b$10$Kc7No3dCyBI8g6Z4k7Ko9OO.IR7cakCtuDNaMo2plWanYiufPckV."
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T01:51:48.531Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 339997.7,
+        "total_current_value": 371315.98,
+        "total_gain_loss": 31318.28,
+        "gain_loss_percentage": 9.21,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 371315.98,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Parag Parikh Flexi Cap Fund",
+          "scheme_code": "",
+          "folio_number": "22212898",
+          "mf_name": "Unknown Mutual Fund",
+          "type": "Equity",
+          "units": 1232.129,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 498.762,
+              "price": 121.437,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 733.367,
+              "price": 116.35,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 4.8696,
+          "current_price": 5.7117,
+          "current_value": 7037.55,
+          "gain_loss": 1037.55,
+          "gain_loss_percentage": 17.29,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Franklin India Money Market Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Franklin Templeton Mutual Fund",
+          "type": "Equity",
+          "units": 851.444,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 851.444,
+              "price": 118.077,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 3.5234,
+          "current_price": 3.8839,
+          "current_value": 3306.92,
+          "gain_loss": 306.92,
+          "gain_loss_percentage": 10.23
+        },
+        {
+          "scheme_name": "Mirae Asset ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 22554.69,
+          "investment_amount": 203997.7,
+          "transactions": [
+            {
+              "date": "2019-01-30T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1371.129,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1202.26,
+              "price": 119.162,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1318.012,
+              "price": 115.752,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-28T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 50918.11,
+              "units": 0,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1434.138,
+              "price": 116.126,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1543.651,
+              "price": 109.513,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1650.498,
+              "price": 106.847,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 90000,
+              "units": 4397.967,
+              "price": 4397.967,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1753.907,
+              "price": 103.409,
+              "broker": ""
+            },
+            {
+              "date": "2021-01-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 40997.95,
+              "units": 6033.11,
+              "price": 1635.143,
+              "broker": ""
+            },
+            {
+              "date": "2022-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 4999.75,
+              "units": 1850.018,
+              "price": 96.111,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 9.0446,
+          "current_price": 9.5025,
+          "current_value": 214325.94,
+          "gain_loss": 10328.24,
+          "gain_loss_percentage": 5.06,
+          "sip_amount": 20400,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large and Midcap Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 143.541,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-06T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 0,
+              "units": 55.419,
+              "price": 0,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 198.96,
+              "price": 68.755,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 20.9,
+          "current_price": 25.9206,
+          "current_value": 3720.67,
+          "gain_loss": 720.67,
+          "gain_loss_percentage": 24.02
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 315.63399999999996,
+          "investment_amount": 9000,
+          "transactions": [
+            {
+              "date": "2019-01-23T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 141.885,
+              "price": 480,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 264.945,
+              "price": 65.985,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 228.68,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 334.488,
+              "price": 69.543,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 311.951,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 398.717,
+              "price": 64.229,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 28.514,
+          "current_price": 34.9119,
+          "current_value": 11019.38,
+          "gain_loss": 2019.38,
+          "gain_loss_percentage": 22.44,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 2197.43,
+          "investment_amount": 56000,
+          "transactions": [
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 391.55,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 462.131,
+              "price": 63.414,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1596.424,
+              "price": 1596.424,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 530.425,
+              "price": 68.294,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 25.4843,
+          "current_price": 31.4765,
+          "current_value": 69167.41,
+          "gain_loss": 13167.41,
+          "gain_loss_percentage": 23.51,
+          "sip_amount": 18667,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Jun",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "SBI Mutual Fund",
+          "type": "Equity",
+          "units": 4474.058,
+          "investment_amount": 53000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 662.976,
+              "price": 67.83,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 44000,
+              "units": 2991.478,
+              "price": 1395.054,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 736.786,
+              "price": 73.81,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 82.818,
+              "price": 82.818,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 11.8461,
+          "current_price": 12.4611,
+          "current_value": 55751.68,
+          "gain_loss": 2751.68,
+          "gain_loss_percentage": 5.19,
+          "sip_amount": 13250,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large Cap Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 652.724,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 317.048,
+              "price": 78.39,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 391.999,
+              "price": 74.951,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 10,
+              "units": 56.323,
+              "price": 2019,
+              "broker": ""
+            }
+          ],
+          "avg_purchase_price": 9.1922,
+          "current_price": 10.7035,
+          "current_value": 6986.43,
+          "gain_loss": 986.43,
+          "gain_loss_percentage": 16.44,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T01:51:48.531Z"
+    },
+    "created_at": "2025-08-24T01:51:48.601Z",
+    "updated_at": "2025-08-24T01:51:48.601Z"
+  },
+  {
+    "id": "18d4ee73-def1-418d-a1be-d3ff32cea42d",
+    "credentials": {
+      "email": "realnavtest1756000863",
+      "username": "realnavtest1756000863",
+      "password": "$2b$10$dArvYL2YJuzTbtVGtEaJZeJ3vC/ZEcaQTH8Up.g43LDR75DEcxsMW"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:01:03.231Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 339997.7,
+        "total_current_value": 589103.17,
+        "total_gain_loss": 249105.47,
+        "gain_loss_percentage": 73.27,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 589103.17,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Parag Parikh Flexi Cap Fund",
+          "scheme_code": "",
+          "folio_number": "22212898",
+          "mf_name": "Unknown Mutual Fund",
+          "type": "Equity",
+          "units": 1232.129,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 498.762,
+              "price": 121.437,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 733.367,
+              "price": 116.35,
+              "broker": ""
+            }
+          ],
+          "current_price": 4.8696,
+          "current_value": 5999.98,
+          "avg_purchase_price": 4.8696,
+          "gain_loss": -0.02,
+          "gain_loss_percentage": 0,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Franklin India Money Market Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Franklin Templeton Mutual Fund",
+          "type": "Equity",
+          "units": 851.444,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 851.444,
+              "price": 118.077,
+              "broker": ""
+            }
+          ],
+          "current_price": 3.5234,
+          "current_value": 2999.98,
+          "avg_purchase_price": 3.5234,
+          "gain_loss": -0.02,
+          "gain_loss_percentage": 0
+        },
+        {
+          "scheme_name": "Mirae Asset ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "79916161523",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 6033.11,
+          "investment_amount": 203997.7,
+          "transactions": [
+            {
+              "date": "2019-01-30T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1371.129,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1202.26,
+              "price": 119.162,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1318.012,
+              "price": 115.752,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-28T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 50918.11,
+              "units": 0,
+              "price": 1371.129,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1434.138,
+              "price": 116.126,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1543.651,
+              "price": 109.513,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1650.498,
+              "price": 106.847,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 90000,
+              "units": 4397.967,
+              "price": 4397.967,
+              "broker": ""
+            },
+            {
+              "date": "2020-01-10T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 1753.907,
+              "price": 103.409,
+              "broker": ""
+            },
+            {
+              "date": "2021-01-28T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 40997.95,
+              "units": 6033.11,
+              "price": 1635.143,
+              "broker": ""
+            },
+            {
+              "date": "2022-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 4999.75,
+              "units": 1850.018,
+              "price": 96.111,
+              "broker": ""
+            }
+          ],
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "avg_purchase_price": 33.813,
+          "gain_loss": 130538.25,
+          "gain_loss_percentage": 63.99,
+          "sip_amount": 20400,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large and Midcap Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 143.541,
+          "investment_amount": 3000,
+          "transactions": [
+            {
+              "date": "2019-01-06T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 0,
+              "units": 55.419,
+              "price": 0,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 198.96,
+              "price": 68.755,
+              "broker": ""
+            }
+          ],
+          "current_price": 20.9,
+          "current_value": 3000.01,
+          "avg_purchase_price": 20.9,
+          "gain_loss": 0.01,
+          "gain_loss_percentage": 0
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "1038556166 21-Sep-2018 on or before 730 days from the date allotment and thereafter there is no exit load. \"Effective from July 01, 2020, stamp duty @ 0.005% will be deducted from the Net ***Address Updated from KRA Data*** PAN: BMEPG1090F KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 315.63399999999996,
+          "investment_amount": 9000,
+          "transactions": [
+            {
+              "date": "2019-01-23T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 141.885,
+              "price": 480,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 264.945,
+              "price": 65.985,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 228.68,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 334.488,
+              "price": 69.543,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 311.951,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 398.717,
+              "price": 64.229,
+              "broker": ""
+            }
+          ],
+          "current_price": 28.514,
+          "current_value": 8999.99,
+          "avg_purchase_price": 28.514,
+          "gain_loss": -0.01,
+          "gain_loss_percentage": 0,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Aditya Birla Sun Life Mutual Fund",
+          "type": "Equity",
+          "units": 391.55,
+          "investment_amount": 56000,
+          "transactions": [
+            {
+              "date": "2020-01-21T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 1,
+              "units": 391.55,
+              "price": 5000,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 462.131,
+              "price": 63.414,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-21T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 50000,
+              "units": 1596.424,
+              "price": 1596.424,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 530.425,
+              "price": 68.294,
+              "broker": ""
+            }
+          ],
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "avg_purchase_price": 143.0213,
+          "gain_loss": 10138.28,
+          "gain_loss_percentage": 18.1,
+          "sip_amount": 18667,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Jun",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "SBI Mutual Fund",
+          "type": "Equity",
+          "units": 736.786,
+          "investment_amount": 53000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 662.976,
+              "price": 67.83,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 44000,
+              "units": 2991.478,
+              "price": 1395.054,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-13T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 736.786,
+              "price": 73.81,
+              "broker": ""
+            },
+            {
+              "date": "2018-01-25T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 82.818,
+              "price": 82.818,
+              "broker": ""
+            }
+          ],
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "avg_purchase_price": 71.934,
+          "gain_loss": 66620.89,
+          "gain_loss_percentage": 125.7,
+          "sip_amount": 13250,
+          "sip_frequency": "Monthly"
+        },
+        {
+          "scheme_name": "Mirae Asset Large Cap Fund",
+          "scheme_code": "",
+          "folio_number": "21462546 PAN: BMEPG1090F Opening Unit Balance: 0.000 KYC: OK PAN: OK",
+          "mf_name": "Mirae Asset Mutual Fund",
+          "type": "Equity",
+          "units": 464.778,
+          "investment_amount": 6000,
+          "transactions": [
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 317.048,
+              "price": 78.39,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-11T00:00:00.000Z",
+              "transaction_type": "Purchase",
+              "amount": 3000,
+              "units": 391.999,
+              "price": 74.951,
+              "broker": ""
+            },
+            {
+              "date": "2019-01-22T00:00:00.000Z",
+              "transaction_type": "Redemption",
+              "amount": 10,
+              "units": 56.323,
+              "price": 2019,
+              "broker": ""
+            }
+          ],
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "avg_purchase_price": 12.9094,
+          "gain_loss": 41808.09,
+          "gain_loss_percentage": 696.8,
+          "sip_amount": 3000,
+          "sip_frequency": "Monthly"
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:01:03.231Z"
+    },
+    "created_at": "2025-08-24T02:01:03.302Z",
+    "updated_at": "2025-08-24T02:01:03.302Z"
+  },
+  {
+    "id": "1419b717-12dd-454e-afb1-d7dd2160b510",
+    "credentials": {
+      "email": "directmarket1756002644",
+      "username": "directmarket1756002644",
+      "password": "$2b$10$nSMUSykGyR7cEJfWxZiuVOlua8C00GY4Uzy3GBdZ8XAuP7Uxav8Di"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:30:44.328Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 400000,
+        "total_current_value": 1093254.37,
+        "total_gain_loss": 693254.37,
+        "gain_loss_percentage": 173.31,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 1093254.37,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 221.869,
+          "current_price": 446.4439,
+          "current_value": 99052.06,
+          "investment_amount": 30000,
+          "gain_loss": 69052.06,
+          "gain_loss_percentage": 230.17353333333332,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 6033.11,
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "investment_amount": 131000,
+          "gain_loss": 203535.95,
+          "gain_loss_percentage": 155.3709541984733,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 1850.018,
+          "current_price": 92.3051,
+          "current_value": 170766.1,
+          "investment_amount": 50000,
+          "gain_loss": 120766.1,
+          "gain_loss_percentage": 241.53220000000002,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 391.55,
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "investment_amount": 23000,
+          "gain_loss": 43138.28,
+          "gain_loss_percentage": 187.55773913043478,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 2991.478,
+          "current_price": 68.63,
+          "current_value": 205305.14,
+          "investment_amount": 94000,
+          "gain_loss": 111305.14000000001,
+          "gain_loss_percentage": 118.40972340425533,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 736.786,
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "investment_amount": 33000,
+          "gain_loss": 86620.89,
+          "gain_loss_percentage": 262.48754545454545,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 464.778,
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "investment_amount": 18000,
+          "gain_loss": 29808.089999999997,
+          "gain_loss_percentage": 165.60049999999998,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 390.169,
+          "current_price": 128.221,
+          "current_value": 50027.86,
+          "investment_amount": 21000,
+          "gain_loss": 29027.86,
+          "gain_loss_percentage": 138.22790476190477,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:30:44.329Z"
+    },
+    "created_at": "2025-08-24T02:30:44.399Z",
+    "updated_at": "2025-08-24T02:30:44.399Z"
+  },
+  {
+    "id": "f0d889f9-f64d-406e-833d-dd6c556c2984",
+    "credentials": {
+      "email": "testuser_1756003033",
+      "username": "testuser_1756003033",
+      "password": "$2b$10$0Jd7bZgXrElb66lFL1uRQeG1tNK2obJOfnMlVp5/ZZ9vxUkVOg7jq"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:37:13.253Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 400000,
+        "total_current_value": 1093254.37,
+        "total_gain_loss": 693254.37,
+        "gain_loss_percentage": 173.31,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 1093254.37,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 221.869,
+          "current_price": 446.4439,
+          "current_value": 99052.06,
+          "investment_amount": 30000,
+          "gain_loss": 69052.06,
+          "gain_loss_percentage": 230.17353333333332,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 6033.11,
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "investment_amount": 131000,
+          "gain_loss": 203535.95,
+          "gain_loss_percentage": 155.3709541984733,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 1850.018,
+          "current_price": 92.3051,
+          "current_value": 170766.1,
+          "investment_amount": 50000,
+          "gain_loss": 120766.1,
+          "gain_loss_percentage": 241.53220000000002,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 391.55,
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "investment_amount": 23000,
+          "gain_loss": 43138.28,
+          "gain_loss_percentage": 187.55773913043478,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 2991.478,
+          "current_price": 68.63,
+          "current_value": 205305.14,
+          "investment_amount": 94000,
+          "gain_loss": 111305.14000000001,
+          "gain_loss_percentage": 118.40972340425533,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 736.786,
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "investment_amount": 33000,
+          "gain_loss": 86620.89,
+          "gain_loss_percentage": 262.48754545454545,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 464.778,
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "investment_amount": 18000,
+          "gain_loss": 29808.089999999997,
+          "gain_loss_percentage": 165.60049999999998,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 390.169,
+          "current_price": 128.221,
+          "current_value": 50027.86,
+          "investment_amount": 21000,
+          "gain_loss": 29027.86,
+          "gain_loss_percentage": 138.22790476190477,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:37:13.254Z"
+    },
+    "created_at": "2025-08-24T02:37:13.323Z",
+    "updated_at": "2025-08-24T02:37:13.323Z"
+  },
+  {
+    "id": "725a23c4-eba4-4385-b8e7-bf8ceb78d46a",
+    "credentials": {
+      "email": "testuser_1756003091",
+      "username": "testuser_1756003091",
+      "password": "$2b$10$.YBpeJplto6prmJ4NED0SOVjSZT3U2OMU1jP.1YE67kPcmM.zYWMq"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:38:12.155Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 400000,
+        "total_current_value": 1185959.67,
+        "total_gain_loss": 785959.67,
+        "gain_loss_percentage": 196.49,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 1185959.67,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 92705.3,
+          "investment_amount": 0,
+          "gain_loss": 92705.3,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 221.869,
+          "current_price": 446.4439,
+          "current_value": 99052.06,
+          "investment_amount": 30000,
+          "gain_loss": 69052.06,
+          "gain_loss_percentage": 230.17353333333332,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 6033.11,
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "investment_amount": 131000,
+          "gain_loss": 203535.95,
+          "gain_loss_percentage": 155.3709541984733,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 1850.018,
+          "current_price": 92.3051,
+          "current_value": 170766.1,
+          "investment_amount": 50000,
+          "gain_loss": 120766.1,
+          "gain_loss_percentage": 241.53220000000002,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 391.55,
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "investment_amount": 23000,
+          "gain_loss": 43138.28,
+          "gain_loss_percentage": 187.55773913043478,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 2991.478,
+          "current_price": 68.63,
+          "current_value": 205305.14,
+          "investment_amount": 94000,
+          "gain_loss": 111305.14000000001,
+          "gain_loss_percentage": 118.40972340425533,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 736.786,
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "investment_amount": 33000,
+          "gain_loss": 86620.89,
+          "gain_loss_percentage": 262.48754545454545,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 464.778,
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "investment_amount": 18000,
+          "gain_loss": 29808.089999999997,
+          "gain_loss_percentage": 165.60049999999998,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 9",
+          "folio_number": "AUTO_9",
+          "units": 390.169,
+          "current_price": 128.221,
+          "current_value": 50027.86,
+          "investment_amount": 21000,
+          "gain_loss": 29027.86,
+          "gain_loss_percentage": 138.22790476190477,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:38:12.156Z"
+    },
+    "created_at": "2025-08-24T02:38:12.228Z",
+    "updated_at": "2025-08-24T02:38:12.228Z"
+  },
+  {
+    "id": "cd2f211f-297c-4f03-8caf-5bfc13efce5a",
+    "credentials": {
+      "email": "testuser_1756003131",
+      "username": "testuser_1756003131",
+      "password": "$2b$10$54GQAvW71NjgBiKx6.4OT.Ztdo0H026M2jXta66qgxHVIA.9qt21e"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:38:52.011Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 400000,
+        "total_current_value": 1185959.67,
+        "total_gain_loss": 785959.67,
+        "gain_loss_percentage": 196.49,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 1185959.67,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 92705.3,
+          "investment_amount": 0,
+          "gain_loss": 92705.3,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 221.869,
+          "current_price": 446.4439,
+          "current_value": 99052.06,
+          "investment_amount": 30000,
+          "gain_loss": 69052.06,
+          "gain_loss_percentage": 230.17353333333332,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 6033.11,
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "investment_amount": 131000,
+          "gain_loss": 203535.95,
+          "gain_loss_percentage": 155.3709541984733,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 1850.018,
+          "current_price": 92.3051,
+          "current_value": 170766.1,
+          "investment_amount": 50000,
+          "gain_loss": 120766.1,
+          "gain_loss_percentage": 241.53220000000002,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 391.55,
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "investment_amount": 23000,
+          "gain_loss": 43138.28,
+          "gain_loss_percentage": 187.55773913043478,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 2991.478,
+          "current_price": 68.63,
+          "current_value": 205305.14,
+          "investment_amount": 94000,
+          "gain_loss": 111305.14000000001,
+          "gain_loss_percentage": 118.40972340425533,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 736.786,
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "investment_amount": 33000,
+          "gain_loss": 86620.89,
+          "gain_loss_percentage": 262.48754545454545,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 464.778,
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "investment_amount": 18000,
+          "gain_loss": 29808.089999999997,
+          "gain_loss_percentage": 165.60049999999998,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 9",
+          "folio_number": "AUTO_9",
+          "units": 390.169,
+          "current_price": 128.221,
+          "current_value": 50027.86,
+          "investment_amount": 21000,
+          "gain_loss": 29027.86,
+          "gain_loss_percentage": 138.22790476190477,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:38:52.011Z"
+    },
+    "created_at": "2025-08-24T02:38:52.082Z",
+    "updated_at": "2025-08-24T02:38:52.082Z"
+  },
+  {
+    "id": "4b5cddb3-093b-463b-894e-b0f0c6f4af35",
+    "credentials": {
+      "email": "vivekg1",
+      "username": "vivekg1",
+      "password": "$2b$10$t9cCggyOlwBmiiRqwLqOQu6JqPDI8Ob2Eh57Zy.vWw9siY4FHri3G"
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "vivekharrypotter@gmail.com",
+      "phone": "9815619602",
+      "address": "#602 GH 3 SECTOR 23 Registrar : CAMS, PANCHKULA PANCHKULA SECTOR 4, Nominee 1: PANCHKULA - 134112 Ravinder Gupta Nominee 2: Nominee 3:, Haryana If you find any folios missing from this consolidation, Opening Unit Balance: 0.000 you have not",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "#602 GH 3 SECTOR 23 Registrar : CAMS",
+      "created_at": "2025-08-24T02:41:29.097Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 400000,
+        "total_current_value": 1185959.67,
+        "total_gain_loss": 785959.67,
+        "gain_loss_percentage": 196.49,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 1185959.67,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 92705.3,
+          "investment_amount": 0,
+          "gain_loss": 92705.3,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 221.869,
+          "current_price": 446.4439,
+          "current_value": 99052.06,
+          "investment_amount": 30000,
+          "gain_loss": 69052.06,
+          "gain_loss_percentage": 230.17353333333332,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 6033.11,
+          "current_price": 55.45,
+          "current_value": 334535.95,
+          "investment_amount": 131000,
+          "gain_loss": 203535.95,
+          "gain_loss_percentage": 155.3709541984733,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 1850.018,
+          "current_price": 92.3051,
+          "current_value": 170766.1,
+          "investment_amount": 50000,
+          "gain_loss": 120766.1,
+          "gain_loss_percentage": 241.53220000000002,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 391.55,
+          "current_price": 168.914,
+          "current_value": 66138.28,
+          "investment_amount": 23000,
+          "gain_loss": 43138.28,
+          "gain_loss_percentage": 187.55773913043478,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 2991.478,
+          "current_price": 68.63,
+          "current_value": 205305.14,
+          "investment_amount": 94000,
+          "gain_loss": 111305.14000000001,
+          "gain_loss_percentage": 118.40972340425533,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 736.786,
+          "current_price": 162.355,
+          "current_value": 119620.89,
+          "investment_amount": 33000,
+          "gain_loss": 86620.89,
+          "gain_loss_percentage": 262.48754545454545,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 464.778,
+          "current_price": 102.8622,
+          "current_value": 47808.09,
+          "investment_amount": 18000,
+          "gain_loss": 29808.089999999997,
+          "gain_loss_percentage": 165.60049999999998,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 9",
+          "folio_number": "AUTO_9",
+          "units": 390.169,
+          "current_price": 128.221,
+          "current_value": 50027.86,
+          "investment_amount": 21000,
+          "gain_loss": 29027.86,
+          "gain_loss_percentage": 138.22790476190477,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:41:29.098Z"
+    },
+    "created_at": "2025-08-24T02:41:29.167Z",
+    "updated_at": "2025-08-24T02:41:29.167Z"
+  },
+  {
+    "id": "cf94c846-d4db-4798-a2b3-170ae997440b",
+    "credentials": {
+      "email": "vivekg2",
+      "username": "vivekg2",
+      "password": "$2b$10$4BKY8mjw3VN9.Jlx.of.Ru.PdSqlQKHygPu0.UHp/2keJ4oSwwGW."
+    },
+    "user_profile": {
+      "name": "Vivek Gupta",
+      "pan": "BMEPG1090F",
+      "email": "GVIVEK2692@GMAIL.COM",
+      "phone": "",
+      "address": "# 602 GH 3 SECTOR 23, PANCHKULA SECTOR 4, PANCHKULA - 134112",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "# 602 GH 3 SECTOR 23",
+      "created_at": "2025-08-24T02:43:11.213Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 4498000,
+        "total_current_value": 5663263.76,
+        "total_gain_loss": 1165263.76,
+        "gain_loss_percentage": 25.91,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 5663263.76,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 19937.261,
+          "current_price": 92.1604,
+          "current_value": 1837425.95,
+          "investment_amount": 1398000,
+          "gain_loss": 439425.94999999995,
+          "gain_loss_percentage": 31.432471387696708,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 46906.541,
+          "current_price": 43.8975,
+          "current_value": 2059079.88,
+          "investment_amount": 1665000,
+          "gain_loss": 394079.8799999999,
+          "gain_loss_percentage": 23.668461261261253,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 50143.707,
+          "current_price": 24.7567,
+          "current_value": 1241392.71,
+          "investment_amount": 1065000,
+          "gain_loss": 176392.70999999996,
+          "gain_loss_percentage": 16.562695774647885,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 1830.494,
+          "current_price": 70.08,
+          "current_value": 128281.02,
+          "investment_amount": 90000,
+          "gain_loss": 38281.020000000004,
+          "gain_loss_percentage": 42.534466666666674,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 5767.007,
+          "current_price": 42.99,
+          "current_value": 247923.63,
+          "investment_amount": 170000,
+          "gain_loss": 77923.63,
+          "gain_loss_percentage": 45.83742941176471,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 3791.286,
+          "current_price": 39.343,
+          "current_value": 149160.57,
+          "investment_amount": 110000,
+          "gain_loss": 39160.57000000001,
+          "gain_loss_percentage": 35.60051818181819,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-24T02:43:11.213Z"
+    },
+    "created_at": "2025-08-24T02:43:11.284Z",
+    "updated_at": "2025-08-24T02:43:11.284Z"
   }
 ]

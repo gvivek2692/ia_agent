@@ -25,6 +25,8 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isPdfPasswordProtected, setIsPdfPasswordProtected] = useState(false);
+  const [pdfPassword, setPdfPassword] = useState('');
   const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState<UploadResult | null>(null);
   const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(null);
@@ -83,6 +85,11 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
       return;
     }
 
+    if (isPdfPasswordProtected && !pdfPassword) {
+      alert('Please provide the PDF password');
+      return;
+    }
+
     if (usernameAvailable === false) {
       alert('Username is already taken. Please choose a different one.');
       return;
@@ -92,18 +99,56 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
     setResult(null);
 
     try {
-      const data: UploadResult = await apiService.uploadMfStatement(file, username, password) as any;
+      const data: UploadResult = await apiService.uploadMfStatement(
+        file, 
+        username, 
+        password, 
+        isPdfPasswordProtected ? pdfPassword : undefined
+      ) as any;
       setResult(data);
 
       if (data.success && onSuccess) {
         onSuccess(data);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Upload error:', error);
-      setResult({
-        success: false,
-        error: 'Upload failed. Please try again.'
+      console.error('Error details:', {
+        message: error.message,
+        response: error.response,
+        data: error.response?.data
       });
+      
+      // Handle specific PDF password errors
+      if (error.response?.data?.code === 'WRONG_PASSWORD') {
+        setResult({
+          success: false,
+          error: 'Incorrect PDF password. Please check your password and try again.'
+        });
+      } else if (error.response?.data?.code === 'PASSWORD_REQUIRED') {
+        setResult({
+          success: false,
+          error: 'This PDF is password protected. Please check the "PDF is password protected" option and provide the password.'
+        });
+      } else if (error.response?.data?.code === 'INVALID_PDF') {
+        setResult({
+          success: false,
+          error: 'Invalid or corrupted PDF file. Please check the file and try again.'
+        });
+      } else if (error.response?.data?.code === 'PARSING_ERROR') {
+        setResult({
+          success: false,
+          error: 'Unable to parse PDF content. Please ensure this is a valid CAS statement.'
+        });
+      } else {
+        // Fallback error handling with better messaging
+        const errorMessage = error.response?.data?.error || 
+                           error.message || 
+                           'Upload failed. Please try again.';
+        setResult({
+          success: false,
+          error: errorMessage
+        });
+      }
     } finally {
       setUploading(false);
     }
@@ -114,6 +159,8 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
     setUsername('');
     setPassword('');
     setConfirmPassword('');
+    setIsPdfPasswordProtected(false);
+    setPdfPassword('');
     setResult(null);
     setUsernameAvailable(null);
     // Reset file input
@@ -164,6 +211,45 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
               </label>
             </div>
           </div>
+
+          {/* PDF Password Protection Option */}
+          {file && (
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <input
+                  id="pdf-password-protected"
+                  type="checkbox"
+                  checked={isPdfPasswordProtected}
+                  onChange={(e) => setIsPdfPasswordProtected(e.target.checked)}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor="pdf-password-protected" className="ml-2 block text-sm text-gray-700">
+                  PDF is password protected
+                </label>
+              </div>
+              
+              {isPdfPasswordProtected && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    PDF Password *
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="password"
+                      value={pdfPassword}
+                      onChange={(e) => setPdfPassword(e.target.value)}
+                      className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Enter PDF password"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    This is different from your account password. Enter the password required to open your PDF statement.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Username */}
           <div>
@@ -246,7 +332,7 @@ const UploadStatement: React.FC<UploadStatementProps> = ({ onSuccess }) => {
           {/* Upload Button */}
           <button
             onClick={handleUpload}
-            disabled={uploading || !file || !username || !password || !confirmPassword || usernameAvailable === false}
+            disabled={uploading || !file || !username || !password || !confirmPassword || usernameAvailable === false || (isPdfPasswordProtected && !pdfPassword)}
             className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {uploading ? (
