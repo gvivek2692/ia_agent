@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingDown, Target, PieChart, Settings, RefreshCw } from 'lucide-react';
+import { TrendingDown, Settings, RefreshCw, MessageSquare } from 'lucide-react';
 import PortfolioOverview from './PortfolioOverview';
 import AssetAllocation from './AssetAllocation';
 import HoldingsTable from './HoldingsTable';
-import GoalsDashboard from './GoalsDashboard';
 import { apiService } from '../services/apiService';
 
 interface PortfolioDashboardProps {
   userId?: string;
   userName?: string;
   onSessionExpired?: () => void;
+  onToggleAIChat?: () => void;
 }
 
 interface PortfolioData {
@@ -30,22 +30,9 @@ interface PortfolioData {
   updated_at: string;
 }
 
-interface GoalData {
-  id: string;
-  name: string;
-  description: string;
-  target_amount: number;
-  current_amount: number;
-  target_date: string;
-  priority: string;
-  category: string;
-  progress_percentage: number;
-}
 
-const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName, onSessionExpired }) => {
-  const [activeTab, setActiveTab] = useState<'portfolio' | 'goals'>('portfolio');
+const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName, onSessionExpired, onToggleAIChat }) => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
-  const [goals, setGoals] = useState<GoalData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
@@ -65,15 +52,10 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
         // Load specific user's data
         const userContext = await apiService.getUserContext(userId) as any;
         setPortfolioData(userContext.portfolio);
-        setGoals(userContext.financial_goals?.goals || []);
       } else {
         // Load demo data
-        const [portfolioResponse, goalsResponse] = await Promise.all([
-          apiService.getPortfolioSummary(),
-          apiService.getGoalsOverview()
-        ]);
+        const portfolioResponse = await apiService.getPortfolioSummary();
         setPortfolioData(portfolioResponse as PortfolioData);
-        setGoals((goalsResponse as any).goals || []);
       }
     } catch (err) {
       console.error('Error loading dashboard data:', err);
@@ -83,20 +65,6 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }
   };
 
-  const handleGoalsUpdate = async (updatedGoals: GoalData[]) => {
-    setGoals(updatedGoals);
-    
-    // If userId is available, save goals to backend for AI insights
-    if (userId) {
-      try {
-        await apiService.updateUserGoals(userId, updatedGoals);
-        console.log('Goals updated in backend for AI insights');
-      } catch (error) {
-        console.error('Failed to update goals in backend:', error);
-        // Don't show error to user as the goals are still updated locally
-      }
-    }
-  };
 
   const handleRefreshPortfolio = async () => {
     if (!userId || !userId.startsWith('kite-') || refreshing) {
@@ -127,11 +95,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
     }
   };
 
-  const formatCurrency = (amount: number | null | undefined) => {
-    if (amount === null || amount === undefined || isNaN(amount)) {
-      return '₹0';
-    }
-    
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -142,25 +106,22 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
 
   const formatPercentage = (percentage: number | string | null | undefined) => {
     if (percentage === null || percentage === undefined || percentage === '') {
-      return 'N/A';
+      return '0.00%';
     }
-    
     const numPercentage = typeof percentage === 'string' ? parseFloat(percentage) : percentage;
-    
     if (isNaN(numPercentage)) {
-      return 'N/A';
+      return '0.00%';
     }
-    
     const sign = numPercentage >= 0 ? '+' : '';
     return `${sign}${numPercentage.toFixed(2)}%`;
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your portfolio...</p>
+          <div className="w-12 h-12 border-4 border-gold-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">Loading your portfolio...</p>
         </div>
       </div>
     );
@@ -168,15 +129,15 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingDown className="w-8 h-8 text-red-600" />
+          <div className="w-16 h-16 bg-red-500/20 backdrop-blur-sm border border-red-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <TrendingDown className="w-8 h-8 text-red-400" />
           </div>
-          <p className="text-red-600 mb-4">{error}</p>
+          <p className="text-red-400 mb-4">{error}</p>
           <button
             onClick={loadDashboardData}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-gradient-to-r from-gold-600 to-amber-600 text-white px-6 py-3 rounded-2xl hover:from-gold-500 hover:to-amber-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold-500/25"
           >
             Try Again
           </button>
@@ -186,125 +147,100 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                {userName ? `${userName}'s Portfolio` : 'Portfolio Dashboard'}
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Track your investments, monitor performance, and manage your financial goals
-              </p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="text-sm text-gray-500">
-                Last updated: {portfolioData ? new Date(portfolioData.updated_at).toLocaleDateString() : 'N/A'}
-              </div>
-              {userId && userId.startsWith('kite-') ? (
-                <button
-                  onClick={handleRefreshPortfolio}
-                  disabled={refreshing}
-                  className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 border border-orange-200 rounded-md hover:bg-orange-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  title="Refresh from Kite"
-                >
-                  <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-                  <span>{refreshing ? 'Syncing...' : 'Sync from Kite'}</span>
-                </button>
-              ) : (
-                <button
-                  onClick={loadDashboardData}
-                  className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors"
-                  title="Refresh Data"
-                >
-                  <Settings className="w-5 h-5" />
-                </button>
-              )}
-            </div>
+    <div className="space-y-6">
+      {/* Portfolio Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-white">
+            {userName ? (
+              <>
+                <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
+                  {userName}'s
+                </span>{' '}
+                Portfolio
+              </>
+            ) : (
+              <>
+                <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
+                  Portfolio
+                </span>{' '}
+                Dashboard
+              </>
+            )}
+          </h2>
+          <p className="text-gray-300 mt-1">
+            Track your investments, monitor performance, and manage your financial goals
+          </p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <div className="text-sm text-gray-400">
+            Last updated: {portfolioData ? new Date(portfolioData.updated_at).toLocaleDateString() : 'N/A'}
           </div>
-
-          {/* Tab Navigation */}
-          <div className="mt-6">
-            <div className="border-b border-gray-200">
-              <nav className="-mb-px flex space-x-8">
-                <button
-                  onClick={() => setActiveTab('portfolio')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'portfolio'
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } transition-colors`}
-                >
-                  <div className="flex items-center space-x-2">
-                    <PieChart className="w-4 h-4" />
-                    <span>Portfolio</span>
-                  </div>
-                </button>
-                <button
-                  onClick={() => setActiveTab('goals')}
-                  className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'goals'
-                      ? 'border-blue-500 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } transition-colors`}
-                >
-                  <div className="flex items-center space-x-2">
-                    <Target className="w-4 h-4" />
-                    <span>Goals</span>
-                  </div>
-                </button>
-              </nav>
-            </div>
-          </div>
+          {onToggleAIChat && (
+            <button
+              onClick={onToggleAIChat}
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gold-300 bg-gold-500/20 border border-gold-400/30 rounded-2xl hover:bg-gold-500/30 hover:text-gold-200 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              title="Open AI Chat"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>AI Chat</span>
+            </button>
+          )}
+          {userId && userId.startsWith('kite-') ? (
+            <button
+              onClick={handleRefreshPortfolio}
+              disabled={refreshing}
+              className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-orange-300 bg-orange-500/20 border border-orange-400/30 rounded-2xl hover:bg-orange-500/30 hover:text-orange-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              title="Refresh from Kite"
+            >
+              <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <span>{refreshing ? 'Syncing...' : 'Sync from Kite'}</span>
+            </button>
+          ) : (
+            <button
+              onClick={loadDashboardData}
+              className="p-3 text-gray-400 hover:text-gold-400 rounded-2xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm transform hover:scale-105"
+              title="Refresh Data"
+            >
+              <Settings className="w-5 h-5" />
+            </button>
+          )}
         </div>
       </div>
 
+
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {activeTab === 'portfolio' && portfolioData && (
-          <div className="space-y-8">
-            {/* Portfolio Overview Cards */}
-            <PortfolioOverview 
-              portfolio={portfolioData}
-              formatCurrency={formatCurrency}
-              formatPercentage={formatPercentage}
-            />
+      {portfolioData && (
+        <div className="space-y-8">
+          {/* Portfolio Overview Cards */}
+          <PortfolioOverview 
+            portfolio={portfolioData}
+            formatCurrency={formatCurrency}
+            formatPercentage={formatPercentage}
+          />
 
-            {/* Charts and Tables */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Asset Allocation Chart */}
-              <div className="lg:col-span-1">
-                <AssetAllocation 
-                  assetAllocation={portfolioData.summary.asset_allocation}
-                  formatCurrency={formatCurrency}
-                />
-              </div>
+          {/* Charts and Tables */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Asset Allocation Chart */}
+            <div className="lg:col-span-1">
+              <AssetAllocation 
+                assetAllocation={portfolioData.summary.asset_allocation}
+                formatCurrency={formatCurrency}
+              />
+            </div>
 
-              {/* Holdings Table */}
-              <div className="lg:col-span-2">
-                <HoldingsTable 
-                  mutualFunds={portfolioData.mutual_funds}
-                  stocks={portfolioData.stocks}
-                  formatCurrency={formatCurrency}
-                  formatPercentage={formatPercentage}
-                />
-              </div>
+            {/* Holdings Table */}
+            <div className="lg:col-span-2">
+              <HoldingsTable 
+                mutualFunds={portfolioData.mutual_funds}
+                stocks={portfolioData.stocks}
+                formatCurrency={formatCurrency}
+                formatPercentage={formatPercentage}
+              />
             </div>
           </div>
-        )}
-
-        {activeTab === 'goals' && (
-          <GoalsDashboard 
-            goals={goals}
-            onGoalsChange={handleGoalsUpdate}
-            userId={userId}
-            formatCurrency={formatCurrency}
-            portfolioValue={portfolioData?.summary?.total_current_value || 0}
-          />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

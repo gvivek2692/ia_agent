@@ -234,11 +234,15 @@ class ApiService {
     });
   }
 
-  async uploadMfStatement(file: File, username: string, password: string) {
+  async uploadMfStatement(file: File, username: string, password: string, pdfPassword?: string) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('username', username);
     formData.append('password', password);
+    
+    if (pdfPassword) {
+      formData.append('pdfPassword', pdfPassword);
+    }
 
     const url = `${this.baseUrl}/upload/mf-statement`;
     
@@ -250,7 +254,22 @@ class ApiService {
       });
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Parse error response to get backend error details
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch (parseError) {
+          // If response isn't JSON, use generic error
+          errorData = { error: `HTTP error! status: ${response.status}` };
+        }
+        
+        // Create error object that matches expected frontend error structure
+        const error = new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        (error as any).response = {
+          data: errorData,
+          status: response.status
+        };
+        throw error;
       }
       
       return await response.json();

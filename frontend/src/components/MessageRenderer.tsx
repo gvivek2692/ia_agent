@@ -12,29 +12,29 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
   const components = {
     // Style headings
     h1: ({ children }: any) => (
-      <h1 className="text-xl font-bold text-gray-900 mb-3 border-b border-gray-200 pb-2">
+      <h1 className="text-xl font-bold text-white mb-3 border-b border-white/20 pb-2">
         {children}
       </h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className="text-lg font-semibold text-gray-800 mb-2 mt-4">
+      <h2 className="text-lg font-semibold text-white mb-2 mt-4">
         {children}
       </h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className="text-base font-medium text-gray-700 mb-2 mt-3">
+      <h3 className="text-base font-medium text-white mb-2 mt-3">
         {children}
       </h3>
     ),
     
     // Style lists
     ul: ({ children }: any) => (
-      <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
+      <ul className="list-disc list-inside mb-3 space-y-1 text-white">
         {children}
       </ul>
     ),
     ol: ({ children }: any) => (
-      <ol className="list-decimal list-inside mb-3 space-y-1 text-gray-700">
+      <ol className="list-decimal list-inside mb-3 space-y-1 text-white">
         {children}
       </ol>
     ),
@@ -44,7 +44,7 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     
     // Style paragraphs
     p: ({ children }: any) => (
-      <p className="mb-3 text-gray-700 leading-relaxed">
+      <p className="mb-3 text-white leading-relaxed">
         {children}
       </p>
     ),
@@ -53,14 +53,14 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     code: ({ inline, children }: any) => {
       if (inline) {
         return (
-          <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800">
+          <code className="bg-white/20 px-1 py-0.5 rounded text-sm font-mono text-gold-200">
             {children}
           </code>
         );
       }
       return (
-        <pre className="bg-gray-100 p-3 rounded-lg overflow-x-auto mb-3">
-          <code className="text-sm font-mono text-gray-800">{children}</code>
+        <pre className="bg-white/20 p-3 rounded-lg overflow-x-auto mb-3">
+          <code className="text-sm font-mono text-gold-200">{children}</code>
         </pre>
       );
     },
@@ -68,44 +68,44 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
     // Style tables
     table: ({ children }: any) => (
       <div className="overflow-x-auto mb-4">
-        <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg">
+        <table className="min-w-full divide-y divide-white/20 border border-white/20 rounded-lg">
           {children}
         </table>
       </div>
     ),
     thead: ({ children }: any) => (
-      <thead className="bg-gray-50">{children}</thead>
+      <thead className="bg-white/10">{children}</thead>
     ),
     tbody: ({ children }: any) => (
-      <tbody className="bg-white divide-y divide-gray-200">{children}</tbody>
+      <tbody className="bg-white/5 divide-y divide-white/20">{children}</tbody>
     ),
     tr: ({ children }: any) => (
-      <tr className="hover:bg-gray-50">{children}</tr>
+      <tr className="hover:bg-white/10">{children}</tr>
     ),
     th: ({ children }: any) => (
-      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
         {children}
       </th>
     ),
     td: ({ children }: any) => (
-      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-white">
         {children}
       </td>
     ),
     
     // Style blockquotes
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-primary-500 pl-4 py-2 mb-3 bg-primary-50 text-gray-700 italic">
+      <blockquote className="border-l-4 border-gold-500 pl-4 py-2 mb-3 bg-white/10 text-white italic">
         {children}
       </blockquote>
     ),
     
     // Style strong and emphasis
     strong: ({ children }: any) => (
-      <strong className="font-semibold text-gray-900">{children}</strong>
+      <strong className="font-semibold text-gold-200">{children}</strong>
     ),
     em: ({ children }: any) => (
-      <em className="italic text-gray-700">{children}</em>
+      <em className="italic text-gray-200">{children}</em>
     ),
   };
 
@@ -119,7 +119,7 @@ const MessageRenderer: React.FC<MessageRendererProps> = ({ content, isBot }) => 
   }
 
   return (
-    <div className="prose prose-sm max-w-none">
+    <div className="prose pamber-sm max-w-none">
       <ReactMarkdown
         components={components}
         remarkPlugins={[remarkGfm]}

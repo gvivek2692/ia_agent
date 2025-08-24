@@ -4,7 +4,6 @@ class KiteService {
   constructor() {
     this.apiKey = process.env.KITE_API_KEY;
     this.apiSecret = process.env.KITE_API_SECRET;
-    this.redirectUrl = process.env.KITE_REDIRECT_URL || 'http://localhost:3000/kite-callback';
     
     if (!this.apiKey || !this.apiSecret) {
       throw new Error('Kite API credentials not found in environment variables');
@@ -17,17 +16,18 @@ class KiteService {
     });
     
     console.log('KiteService initialized with API Key:', this.apiKey);
+    console.log('Redirect URL is configured in Kite Connect dashboard (not controlled by backend)');
   }
 
   // Generate login URL for OAuth flow
   getLoginUrl() {
     try {
-      // KiteConnect doesn't support custom redirect URLs in getLoginURL()
-      // We need to manually construct the URL with our redirect URL
-      const loginUrl = `https://kite.zerodha.com/connect/login?api_key=${this.apiKey}&v=3`;
+      // Use KiteConnect's official method to generate login URL
+      // The redirect URL is configured in Kite Connect dashboard, not here
+      const loginUrl = this.kc.getLoginURL();
       console.log('Generated Kite login URL:', loginUrl);
-      console.log('Using redirect URL:', this.redirectUrl);
-      console.log('Note: Make sure to configure this redirect URL in your Kite Connect app settings');
+      console.log('Redirect URL is configured in Kite Connect dashboard');
+      
       return loginUrl;
     } catch (error) {
       console.error('Error generating Kite login URL:', error);
@@ -39,6 +39,8 @@ class KiteService {
   async generateSession(requestToken) {
     try {
       console.log('Generating Kite session with request token:', requestToken);
+      console.log('Using API Key:', this.apiKey);
+      console.log('API Secret configured:', !!this.apiSecret);
       
       const response = await this.kc.generateSession(requestToken, this.apiSecret);
       console.log('Kite session generated successfully:', response);
@@ -62,6 +64,28 @@ class KiteService {
       };
     } catch (error) {
       console.error('Error generating Kite session:', error);
+      
+      // Enhanced error logging for debugging
+      if (error.response && error.response.data) {
+        console.error('Kite API Error Response:', error.response.data);
+      }
+      
+      // Provide more specific error messages
+      if (error.message && error.message.includes('user is not enabled')) {
+        const enhancedError = new Error(`Kite Connect Error: The user is not enabled for this app. 
+        
+This usually means:
+1. Your Kite Connect app is in development mode and this user is not in the test users list
+2. Add the user's Zerodha User ID to the 'Test Users' list in your Kite Connect app settings
+3. Or request production approval from Zerodha to allow all users
+
+API Key: ${this.apiKey}
+Original Error: ${error.message}`);
+        
+        enhancedError.originalError = error;
+        throw enhancedError;
+      }
+      
       throw error;
     }
   }

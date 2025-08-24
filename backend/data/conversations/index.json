@@ -1,201 +1,31 @@
 [
   {
-    "id": "conv_1755417954041_09hu73bjk",
-    "title": "who are the CEOs of the stocks in my portfolio...",
+    "id": "conv_1755920050481_jy3k3ovpx",
+    "title": "what news today related to my portfolio...",
     "userId": "demo-user",
-    "createdAt": "2025-08-17T08:06:24.499Z",
-    "updatedAt": "2025-08-17T08:06:29.385Z",
-    "messageCount": 2,
+    "createdAt": "2025-08-23T03:34:38.138Z",
+    "updatedAt": "2025-08-23T03:34:38.140Z",
+    "messageCount": 1,
     "tags": [],
     "archived": false
   },
   {
-    "id": "test_conv_market_1755417870077",
-    "title": "What is todays market update and how does it affec...",
+    "id": "conv_1755918335690_pftdizmng",
+    "title": "what is the relevant news today for my portfolio...",
     "userId": "demo-user",
-    "createdAt": "2025-08-17T08:04:30.080Z",
-    "updatedAt": "2025-08-17T08:04:30.082Z",
-    "messageCount": 2,
+    "createdAt": "2025-08-23T03:06:02.814Z",
+    "updatedAt": "2025-08-23T03:06:02.816Z",
+    "messageCount": 1,
     "tags": [],
     "archived": false
   },
   {
-    "id": "test_conv_mf_1755417857033",
-    "title": "List all mutual funds in my portfolio with their c...",
+    "id": "conv_1755882969505_9t5cjxwhu",
+    "title": "How is my portfolio performing...",
     "userId": "demo-user",
-    "createdAt": "2025-08-17T08:04:17.034Z",
-    "updatedAt": "2025-08-17T08:04:17.036Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "test_conv_1755417841687",
-    "title": "How is my SBI Bluechip Fund performing compared to...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T08:04:01.689Z",
-    "updatedAt": "2025-08-17T08:04:08.920Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755417499672_gmob205yl",
-    "title": "tell me top holdings of my mutual funds...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T07:58:31.548Z",
-    "updatedAt": "2025-08-17T07:58:31.550Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755417167779_wjb70wedf",
-    "title": "date today...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T07:52:53.681Z",
-    "updatedAt": "2025-08-17T07:55:32.655Z",
-    "messageCount": 6,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755416628246_c7wjebdpx",
-    "title": "which mutual funds are there in my portfolio...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T07:44:04.066Z",
-    "updatedAt": "2025-08-17T07:48:21.721Z",
-    "messageCount": 12,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755416183938_ltn85phkx",
-    "title": "my MF investments current value...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T07:36:51.525Z",
-    "updatedAt": "2025-08-17T07:37:38.686Z",
-    "messageCount": 4,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755415163859_v591gzm18",
-    "title": "which mfs in my portfolio...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-17T07:19:36.094Z",
-    "updatedAt": "2025-08-17T07:19:42.871Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1755320527432_7f7uouabv",
-    "title": "hi...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-16T05:02:14.370Z",
-    "updatedAt": "2025-08-16T05:04:05.108Z",
-    "messageCount": 6,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754812189645_oug1852iq",
-    "title": "what were my expenses last month...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-10T07:49:57.503Z",
-    "updatedAt": "2025-08-10T07:50:53.186Z",
-    "messageCount": 4,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754802315938_okl6xwd92",
-    "title": "which stocks and sectors does ppfas invest in ...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-10T05:05:41.071Z",
-    "updatedAt": "2025-08-10T05:06:49.195Z",
-    "messageCount": 4,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754802172832_3x0v7b2bs",
-    "title": "Compare the latest earnings report of all my stock...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-10T05:03:19.889Z",
-    "updatedAt": "2025-08-10T05:03:30.933Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754801731809_nlewlpz6y",
-    "title": "hi...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-10T04:55:38.913Z",
-    "updatedAt": "2025-08-10T04:55:40.489Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754669988319_3xggpps1j",
-    "title": "show my total portfolio value...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-08T16:20:13.299Z",
-    "updatedAt": "2025-08-08T16:21:29.371Z",
-    "messageCount": 4,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754669602056_z6lb39051",
-    "title": "How are my financial goals progressing...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-08T16:13:43.553Z",
-    "updatedAt": "2025-08-08T16:16:50.989Z",
-    "messageCount": 8,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754668801271_xu8hr8f9a",
-    "title": "hi...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-08T16:00:13.109Z",
-    "updatedAt": "2025-08-08T16:02:09.114Z",
-    "messageCount": 3,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754668609154_1kz7fpc16",
-    "title": "Show me my portfolio summary...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-08T15:56:57.535Z",
-    "updatedAt": "2025-08-08T15:57:05.783Z",
-    "messageCount": 3,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1754668180246_5peh30jo8",
-    "title": "Show me my portfolio summary...",
-    "userId": "demo-user",
-    "createdAt": "2025-08-08T15:51:02.305Z",
-    "updatedAt": "2025-08-08T15:51:02.321Z",
-    "messageCount": 2,
-    "tags": [],
-    "archived": false
-  },
-  {
-    "id": "conv_1753892183555_bthcracv1",
-    "title": "How are my financial goals progressing...",
-    "userId": "demo-user",
-    "createdAt": "2025-07-30T16:16:26.770Z",
-    "updatedAt": "2025-07-30T16:16:40.217Z",
-    "messageCount": 4,
+    "createdAt": "2025-08-22T17:17:52.489Z",
+    "updatedAt": "2025-08-22T17:17:52.491Z",
+    "messageCount": 1,
     "tags": [],
     "archived": false
   }

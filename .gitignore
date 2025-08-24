@@ -7,6 +7,9 @@ node_modules/
 backend/.env
 frontend/.env.local
 
+# Claude Code settings
+.claude/settings.local.json
+
 # Keep production .env files for reference
 !frontend/.env
 
@@ -42,16 +45,10 @@ coverage/
 ehthumbs.db
 Thumbs.db
 
-# Test files and sample data
-*.ipynb
-*.xls
-*.xlsx
-test.*
-sample_*
-*.csv
-*.pdf
+# Playwright MCP testing artifacts
+.playwright-mcp/
 
-# Temporary files
-temp/
-tmp/
-*.tmp
+# Backup directories
+backend/data/conversations_backup/
+
+*.pdf

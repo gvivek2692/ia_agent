@@ -10,7 +10,7 @@ interface Holding {
   current_value: number;
   investment_amount: number;
   gain_loss: number;
-  gain_loss_percentage: number | null;
+  gain_loss_percentage: number;
   current_price?: number;
   avg_purchase_price?: number;
   type?: string;
@@ -20,8 +20,8 @@ interface Holding {
 interface HoldingsTableProps {
   mutualFunds: Holding[];
   stocks: Holding[];
-  formatCurrency: (amount: number | null | undefined) => string;
-  formatPercentage: (percentage: number | string | null | undefined) => string;
+  formatCurrency: (amount: number) => string;
+  formatPercentage: (percentage: number) => string;
 }
 
 type SortField = 'name' | 'currentValue' | 'investmentAmount' | 'gainLoss' | 'gainLossPercentage';
@@ -89,8 +89,8 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
         bValue = b.gain_loss;
         break;
       case 'gainLossPercentage':
-        aValue = a.gain_loss_percentage ?? 0;
-        bValue = b.gain_loss_percentage ?? 0;
+        aValue = a.gain_loss_percentage;
+        bValue = b.gain_loss_percentage;
         break;
       default:
         aValue = a.current_value;
@@ -126,41 +126,39 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const calculateTotals = () => {
     const totals = filteredHoldings.reduce((acc, holding) => ({
-      currentValue: acc.currentValue + (holding.current_value || 0),
-      investmentAmount: acc.investmentAmount + (holding.investment_amount || 0),
-      gainLoss: acc.gainLoss + (holding.gain_loss || 0),
+      currentValue: acc.currentValue + holding.current_value,
+      investmentAmount: acc.investmentAmount + holding.investment_amount,
+      gainLoss: acc.gainLoss + holding.gain_loss,
     }), { currentValue: 0, investmentAmount: 0, gainLoss: 0 });
 
-    const gainLossPercentage = totals.investmentAmount > 0 
-      ? (totals.gainLoss / totals.investmentAmount) * 100 
-      : 0;
+    const gainLossPercentage = (totals.gainLoss / totals.investmentAmount) * 100;
     return { ...totals, gainLossPercentage };
   };
 
   const totals = calculateTotals();
 
   return (
-    <div className="bg-white rounded-lg shadow-md">
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-white/20">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Holdings</h3>
+          <h3 className="text-lg font-semibold text-white">Holdings</h3>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100 transition-colors"
+            className="p-2 text-gray-400 hover:text-gray-300 rounded-md hover:bg-white/10 transition-colors"
           >
             <Filter className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
+        <div className="flex space-x-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-1">
           <button
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'all'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
+                : 'text-gray-400 hover:text-gray-300'
             }`}
           >
             All ({allHoldings.length})
@@ -169,8 +167,8 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             onClick={() => setActiveTab('mutualFunds')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'mutualFunds'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
+                : 'text-gray-400 hover:text-gray-300'
             }`}
           >
             Mutual Funds ({mutualFunds.length})
@@ -179,8 +177,8 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             onClick={() => setActiveTab('stocks')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               activeTab === 'stocks'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-gold-500/20 text-gold-400 shadow-sm backdrop-blur-sm border border-gold-400/30'
+                : 'text-gray-400 hover:text-gray-300'
             }`}
           >
             Stocks ({stocks.length})
@@ -189,7 +187,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
         {/* Search and Filters */}
         {showFilters && (
-          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+          <div className="mt-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="flex-1">
                 <div className="relative">
@@ -199,7 +197,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                     placeholder="Search holdings..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
               </div>
@@ -209,36 +207,36 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
       </div>
 
       {/* Summary */}
-      <div className="p-6 bg-blue-50 border-b border-gray-200">
+      <div className="p-6 bg-white/5 backdrop-blur-sm border-b border-white/20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <p className="text-sm text-gray-600">Holdings</p>
-            <p className="text-lg font-semibold text-gray-900">{filteredHoldings.length}</p>
+            <p className="text-sm text-gray-300">Holdings</p>
+            <p className="text-lg font-semibold text-white">{filteredHoldings.length}</p>
           </div>
           <div>
-            <p className="text-sm text-gray-600">Current Value</p>
-            <p className="text-lg font-semibold text-gray-900">{formatCurrency(totals.currentValue)}</p>
+            <p className="text-sm text-gray-300">Current Value</p>
+            <p className="text-lg font-semibold text-white">{formatCurrency(totals.currentValue)}</p>
           </div>
           <div>
-            <p className="text-sm text-gray-600">Investment Amount</p>
-            <p className="text-lg font-semibold text-gray-900">{formatCurrency(totals.investmentAmount)}</p>
+            <p className="text-sm text-gray-300">Investment Amount</p>
+            <p className="text-lg font-semibold text-white">{formatCurrency(totals.investmentAmount)}</p>
           </div>
           <div>
-            <p className="text-sm text-gray-600">Total Gain/Loss</p>
+            <p className="text-sm text-gray-300">Total Gain/Loss</p>
             <div className="flex items-center space-x-2">
               <p className={`text-lg font-semibold ${
-                totals.gainLoss >= 0 ? 'text-green-600' : 'text-red-600'
+                totals.gainLoss >= 0 ? 'text-green-400' : 'text-red-400'
               }`}>
                 {formatCurrency(Math.abs(totals.gainLoss))}
               </p>
               {totals.gainLoss >= 0 ? (
-                <TrendingUp className="w-4 h-4 text-green-600" />
+                <TrendingUp className="w-4 h-4 text-green-400" />
               ) : (
-                <TrendingDown className="w-4 h-4 text-red-600" />
+                <TrendingDown className="w-4 h-4 text-red-400" />
               )}
             </div>
             <p className={`text-sm ${
-              totals.gainLoss >= 0 ? 'text-green-600' : 'text-red-600'
+              totals.gainLoss >= 0 ? 'text-green-400' : 'text-red-400'
             }`}>
               {formatPercentage(totals.gainLossPercentage)}
             </p>
@@ -249,10 +247,10 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-white/5 backdrop-blur-sm">
             <tr>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-white/10 transition-colors"
                 onClick={() => handleSort('name')}
               >
                 <div className="flex items-center">
@@ -260,11 +258,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   <SortIcon field="name" />
                 </div>
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                 Type
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-white/10 transition-colors"
                 onClick={() => handleSort('currentValue')}
               >
                 <div className="flex items-center justify-end">
@@ -273,7 +271,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-white/10 transition-colors"
                 onClick={() => handleSort('investmentAmount')}
               >
                 <div className="flex items-center justify-end">
@@ -282,7 +280,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-white/10 transition-colors"
                 onClick={() => handleSort('gainLoss')}
               >
                 <div className="flex items-center justify-end">
@@ -291,7 +289,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-white/10 transition-colors"
                 onClick={() => handleSort('gainLossPercentage')}
               >
                 <div className="flex items-center justify-end">
@@ -301,40 +299,40 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="divide-y divide-white/20">
             {sortedHoldings.map((holding, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr key={index} className="hover:bg-white/10">
                 <td className="px-6 py-4">
                   <div>
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-white">
                       {holding.displayName}
                     </div>
                     {holding.mf_name && holding.type === 'mutual_fund' && (
-                      <div className="text-xs text-gray-500">{holding.mf_name}</div>
+                      <div className="text-xs text-gray-400">{holding.mf_name}</div>
                     )}
                     {holding.folio_number && (
-                      <div className="text-xs text-gray-500">Folio: {holding.folio_number}</div>
+                      <div className="text-xs text-gray-400">Folio: {holding.folio_number}</div>
                     )}
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                     holding.type === 'mutual_fund'
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-green-100 text-green-800'
+                      ? 'bg-blue-500/20 text-blue-400 backdrop-blur-sm border border-blue-400/30'
+                      : 'bg-green-500/20 text-green-400 backdrop-blur-sm border border-green-400/30'
                   }`}>
                     {holding.type === 'mutual_fund' ? 'Mutual Fund' : 'Stock'}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-right text-sm font-medium text-gray-900">
+                <td className="px-6 py-4 text-right text-sm font-medium text-white">
                   {formatCurrency(holding.current_value)}
                 </td>
-                <td className="px-6 py-4 text-right text-sm text-gray-900">
+                <td className="px-6 py-4 text-right text-sm text-white">
                   {formatCurrency(holding.investment_amount)}
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className={`text-sm font-medium ${
-                    holding.gain_loss >= 0 ? 'text-green-600' : 'text-red-600'
+                    holding.gain_loss >= 0 ? 'text-green-400' : 'text-red-400'
                   }`}>
                     {formatCurrency(Math.abs(holding.gain_loss))}
                   </div>
@@ -342,14 +340,14 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end space-x-1">
                     <span className={`text-sm font-medium ${
-                      (holding.gain_loss_percentage ?? 0) >= 0 ? 'text-green-600' : 'text-red-600'
+                      holding.gain_loss_percentage >= 0 ? 'text-green-400' : 'text-red-400'
                     }`}>
                       {formatPercentage(holding.gain_loss_percentage)}
                     </span>
-                    {(holding.gain_loss_percentage ?? 0) >= 0 ? (
-                      <TrendingUp className="w-3 h-3 text-green-600" />
+                    {holding.gain_loss_percentage >= 0 ? (
+                      <TrendingUp className="w-3 h-3 text-green-400" />
                     ) : (
-                      <TrendingDown className="w-3 h-3 text-red-600" />
+                      <TrendingDown className="w-3 h-3 text-red-400" />
                     )}
                   </div>
                 </td>
@@ -360,13 +358,13 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
         
         {sortedHoldings.length === 0 && (
           <div className="text-center py-12">
-            <div className="text-gray-500">
+            <div className="text-gray-400">
               {searchTerm ? 'No holdings match your search.' : 'No holdings found.'}
             </div>
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="mt-2 text-blue-600 hover:text-blue-800 text-sm"
+                className="mt-2 text-gold-400 hover:text-gold-300 text-sm transition-colors"
               >
                 Clear search
               </button>

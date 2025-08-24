@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ChatInterface from './components/ChatInterface';
-import ConnectionTest from './components/ConnectionTest';
-import ConversationHistory from './components/ConversationHistory';
+import { MessageSquare, BarChart3, Brain } from 'lucide-react';
+import LandingPage from './components/LandingPage';
+import AIChatSidebar from './components/AIChatSidebar';
 import LoginForm from './components/LoginForm';
 import UserList from './components/UserList';
 import UserProfile from './components/UserProfile';
@@ -21,14 +21,13 @@ interface User {
   risk_tolerance: string;
 }
 
-type AppView = 'login' | 'userList' | 'chat' | 'upload' | 'portfolio' | 'insights';
+type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights';
 
 function App() {
-  const [currentView, setCurrentView] = useState<AppView>('login');
+  const [currentView, setCurrentView] = useState<AppView>('landing');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [sessionId, setSessionId] = useState<string>('');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentConversationId, setCurrentConversationId] = useState<string>('');
+  const [aiChatOpen, setAiChatOpen] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   // Check for existing session on app load
@@ -85,7 +84,7 @@ function App() {
       }
     } catch (error) {
       console.error('Kite callback error:', error);
-      setCurrentView('login');
+      setCurrentView('landing');
     } finally {
       setIsAuthChecking(false);
     }
@@ -102,22 +101,23 @@ function App() {
           setCurrentUser(JSON.parse(savedUser));
           setSessionId(savedSessionId);
           
-          // Redirect Kite users to portfolio page, demo users to chat
-          if (savedSessionId.startsWith('kite-session-')) {
-            setCurrentView('portfolio');
-          } else {
-            setCurrentView('chat');
-          }
+          // Redirect all users to portfolio page
+          setCurrentView('portfolio');
         } else {
-          // Invalid session, clear storage
+          // Invalid session, clear storage and show landing page
           localStorage.removeItem('wealth_advisor_session');
           localStorage.removeItem('wealth_advisor_user');
+          setCurrentView('landing');
         }
       } catch (error) {
         console.error('Session check error:', error);
         localStorage.removeItem('wealth_advisor_session');
         localStorage.removeItem('wealth_advisor_user');
+        setCurrentView('landing');
       }
+    } else {
+      // No existing session, show landing page
+      setCurrentView('landing');
     }
     
     setIsAuthChecking(false);
@@ -127,12 +127,8 @@ function App() {
     setCurrentUser(user);
     setSessionId(newSessionId);
     
-    // Redirect Kite users to portfolio page, demo users to chat
-    if (newSessionId.startsWith('kite-session-')) {
-      setCurrentView('portfolio');
-    } else {
-      setCurrentView('chat');
-    }
+    // Redirect all users to portfolio page
+    setCurrentView('portfolio');
     
     // Save to localStorage for persistence
     localStorage.setItem('wealth_advisor_session', newSessionId);
@@ -142,9 +138,8 @@ function App() {
   const handleLogout = () => {
     setCurrentUser(null);
     setSessionId('');
-    setCurrentView('login');
-    setCurrentConversationId('');
-    setSidebarOpen(false);
+    setCurrentView('landing');
+    setAiChatOpen(false);
     
     // Clear localStorage
     localStorage.removeItem('wealth_advisor_session');
@@ -160,39 +155,62 @@ function App() {
       }
     } catch (error) {
       console.error('Auto-login error:', error);
-      setCurrentView('login');
+      setCurrentView('landing');
     }
   };
 
-  const handleNewConversation = () => {
-    setCurrentConversationId('');
-    setSidebarOpen(false);
+  const toggleAIChat = () => {
+    setAiChatOpen(!aiChatOpen);
   };
 
-  const handleSelectConversation = (conversationId: string) => {
-    setCurrentConversationId(conversationId);
-    setSidebarOpen(false);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const handleUploadSuccess = (result: any) => {
-    // After successful upload, redirect to login to use the new account
-    alert(`Account created successfully! You can now login with your username.`);
-    setCurrentView('login');
+  const handleUploadSuccess = async (result: any) => {
+    try {
+      if (result.success && result.userId) {
+        // Automatically fetch the newly created user and log them in
+        const response = await apiService.getUser(result.userId) as any;
+        
+        if (response.success && response.user) {
+          // Auto-login the newly created user
+          handleLoginSuccess(response.user, result.userId);
+          
+          // Set view to portfolio to show their uploaded data
+          setCurrentView('portfolio');
+          
+          // Show success message
+          alert(`Welcome ${response.user.user_profile?.name || 'User'}! Your portfolio has been created from your CAS statement.`);
+        } else {
+          // Fallback to manual login if auto-login fails
+          alert(`Account created successfully! Please login with your username.`);
+          setCurrentView('login');
+        }
+      } else {
+        alert(`Account creation failed. Please try again.`);
+        setCurrentView('upload');
+      }
+    } catch (error) {
+      console.error('Auto-login error after upload:', error);
+      // Fallback to manual login
+      alert(`Account created successfully! Please login with your username.`);
+      setCurrentView('login');
+    }
   };
 
   // Show loading screen while checking authentication
   if (isAuthChecking) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading Wealth Manager AI...</p>
+          <div className="w-12 h-12 border-4 border-gold-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">Loading WealthWise AI...</p>
         </div>
       </div>
+    );
+  }
+
+  // Show landing page
+  if (currentView === 'landing') {
+    return (
+      <LandingPage onGetStarted={() => setCurrentView('login')} />
     );
   }
 
@@ -203,6 +221,7 @@ function App() {
         onLoginSuccess={handleLoginSuccess}
         onShowUserList={() => setCurrentView('userList')}
         onShowUpload={() => setCurrentView('upload')}
+        onBackToLanding={() => setCurrentView('landing')}
       />
     );
   }
@@ -220,12 +239,12 @@ function App() {
   // Show upload form
   if (currentView === 'upload') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 py-8">
         <div className="container mx-auto px-4">
           <div className="mb-6 text-center">
             <button
               onClick={() => setCurrentView('login')}
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium mb-4"
+              className="inline-flex items-center text-gold-400 hover:text-gold-300 font-medium mb-4 transition-colors"
             >
               ← Back to Login
             </button>
@@ -238,66 +257,74 @@ function App() {
 
   // Show main chat interface (authenticated)
   return (
-    <div className="min-h-screen bg-gray-50 relative">
-      {/* Conversation History Sidebar */}
-      <ConversationHistory
-        isOpen={sidebarOpen}
-        onToggle={toggleSidebar}
-        currentConversationId={currentConversationId}
-        onSelectConversation={handleSelectConversation}
-        onNewConversation={handleNewConversation}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-gold-600/10 to-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-amber-600/10 to-gold-600/10 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* AI Chat Sidebar */}
+      <AIChatSidebar
+        isOpen={aiChatOpen}
+        onToggle={toggleAIChat}
         userId={currentUser?.id}
+        userName={currentUser?.name}
       />
 
-      <div className={`transition-all duration-300 ${sidebarOpen ? 'lg:ml-72' : ''}`}>
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between">
+      <div className={`relative z-10 transition-all duration-300 ${aiChatOpen ? 'lg:ml-[500px]' : ''}`}>
+        <header 
+          className="bg-black/50 backdrop-blur-lg border-b border-gold-500/20 shadow-lg overflow-visible relative"
+          style={{ zIndex: 'var(--z-dropdown)' }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 overflow-visible relative">
+            <div className="flex items-center justify-between overflow-visible relative">
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={toggleSidebar}
-                  className="p-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors text-xl"
-                  title="Toggle Chat History"
+                  onClick={toggleAIChat}
+                  className="p-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors backdrop-blur-sm"
+                  title="Toggle AI Chat"
                 >
-                  ☰
+                  <MessageSquare className="w-5 h-5" />
                 </button>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Wealth Manager AI</h1>
-                  <p className="text-sm text-gray-600 mt-1">Your personalized financial planning assistant</p>
+                  <h1 className="text-2xl font-bold text-white">
+                    <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
+                      WealthWise
+                    </span>{' '}
+                    AI
+                  </h1>
+                  <p className="text-sm text-gray-300 mt-1">Your intelligent financial health companion</p>
                 </div>
               </div>
               
               {/* Navigation Pills */}
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => setCurrentView('chat')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    currentView === 'chat'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
-                  }`}
-                >
-                  💬 Chat
-                </button>
-                <button
                   onClick={() => setCurrentView('portfolio')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'portfolio'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >
-                  📊 Portfolio
+                  <span className="flex items-center space-x-2">
+                    <BarChart3 className="w-4 h-4" />
+                    <span>Portfolio</span>
+                  </span>
                 </button>
                 <button
                   onClick={() => setCurrentView('insights')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'insights'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
                   }`}
                 >
-                  🧠 AI Insights
+                  <span className="flex items-center space-x-2">
+                    <Brain className="w-4 h-4" />
+                    <span>AI Insights</span>
+                  </span>
                 </button>
               </div>
               
@@ -313,28 +340,13 @@ function App() {
           </div>
         </header>
         
-        <main className={`${currentView === 'portfolio' || currentView === 'insights' ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6'}`}>
-          {currentView === 'chat' && (
-            <>
-              {/* Connection Test - Remove this in production */}
-              <div className="mb-6">
-                <ConnectionTest />
-              </div>
-              
-              <ChatInterface 
-                selectedConversationId={currentConversationId}
-                onConversationChange={setCurrentConversationId}
-                userId={currentUser?.id}
-                userName={currentUser?.name}
-              />
-            </>
-          )}
-          
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {currentView === 'portfolio' && (
             <PortfolioDashboard 
               userId={currentUser?.id}
               userName={currentUser?.name}
               onSessionExpired={handleLogout}
+              onToggleAIChat={toggleAIChat}
             />
           )}
           
@@ -343,6 +355,7 @@ function App() {
               userId={currentUser?.id}
               userName={currentUser?.name}
               onSessionExpired={handleLogout}
+              onToggleAIChat={toggleAIChat}
             />
           )}
         </main>
