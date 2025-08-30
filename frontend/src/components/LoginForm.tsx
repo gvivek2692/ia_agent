@@ -27,7 +27,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
       const response = await apiService.login(email, password) as any;
       
       if (response.success) {
-        onLoginSuccess(response.user, response.sessionId);
+        onLoginSuccess(response.user, response.session_id);
       } else {
         setError(response.error || 'Login failed');
       }
@@ -51,7 +51,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onShowUserList, o
         const response = await apiService.login(demoEmail, 'demo123') as any;
         
         if (response.success) {
-          onLoginSuccess(response.user, response.sessionId);
+          onLoginSuccess(response.user, response.session_id);
         } else {
           setError(response.error || 'Login failed');
         }

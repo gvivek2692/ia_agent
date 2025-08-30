@@ -25,14 +25,22 @@ class ApiService {
     this.backendUrl = config.backendUrl;
   }
 
-  private async makeRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  private async makeRequest<T>(endpoint: string, options: RequestInit = {}, sessionId?: string): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
     
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(options.headers as Record<string, string> || {})
+    };
+    
+    // Add session header if provided
+    if (sessionId) {
+      headers['x-session-id'] = sessionId;
+    }
+    
     const defaultOptions: RequestInit = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
       ...options,
+      headers,
     };
 
     try {
@@ -91,18 +99,18 @@ class ApiService {
   }
 
   // Portfolio data
-  async getPortfolioSummary() {
-    return this.makeRequest('/portfolio/summary');
+  async getPortfolioSummary(sessionId?: string) {
+    return this.makeRequest('/portfolio/summary', {}, sessionId);
   }
 
   // Goals data
-  async getGoalsOverview() {
-    return this.makeRequest('/goals/overview');
+  async getGoalsOverview(sessionId?: string) {
+    return this.makeRequest('/goals/overview', {}, sessionId);
   }
 
   // Transaction data
-  async getRecentTransactions() {
-    return this.makeRequest('/transactions/recent');
+  async getRecentTransactions(sessionId?: string) {
+    return this.makeRequest('/transactions/recent', {}, sessionId);
   }
 
   // Market data
@@ -116,8 +124,9 @@ class ApiService {
   }
 
   // User context data
-  async getUserContext(userId: string) {
-    return this.makeRequest(`/user-context?userId=${userId}`);
+  async getUserContext(userId?: string, sessionId?: string) {
+    const params = userId ? `?userId=${userId}` : '';
+    return this.makeRequest(`/user-context${params}`, {}, sessionId);
   }
 
   // AI Insights
@@ -140,6 +149,13 @@ class ApiService {
   }
 
   // Conversation History API methods
+  /**
+   * Get conversations for a user
+   * @param limit Maximum number of conversations to return
+   * @param offset Number of conversations to skip
+   * @param userId User ID to get conversations for
+   * @returns Promise resolving to conversation response object with conversations array
+   */
   async getConversations(limit = 50, offset = 0, userId = 'demo-user') {
     return this.makeRequest(`/conversations?limit=${limit}&offset=${offset}&userId=${userId}`);
   }

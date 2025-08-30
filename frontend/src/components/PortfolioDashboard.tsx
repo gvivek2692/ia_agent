@@ -8,6 +8,7 @@ import { apiService } from '../services/apiService';
 interface PortfolioDashboardProps {
   userId?: string;
   userName?: string;
+  sessionId?: string;
   onSessionExpired?: () => void;
   onToggleAIChat?: () => void;
 }
@@ -24,14 +25,14 @@ interface PortfolioData {
         percentage: number;
       };
     };
+    updated_at?: string;
   };
-  mutual_funds: any[];
   stocks: any[];
-  updated_at: string;
+  mutual_funds: any[];
 }
 
 
-const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName, onSessionExpired, onToggleAIChat }) => {
+const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userName, sessionId, onSessionExpired, onToggleAIChat }) => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,23 +41,28 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
   useEffect(() => {
     loadDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [userId, sessionId]);
 
   const loadDashboardData = async () => {
     setLoading(true);
     setError(null);
     
     try {
-      // Load portfolio data
-      if (userId) {
-        // Load specific user's data
-        const userContext = await apiService.getUserContext(userId) as any;
-        setPortfolioData(userContext.portfolio);
-      } else {
-        // Load demo data
-        const portfolioResponse = await apiService.getPortfolioSummary();
-        setPortfolioData(portfolioResponse as PortfolioData);
-      }
+      // Use user-context endpoint to get complete portfolio data including holdings
+      const userContextResponse = await apiService.getUserContext(userId, sessionId) as any;
+      const portfolio = userContextResponse.portfolio;
+      
+      // Transform the data to match our interface
+      const portfolioData = {
+        summary: {
+          ...portfolio.summary,
+          updated_at: new Date().toISOString()
+        },
+        stocks: portfolio.stocks || [],
+        mutual_funds: portfolio.mutual_funds || []
+      };
+      
+      setPortfolioData(portfolioData as PortfolioData);
     } catch (err) {
       console.error('Error loading dashboard data:', err);
       setError('Failed to load portfolio data. Please try again.');
@@ -174,7 +180,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ userId, userNam
         </div>
         <div className="flex items-center space-x-4">
           <div className="text-sm text-gray-400">
-            Last updated: {portfolioData ? new Date(portfolioData.updated_at).toLocaleDateString() : 'N/A'}
+            Last updated: {portfolioData?.summary?.updated_at ? new Date(portfolioData.summary.updated_at).toLocaleDateString() : 'N/A'}
           </div>
           {onToggleAIChat && (
             <button

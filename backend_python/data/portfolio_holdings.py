@@ -1,0 +1,271 @@
+"""
+Demo Portfolio Holdings - Realistic Indian Investment Portfolio
+Mix of stocks, mutual funds, and other instruments
+"""
+
+from typing import Dict, Any, List
+
+# Stock Holdings - Major Indian Companies
+stocks: List[Dict[str, Any]] = [
+    {
+        "symbol": "INFY",
+        "company_name": "Infosys Limited",
+        "quantity": 15,
+        "avg_purchase_price": 1450,
+        "current_price": 1520,
+        "investment_amount": 21750,
+        "current_value": 22800,
+        "gain_loss": 1050,
+        "gain_loss_percentage": 4.83,
+        "sector": "Information Technology",
+        "exchange": "NSE",
+        "purchase_dates": ["2023-08-15", "2024-01-20"]
+    },
+    {
+        "symbol": "HDFCBANK",
+        "company_name": "HDFC Bank Limited",
+        "quantity": 8,
+        "avg_purchase_price": 1680,
+        "current_price": 1750,
+        "investment_amount": 13440,
+        "current_value": 14000,
+        "gain_loss": 560,
+        "gain_loss_percentage": 4.17,
+        "sector": "Banking",
+        "exchange": "NSE",
+        "purchase_dates": ["2023-09-10", "2023-12-05"]
+    },
+    {
+        "symbol": "RELIANCE",
+        "company_name": "Reliance Industries Limited",
+        "quantity": 6,
+        "avg_purchase_price": 2800,
+        "current_price": 2920,
+        "investment_amount": 16800,
+        "current_value": 17520,
+        "gain_loss": 720,
+        "gain_loss_percentage": 4.29,
+        "sector": "Oil & Gas",
+        "exchange": "NSE",
+        "purchase_dates": ["2024-02-14"]
+    },
+    {
+        "symbol": "TCS",
+        "company_name": "Tata Consultancy Services",
+        "quantity": 5,
+        "avg_purchase_price": 3850,
+        "current_price": 4100,
+        "investment_amount": 19250,
+        "current_value": 20500,
+        "gain_loss": 1250,
+        "gain_loss_percentage": 6.49,
+        "sector": "Information Technology",
+        "exchange": "NSE",
+        "purchase_dates": ["2023-11-20"]
+    },
+    {
+        "symbol": "BAJFINANCE",
+        "company_name": "Bajaj Finance Limited",
+        "quantity": 3,
+        "avg_purchase_price": 7200,
+        "current_price": 7650,
+        "investment_amount": 21600,
+        "current_value": 22950,
+        "gain_loss": 1350,
+        "gain_loss_percentage": 6.25,
+        "sector": "Financial Services",
+        "exchange": "NSE",
+        "purchase_dates": ["2024-03-10"]
+    }
+]
+
+# Mutual Fund Holdings
+mutual_funds: List[Dict[str, Any]] = [
+    {
+        "scheme_name": "SBI Bluechip Fund - Direct Growth",
+        "scheme_code": "SBI-BC-DG",
+        "units": 450.75,
+        "nav": 78.50,
+        "current_value": 35384,
+        "investment_amount": 32000,
+        "gain_loss": 3384,
+        "gain_loss_percentage": 10.58,
+        "fund_category": "Large Cap",
+        "fund_house": "SBI Mutual Fund",
+        "sip_amount": 8000,
+        "sip_date": 5,
+        "sip_start_date": "2023-06-05",
+        "expense_ratio": 0.65
+    },
+    {
+        "scheme_name": "Axis Midcap Fund - Direct Growth",
+        "scheme_code": "AXIS-MC-DG",
+        "units": 380.25,
+        "nav": 65.20,
+        "current_value": 24792,
+        "investment_amount": 22000,
+        "gain_loss": 2792,
+        "gain_loss_percentage": 12.69,
+        "fund_category": "Mid Cap",
+        "fund_house": "Axis Mutual Fund",
+        "sip_amount": 5000,
+        "sip_date": 10,
+        "sip_start_date": "2023-07-10",
+        "expense_ratio": 0.85
+    },
+    {
+        "scheme_name": "Mirae Asset Large & Midcap Fund - Direct Growth",
+        "scheme_code": "MIRAE-LM-DG",
+        "units": 285.60,
+        "nav": 125.80,
+        "current_value": 35928,
+        "investment_amount": 30000,
+        "gain_loss": 5928,
+        "gain_loss_percentage": 19.76,
+        "fund_category": "Large & Mid Cap",
+        "fund_house": "Mirae Asset",
+        "sip_amount": 7000,
+        "sip_date": 15,
+        "sip_start_date": "2023-08-15",
+        "expense_ratio": 0.75
+    },
+    {
+        "scheme_name": "HDFC Hybrid Equity Fund - Direct Growth",
+        "scheme_code": "HDFC-HE-DG",
+        "units": 320.90,
+        "nav": 95.60,
+        "current_value": 30678,
+        "investment_amount": 28000,
+        "gain_loss": 2678,
+        "gain_loss_percentage": 9.56,
+        "fund_category": "Hybrid",
+        "fund_house": "HDFC Mutual Fund",
+        "sip_amount": 6000,
+        "sip_date": 20,
+        "sip_start_date": "2023-09-20",
+        "expense_ratio": 0.68
+    },
+    {
+        "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Growth",
+        "scheme_code": "PPFAS-FC-DG",
+        "units": 180.45,
+        "nav": 78.90,
+        "current_value": 14238,
+        "investment_amount": 12000,
+        "gain_loss": 2238,
+        "gain_loss_percentage": 18.65,
+        "fund_category": "Flexi Cap",
+        "fund_house": "PPFAS Mutual Fund",
+        "sip_amount": 3000,
+        "sip_date": 25,
+        "sip_start_date": "2024-01-25",
+        "expense_ratio": 0.72
+    }
+]
+
+# ELSS Funds (Tax Saving)
+elss_funds: List[Dict[str, Any]] = [
+    {
+        "scheme_name": "Axis Long Term Equity Fund - Direct Growth",
+        "scheme_code": "AXIS-LTE-DG",
+        "units": 220.35,
+        "nav": 68.40,
+        "current_value": 15072,
+        "investment_amount": 12000,
+        "gain_loss": 3072,
+        "gain_loss_percentage": 25.60,
+        "fund_category": "ELSS",
+        "fund_house": "Axis Mutual Fund",
+        "lock_in_period": "3 years",
+        "investment_date": "2023-03-31",
+        "tax_benefit": 12000
+    }
+]
+
+# PPF Account
+ppf: Dict[str, Any] = {
+    "account_number": "PPF123456789",
+    "current_balance": 185000,
+    "annual_contribution": 150000,
+    "years_completed": 1.5,
+    "maturity_date": "2038-04-01",
+    "estimated_maturity_value": 4500000,
+    "last_contribution": "2024-03-31",
+    "interest_rate": 7.1
+}
+
+# EPF Account
+epf: Dict[str, Any] = {
+    "account_number": "EPF987654321",
+    "current_balance": 125000,
+    "monthly_contribution": 4320,  # Employee + Employer
+    "years_of_service": 2.5,
+    "last_contribution": "2024-06-30",
+    "interest_rate": 8.15
+}
+
+
+def calculate_portfolio_summary() -> Dict[str, Any]:
+    """Calculate portfolio summary with all allocations and metrics"""
+    
+    stocks_value = sum(stock["current_value"] for stock in stocks)
+    mf_value = sum(mf["current_value"] for mf in mutual_funds)
+    elss_value = sum(elss["current_value"] for elss in elss_funds)
+    ppf_value = ppf["current_balance"]
+    epf_value = epf["current_balance"]
+
+    total_investment = (
+        sum(stock["investment_amount"] for stock in stocks) +
+        sum(mf["investment_amount"] for mf in mutual_funds) +
+        sum(elss["investment_amount"] for elss in elss_funds) +
+        ppf_value + epf_value
+    )
+
+    total_current_value = stocks_value + mf_value + elss_value + ppf_value + epf_value
+    total_gain_loss = total_current_value - total_investment
+
+    return {
+        "total_investment": total_investment,
+        "total_current_value": total_current_value,
+        "total_gain_loss": total_gain_loss,
+        "gain_loss_percentage": round(((total_gain_loss / total_investment) * 100), 2) if total_investment > 0 else 0,
+        "asset_allocation": {
+            "stocks": {
+                "value": stocks_value,
+                "percentage": round(((stocks_value / total_current_value) * 100), 2) if total_current_value > 0 else 0
+            },
+            "mutual_funds": {
+                "value": mf_value,
+                "percentage": round(((mf_value / total_current_value) * 100), 2) if total_current_value > 0 else 0
+            },
+            "elss": {
+                "value": elss_value,
+                "percentage": round(((elss_value / total_current_value) * 100), 2) if total_current_value > 0 else 0
+            },
+            "ppf": {
+                "value": ppf_value,
+                "percentage": round(((ppf_value / total_current_value) * 100), 2) if total_current_value > 0 else 0
+            },
+            "epf": {
+                "value": epf_value,
+                "percentage": round(((epf_value / total_current_value) * 100), 2) if total_current_value > 0 else 0
+            }
+        },
+        "sector_allocation": {
+            "technology": round(((sum(s["current_value"] for s in stocks if s["sector"] == "Information Technology") / stocks_value) * 100), 2) if stocks_value > 0 else 0,
+            "banking": round(((sum(s["current_value"] for s in stocks if s["sector"] == "Banking") / stocks_value) * 100), 2) if stocks_value > 0 else 0,
+            "financial_services": round(((sum(s["current_value"] for s in stocks if s["sector"] == "Financial Services") / stocks_value) * 100), 2) if stocks_value > 0 else 0,
+            "oil_gas": round(((sum(s["current_value"] for s in stocks if s["sector"] == "Oil & Gas") / stocks_value) * 100), 2) if stocks_value > 0 else 0
+        }
+    }
+
+
+# Portfolio Holdings Data Structure
+portfolio_holdings: Dict[str, Any] = {
+    "stocks": stocks,
+    "mutual_funds": mutual_funds,
+    "elss_funds": elss_funds,
+    "ppf": ppf,
+    "epf": epf,
+    "summary": calculate_portfolio_summary()
+}

@@ -7452,5 +7452,311 @@
     },
     "created_at": "2025-08-24T02:43:11.284Z",
     "updated_at": "2025-08-24T02:43:11.284Z"
+  },
+  {
+    "id": "6ab9f4c0-16a3-41bd-ac65-e1604d171f5d",
+    "credentials": {
+      "email": "dfghjk",
+      "username": "dfghjk",
+      "password": "$2b$10$kYPqwP8QUSb9EPZe0rulg.ZM61L7VHht3PhOWF8SS6qp8r9vQln4u"
+    },
+    "user_profile": {
+      "name": "Neha Rallan",
+      "pan": "AJEPR6167Q",
+      "email": "chopneha@gmail.com",
+      "phone": "8800771117",
+      "address": "21-Sep-2022 Haryana Switch-In - From HDFC Index Fund-S&P BSE SENSEX-DP Growth - via registered your email id against those folios. 173,574.60 2,193.072 79.1468 2,193.072",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "21-Sep-2022 Haryana Switch-In - From HDFC Index Fund-S&P BSE SENSEX-DP Growth - via registered your email id against those folios. 173",
+      "created_at": "2025-08-27T18:07:39.697Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 3051223.78,
+        "total_current_value": 5770478.03,
+        "total_gain_loss": 2719254.25,
+        "gain_loss_percentage": 89.12,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 5770478.03,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [
+        {
+          "scheme_name": "Mutual Fund Scheme 1",
+          "folio_number": "AUTO_1",
+          "units": 11103.432,
+          "current_price": 98.1156,
+          "current_value": 1089419.89,
+          "investment_amount": 889732.9,
+          "gain_loss": 199686.98999999987,
+          "gain_loss_percentage": 22.443476013981257,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 2",
+          "folio_number": "AUTO_2",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 115536.97,
+          "investment_amount": 0,
+          "gain_loss": 115536.97,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 3",
+          "folio_number": "AUTO_3",
+          "units": 33335.322,
+          "current_price": 24.2327,
+          "current_value": 807804.86,
+          "investment_amount": 529084.56,
+          "gain_loss": 278720.29999999993,
+          "gain_loss_percentage": 52.6797266584381,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 4",
+          "folio_number": "AUTO_4",
+          "units": 7458.195,
+          "current_price": 57.2029,
+          "current_value": 426630.38,
+          "investment_amount": 400000,
+          "gain_loss": 26630.380000000005,
+          "gain_loss_percentage": 6.657595000000001,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 5",
+          "folio_number": "AUTO_5",
+          "units": 35304.738,
+          "current_price": 24.3534,
+          "current_value": 859790.41,
+          "investment_amount": 657714.22,
+          "gain_loss": 202076.19000000006,
+          "gain_loss_percentage": 30.7240111062218,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 6",
+          "folio_number": "AUTO_6",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 228382.57,
+          "investment_amount": 0,
+          "gain_loss": 228382.57,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 7",
+          "folio_number": "AUTO_7",
+          "units": 34998.25,
+          "current_price": 3.820209296179095,
+          "current_value": 133700.64,
+          "investment_amount": 4000,
+          "gain_loss": 129700.64000000001,
+          "gain_loss_percentage": 3242.5160000000005,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 8",
+          "folio_number": "AUTO_8",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 242772.61,
+          "investment_amount": 0,
+          "gain_loss": 242772.61,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 9",
+          "folio_number": "AUTO_9",
+          "units": 77.746,
+          "current_price": 388.6024,
+          "current_value": 30212.28,
+          "investment_amount": 26000,
+          "gain_loss": 4212.279999999999,
+          "gain_loss_percentage": 16.20107692307692,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 10",
+          "folio_number": "AUTO_10",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 508912.05,
+          "investment_amount": 0,
+          "gain_loss": 508912.05,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 11",
+          "folio_number": "AUTO_11",
+          "units": 16245.157,
+          "current_price": 43.862,
+          "current_value": 712545.08,
+          "investment_amount": 494691.89,
+          "gain_loss": 217853.18999999994,
+          "gain_loss_percentage": 44.038156760564625,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 12",
+          "folio_number": "AUTO_12",
+          "units": 11999.4,
+          "current_price": 11.902150107505376,
+          "current_value": 142818.66,
+          "investment_amount": 0.1,
+          "gain_loss": 142818.56,
+          "gain_loss_percentage": 142818560,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 13",
+          "folio_number": "AUTO_13",
+          "units": 0,
+          "current_price": 0,
+          "current_value": 229032.53,
+          "investment_amount": 0,
+          "gain_loss": 229032.53,
+          "gain_loss_percentage": 0,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 14",
+          "folio_number": "AUTO_14",
+          "units": 11999.4,
+          "current_price": 12.864565728286415,
+          "current_value": 154367.07,
+          "investment_amount": 0.11,
+          "gain_loss": 154366.96000000002,
+          "gain_loss_percentage": 140333600.00000003,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        },
+        {
+          "scheme_name": "Mutual Fund Scheme 15",
+          "folio_number": "AUTO_15",
+          "units": 5148.314,
+          "current_price": 17.2002,
+          "current_value": 88552.03,
+          "investment_amount": 50000,
+          "gain_loss": 38552.03,
+          "gain_loss_percentage": 77.10405999999999,
+          "type": "Equity",
+          "mf_name": "Mutual Fund",
+          "transactions": []
+        }
+      ],
+      "stocks": [],
+      "updated_at": "2025-08-27T18:07:39.698Z"
+    },
+    "created_at": "2025-08-27T18:07:39.767Z",
+    "updated_at": "2025-08-27T18:07:39.767Z"
+  },
+  {
+    "id": "56b4d02b-92aa-4a51-b456-e8bca8f6f40d",
+    "credentials": {
+      "email": "dfghjkl",
+      "username": "dfghjkl",
+      "password": "$2b$10$J7/8OD.fCZEjjhWkrD59LOz5Rr5OtwvCqkKZbGWPVmCjcqIBWrRTC"
+    },
+    "user_profile": {
+      "name": "Unknown",
+      "pan": "AALPK1769R",
+      "email": "maxpk44@gmail.com",
+      "phone": "9871263322",
+      "address": "",
+      "age": 28,
+      "profession": "Software Engineer",
+      "location": "Mumbai, Maharashtra",
+      "created_at": "2025-08-27T18:08:21.074Z"
+    },
+    "financial_profile": {
+      "take_home": 85000,
+      "total_income": 100000,
+      "expenses": {
+        "housing": 25000,
+        "food": 8000,
+        "transport": 5000,
+        "utilities": 3000,
+        "entertainment": 4000,
+        "others": 5000
+      }
+    },
+    "investment_profile": {
+      "risk_tolerance": "Moderate",
+      "investment_experience": "Intermediate",
+      "investment_horizon": "5-10 years"
+    },
+    "portfolio": {
+      "summary": {
+        "total_investment": 0,
+        "total_current_value": 0,
+        "total_gain_loss": 0,
+        "gain_loss_percentage": 0,
+        "asset_allocation": {
+          "mutual_funds": {
+            "value": 0,
+            "percentage": 100
+          }
+        }
+      },
+      "mutual_funds": [],
+      "stocks": [],
+      "updated_at": "2025-08-27T18:08:21.074Z"
+    },
+    "created_at": "2025-08-27T18:08:21.143Z",
+    "updated_at": "2025-08-27T18:08:21.143Z"
   }
 ]

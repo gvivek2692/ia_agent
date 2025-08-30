@@ -1,0 +1,26 @@
+{
+  "id": "conv_1756565977154_fcf7f235",
+  "title": "New Chat",
+  "user_id": "rajesh-kumar",
+  "messages": [
+    {
+      "id": "e63e9f8d-20f7-4c8b-8494-f7aae3235bf5",
+      "content": "which is my best performing mutual fund",
+      "timestamp": "2025-08-30T20:29:37.155276",
+      "is_bot": false,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1756565942377_yhzun1b1e"
+    },
+    {
+      "id": "35993bfe-aafa-4716-b70f-920ddb25c770",
+      "content": "Based on your current portfolio, here are the details of your mutual fund holdings along with their performance:\n\n| Mutual Fund                                        | Units    | NAV (\u20b9) | Current Value (\u20b9) | Total Investment (\u20b9) | Gain/Loss (%) | Gain/Loss (\u20b9) |\n|---------------------------------------------------|----------|---------|-------------------|----------------------|----------------|----------------|\n| **DSP Midcap Fund - Direct Growth**               | 947.07   | 182.81  | 173,133           | 168,000              | +3.06%         | +5,133         |\n| **Nippon India Small Cap Fund - Direct Growth**   | 1279.42  | 150.23  | 192,207           | 180,000              | +14.41%        | +12,207        |\n| **Motilal Oswal Nasdaq 100 Fund - Direct Growth** | 1627.91  | 49.93   | 81,281            | 75,000               | -3.24%         | -2,719         |\n\n### Best Performing Mutual Fund\n- **Nippon India Small Cap Fund - Direct Growth**\n  - **Current Value:** \u20b9192,207\n  - **Total Investment:** \u20b9180,000\n  - **Gain/Loss:** **+14.41%** (+\u20b912,207)\n\nThe **Nippon India Small Cap Fund** is your best performer, with a gain of **14.41%** since your investment. This fund is showing strong growth, aligning well with your aggressive risk profile.\n\nIf you have any further questions or need advice on future investments, feel free to ask!",
+      "timestamp": "2025-08-30T20:29:37.155749",
+      "is_bot": true,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1756565942377_yhzun1b1e"
+    }
+  ],
+  "created_at": "2025-08-30T20:29:37.154462",
+  "updated_at": "2025-08-30T20:29:37.155754",
+  "archived": false
+}

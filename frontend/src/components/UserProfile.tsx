@@ -3,18 +3,18 @@ import { apiService } from '../services/apiService';
 
 interface User {
   id: string;
-  name: string;
-  email: string;
-  profession: string;
-  location: string;
-  age: number;
-  experience_level: string;
-  risk_tolerance: string;
+  name?: string;
+  email?: string;
+  profession?: string;
+  location?: string;
+  age?: number;
+  experience_level?: string;
+  risk_tolerance?: string;
 }
 
 interface UserProfileProps {
   user: User;
-  sessionId: string;
+  sessionId?: string;
   onLogout: () => void;
 }
 
@@ -40,7 +40,9 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await apiService.logout(sessionId);
+      if (sessionId) {
+        await apiService.logout(sessionId);
+      }
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
@@ -49,8 +51,9 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
     }
   };
 
-  const getRiskColor = (riskTolerance: string) => {
-    switch (riskTolerance.toLowerCase()) {
+  const getRiskColor = (riskTolerance: string | undefined) => {
+    const risk = (riskTolerance || 'moderate').toLowerCase();
+    switch (risk) {
       case 'conservative':
         return 'bg-green-500/20 text-green-300 border border-green-500/30 backdrop-blur-sm';
       case 'moderate':
@@ -170,7 +173,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, sessionId, onLogout }) 
           {/* Session Info */}
           <div className="px-3 sm:px-4 pb-3 sm:pb-4">
             <div className="text-xs text-gray-400 bg-white/10 rounded-xl p-2 sm:p-3 backdrop-blur-sm border border-white/20">
-              <span className="text-gray-300">Session ID:</span> <span className="font-mono text-gold-300 break-all">{sessionId.slice(-8)}...</span>
+              <span className="text-gray-300">Session ID:</span> <span className="font-mono text-gold-300 break-all">{sessionId ? sessionId.slice(-8) : 'N/A'}...</span>
             </div>
           </div>
         </div>

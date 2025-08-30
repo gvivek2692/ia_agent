@@ -1,0 +1,26 @@
+{
+  "id": "conv_1756483341362_595fed21",
+  "title": "New Chat",
+  "user_id": "demo-user-123",
+  "messages": [
+    {
+      "id": "30adcf3d-6f79-4006-89ee-7ae73e606c79",
+      "content": "Show me my asset allocation",
+      "timestamp": "2025-08-29T21:32:21.363601",
+      "is_bot": false,
+      "user_id": "demo-user-123",
+      "conversation_id": "test-conversation"
+    },
+    {
+      "id": "81e3ec5c-1e73-4dce-9802-309463b1a9da",
+      "content": "Here's a detailed breakdown of your current asset allocation:\n\n### Asset Allocation Overview\n\n| Asset Class          | Amount (\u20b9)  | Percentage of Portfolio |\n|---------------------|-------------|-------------------------|\n| **Stocks**          | \u20b997,770     | 17.3%                   |\n| **Mutual Funds**    | \u20b9141,020    | 25.0%                   |\n| **ELSS**            | \u20b915,072     | 2.7%                    |\n| **PPF**             | \u20b9185,000    | 32.8%                   |\n| **EPF**             | \u20b9125,000    | 22.2%                   |\n| **Total Portfolio** | \u20b9563,862    | 100%                    |\n\n### Key Insights\n- Your largest allocation is in **PPF** (Public Provident Fund), which is a safe long-term investment, making up **32.8%** of your total portfolio.\n- **Mutual Funds** constitute a significant portion at **25.0%**, indicating a balanced approach towards growth with moderate risk.\n- Your **equity exposure** in **stocks** is at **17.3%**, which is suitable for a moderate risk profile, allowing for capital appreciation while maintaining stability.\n\nIf you have any specific goals or adjustments in mind, feel free to share!",
+      "timestamp": "2025-08-29T21:32:21.363976",
+      "is_bot": true,
+      "user_id": "demo-user-123",
+      "conversation_id": "test-conversation"
+    }
+  ],
+  "created_at": "2025-08-29T21:32:21.362754",
+  "updated_at": "2025-08-29T21:32:21.363981",
+  "archived": false
+}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import io, { Socket } from 'socket.io-client';
 import MessageRenderer from './MessageRenderer';
 import { config } from '../config/environment';
 import { apiService } from '../services/apiService';
@@ -37,13 +36,22 @@ interface ChatInterfaceProps {
   userName?: string;
 }
 
+interface WebSocketMessage {
+  type: string;
+  data?: any;
+  message?: string;
+  userId?: string;
+  conversationId?: string;
+  context?: any;
+}
+
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ 
   selectedConversationId, 
   onConversationChange,
   userId,
   userName
 }) => {
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [websocket, setWebsocket] = useState<WebSocket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isConnected, setIsConnected] = useState(false);
@@ -51,6 +59,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const [conversationId, setConversationId] = useState<string>('');
   const [connectionError, setConnectionError] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const reconnectAttemptsRef = useRef<number>(0);
+  const maxReconnectAttempts = 5;
+  const reconnectDelay = 1000;
+
+  // Generate unique client ID for WebSocket connection
+  const clientId = useRef<string>(`client_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
   const initializeConversation = useCallback(() => {
     const newConversationId = `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -102,75 +117,102 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
     }
   }, [onConversationChange, initializeConversation]);
 
+  const connectWebSocket = useCallback(() => {
+    try {
+      // Convert HTTP URL to WebSocket URL
+      const wsUrl = config.backendUrl.replace('http://', 'ws://').replace('https://', 'wss://');
+      const websocketUrl = `${wsUrl}/ws/${clientId.current}`;
+      
+      console.log('Connecting to WebSocket:', websocketUrl);
+      
+      const ws = new WebSocket(websocketUrl);
+      
+      ws.onopen = () => {
+        console.log('WebSocket connected');
+        setIsConnected(true);
+        setConnectionError('');
+        reconnectAttemptsRef.current = 0;
+        
+        // Clear any existing reconnect timeout
+        if (reconnectTimeoutRef.current) {
+          clearTimeout(reconnectTimeoutRef.current);
+          reconnectTimeoutRef.current = null;
+        }
+      };
+
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log('WebSocket message received:', data);
+          
+          if (data.type === 'chat_response') {
+            const responseMessage = data.data;
+            if (responseMessage && responseMessage.message) {
+              const message: Message = {
+                id: Date.now(),
+                message: responseMessage.message,
+                timestamp: responseMessage.timestamp || new Date().toISOString(),
+                isBot: true
+              };
+              setMessages(prev => [...prev, message]);
+              setIsTyping(false);
+            }
+          }
+        } catch (error) {
+          console.error('Error parsing WebSocket message:', error);
+        }
+      };
+
+      ws.onclose = (event) => {
+        console.log('WebSocket closed:', event.code, event.reason);
+        setIsConnected(false);
+        
+        // Attempt to reconnect if not manually closed
+        if (event.code !== 1000 && reconnectAttemptsRef.current < maxReconnectAttempts) {
+          reconnectAttemptsRef.current += 1;
+          setConnectionError(`Reconnecting... (${reconnectAttemptsRef.current}/${maxReconnectAttempts})`);
+          
+          reconnectTimeoutRef.current = setTimeout(() => {
+            connectWebSocket();
+          }, reconnectDelay * reconnectAttemptsRef.current);
+        } else if (reconnectAttemptsRef.current >= maxReconnectAttempts) {
+          setConnectionError('Connection failed after maximum attempts');
+        }
+      };
+
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        setConnectionError('WebSocket connection error');
+        setIsConnected(false);
+      };
+
+      setWebsocket(ws);
+      
+      return () => {
+        if (reconnectTimeoutRef.current) {
+          clearTimeout(reconnectTimeoutRef.current);
+        }
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.close(1000, 'Component unmounting');
+        }
+      };
+    } catch (error) {
+      console.error('Error creating WebSocket:', error);
+      setConnectionError('Failed to create WebSocket connection');
+    }
+  }, []);
+
   useEffect(() => {
-    console.log('Connecting to backend:', config.backendUrl);
+    const cleanup = connectWebSocket();
     
-    const newSocket = io(config.backendUrl, {
-      transports: ['polling', 'websocket'], // Try polling first for better compatibility
-      timeout: 10000,
-      reconnection: true,
-      reconnectionAttempts: 5,
-      reconnectionDelay: 1000,
-      forceNew: true
-    });
-    setSocket(newSocket);
-
-    newSocket.on('connect', () => {
-      setIsConnected(true);
-      setConnectionError('');
-      console.log('Connected to server at:', config.backendUrl);
-    });
-
-    newSocket.on('disconnect', () => {
-      setIsConnected(false);
-      console.log('Disconnected from server');
-    });
-
-    newSocket.on('connect_error', (error) => {
-      console.error('Connection error to', config.backendUrl, ':', error);
-      setConnectionError(`Failed to connect to ${config.backendUrl}: ${error.message}`);
-      setIsConnected(false);
-    });
-
-    newSocket.on('reconnect_error', (error) => {
-      console.error('Reconnection error:', error);
-    });
-
-    newSocket.on('reconnect', (attemptNumber) => {
-      console.log('Reconnected after', attemptNumber, 'attempts');
-      setIsConnected(true);
-      setConnectionError('');
-    });
-
-    newSocket.on('chat_response', (response: Message) => {
-      setMessages(prev => [...prev, response]);
-      setIsTyping(false);
-    });
-
-    newSocket.on('error', (error) => {
-      console.error('Socket error:', error?.message || error);
-      setIsTyping(false);
-      // Optionally show user-friendly error message
-      if (error?.message) {
-        setMessages(prev => [...prev, {
-          id: Date.now(),
-          message: `⚠️ Error: ${error.message}. Please try again.`,
-          timestamp: new Date().toISOString(),
-          isBot: true
-        }]);
-      }
-    });
-
     // Initialize first conversation
     if (!selectedConversationId) {
       initializeConversation();
     }
 
-    return () => {
-      newSocket.close();
-    };
+    return cleanup;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);  // Only run once on mount
+  }, []); // Only run once on mount
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -190,7 +232,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   }, [selectedConversationId, conversationId, initializeConversation, loadConversation]);
 
   const sendMessage = () => {
-    if (!inputMessage.trim() || !socket || !isConnected) return;
+    if (!inputMessage.trim() || !websocket || !isConnected) return;
 
     const userMessage: Message = {
       id: Date.now(),
@@ -202,27 +244,60 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
     
-    // Send message with conversation context and user info
-    socket.emit('chat_message', { 
+    // Send message in format expected by Python FastAPI backend
+    const wsMessage: WebSocketMessage = {
+      type: 'chat_message',
       message: inputMessage,
+      userId: userId,
       conversationId: conversationId,
-      conversationHistory: messages.slice(-10), // Send last 10 messages for context
-      userId: userId // Send userId for personalized responses
-    });
-    setInputMessage('');
+      context: {
+        conversationHistory: messages.slice(-10), // Send last 10 messages for context
+        userName: userName
+      }
+    };
+    
+    try {
+      websocket.send(JSON.stringify(wsMessage));
+      setInputMessage('');
+    } catch (error) {
+      console.error('Error sending WebSocket message:', error);
+      setIsTyping(false);
+      setMessages(prev => [...prev, {
+        id: Date.now(),
+        message: '⚠️ Failed to send message. Please try again.',
+        timestamp: new Date().toISOString(),
+        isBot: true
+      }]);
+    }
   };
 
   const clearConversation = () => {
     const newConversationId = initializeConversation();
-    if (socket) {
-      socket.emit('conversation_cleared', { conversationId: newConversationId });
+    if (websocket && isConnected) {
+      const wsMessage: WebSocketMessage = {
+        type: 'conversation_cleared',
+        conversationId: newConversationId
+      };
+      try {
+        websocket.send(JSON.stringify(wsMessage));
+      } catch (error) {
+        console.error('Error sending conversation_cleared message:', error);
+      }
     }
   };
 
   const startNewConversation = () => {
     const newConversationId = initializeConversation();
-    if (socket) {
-      socket.emit('conversation_cleared', { conversationId: newConversationId });
+    if (websocket && isConnected) {
+      const wsMessage: WebSocketMessage = {
+        type: 'conversation_cleared',
+        conversationId: newConversationId
+      };
+      try {
+        websocket.send(JSON.stringify(wsMessage));
+      } catch (error) {
+        console.error('Error sending conversation_cleared message:', error);
+      }
     }
   };
 
@@ -231,6 +306,12 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  const handleReconnect = () => {
+    reconnectAttemptsRef.current = 0;
+    setConnectionError('');
+    connectWebSocket();
   };
 
   return (
@@ -242,9 +323,19 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
             {isConnected ? (
               <span>🟢 Connected to WealthWise AI</span>
             ) : (
-              <span title={connectionError || 'Connecting...'}>
-                🔴 {connectionError ? 'Connection Failed' : 'Connecting...'}
-              </span>
+              <div className="flex items-center space-x-2">
+                <span title={connectionError || 'Connecting...'}>
+                  🔴 {connectionError ? 'Connection Failed' : 'Connecting...'}
+                </span>
+                {connectionError && !connectionError.includes('Reconnecting') && (
+                  <button
+                    onClick={handleReconnect}
+                    className="px-2 py-1 text-xs bg-red-500/20 text-red-300 rounded hover:bg-red-500/30 border border-red-500/30"
+                  >
+                    Retry
+                  </button>
+                )}
+              </div>
             )}
           </div>
           
@@ -275,7 +366,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
               {userName ? `User: ${userName} • ` : ''}
               Conversation: {conversationId.slice(-8)} • Messages: {messages.length}
             </span>
-            <span className="text-gold-400">Backend: {config.isDevelopment ? 'Local' : 'Render'}</span>
+            <span className="text-gold-400">Backend: Python FastAPI</span>
           </div>
           <div className="mt-1 flex justify-between">
             <span>Model: GPT-4.1 Mini with Web Search</span>

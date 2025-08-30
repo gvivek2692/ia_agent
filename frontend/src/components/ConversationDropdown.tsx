@@ -5,10 +5,17 @@ import { apiService } from '../services/apiService';
 interface Conversation {
   id: string;
   title: string;
-  createdAt: string;
-  updatedAt: string;
-  messageCount: number;
+  created_at: string;
+  updated_at: string;
+  message_count: number;
   archived: boolean;
+}
+
+interface ConversationResponse {
+  conversations: Conversation[];
+  total: number;
+  limit: number;
+  offset: number;
 }
 
 interface ConversationDropdownProps {
@@ -49,10 +56,14 @@ const ConversationDropdown: React.FC<ConversationDropdownProps> = ({
   const loadConversations = async () => {
     setLoading(true);
     try {
-      const data = await apiService.getConversations(3, 0, userId || 'demo-user') as Conversation[];
-      setConversations(data);
+      const response = await apiService.getConversations(3, 0, userId || 'demo-user') as ConversationResponse;
+      
+      // Extract conversations array from response object
+      const conversationsArray = response?.conversations || [];
+      setConversations(conversationsArray);
     } catch (error) {
       console.error('Failed to load conversations:', error);
+      setConversations([]); // Set empty array on error
     }
     setLoading(false);
   };
@@ -136,11 +147,11 @@ const ConversationDropdown: React.FC<ConversationDropdownProps> = ({
                   <div className="flex items-center justify-between w-full">
                     <span className="truncate font-medium">{conversation.title}</span>
                     <span className="text-xs text-gray-400 ml-2 flex-shrink-0">
-                      {formatDate(conversation.updatedAt)}
+                      {formatDate(conversation.updated_at)}
                     </span>
                   </div>
                   <span className="text-xs text-gray-500 mt-0.5">
-                    {conversation.messageCount} messages
+                    {conversation.message_count} messages
                   </span>
                 </button>
               ))}

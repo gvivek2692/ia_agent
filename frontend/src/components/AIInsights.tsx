@@ -25,6 +25,7 @@ import { apiService } from '../services/apiService';
 interface AIInsightsProps {
   userId?: string;
   userName?: string;
+  sessionId?: string;
   onSessionExpired?: () => void;
   onToggleAIChat?: () => void;
 }
@@ -64,7 +65,7 @@ interface AIInsightsData {
   last_updated: string;
 }
 
-const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpired, onToggleAIChat }) => {
+const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, onSessionExpired, onToggleAIChat }) => {
   const [insightsData, setInsightsData] = useState<AIInsightsData | null>(null);
   const [goals, setGoals] = useState<GoalData[]>([]);
   const [portfolioValue, setPortfolioValue] = useState<number>(0);
@@ -97,8 +98,8 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, onSessionExpi
       } else {
         // Load demo data
         const [goalsResponse, portfolioResponse] = await Promise.all([
-          apiService.getGoalsOverview(),
-          apiService.getPortfolioSummary()
+          apiService.getGoalsOverview(sessionId),
+          apiService.getPortfolioSummary(sessionId)
         ]);
         setGoals((goalsResponse as any).goals || []);
         setPortfolioValue((portfolioResponse as any).summary?.total_current_value || 0);

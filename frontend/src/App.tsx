@@ -12,13 +12,13 @@ import { apiService } from './services/apiService';
 
 interface User {
   id: string;
-  name: string;
-  email: string;
-  profession: string;
-  location: string;
-  age: number;
-  experience_level: string;
-  risk_tolerance: string;
+  name?: string;
+  email?: string;
+  profession?: string;
+  location?: string;
+  age?: number;
+  experience_level?: string;
+  risk_tolerance?: string;
 }
 
 type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights';
@@ -151,7 +151,7 @@ function App() {
       const response = await apiService.login(email, 'demo123') as any;
       
       if (response.success) {
-        handleLoginSuccess(response.user, response.sessionId);
+        handleLoginSuccess(response.user, response.session_id);
       }
     } catch (error) {
       console.error('Auto-login error:', error);
@@ -345,6 +345,7 @@ function App() {
             <PortfolioDashboard 
               userId={currentUser?.id}
               userName={currentUser?.name}
+              sessionId={sessionId}
               onSessionExpired={handleLogout}
               onToggleAIChat={toggleAIChat}
             />
@@ -354,6 +355,7 @@ function App() {
             <AIInsights 
               userId={currentUser?.id}
               userName={currentUser?.name}
+              sessionId={sessionId}
               onSessionExpired={handleLogout}
               onToggleAIChat={toggleAIChat}
             />
