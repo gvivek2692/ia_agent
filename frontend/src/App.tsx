@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, BarChart3, Brain } from 'lucide-react';
+import { MessageSquare, BarChart3, Brain, User } from 'lucide-react';
 import LandingPage from './components/LandingPage';
 import AIChatSidebar from './components/AIChatSidebar';
 import LoginForm from './components/LoginForm';
@@ -8,6 +8,7 @@ import UserProfile from './components/UserProfile';
 import UploadStatement from './components/UploadStatement';
 import PortfolioDashboard from './components/PortfolioDashboard';
 import AIInsights from './components/AIInsights';
+import ProfileEditPage from './components/ProfileEditPage';
 import { apiService } from './services/apiService';
 
 interface User {
@@ -21,7 +22,7 @@ interface User {
   risk_tolerance?: string;
 }
 
-type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights';
+type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights' | 'profile';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
@@ -326,6 +327,19 @@ function App() {
                     <span>AI Insights</span>
                   </span>
                 </button>
+                <button
+                  onClick={() => setCurrentView('profile')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                    currentView === 'profile'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
+                  }`}
+                >
+                  <span className="flex items-center space-x-2">
+                    <User className="w-4 h-4" />
+                    <span>Profile</span>
+                  </span>
+                </button>
               </div>
               
               {/* User Profile Component */}
@@ -334,6 +348,7 @@ function App() {
                   user={currentUser}
                   sessionId={sessionId}
                   onLogout={handleLogout}
+                  onEditProfile={() => setCurrentView('profile')}
                 />
               )}
             </div>
@@ -358,6 +373,19 @@ function App() {
               sessionId={sessionId}
               onSessionExpired={handleLogout}
               onToggleAIChat={toggleAIChat}
+            />
+          )}
+          
+          {currentView === 'profile' && currentUser && (
+            <ProfileEditPage 
+              user={currentUser}
+              sessionId={sessionId}
+              onBack={() => setCurrentView('portfolio')}
+              onProfileUpdated={(updatedUser) => {
+                setCurrentUser(updatedUser);
+                // Update localStorage with updated user data
+                localStorage.setItem('wealth_advisor_user', JSON.stringify(updatedUser));
+              }}
             />
           )}
         </main>

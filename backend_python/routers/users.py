@@ -6,6 +6,7 @@ import json
 import os
 from typing import List, Dict, Any, Optional
 from fastapi import APIRouter, HTTPException, Query, Header
+from pydantic import BaseModel
 
 from models.user import UserResponse
 from services.auth_service import AuthService
@@ -13,6 +14,18 @@ from shared_services import auth_service as shared_auth_service, demo_service
 
 router = APIRouter()
 auth_service = AuthService()
+
+
+class LoanInfo(BaseModel):
+    emi: float
+    tenure_remaining_months: int
+    principal_remaining: float
+
+
+class ProfileUpdateRequest(BaseModel):
+    user_profile: Optional[Dict[str, Any]] = None
+    financial_profile: Optional[Dict[str, Any]] = None
+    loan_profile: Optional[Dict[str, Any]] = None
 
 
 def load_users() -> List[Dict[str, Any]]:
@@ -248,6 +261,77 @@ async def get_user_goals(user_id: str):
             detail={
                 "success": False,
                 "error": "Failed to retrieve goals",
+                "code": "SERVER_ERROR"
+            }
+        )
+
+
+@router.put("/users/{user_id}/profile")
+async def update_user_profile(user_id: str, profile_data: ProfileUpdateRequest, x_session_id: Optional[str] = Header(None)):
+    """Update user profile information"""
+    try:
+        # Verify session if provided
+        if x_session_id:
+            session_result = shared_auth_service.get_session(x_session_id)
+            if not session_result.get("success"):
+                raise HTTPException(
+                    status_code=401,
+                    detail={
+                        "success": False,
+                        "error": "Invalid session",
+                        "code": "INVALID_SESSION"
+                    }
+                )
+            
+            # Check if session user matches the user_id being updated
+            session_user_id = session_result.get("user", {}).get("id")
+            if session_user_id != user_id:
+                raise HTTPException(
+                    status_code=403,
+                    detail={
+                        "success": False,
+                        "error": "Not authorized to update this profile",
+                        "code": "UNAUTHORIZED"
+                    }
+                )
+
+        # Update user profile using demo service
+        update_result = demo_service.update_user_profile(user_id, profile_data.dict(exclude_none=True))
+        
+        if "error" in update_result:
+            if "not found" in update_result["error"].lower():
+                raise HTTPException(
+                    status_code=404,
+                    detail={
+                        "success": False,
+                        "error": "User not found",
+                        "code": "USER_NOT_FOUND"
+                    }
+                )
+            else:
+                raise HTTPException(
+                    status_code=500,
+                    detail={
+                        "success": False,
+                        "error": update_result["error"],
+                        "code": "UPDATE_FAILED"
+                    }
+                )
+        
+        return {
+            "success": True,
+            "message": "Profile updated successfully",
+            "user": update_result
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "success": False,
+                "error": "Failed to update profile",
                 "code": "SERVER_ERROR"
             }
         )

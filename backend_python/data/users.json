@@ -8175,19 +8175,26 @@
     "credentials": {
       "email": "priya.sharma@email.com",
       "username": "priya.sharma",
-      "password": "$2b$12$aj5JiVSB/81eFIFbC9qGauJ8b6NDTr7NoLwBP/JCItSYNowglyIOO"
+      "password": "$2b$12$5Sk4OChahTk3XLKNA/uk5eozwuuR89tITVDX2VFb0qCRGqlzt4vJS"
     },
     "user_profile": {
       "name": "Priya Sharma",
       "age": 28,
+      "gender": "Female",
+      "marital_status": "Single",
+      "kids": 0,
       "profession": "Software Engineer",
       "location": "Bangalore, Karnataka",
       "company": "Tech Solutions Pvt Ltd",
       "experience": "5 years",
-      "education": "B.Tech Computer Science",
-      "phone": "+91-9876543210",
+      "education": "",
+      "phone": "",
       "email": "priya.sharma@email.com",
-      "created_at": "2025-08-30T19:48:11.856707"
+      "hobbies": [
+        "Reading",
+        "traveling"
+      ],
+      "created_at": "2025-09-02T16:43:03.279700"
     },
     "financial_profile": {
       "monthly_salary": 120000,
@@ -8197,7 +8204,21 @@
       "savings_rate": 25.0,
       "bonus_frequency": "annual",
       "last_bonus": 150000,
-      "other_income": 5000
+      "other_income": 0,
+      "school_fees": 0
+    },
+    "loan_profile": {
+      "home_loan": {
+        "emi": 0,
+        "tenure_remaining_months": 0,
+        "principal_remaining": 0
+      },
+      "car_loan": {
+        "emi": 0,
+        "tenure_remaining_months": 0,
+        "principal_remaining": 0
+      },
+      "other_emi": 0
     },
     "investment_profile": {
       "risk_tolerance": "conservative",
@@ -8213,34 +8234,68 @@
     },
     "portfolio": {
       "summary": {
-        "total_investment": 543915,
-        "total_current_value": 571367,
-        "total_gain_loss": 27452,
-        "gain_loss_percentage": 5.05,
-        "updated_at": "2025-08-30T19:48:11.556422",
+        "total_investment": 546737,
+        "total_current_value": 568899,
+        "total_gain_loss": 22162,
+        "gain_loss_percentage": 4.05,
+        "updated_at": "2025-09-02T16:43:02.978070",
         "asset_allocation": {
           "stocks": {
-            "value": 211109,
-            "percentage": 36.95
+            "value": 238290,
+            "percentage": 41.89
           },
           "mutual_funds": {
-            "value": 360258,
-            "percentage": 63.05
+            "value": 330609,
+            "percentage": 58.11
           }
         }
       },
       "stocks": [
         {
-          "symbol": "HINDUNILVR",
-          "company_name": "Hindustan Unilever Limited",
-          "quantity": 18,
-          "avg_purchase_price": 2943,
-          "current_price": 2741,
-          "investment_amount": 52974,
-          "current_value": 49338,
-          "gain_loss": -3636,
-          "gain_loss_percentage": -6.86,
-          "sector": "FMCG",
+          "symbol": "TCS",
+          "company_name": "Tata Consultancy Services",
+          "quantity": 12,
+          "avg_purchase_price": 4401,
+          "current_price": 4783,
+          "investment_amount": 52812,
+          "current_value": 57396,
+          "gain_loss": 4584,
+          "gain_loss_percentage": 8.68,
+          "sector": "Information Technology",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "BHARTIARTL",
+          "company_name": "Bharti Airtel Limited",
+          "quantity": 47,
+          "avg_purchase_price": 1166,
+          "current_price": 1405,
+          "investment_amount": 54802,
+          "current_value": 66035,
+          "gain_loss": 11233,
+          "gain_loss_percentage": 20.5,
+          "sector": "Telecom",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "HDFCBANK",
+          "company_name": "HDFC Bank Limited",
+          "quantity": 40,
+          "avg_purchase_price": 1360,
+          "current_price": 1602,
+          "investment_amount": 54400,
+          "current_value": 64080,
+          "gain_loss": 9680,
+          "gain_loss_percentage": 17.79,
+          "sector": "Banking",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8250,47 +8305,13 @@
         {
           "symbol": "INFY",
           "company_name": "Infosys Limited",
-          "quantity": 36,
-          "avg_purchase_price": 1487,
-          "current_price": 1392,
-          "investment_amount": 53532,
-          "current_value": 50112,
-          "gain_loss": -3420,
-          "gain_loss_percentage": -6.39,
-          "sector": "Information Technology",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "ITC",
-          "company_name": "ITC Limited",
-          "quantity": 127,
-          "avg_purchase_price": 432,
-          "current_price": 407,
-          "investment_amount": 54864,
-          "current_value": 51689,
-          "gain_loss": -3175,
-          "gain_loss_percentage": -5.79,
-          "sector": "FMCG",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "TCS",
-          "company_name": "Tata Consultancy Services",
-          "quantity": 15,
-          "avg_purchase_price": 3503,
-          "current_price": 3998,
-          "investment_amount": 52545,
-          "current_value": 59970,
-          "gain_loss": 7425,
-          "gain_loss_percentage": 14.13,
+          "quantity": 29,
+          "avg_purchase_price": 1887,
+          "current_price": 1751,
+          "investment_amount": 54723,
+          "current_value": 50779,
+          "gain_loss": -3944,
+          "gain_loss_percentage": -7.21,
           "sector": "Information Technology",
           "exchange": "NSE",
           "purchase_dates": [
@@ -8303,50 +8324,50 @@
         {
           "scheme_name": "Mirae Asset Large Cap Fund - Direct Growth",
           "scheme_code": "MA-LC-DG",
-          "units": 1608.03,
-          "nav": 104.99,
-          "current_value": 168827,
+          "units": 1589.29,
+          "nav": 105.47,
+          "current_value": 167622,
           "investment_amount": 165000,
-          "gain_loss": 3827,
-          "gain_loss_percentage": 2.32,
+          "gain_loss": 2622,
+          "gain_loss_percentage": 1.59,
           "category": "Large Cap",
           "fund_house": "Mirae Mutual Fund",
           "sip_amount": 8000,
-          "sip_date": 15,
+          "sip_date": 28,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.52
         },
         {
-          "scheme_name": "HDFC Corporate Bond Fund - Direct Growth",
-          "scheme_code": "HDFC-CB-DG",
-          "units": 4380.53,
-          "nav": 26.3,
-          "current_value": 115208,
+          "scheme_name": "SBI Magnum Medium Duration Fund - Direct Growth",
+          "scheme_code": "SBI-MD-DG",
+          "units": 2115.38,
+          "nav": 45.0,
+          "current_value": 95192,
           "investment_amount": 99000,
-          "gain_loss": 16208,
-          "gain_loss_percentage": 16.37,
-          "category": "Corporate Bond",
-          "fund_house": "HDFC Mutual Fund",
+          "gain_loss": -3808,
+          "gain_loss_percentage": -3.85,
+          "category": "Medium Duration",
+          "fund_house": "SBI Mutual Fund",
           "sip_amount": 5000,
-          "sip_date": 16,
+          "sip_date": 6,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.28
+          "expense_ratio": 0.45
         },
         {
-          "scheme_name": "ICICI Prudential Equity & Debt Fund - Direct Growth",
-          "scheme_code": "ICICI-ED-DG",
-          "units": 307.56,
-          "nav": 247.83,
-          "current_value": 76223,
+          "scheme_name": "HDFC Balanced Advantage Fund - Direct Growth",
+          "scheme_code": "HDFC-BA-DG",
+          "units": 991.74,
+          "nav": 68.36,
+          "current_value": 67795,
           "investment_amount": 66000,
-          "gain_loss": 10223,
-          "gain_loss_percentage": 15.49,
-          "category": "Aggressive Hybrid",
-          "fund_house": "ICICI Mutual Fund",
+          "gain_loss": 1795,
+          "gain_loss_percentage": 2.72,
+          "category": "Balanced Advantage",
+          "fund_house": "HDFC Mutual Fund",
           "sip_amount": 3000,
-          "sip_date": 5,
+          "sip_date": 22,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.58
+          "expense_ratio": 0.42
         }
       ]
     },
@@ -8519,11 +8540,14 @@
     "credentials": {
       "email": "rajesh.kumar@email.com",
       "username": "rajesh.kumar",
-      "password": "$2b$12$m3Zic2Sdyfo99ROwBKCh1O9skO18uT4.oseHqWwV.EA3f7oNy5flm"
+      "password": "$2b$12$m/fDw0awds941EjZhwrF/eDNS3kYh69v/RN3Hmn5TQ8u47pIwieLi"
     },
     "user_profile": {
       "name": "Rajesh Kumar",
       "age": 35,
+      "gender": "Male",
+      "marital_status": "Married",
+      "kids": 2,
       "profession": "Business Owner",
       "location": "Mumbai, Maharashtra",
       "company": "Kumar Enterprises Pvt Ltd",
@@ -8531,7 +8555,13 @@
       "education": "MBA Finance",
       "phone": "+91-9876543211",
       "email": "rajesh.kumar@email.com",
-      "created_at": "2025-08-30T19:48:12.160514"
+      "hobbies": [
+        "Golf",
+        "Stock Trading",
+        "Travel",
+        "Reading Business Books"
+      ],
+      "created_at": "2025-09-02T16:43:03.580423"
     },
     "financial_profile": {
       "monthly_salary": 200000,
@@ -8541,7 +8571,21 @@
       "savings_rate": 33.3,
       "bonus_frequency": "quarterly",
       "last_bonus": 300000,
-      "other_income": 25000
+      "other_income": 25000,
+      "school_fees": 25000
+    },
+    "loan_profile": {
+      "home_loan": {
+        "emi": 45000,
+        "tenure_remaining_months": 180,
+        "principal_remaining": 6500000
+      },
+      "car_loan": {
+        "emi": 18000,
+        "tenure_remaining_months": 36,
+        "principal_remaining": 600000
+      },
+      "other_emi": 8000
     },
     "investment_profile": {
       "risk_tolerance": "aggressive",
@@ -8557,34 +8601,34 @@
     },
     "portfolio": {
       "summary": {
-        "total_investment": 1375498,
-        "total_current_value": 1408998,
-        "total_gain_loss": 33500,
-        "gain_loss_percentage": 2.44,
-        "updated_at": "2025-08-30T19:48:11.857102",
+        "total_investment": 1389045,
+        "total_current_value": 1516019,
+        "total_gain_loss": 126974,
+        "gain_loss_percentage": 9.14,
+        "updated_at": "2025-09-02T16:43:03.280084",
         "asset_allocation": {
           "stocks": {
-            "value": 962377,
-            "percentage": 68.3
+            "value": 1075834,
+            "percentage": 70.96
           },
           "mutual_funds": {
-            "value": 446621,
-            "percentage": 31.7
+            "value": 440185,
+            "percentage": 29.04
           }
         }
       },
       "stocks": [
         {
-          "symbol": "TCS",
-          "company_name": "Tata Consultancy Services",
-          "quantity": 34,
-          "avg_purchase_price": 4064,
-          "current_price": 3842,
-          "investment_amount": 138176,
-          "current_value": 130628,
-          "gain_loss": -7548,
-          "gain_loss_percentage": -5.46,
-          "sector": "Information Technology",
+          "symbol": "ICICIBANK",
+          "company_name": "ICICI Bank Limited",
+          "quantity": 116,
+          "avg_purchase_price": 1201,
+          "current_price": 1465,
+          "investment_amount": 139316,
+          "current_value": 169940,
+          "gain_loss": 30624,
+          "gain_loss_percentage": 21.98,
+          "sector": "Banking",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8592,16 +8636,16 @@
           ]
         },
         {
-          "symbol": "BHARTIARTL",
-          "company_name": "Bharti Airtel Limited",
-          "quantity": 63,
-          "avg_purchase_price": 2192,
-          "current_price": 2009,
-          "investment_amount": 138096,
-          "current_value": 126567,
-          "gain_loss": -11529,
-          "gain_loss_percentage": -8.35,
-          "sector": "Telecom",
+          "symbol": "INFY",
+          "company_name": "Infosys Limited",
+          "quantity": 80,
+          "avg_purchase_price": 1749,
+          "current_price": 1880,
+          "investment_amount": 139920,
+          "current_value": 150400,
+          "gain_loss": 10480,
+          "gain_loss_percentage": 7.49,
+          "sector": "Information Technology",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8611,31 +8655,14 @@
         {
           "symbol": "BAJFINANCE",
           "company_name": "Bajaj Finance Limited",
-          "quantity": 14,
-          "avg_purchase_price": 9794,
-          "current_price": 9064,
-          "investment_amount": 137116,
-          "current_value": 126896,
-          "gain_loss": -10220,
-          "gain_loss_percentage": -7.45,
+          "quantity": 16,
+          "avg_purchase_price": 8354,
+          "current_price": 8392,
+          "investment_amount": 133664,
+          "current_value": 134272,
+          "gain_loss": 608,
+          "gain_loss_percentage": 0.45,
           "sector": "Financial Services",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "PAGEIND",
-          "company_name": "Page Industries Limited",
-          "quantity": 4,
-          "avg_purchase_price": 30738,
-          "current_price": 37111,
-          "investment_amount": 122952,
-          "current_value": 148444,
-          "gain_loss": 25492,
-          "gain_loss_percentage": 20.73,
-          "sector": "Textiles",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8645,13 +8672,13 @@
         {
           "symbol": "PIDILITIND",
           "company_name": "Pidilite Industries Limited",
-          "quantity": 52,
-          "avg_purchase_price": 2689,
-          "current_price": 2959,
-          "investment_amount": 139828,
-          "current_value": 153868,
-          "gain_loss": 14040,
-          "gain_loss_percentage": 10.04,
+          "quantity": 51,
+          "avg_purchase_price": 2705,
+          "current_price": 3213,
+          "investment_amount": 137955,
+          "current_value": 163863,
+          "gain_loss": 25908,
+          "gain_loss_percentage": 18.78,
           "sector": "Chemicals",
           "exchange": "NSE",
           "purchase_dates": [
@@ -8660,16 +8687,16 @@
           ]
         },
         {
-          "symbol": "HAPPSTMNDS",
-          "company_name": "Happiest Minds Technologies",
-          "quantity": 150,
-          "avg_purchase_price": 930,
-          "current_price": 980,
-          "investment_amount": 139500,
-          "current_value": 147000,
-          "gain_loss": 7500,
-          "gain_loss_percentage": 5.38,
-          "sector": "Technology",
+          "symbol": "MCDOWELL-N",
+          "company_name": "United Spirits Limited",
+          "quantity": 119,
+          "avg_purchase_price": 1170,
+          "current_price": 1222,
+          "investment_amount": 139230,
+          "current_value": 145418,
+          "gain_loss": 6188,
+          "gain_loss_percentage": 4.44,
+          "sector": "Beverages",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8679,14 +8706,31 @@
         {
           "symbol": "TATACHEM",
           "company_name": "Tata Chemicals Limited",
-          "quantity": 118,
-          "avg_purchase_price": 1185,
-          "current_price": 1093,
-          "investment_amount": 139830,
-          "current_value": 128974,
-          "gain_loss": -10856,
-          "gain_loss_percentage": -7.76,
+          "quantity": 141,
+          "avg_purchase_price": 990,
+          "current_price": 1071,
+          "investment_amount": 139590,
+          "current_value": 151011,
+          "gain_loss": 11421,
+          "gain_loss_percentage": 8.18,
           "sector": "Chemicals",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "ROUTE",
+          "company_name": "Route Mobile Limited",
+          "quantity": 77,
+          "avg_purchase_price": 1810,
+          "current_price": 2090,
+          "investment_amount": 139370,
+          "current_value": 160930,
+          "gain_loss": 21560,
+          "gain_loss_percentage": 15.47,
+          "sector": "Technology",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8698,48 +8742,48 @@
         {
           "scheme_name": "DSP Midcap Fund - Direct Growth",
           "scheme_code": "DSP-MC-DG",
-          "units": 947.07,
-          "nav": 182.81,
-          "current_value": 173133,
+          "units": 1026.46,
+          "nav": 169.92,
+          "current_value": 174415,
           "investment_amount": 168000,
-          "gain_loss": 5133,
-          "gain_loss_percentage": 3.06,
+          "gain_loss": 6415,
+          "gain_loss_percentage": 3.82,
           "category": "Mid Cap",
           "fund_house": "DSP Mutual Fund",
           "sip_amount": 12000,
-          "sip_date": 17,
+          "sip_date": 22,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.71
         },
         {
-          "scheme_name": "Nippon India Small Cap Fund - Direct Growth",
-          "scheme_code": "NI-SC-DG",
-          "units": 1279.42,
-          "nav": 150.23,
-          "current_value": 192207,
+          "scheme_name": "Axis Small Cap Fund - Direct Growth",
+          "scheme_code": "AXIS-SC-DG",
+          "units": 2142.86,
+          "nav": 81.99,
+          "current_value": 175693,
           "investment_amount": 168000,
-          "gain_loss": 24207,
-          "gain_loss_percentage": 14.41,
+          "gain_loss": 7693,
+          "gain_loss_percentage": 4.58,
           "category": "Small Cap",
-          "fund_house": "Nippon Mutual Fund",
+          "fund_house": "Axis Mutual Fund",
           "sip_amount": 10000,
-          "sip_date": 24,
+          "sip_date": 19,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.85
+          "expense_ratio": 0.78
         },
         {
           "scheme_name": "Motilal Oswal Nasdaq 100 Fund - Direct Growth",
           "scheme_code": "MO-NASDAQ-DG",
-          "units": 1627.91,
-          "nav": 49.93,
-          "current_value": 81281,
+          "units": 1830.46,
+          "nav": 49.21,
+          "current_value": 90077,
           "investment_amount": 84000,
-          "gain_loss": -2719,
-          "gain_loss_percentage": -3.24,
+          "gain_loss": 6077,
+          "gain_loss_percentage": 7.23,
           "category": "International",
           "fund_house": "Motilal Mutual Fund",
           "sip_amount": 5000,
-          "sip_date": 16,
+          "sip_date": 4,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.65
         }
@@ -8909,11 +8953,14 @@
     "credentials": {
       "email": "anita.desai@email.com",
       "username": "anita.desai",
-      "password": "$2b$12$cMXr1tmeCgLgM74JSv/8YO/i/fLahtQTSW672/g.cIyNzel//l5E6"
+      "password": "$2b$12$3OD/Gu5uZ/avQmY5ijORFuzsUJnzHA3zQU.pGn4ryAMDL.39CQ0cG"
     },
     "user_profile": {
       "name": "Dr. Anita Desai",
       "age": 32,
+      "gender": "Female",
+      "marital_status": "Married",
+      "kids": 2,
       "profession": "Medical Doctor",
       "location": "Delhi, NCR",
       "company": "Apollo Hospitals",
@@ -8921,7 +8968,13 @@
       "education": "MBBS, MD",
       "phone": "+91-9876543212",
       "email": "anita.desai@email.com",
-      "created_at": "2025-08-30T19:48:12.460541"
+      "hobbies": [
+        "Classical Music",
+        "Medical Research",
+        "Gardening",
+        "Teaching"
+      ],
+      "created_at": "2025-09-02T16:43:03.880134"
     },
     "financial_profile": {
       "monthly_salary": 150000,
@@ -8931,7 +8984,21 @@
       "savings_rate": 30.8,
       "bonus_frequency": "annual",
       "last_bonus": 200000,
-      "other_income": 15000
+      "other_income": 15000,
+      "school_fees": 12000
+    },
+    "loan_profile": {
+      "home_loan": {
+        "emi": 28000,
+        "tenure_remaining_months": 120,
+        "principal_remaining": 2800000
+      },
+      "car_loan": {
+        "emi": 0,
+        "tenure_remaining_months": 0,
+        "principal_remaining": 0
+      },
+      "other_emi": 5000
     },
     "investment_profile": {
       "risk_tolerance": "moderate",
@@ -8948,34 +9015,34 @@
     },
     "portfolio": {
       "summary": {
-        "total_investment": 974809,
-        "total_current_value": 1026600,
-        "total_gain_loss": 51791,
-        "gain_loss_percentage": 5.31,
-        "updated_at": "2025-08-30T19:48:12.160719",
+        "total_investment": 971280,
+        "total_current_value": 1017540,
+        "total_gain_loss": 46260,
+        "gain_loss_percentage": 4.76,
+        "updated_at": "2025-09-02T16:43:03.580576",
         "asset_allocation": {
           "stocks": {
-            "value": 517987,
-            "percentage": 50.46
+            "value": 502039,
+            "percentage": 49.34
           },
           "mutual_funds": {
-            "value": 508613,
-            "percentage": 49.54
+            "value": 515501,
+            "percentage": 50.66
           }
         }
       },
       "stocks": [
         {
-          "symbol": "TCS",
-          "company_name": "Tata Consultancy Services",
-          "quantity": 26,
-          "avg_purchase_price": 3705,
-          "current_price": 4201,
-          "investment_amount": 96330,
-          "current_value": 109226,
-          "gain_loss": 12896,
-          "gain_loss_percentage": 13.39,
-          "sector": "Information Technology",
+          "symbol": "HINDUNILVR",
+          "company_name": "Hindustan Unilever Limited",
+          "quantity": 33,
+          "avg_purchase_price": 2938,
+          "current_price": 2790,
+          "investment_amount": 96954,
+          "current_value": 92070,
+          "gain_loss": -4884,
+          "gain_loss_percentage": -5.04,
+          "sector": "FMCG",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -8985,13 +9052,13 @@
         {
           "symbol": "ICICIBANK",
           "company_name": "ICICI Bank Limited",
-          "quantity": 66,
-          "avg_purchase_price": 1473,
-          "current_price": 1450,
-          "investment_amount": 97218,
-          "current_value": 95700,
-          "gain_loss": -1518,
-          "gain_loss_percentage": -1.56,
+          "quantity": 84,
+          "avg_purchase_price": 1154,
+          "current_price": 1217,
+          "investment_amount": 96936,
+          "current_value": 102228,
+          "gain_loss": 5292,
+          "gain_loss_percentage": 5.46,
           "sector": "Banking",
           "exchange": "NSE",
           "purchase_dates": [
@@ -9000,16 +9067,33 @@
           ]
         },
         {
-          "symbol": "INFY",
-          "company_name": "Infosys Limited",
-          "quantity": 73,
-          "avg_purchase_price": 1337,
-          "current_price": 1585,
-          "investment_amount": 97601,
-          "current_value": 115705,
-          "gain_loss": 18104,
-          "gain_loss_percentage": 18.55,
+          "symbol": "TCS",
+          "company_name": "Tata Consultancy Services",
+          "quantity": 21,
+          "avg_purchase_price": 4663,
+          "current_price": 4495,
+          "investment_amount": 97923,
+          "current_value": 94395,
+          "gain_loss": -3528,
+          "gain_loss_percentage": -3.6,
           "sector": "Information Technology",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "BAJFINANCE",
+          "company_name": "Bajaj Finance Limited",
+          "quantity": 15,
+          "avg_purchase_price": 6391,
+          "current_price": 7720,
+          "investment_amount": 95865,
+          "current_value": 115800,
+          "gain_loss": 19935,
+          "gain_loss_percentage": 20.79,
+          "sector": "Financial Services",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -9019,31 +9103,14 @@
         {
           "symbol": "DMART",
           "company_name": "Avenue Supermarts Limited",
-          "quantity": 20,
-          "avg_purchase_price": 4787,
-          "current_price": 5207,
-          "investment_amount": 95740,
-          "current_value": 104140,
-          "gain_loss": 8400,
-          "gain_loss_percentage": 8.77,
+          "quantity": 17,
+          "avg_purchase_price": 5506,
+          "current_price": 5738,
+          "investment_amount": 93602,
+          "current_value": 97546,
+          "gain_loss": 3944,
+          "gain_loss_percentage": 4.21,
           "sector": "Retail",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "MCDOWELL-N",
-          "company_name": "United Spirits Limited",
-          "quantity": 96,
-          "avg_purchase_price": 1020,
-          "current_price": 971,
-          "investment_amount": 97920,
-          "current_value": 93216,
-          "gain_loss": -4704,
-          "gain_loss_percentage": -4.8,
-          "sector": "Beverages",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -9055,64 +9122,64 @@
         {
           "scheme_name": "Nippon India Large Cap Fund - Direct Growth",
           "scheme_code": "NI-LC-DG",
-          "units": 2325.11,
-          "nav": 75.91,
-          "current_value": 176499,
+          "units": 2302.94,
+          "nav": 78.77,
+          "current_value": 181403,
           "investment_amount": 171500,
-          "gain_loss": 4999,
-          "gain_loss_percentage": 2.91,
+          "gain_loss": 9903,
+          "gain_loss_percentage": 5.77,
           "category": "Large Cap",
           "fund_house": "Nippon Mutual Fund",
           "sip_amount": 10000,
-          "sip_date": 13,
+          "sip_date": 8,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.68
         },
         {
-          "scheme_name": "Kotak Emerging Equity Fund - Direct Growth",
-          "scheme_code": "KOTAK-EE-DG",
-          "units": 1472.36,
-          "nav": 86.22,
-          "current_value": 126947,
+          "scheme_name": "DSP Midcap Fund - Direct Growth",
+          "scheme_code": "DSP-MC-DG",
+          "units": 775.56,
+          "nav": 169.29,
+          "current_value": 131295,
           "investment_amount": 122500,
-          "gain_loss": 4447,
-          "gain_loss_percentage": 3.63,
+          "gain_loss": 8795,
+          "gain_loss_percentage": 7.18,
           "category": "Mid Cap",
-          "fund_house": "Kotak Mutual Fund",
+          "fund_house": "DSP Mutual Fund",
           "sip_amount": 7000,
-          "sip_date": 4,
+          "sip_date": 15,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.65
+          "expense_ratio": 0.71
         },
         {
           "scheme_name": "SBI Magnum Medium Duration Fund - Direct Growth",
           "scheme_code": "SBI-MD-DG",
-          "units": 2641.79,
-          "nav": 50.42,
-          "current_value": 133199,
+          "units": 2771.49,
+          "nav": 47.85,
+          "current_value": 132616,
           "investment_amount": 122500,
-          "gain_loss": 10699,
-          "gain_loss_percentage": 8.73,
+          "gain_loss": 10116,
+          "gain_loss_percentage": 8.26,
           "category": "Medium Duration",
           "fund_house": "SBI Mutual Fund",
           "sip_amount": 5000,
-          "sip_date": 15,
+          "sip_date": 13,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.45
         },
         {
           "scheme_name": "PPFAS Long Term Equity Fund - Direct Growth",
           "scheme_code": "PPFAS-LTE-DG",
-          "units": 923.02,
-          "nav": 77.97,
-          "current_value": 71968,
+          "units": 912.7,
+          "nav": 76.9,
+          "current_value": 70187,
           "investment_amount": 73500,
-          "gain_loss": -1532,
-          "gain_loss_percentage": -2.08,
+          "gain_loss": -3313,
+          "gain_loss_percentage": -4.51,
           "category": "International",
           "fund_house": "PPFAS Mutual Fund",
           "sip_amount": 3000,
-          "sip_date": 11,
+          "sip_date": 17,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.73
         }
@@ -9281,11 +9348,14 @@
     "credentials": {
       "email": "arjun.singh@email.com",
       "username": "arjun.singh",
-      "password": "$2b$12$8hBhuILaNYGj5svopDCWm.Uy1MxRjiXl07v.h2ako9NuGXa9C.DGG"
+      "password": "$2b$12$jWnseiOUWyOE3J6yNZBfrepFCTuMu61FaxEgJw/wDesqgc7YHjSOO"
     },
     "user_profile": {
       "name": "Arjun Singh",
       "age": 26,
+      "gender": "Male",
+      "marital_status": "Single",
+      "kids": 0,
       "profession": "Software Developer",
       "location": "Pune, Maharashtra",
       "company": "Infosys Limited",
@@ -9293,7 +9363,13 @@
       "education": "B.Tech IT",
       "phone": "+91-9876543213",
       "email": "arjun.singh@email.com",
-      "created_at": "2025-08-30T19:48:12.760187"
+      "hobbies": [
+        "Gaming",
+        "Coding",
+        "Football",
+        "Cryptocurrency Trading"
+      ],
+      "created_at": "2025-09-02T16:43:04.179927"
     },
     "financial_profile": {
       "monthly_salary": 95000,
@@ -9303,7 +9379,21 @@
       "savings_rate": 31.3,
       "bonus_frequency": "annual",
       "last_bonus": 100000,
-      "other_income": 8000
+      "other_income": 8000,
+      "school_fees": 0
+    },
+    "loan_profile": {
+      "home_loan": {
+        "emi": 0,
+        "tenure_remaining_months": 0,
+        "principal_remaining": 0
+      },
+      "car_loan": {
+        "emi": 12000,
+        "tenure_remaining_months": 24,
+        "principal_remaining": 280000
+      },
+      "other_emi": 3000
     },
     "investment_profile": {
       "risk_tolerance": "aggressive",
@@ -9320,33 +9410,50 @@
     },
     "portfolio": {
       "summary": {
-        "total_investment": 308106,
-        "total_current_value": 325315,
-        "total_gain_loss": 17209,
-        "gain_loss_percentage": 5.59,
-        "updated_at": "2025-08-30T19:48:12.460700",
+        "total_investment": 284160,
+        "total_current_value": 304659,
+        "total_gain_loss": 20499,
+        "gain_loss_percentage": 7.21,
+        "updated_at": "2025-09-02T16:43:03.880295",
         "asset_allocation": {
           "stocks": {
-            "value": 221488,
-            "percentage": 68.08
+            "value": 200484,
+            "percentage": 65.81
           },
           "mutual_funds": {
-            "value": 103827,
-            "percentage": 31.92
+            "value": 104175,
+            "percentage": 34.19
           }
         }
       },
       "stocks": [
         {
+          "symbol": "ITC",
+          "company_name": "ITC Limited",
+          "quantity": 67,
+          "avg_purchase_price": 473,
+          "current_price": 498,
+          "investment_amount": 31691,
+          "current_value": 33366,
+          "gain_loss": 1675,
+          "gain_loss_percentage": 5.29,
+          "sector": "FMCG",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
           "symbol": "TCS",
           "company_name": "Tata Consultancy Services",
-          "quantity": 10,
-          "avg_purchase_price": 3094,
-          "current_price": 3676,
-          "investment_amount": 30940,
-          "current_value": 36760,
-          "gain_loss": 5820,
-          "gain_loss_percentage": 18.81,
+          "quantity": 8,
+          "avg_purchase_price": 3993,
+          "current_price": 3725,
+          "investment_amount": 31944,
+          "current_value": 29800,
+          "gain_loss": -2144,
+          "gain_loss_percentage": -6.71,
           "sector": "Information Technology",
           "exchange": "NSE",
           "purchase_dates": [
@@ -9355,50 +9462,16 @@
           ]
         },
         {
-          "symbol": "HDFCBANK",
-          "company_name": "HDFC Bank Limited",
-          "quantity": 18,
-          "avg_purchase_price": 1712,
-          "current_price": 2072,
-          "investment_amount": 30816,
-          "current_value": 37296,
-          "gain_loss": 6480,
-          "gain_loss_percentage": 21.03,
-          "sector": "Banking",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "DMART",
-          "company_name": "Avenue Supermarts Limited",
+          "symbol": "APOLLOHOSP",
+          "company_name": "Apollo Hospitals Enterprise",
           "quantity": 5,
-          "avg_purchase_price": 5490,
-          "current_price": 5202,
-          "investment_amount": 27450,
-          "current_value": 26010,
-          "gain_loss": -1440,
-          "gain_loss_percentage": -5.25,
-          "sector": "Retail",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "MCDOWELL-N",
-          "company_name": "United Spirits Limited",
-          "quantity": 35,
-          "avg_purchase_price": 912,
-          "current_price": 1034,
-          "investment_amount": 31920,
-          "current_value": 36190,
-          "gain_loss": 4270,
-          "gain_loss_percentage": 13.38,
-          "sector": "Beverages",
+          "avg_purchase_price": 6003,
+          "current_price": 6224,
+          "investment_amount": 30015,
+          "current_value": 31120,
+          "gain_loss": 1105,
+          "gain_loss_percentage": 3.68,
+          "sector": "Healthcare",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -9408,13 +9481,13 @@
         {
           "symbol": "PIDILITIND",
           "company_name": "Pidilite Industries Limited",
-          "quantity": 9,
-          "avg_purchase_price": 3212,
-          "current_price": 2931,
-          "investment_amount": 28908,
-          "current_value": 26379,
-          "gain_loss": -2529,
-          "gain_loss_percentage": -8.75,
+          "quantity": 10,
+          "avg_purchase_price": 3169,
+          "current_price": 3530,
+          "investment_amount": 31690,
+          "current_value": 35300,
+          "gain_loss": 3610,
+          "gain_loss_percentage": 11.39,
           "sector": "Chemicals",
           "exchange": "NSE",
           "purchase_dates": [
@@ -9423,15 +9496,32 @@
           ]
         },
         {
-          "symbol": "ROUTE",
-          "company_name": "Route Mobile Limited",
-          "quantity": 14,
-          "avg_purchase_price": 2212,
-          "current_price": 2146,
-          "investment_amount": 30968,
-          "current_value": 30044,
-          "gain_loss": -924,
-          "gain_loss_percentage": -2.98,
+          "symbol": "PAGEIND",
+          "company_name": "Page Industries Limited",
+          "quantity": 0,
+          "avg_purchase_price": 36381,
+          "current_price": 38805,
+          "investment_amount": 0,
+          "current_value": 0,
+          "gain_loss": 0,
+          "gain_loss_percentage": 0,
+          "sector": "Textiles",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "HAPPSTMNDS",
+          "company_name": "Happiest Minds Technologies",
+          "quantity": 28,
+          "avg_purchase_price": 1125,
+          "current_price": 1157,
+          "investment_amount": 31500,
+          "current_value": 32396,
+          "gain_loss": 896,
+          "gain_loss_percentage": 2.84,
           "sector": "Technology",
           "exchange": "NSE",
           "purchase_dates": [
@@ -9443,12 +9533,12 @@
           "symbol": "TATACHEM",
           "company_name": "Tata Chemicals Limited",
           "quantity": 27,
-          "avg_purchase_price": 1152,
-          "current_price": 1067,
-          "investment_amount": 31104,
-          "current_value": 28809,
-          "gain_loss": -2295,
-          "gain_loss_percentage": -7.38,
+          "avg_purchase_price": 1160,
+          "current_price": 1426,
+          "investment_amount": 31320,
+          "current_value": 38502,
+          "gain_loss": 7182,
+          "gain_loss_percentage": 22.93,
           "sector": "Chemicals",
           "exchange": "NSE",
           "purchase_dates": [
@@ -9459,52 +9549,52 @@
       ],
       "mutual_funds": [
         {
-          "scheme_name": "Kotak Emerging Equity Fund - Direct Growth",
-          "scheme_code": "KOTAK-EE-DG",
-          "units": 526.97,
-          "nav": 81.48,
-          "current_value": 42937,
+          "scheme_name": "Axis Midcap Fund - Direct Growth",
+          "scheme_code": "AXIS-MC-DG",
+          "units": 337.64,
+          "nav": 119.75,
+          "current_value": 40433,
           "investment_amount": 38400,
-          "gain_loss": 4537,
-          "gain_loss_percentage": 11.82,
+          "gain_loss": 2033,
+          "gain_loss_percentage": 5.29,
           "category": "Mid Cap",
-          "fund_house": "Kotak Mutual Fund",
+          "fund_house": "Axis Mutual Fund",
           "sip_amount": 12000,
+          "sip_date": 10,
+          "sip_start_date": "2023-06-05",
+          "expense_ratio": 0.73
+        },
+        {
+          "scheme_name": "Nippon India Small Cap Fund - Direct Growth",
+          "scheme_code": "NI-SC-DG",
+          "units": 337.35,
+          "nav": 129.35,
+          "current_value": 43636,
+          "investment_amount": 38400,
+          "gain_loss": 5236,
+          "gain_loss_percentage": 13.63,
+          "category": "Small Cap",
+          "fund_house": "Nippon Mutual Fund",
+          "sip_amount": 10000,
+          "sip_date": 28,
+          "sip_start_date": "2023-06-05",
+          "expense_ratio": 0.85
+        },
+        {
+          "scheme_name": "PPFAS Long Term Equity Fund - Direct Growth",
+          "scheme_code": "PPFAS-LTE-DG",
+          "units": 308.29,
+          "nav": 65.22,
+          "current_value": 20106,
+          "investment_amount": 19200,
+          "gain_loss": 906,
+          "gain_loss_percentage": 4.72,
+          "category": "International",
+          "fund_house": "PPFAS Mutual Fund",
+          "sip_amount": 5000,
           "sip_date": 13,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.65
-        },
-        {
-          "scheme_name": "SBI Small Cap Fund - Direct Growth",
-          "scheme_code": "SBI-SC-DG",
-          "units": 367.75,
-          "nav": 112.7,
-          "current_value": 41445,
-          "investment_amount": 38400,
-          "gain_loss": 3045,
-          "gain_loss_percentage": 7.93,
-          "category": "Small Cap",
-          "fund_house": "SBI Mutual Fund",
-          "sip_amount": 10000,
-          "sip_date": 19,
-          "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.82
-        },
-        {
-          "scheme_name": "Motilal Oswal Nasdaq 100 Fund - Direct Growth",
-          "scheme_code": "MO-NASDAQ-DG",
-          "units": 388.19,
-          "nav": 50.09,
-          "current_value": 19445,
-          "investment_amount": 19200,
-          "gain_loss": 245,
-          "gain_loss_percentage": 1.27,
-          "category": "International",
-          "fund_house": "Motilal Mutual Fund",
-          "sip_amount": 5000,
-          "sip_date": 17,
-          "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.65
+          "expense_ratio": 0.73
         }
       ]
     },
@@ -9661,11 +9751,14 @@
     "credentials": {
       "email": "meera.patel@email.com",
       "username": "meera.patel",
-      "password": "$2b$12$XtYCexEnsJeNP4F4bIFghOFi.VhSsJYtosoX9qEX4KQOwyupL461K"
+      "password": "$2b$12$1.rcZfXJ6nl29cP951tniuJXQQwppiJ1hcbSp74HnZfjnKMWjgszi"
     },
     "user_profile": {
       "name": "Meera Patel",
       "age": 38,
+      "gender": "Female",
+      "marital_status": "Married",
+      "kids": 2,
       "profession": "Senior Manager",
       "location": "Ahmedabad, Gujarat",
       "company": "L&T Infotech",
@@ -9673,7 +9766,13 @@
       "education": "MBA Operations",
       "phone": "+91-9876543214",
       "email": "meera.patel@email.com",
-      "created_at": "2025-08-30T19:48:13.059067"
+      "hobbies": [
+        "Classical Dance",
+        "Cooking",
+        "Family Time",
+        "Investment Research"
+      ],
+      "created_at": "2025-09-02T16:43:04.479671"
     },
     "financial_profile": {
       "monthly_salary": 175000,
@@ -9683,7 +9782,21 @@
       "savings_rate": 24.1,
       "bonus_frequency": "annual",
       "last_bonus": 250000,
-      "other_income": 10000
+      "other_income": 10000,
+      "school_fees": 20000
+    },
+    "loan_profile": {
+      "home_loan": {
+        "emi": 35000,
+        "tenure_remaining_months": 96,
+        "principal_remaining": 2800000
+      },
+      "car_loan": {
+        "emi": 15000,
+        "tenure_remaining_months": 48,
+        "principal_remaining": 700000
+      },
+      "other_emi": 6000
     },
     "investment_profile": {
       "risk_tolerance": "conservative",
@@ -9700,19 +9813,19 @@
     },
     "portfolio": {
       "summary": {
-        "total_investment": 1196379,
-        "total_current_value": 1291129,
-        "total_gain_loss": 94750,
-        "gain_loss_percentage": 7.92,
-        "updated_at": "2025-08-30T19:48:12.760349",
+        "total_investment": 1198268,
+        "total_current_value": 1222143,
+        "total_gain_loss": 23875,
+        "gain_loss_percentage": 1.99,
+        "updated_at": "2025-09-02T16:43:04.180061",
         "asset_allocation": {
           "stocks": {
-            "value": 521206,
-            "percentage": 40.37
+            "value": 465096,
+            "percentage": 38.06
           },
           "mutual_funds": {
-            "value": 769923,
-            "percentage": 59.63
+            "value": 757047,
+            "percentage": 61.94
           }
         }
       },
@@ -9720,14 +9833,48 @@
         {
           "symbol": "ICICIBANK",
           "company_name": "ICICI Bank Limited",
-          "quantity": 88,
-          "avg_purchase_price": 1359,
-          "current_price": 1489,
-          "investment_amount": 119592,
-          "current_value": 131032,
-          "gain_loss": 11440,
-          "gain_loss_percentage": 9.57,
+          "quantity": 102,
+          "avg_purchase_price": 1175,
+          "current_price": 1250,
+          "investment_amount": 119850,
+          "current_value": 127500,
+          "gain_loss": 7650,
+          "gain_loss_percentage": 6.38,
           "sector": "Banking",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "ITC",
+          "company_name": "ITC Limited",
+          "quantity": 191,
+          "avg_purchase_price": 626,
+          "current_price": 578,
+          "investment_amount": 119566,
+          "current_value": 110398,
+          "gain_loss": -9168,
+          "gain_loss_percentage": -7.67,
+          "sector": "FMCG",
+          "exchange": "NSE",
+          "purchase_dates": [
+            "2023-08-15",
+            "2024-01-20"
+          ]
+        },
+        {
+          "symbol": "INFY",
+          "company_name": "Infosys Limited",
+          "quantity": 62,
+          "avg_purchase_price": 1920,
+          "current_price": 1821,
+          "investment_amount": 119040,
+          "current_value": 112902,
+          "gain_loss": -6138,
+          "gain_loss_percentage": -5.16,
+          "sector": "Information Technology",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -9737,48 +9884,14 @@
         {
           "symbol": "TCS",
           "company_name": "Tata Consultancy Services",
-          "quantity": 36,
-          "avg_purchase_price": 3279,
-          "current_price": 3655,
-          "investment_amount": 118044,
-          "current_value": 131580,
-          "gain_loss": 13536,
-          "gain_loss_percentage": 11.47,
+          "quantity": 28,
+          "avg_purchase_price": 4279,
+          "current_price": 4082,
+          "investment_amount": 119812,
+          "current_value": 114296,
+          "gain_loss": -5516,
+          "gain_loss_percentage": -4.6,
           "sector": "Information Technology",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "RELIANCE",
-          "company_name": "Reliance Industries Limited",
-          "quantity": 55,
-          "avg_purchase_price": 2173,
-          "current_price": 2645,
-          "investment_amount": 119515,
-          "current_value": 145475,
-          "gain_loss": 25960,
-          "gain_loss_percentage": 21.72,
-          "sector": "Oil & Gas",
-          "exchange": "NSE",
-          "purchase_dates": [
-            "2023-08-15",
-            "2024-01-20"
-          ]
-        },
-        {
-          "symbol": "HINDUNILVR",
-          "company_name": "Hindustan Unilever Limited",
-          "quantity": 41,
-          "avg_purchase_price": 2908,
-          "current_price": 2759,
-          "investment_amount": 119228,
-          "current_value": 113119,
-          "gain_loss": -6109,
-          "gain_loss_percentage": -5.12,
-          "sector": "FMCG",
           "exchange": "NSE",
           "purchase_dates": [
             "2023-08-15",
@@ -9788,52 +9901,52 @@
       ],
       "mutual_funds": [
         {
-          "scheme_name": "SBI Bluechip Fund - Direct Growth",
-          "scheme_code": "SBI-BC-DG",
-          "units": 4358.88,
-          "nav": 91.26,
-          "current_value": 397792,
+          "scheme_name": "Nippon India Large Cap Fund - Direct Growth",
+          "scheme_code": "NI-LC-DG",
+          "units": 4938.27,
+          "nav": 72.09,
+          "current_value": 356000,
           "investment_amount": 360000,
-          "gain_loss": 37792,
-          "gain_loss_percentage": 10.5,
+          "gain_loss": -4000,
+          "gain_loss_percentage": -1.11,
           "category": "Large Cap",
-          "fund_house": "SBI Mutual Fund",
+          "fund_house": "Nippon Mutual Fund",
           "sip_amount": 8000,
-          "sip_date": 16,
+          "sip_date": 2,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.65
+          "expense_ratio": 0.68
         },
         {
           "scheme_name": "HDFC Corporate Bond Fund - Direct Growth",
           "scheme_code": "HDFC-CB-DG",
-          "units": 9094.74,
-          "nav": 25.2,
-          "current_value": 229187,
+          "units": 9330.45,
+          "nav": 26.43,
+          "current_value": 246604,
           "investment_amount": 216000,
-          "gain_loss": 13187,
-          "gain_loss_percentage": 6.11,
+          "gain_loss": 30604,
+          "gain_loss_percentage": 14.17,
           "category": "Corporate Bond",
           "fund_house": "HDFC Mutual Fund",
           "sip_amount": 5000,
-          "sip_date": 8,
+          "sip_date": 19,
           "sip_start_date": "2023-06-05",
           "expense_ratio": 0.28
         },
         {
-          "scheme_name": "HDFC Balanced Advantage Fund - Direct Growth",
-          "scheme_code": "HDFC-BA-DG",
-          "units": 2031.32,
-          "nav": 70.37,
-          "current_value": 142944,
+          "scheme_name": "ICICI Prudential Equity & Debt Fund - Direct Growth",
+          "scheme_code": "ICICI-ED-DG",
+          "units": 602.26,
+          "nav": 256.44,
+          "current_value": 154443,
           "investment_amount": 144000,
-          "gain_loss": -1056,
-          "gain_loss_percentage": -0.73,
-          "category": "Balanced Advantage",
-          "fund_house": "HDFC Mutual Fund",
+          "gain_loss": 10443,
+          "gain_loss_percentage": 7.25,
+          "category": "Aggressive Hybrid",
+          "fund_house": "ICICI Mutual Fund",
           "sip_amount": 3000,
-          "sip_date": 12,
+          "sip_date": 3,
           "sip_start_date": "2023-06-05",
-          "expense_ratio": 0.42
+          "expense_ratio": 0.58
         }
       ]
     },

@@ -49,6 +49,7 @@ def create_full_user_record(demo_user: Dict[str, Any]) -> Dict[str, Any]:
             "created_at": datetime.now().isoformat()
         },
         "financial_profile": demo_user["financial_profile"],
+        "loan_profile": demo_user["loan_profile"],
         "investment_profile": demo_user["investment_profile"],
         "portfolio": portfolio_data,
         "financial_goals": financial_goals,

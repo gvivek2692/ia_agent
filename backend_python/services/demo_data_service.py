@@ -2,6 +2,8 @@
 Demo Data Service - Provides comprehensive demo data for AI Wealth Advisor
 """
 
+import json
+import os
 import logging
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
@@ -25,45 +27,71 @@ class DemoDataService:
         if not user_id:
             user_id = "priya-sharma"  # Default to first demo user
         
-        # Get user data
-        user_data = get_demo_user_by_id(user_id)
+        # First try to get user data from users.json (updated data)
+        users_file = "data/users.json"
+        user_data = None
+        
+        if os.path.exists(users_file):
+            with open(users_file, 'r') as f:
+                users = json.load(f)
+                for user in users:
+                    if user.get('id') == user_id:
+                        user_data = user
+                        break
+        
+        # If not found in users.json, fall back to static demo data
         if not user_data:
-            return {"error": f"User {user_id} not found"}
+            user_data = get_demo_user_by_id(user_id)
+            if not user_data:
+                return {"error": f"User {user_id} not found"}
+            
+            # For static demo data, generate portfolio
+            portfolio_data = get_complete_portfolio_data(
+                user_data["risk_profile"],
+                user_data["portfolio_target_amount"]
+            )
+            
+            return {
+                "user_profile": {
+                    "id": user_id,
+                    "name": user_data["user_profile"]["name"],
+                    "age": user_data["user_profile"]["age"],
+                    "location": user_data["user_profile"]["location"],
+                    "profession": user_data["user_profile"]["profession"],
+                    "company": user_data["user_profile"]["company"],
+                    "experience": user_data["user_profile"]["experience"]
+                },
+                "financial_profile": {
+                    "monthly_salary": user_data["financial_profile"]["monthly_salary"],
+                    "annual_ctc": user_data["financial_profile"]["annual_ctc"],
+                    "take_home": user_data["financial_profile"]["take_home"],
+                    "monthly_expenses": user_data["financial_profile"]["monthly_expenses"],
+                    "savings_rate": user_data["financial_profile"]["savings_rate"],
+                    "emergency_fund": user_data["banking"]["current_emergency_fund"],
+                    "emergency_fund_target": user_data["banking"]["emergency_fund_target"]
+                },
+                "investment_profile": user_data["investment_profile"],
+                "portfolio": portfolio_data,
+                "financial_goals": get_financial_goals_by_user_id(user_id),
+                "recent_transactions": self.generate_recent_transactions(user_id),
+                "monthly_expenses": user_data["monthly_expenses"],
+                "banking": user_data["banking"]
+            }
         
-        # Generate personalized portfolio
-        portfolio_data = get_complete_portfolio_data(
-            user_data["risk_profile"],
-            user_data["portfolio_target_amount"]
-        )
-        
+        # User found in users.json - return their stored data
         # Get financial goals
         financial_goals = get_financial_goals_by_user_id(user_id)
         
         return {
-            "user_profile": {
-                "id": user_id,
-                "name": user_data["user_profile"]["name"],
-                "age": user_data["user_profile"]["age"],
-                "location": user_data["user_profile"]["location"],
-                "profession": user_data["user_profile"]["profession"],
-                "company": user_data["user_profile"]["company"],
-                "experience": user_data["user_profile"]["experience"]
-            },
-            "financial_profile": {
-                "monthly_salary": user_data["financial_profile"]["monthly_salary"],
-                "annual_ctc": user_data["financial_profile"]["annual_ctc"],
-                "take_home": user_data["financial_profile"]["take_home"],
-                "monthly_expenses": user_data["financial_profile"]["monthly_expenses"],
-                "savings_rate": user_data["financial_profile"]["savings_rate"],
-                "emergency_fund": user_data["banking"]["current_emergency_fund"],
-                "emergency_fund_target": user_data["banking"]["emergency_fund_target"]
-            },
-            "investment_profile": user_data["investment_profile"],
-            "portfolio": portfolio_data,
+            "user_profile": user_data.get("user_profile", {}),
+            "financial_profile": user_data.get("financial_profile", {}),
+            "investment_profile": user_data.get("investment_profile", {}),
+            "loan_profile": user_data.get("loan_profile", {}),
+            "portfolio": user_data.get("portfolio", {}),
             "financial_goals": financial_goals,
-            "recent_transactions": self.generate_recent_transactions(user_id),
-            "monthly_expenses": user_data["monthly_expenses"],
-            "banking": user_data["banking"]
+            "recent_transactions": user_data.get("recent_transactions", []),
+            "monthly_expenses": user_data.get("monthly_expenses", {}),
+            "banking": user_data.get("banking", {})
         }
     
     def generate_recent_transactions(self, user_id: str, days: int = 30) -> List[Dict[str, Any]]:
@@ -272,3 +300,56 @@ class DemoDataService:
             "remaining_80c_limit": max(0, 150000 - total_tax_saving_investment),
             "estimated_tax_benefit": min(150000, total_tax_saving_investment) * 0.3  # Assuming 30% tax bracket
         }
+    
+    def update_user_profile(self, user_id: str, profile_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Update user profile information and persist to JSON"""
+        try:
+            # Load current users data from JSON file
+            users_file = "data/users.json"
+            users = []
+            
+            if os.path.exists(users_file):
+                with open(users_file, 'r') as f:
+                    users = json.load(f)
+            
+            # Find the user to update
+            user_index = None
+            for i, user in enumerate(users):
+                if user.get('id') == user_id:
+                    user_index = i
+                    break
+            
+            if user_index is None:
+                return {"error": f"User {user_id} not found"}
+            
+            # Update user data with provided profile_data
+            current_user = users[user_index]
+            
+            # Update user_profile section
+            if "user_profile" in profile_data:
+                current_user.setdefault("user_profile", {}).update(profile_data["user_profile"])
+            
+            # Update financial_profile section
+            if "financial_profile" in profile_data:
+                current_user.setdefault("financial_profile", {}).update(profile_data["financial_profile"])
+            
+            # Update loan_profile section
+            if "loan_profile" in profile_data:
+                current_user.setdefault("loan_profile", {}).update(profile_data["loan_profile"])
+            
+            # Save updated users data back to JSON file
+            with open(users_file, 'w') as f:
+                json.dump(users, f, indent=2)
+            
+            logger.info(f"Successfully updated profile for user {user_id}")
+            
+            # Return the updated user data (sanitized - remove password)
+            updated_user = current_user.copy()
+            if 'credentials' in updated_user and 'password' in updated_user['credentials']:
+                del updated_user['credentials']['password']
+            
+            return updated_user
+            
+        except Exception as e:
+            logger.error(f"Error updating profile for user {user_id}: {str(e)}")
+            return {"error": f"Failed to update profile: {str(e)}"}

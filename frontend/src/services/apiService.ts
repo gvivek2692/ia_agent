@@ -233,6 +233,13 @@ class ApiService {
     return this.makeRequest(`/users/${userId}`);
   }
 
+  async updateUserProfile(userId: string, profileData: any, sessionId?: string) {
+    return this.makeRequest(`/users/${userId}/profile`, {
+      method: 'PUT',
+      body: JSON.stringify(profileData)
+    }, sessionId);
+  }
+
 
   async getUserTransactions(userId: string, limit = 50, offset = 0) {
     return this.makeRequest(`/user/${userId}/transactions?limit=${limit}&offset=${offset}`);
