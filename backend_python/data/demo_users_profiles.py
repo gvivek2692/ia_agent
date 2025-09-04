@@ -16,13 +16,17 @@ priya_sharma = {
     "user_profile": {
         "name": "Priya Sharma",
         "age": 28,
+        "gender": "Female",
+        "marital_status": "Single",
+        "kids": 0,
         "profession": "Software Engineer",
         "location": "Bangalore, Karnataka",
         "company": "Tech Solutions Pvt Ltd",
         "experience": "5 years",
         "education": "B.Tech Computer Science",
         "phone": "+91-9876543210",
-        "email": "priya.sharma@email.com"
+        "email": "priya.sharma@email.com",
+        "hobbies": ["Reading", "Photography", "Yoga", "Cooking"]
     },
     "financial_profile": {
         "monthly_salary": 120000,  # ₹1.2L per month
@@ -32,7 +36,21 @@ priya_sharma = {
         "savings_rate": 25.0,
         "bonus_frequency": "annual",
         "last_bonus": 150000,
-        "other_income": 5000
+        "other_income": 5000,
+        "school_fees": 0  # Not applicable for single person
+    },
+    "loan_profile": {
+        "home_loan": {
+            "emi": 0,  # No home loan yet
+            "tenure_remaining_months": 0,
+            "principal_remaining": 0
+        },
+        "car_loan": {
+            "emi": 0,  # No car loan
+            "tenure_remaining_months": 0,
+            "principal_remaining": 0
+        },
+        "other_emi": 0  # No other EMIs
     },
     "investment_profile": {
         "risk_tolerance": "conservative",
@@ -57,13 +75,17 @@ rajesh_kumar = {
     "user_profile": {
         "name": "Rajesh Kumar",
         "age": 35,
+        "gender": "Male",
+        "marital_status": "Married",
+        "kids": 2,
         "profession": "Business Owner",
         "location": "Mumbai, Maharashtra",
         "company": "Kumar Enterprises Pvt Ltd",
         "experience": "12 years",
         "education": "MBA Finance",
         "phone": "+91-9876543211",
-        "email": "rajesh.kumar@email.com"
+        "email": "rajesh.kumar@email.com",
+        "hobbies": ["Golf", "Stock Trading", "Travel", "Reading Business Books"]
     },
     "financial_profile": {
         "monthly_salary": 200000,  # ₹2L per month
@@ -73,7 +95,21 @@ rajesh_kumar = {
         "savings_rate": 33.3,
         "bonus_frequency": "quarterly",
         "last_bonus": 300000,
-        "other_income": 25000  # Business income
+        "other_income": 25000,  # Business income
+        "school_fees": 25000  # Two kids in private school
+    },
+    "loan_profile": {
+        "home_loan": {
+            "emi": 45000,  # Home loan EMI
+            "tenure_remaining_months": 180,  # 15 years remaining
+            "principal_remaining": 6500000
+        },
+        "car_loan": {
+            "emi": 18000,  # Car loan EMI
+            "tenure_remaining_months": 36,  # 3 years remaining
+            "principal_remaining": 600000
+        },
+        "other_emi": 8000  # Personal loan/credit card EMI
     },
     "investment_profile": {
         "risk_tolerance": "aggressive",
@@ -98,13 +134,17 @@ anita_desai = {
     "user_profile": {
         "name": "Dr. Anita Desai",
         "age": 32,
+        "gender": "Female",
+        "marital_status": "Married",
+        "kids": 1,
         "profession": "Medical Doctor",
         "location": "Delhi, NCR",
         "company": "Apollo Hospitals",
         "experience": "8 years",
         "education": "MBBS, MD",
         "phone": "+91-9876543212",
-        "email": "anita.desai@email.com"
+        "email": "anita.desai@email.com",
+        "hobbies": ["Classical Music", "Medical Research", "Gardening", "Teaching"]
     },
     "financial_profile": {
         "monthly_salary": 150000,  # ₹1.5L per month
@@ -114,7 +154,21 @@ anita_desai = {
         "savings_rate": 30.8,
         "bonus_frequency": "annual",
         "last_bonus": 200000,
-        "other_income": 15000  # Private practice
+        "other_income": 15000,  # Private practice
+        "school_fees": 12000  # One child in good private school
+    },
+    "loan_profile": {
+        "home_loan": {
+            "emi": 28000,  # Home loan EMI
+            "tenure_remaining_months": 120,  # 10 years remaining
+            "principal_remaining": 2800000
+        },
+        "car_loan": {
+            "emi": 0,  # No car loan - paid off
+            "tenure_remaining_months": 0,
+            "principal_remaining": 0
+        },
+        "other_emi": 5000  # Education loan
     },
     "investment_profile": {
         "risk_tolerance": "moderate",
@@ -139,13 +193,17 @@ arjun_singh = {
     "user_profile": {
         "name": "Arjun Singh",
         "age": 26,
+        "gender": "Male",
+        "marital_status": "Single",
+        "kids": 0,
         "profession": "Software Developer",
         "location": "Pune, Maharashtra",
         "company": "Infosys Limited",
         "experience": "3 years",
         "education": "B.Tech IT",
         "phone": "+91-9876543213",
-        "email": "arjun.singh@email.com"
+        "email": "arjun.singh@email.com",
+        "hobbies": ["Gaming", "Coding", "Football", "Cryptocurrency Trading"]
     },
     "financial_profile": {
         "monthly_salary": 95000,   # ₹95K per month
@@ -155,7 +213,21 @@ arjun_singh = {
         "savings_rate": 31.3,
         "bonus_frequency": "annual",
         "last_bonus": 100000,
-        "other_income": 8000  # Freelancing
+        "other_income": 8000,  # Freelancing
+        "school_fees": 0  # Single, no kids
+    },
+    "loan_profile": {
+        "home_loan": {
+            "emi": 0,  # No home loan yet - renting
+            "tenure_remaining_months": 0,
+            "principal_remaining": 0
+        },
+        "car_loan": {
+            "emi": 12000,  # Bike/scooter loan
+            "tenure_remaining_months": 24,  # 2 years remaining
+            "principal_remaining": 280000
+        },
+        "other_emi": 3000  # Credit card EMI
     },
     "investment_profile": {
         "risk_tolerance": "aggressive",
@@ -180,13 +252,17 @@ meera_patel = {
     "user_profile": {
         "name": "Meera Patel",
         "age": 38,
+        "gender": "Female",
+        "marital_status": "Married",
+        "kids": 2,
         "profession": "Senior Manager",
         "location": "Ahmedabad, Gujarat",
         "company": "L&T Infotech",
         "experience": "15 years",
         "education": "MBA Operations",
         "phone": "+91-9876543214",
-        "email": "meera.patel@email.com"
+        "email": "meera.patel@email.com",
+        "hobbies": ["Classical Dance", "Cooking", "Family Time", "Investment Research"]
     },
     "financial_profile": {
         "monthly_salary": 175000,  # ₹1.75L per month
@@ -196,7 +272,21 @@ meera_patel = {
         "savings_rate": 24.1,
         "bonus_frequency": "annual",
         "last_bonus": 250000,
-        "other_income": 10000  # Consultancy
+        "other_income": 10000,  # Consultancy
+        "school_fees": 20000  # Two kids in quality schools
+    },
+    "loan_profile": {
+        "home_loan": {
+            "emi": 35000,  # Home loan EMI
+            "tenure_remaining_months": 96,  # 8 years remaining
+            "principal_remaining": 2800000
+        },
+        "car_loan": {
+            "emi": 15000,  # Car loan EMI
+            "tenure_remaining_months": 48,  # 4 years remaining
+            "principal_remaining": 700000
+        },
+        "other_emi": 6000  # Personal/education loan
     },
     "investment_profile": {
         "risk_tolerance": "conservative",
