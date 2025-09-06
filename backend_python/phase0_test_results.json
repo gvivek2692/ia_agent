@@ -1,0 +1,245 @@
+{
+  "test_suite": "Phase 0 AI Chat Enhancements",
+  "start_time": 1757141634.264543,
+  "tests": [
+    {
+      "test": "semantic_query_generation",
+      "results": [
+        {
+          "input_query": "How is the Indian stock market performing today?",
+          "intent": "market_update",
+          "generated_queries": [
+            {
+              "query": "current market data NSE BSE Nifty Sensex performance today INFY TCS HDFCBANK latest news",
+              "confidence": 0.8,
+              "search_angle": "current_market_data",
+              "reasoning": "This query is effective because it is tailored to retrieve the most recent performance data of the Indian stock market, specifically focusing on key indices (NSE, BSE, Nifty, Sensex) and the user's top holdings (INFY, TCS, HDFCBANK). The inclusion of 'today' and 'latest news' ensures that the results are time-sensitive and relevant."
+            },
+            {
+              "query": "latest expert analysis on Indian stock market performance today NSE BSE Nifty Sensex INFY TCS HDFCBANK",
+              "confidence": 0.8,
+              "search_angle": "expert_analysis",
+              "reasoning": "This query is effective as it combines the need for current market performance updates with expert analysis, specifically mentioning key indices and the user's top holdings. This specificity will help in retrieving focused and relevant information from credible financial news sources."
+            },
+            {
+              "query": "latest news impact on Indian stock market performance today NSE BSE Nifty Sensex INFY TCS HDFCBANK",
+              "confidence": 0.8,
+              "search_angle": "news_impact",
+              "reasoning": "This query is effective as it combines the need for current market performance with specific stock symbols of the user's top holdings. It targets relevant Indian stock exchanges (NSE, BSE) and indices (Nifty, Sensex) while focusing on the latest news that could impact market performance."
+            }
+          ],
+          "generation_time": 8.429405927658081,
+          "queries_generated": 3,
+          "success": true
+        },
+        {
+          "input_query": "Should I invest in INFY stock right now?",
+          "intent": "stock_research",
+          "generated_queries": [
+            {
+              "query": "current market data for INFY stock NSE BSE latest news analysis October 2023",
+              "confidence": 0.8,
+              "search_angle": "current_market_data",
+              "reasoning": "This query is effective as it focuses specifically on the current market data for Infosys (INFY), incorporating relevant stock exchanges (NSE and BSE) and emphasizing the need for the latest news and analysis, which is crucial for making informed investment decisions."
+            },
+            {
+              "query": "latest expert analysis on INFY stock investment recommendation site:nseindia.com OR site:bseindia.com OR site:moneycontrol.com OR site:financialexpress.com",
+              "confidence": 0.8,
+              "search_angle": "expert_analysis",
+              "reasoning": "This query is effective because it targets expert analysis specifically related to Infosys (INFY) stock, which is crucial for the user's investment decision. Including terms like 'latest' ensures that the information is current, while specifying Indian financial news sources enhances the relevance of the results. The use of site operators narrows down the search to reputable sources that focus on Indian markets."
+            },
+            {
+              "query": "latest news impact on INFY stock NSE BSE Nifty Sensex October 2023",
+              "confidence": 0.8,
+              "search_angle": "news_impact",
+              "reasoning": "This query is effective as it specifically targets the latest news and its impact on INFY stock, while also including relevant market indices like NSE, BSE, Nifty, and Sensex. This ensures that the search results will be focused on current market sentiment and analysis regarding INFY, which is crucial for making an informed investment decision."
+            }
+          ],
+          "generation_time": 8.21816611289978,
+          "queries_generated": 3,
+          "success": true
+        },
+        {
+          "input_query": "What's the impact of RBI's latest policy on my portfolio?",
+          "intent": "policy_impact",
+          "generated_queries": [
+            {
+              "query": "RBI latest policy impact on INFY TCS HDFCBANK portfolio current market data Nifty Sensex October 2023",
+              "confidence": 0.9,
+              "search_angle": "current_market_data",
+              "reasoning": "This query is tailored to find the latest information regarding the Reserve Bank of India's policies and their specific impact on the user's top holdings (INFY, TCS, HDFCBANK) as well as the overall market context (Nifty, Sensex). It includes time-sensitive terms to ensure current data is retrieved, and focuses on relevant financial terminology to optimize search results."
+            },
+            {
+              "query": "RBI latest policy impact on INFY TCS HDFCBANK portfolio analysis site:nseindia.com OR site:moneycontrol.com OR site:livemint.com",
+              "confidence": 0.8,
+              "search_angle": "expert_analysis",
+              "reasoning": "This query is effective as it focuses on the latest RBI policy and its specific impact on the user's top holdings (INFY, TCS, HDFCBANK). Including specific stock symbols ensures the search results are tailored to the user's interests. The inclusion of reputable Indian financial news sources increases the likelihood of obtaining credible and relevant analysis."
+            },
+            {
+              "query": "impact of RBI latest policy on INFY TCS HDFCBANK portfolio news site:nseindia.com OR site:bseindia.com OR site:moneycontrol.com OR site:livemint.com",
+              "confidence": 0.8,
+              "search_angle": "news_impact",
+              "reasoning": "This query is effective as it specifically targets the impact of the Reserve Bank of India's latest policy, which is a key factor influencing the Indian financial markets, particularly on major stocks like Infosys (INFY), Tata Consultancy Services (TCS), and HDFC Bank (HDFCBANK). By including 'news' and specifying trusted Indian financial news sources like NSE, BSE, Moneycontrol, and Livemint, the query ensures that the results are timely and relevant to the user's portfolio."
+            }
+          ],
+          "generation_time": 9.168148040771484,
+          "queries_generated": 3,
+          "success": true
+        },
+        {
+          "input_query": "Which is better investment - mutual funds or direct equity?",
+          "intent": "comparative_analysis",
+          "generated_queries": [
+            {
+              "query": "latest comparison mutual funds vs direct equity investment performance INFY TCS HDFCBANK site:nseindia.com OR site:bseindia.com OR site:moneycontrol.com",
+              "confidence": 0.85,
+              "search_angle": "current_market_data",
+              "reasoning": "This query is effective as it specifically targets the latest comparative analysis of mutual funds and direct equity, incorporating the user's top holdings (INFY, TCS, HDFCBANK) to ensure relevance. By including Indian stock market sites like NSE, BSE, and Moneycontrol, it focuses on credible sources for current market data."
+            },
+            {
+              "query": "latest expert analysis mutual funds vs direct equity investment comparison India INFY TCS HDFCBANK site:nseindia.com OR site:bseindia.com OR site:moneycontrol.com OR site:livemint.com",
+              "confidence": 0.8,
+              "search_angle": "expert_analysis",
+              "reasoning": "This query is effective because it specifically targets the comparison between mutual funds and direct equity investments in the Indian market context, using relevant stock symbols (INFY, TCS, HDFCBANK) to filter for expert analysis. Including 'latest' ensures that the information is current, and specifying reputable Indian financial news sources will yield high-quality results."
+            },
+            {
+              "query": "latest news impact on mutual funds vs direct equity investment in INFY TCS HDFCBANK site:nseindia.com OR site:moneycontrol.com OR site:livemint.com",
+              "confidence": 0.85,
+              "search_angle": "news_impact",
+              "reasoning": "This query is effective because it focuses on the latest news and analysis regarding the comparative impact of mutual funds and direct equity investments specifically related to the user's top holdings (INFY, TCS, HDFCBANK). By including specific stock symbols and reputable Indian financial news sources, the query is likely to yield relevant and timely information."
+            }
+          ],
+          "generation_time": 10.193127870559692,
+          "queries_generated": 3,
+          "success": true
+        }
+      ]
+    },
+    {
+      "test": "search_orchestration",
+      "results": [
+        {
+          "input_query": "How is the Indian stock market performing today?",
+          "intent": "market_update",
+          "orchestration_summary": {
+            "total_queries_executed": 2,
+            "total_raw_results": 10,
+            "deduplicated_results": 8,
+            "final_results": 8,
+            "orchestration_time_seconds": 12.076867,
+            "average_credibility": 0.8
+          },
+          "total_sources": 4,
+          "results_count": 8,
+          "deduplication_stats": {
+            "raw_count": 10,
+            "deduplicated_count": 8,
+            "duplicates_removed": 2
+          },
+          "query_performance": {
+            "query_0": 0.6666666666666667,
+            "query_1": 0.6666666666666667
+          },
+          "orchestration_time": 12.07701301574707,
+          "synthesis_ready": true,
+          "success": true,
+          "sample_result": {
+            "title": "Stock Market Statistics - Moneycontrol",
+            "source": "www.moneycontrol.com",
+            "credibility_score": 0.9,
+            "relevance_score": 0.3375,
+            "search_angle": "current_market_data"
+          }
+        },
+        {
+          "input_query": "Should I invest in INFY stock right now?",
+          "intent": "stock_research",
+          "orchestration_summary": {
+            "total_queries_executed": 2,
+            "total_raw_results": 10,
+            "deduplicated_results": 6,
+            "final_results": 6,
+            "orchestration_time_seconds": 13.35864,
+            "average_credibility": 0.7083333333333334
+          },
+          "total_sources": 6,
+          "results_count": 6,
+          "deduplication_stats": {
+            "raw_count": 10,
+            "deduplicated_count": 6,
+            "duplicates_removed": 4
+          },
+          "query_performance": {
+            "query_0": 0.75,
+            "query_1": 0.6666666666666667
+          },
+          "orchestration_time": 13.358697891235352,
+          "synthesis_ready": true,
+          "success": true,
+          "sample_result": {
+            "title": "Infosys Limited Share Price Today, Live NSE Stock Price, News",
+            "source": "www.nseindia.com",
+            "credibility_score": 0.95,
+            "relevance_score": 0.28250000000000003,
+            "search_angle": "news_impact"
+          }
+        }
+      ]
+    },
+    {
+      "test": "information_synthesis",
+      "results": [
+        {
+          "input_query": "How is the Indian stock market performing today?",
+          "sources_used": 8,
+          "response_length": 2295,
+          "confidence_score": 1.0,
+          "conflicts_detected": 0,
+          "synthesis_metadata": {
+            "sources_used": 8,
+            "conflicts_detected": 0,
+            "synthesis_time_seconds": 6.902935,
+            "confidence_factors": {
+              "source_credibility": 0.85,
+              "source_agreement": 1.0,
+              "information_completeness": 1.0
+            }
+          },
+          "synthesis_time": 16.96289587020874,
+          "success": true,
+          "response_preview": "As of today, the Indian stock market is experiencing a mixed performance. The Nifty 50 index is currently trading at approximately 19,200 points, reflecting a slight decline of about 0.15% from the pr..."
+        }
+      ]
+    },
+    {
+      "test": "end_to_end_improvement",
+      "results": [
+        {
+          "input_query": "How is the Indian stock market performing today?",
+          "response_generated": true,
+          "response_length": 2006,
+          "sources_provided": 8,
+          "processing_time": 24.359558820724487,
+          "is_bot_response": true,
+          "timestamp": "2025-09-06T12:25:43.039730",
+          "success": true,
+          "response_preview": "As of today, September 6, 2025, the Indian stock market is showing mixed performance:\n\n1. **BSE Sensex**: The Sensex is currently at 79,809.65, down by 270.92 points or 0.34%, indicating a bearish trend for the day.\n2. **Nifty 50**: In contrast, the Nifty 50 index is at 24,741.00, up by 6.70 points ...",
+          "enhancement_indicators": {
+            "enhanced_search_mentioned": false,
+            "multiple_sources": true,
+            "confidence_mentioned": false,
+            "conflicts_mentioned": false,
+            "synthesis_quality": true
+          },
+          "enhancement_score": 0.4
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_time": 110.77739000320435,
+    "tests_run": 4,
+    "successful_tests": 4,
+    "success_rate": 1.0
+  }
+}

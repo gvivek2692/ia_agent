@@ -18,6 +18,8 @@ from services.ai_function_service import AIFunctionRegistry
 from services.dynamic_context_service import DynamicContextService
 from services.smart_search_engine import SmartSearchEngine
 from services.inline_citation_service import InlineCitationService, CitationStyle
+from services.intelligent_search_orchestrator import IntelligentSearchOrchestrator
+from services.information_synthesis_engine import InformationSynthesisEngine
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -32,6 +34,10 @@ class AIService:
         self.dynamic_context_service = DynamicContextService()
         self.smart_search_engine = SmartSearchEngine()
         self.citation_service = InlineCitationService(CitationStyle.NUMBERED)
+        
+        # Enhanced Phase 0 components
+        self.search_orchestrator = IntelligentSearchOrchestrator()
+        self.synthesis_engine = InformationSynthesisEngine()
         
         # Initialize OpenAI client
         if settings.openai_api_key:
@@ -362,36 +368,72 @@ CONVERSATION GUIDELINES:
             )
             
             if search_decision.should_search:
-                logger.info(f'Smart search triggered: {search_decision.search_intent.value if search_decision.search_intent else "general"} '
+                logger.info(f'Enhanced search triggered: {search_decision.search_intent.value if search_decision.search_intent else "general"} '
                            f'(priority: {search_decision.priority}, relevance: {search_decision.estimated_relevance:.2f})')
                 
-                # Use the optimized search query from smart engine
-                search_query = search_decision.search_query
-                logger.info(f'Optimized search query: {search_query}')
-                
-                # Perform web search with enhanced parameters
-                user_location = dynamic_context.get('user_profile', {}).get('location', 'India')
-                search_params = {
-                    "location": user_location,
-                    "num": min(8, 5 + search_decision.priority // 3)  # More results for high-priority searches
-                }
-                
-                search_results = await self.web_search_service.search(search_query, search_params)
-                
-                if "error" not in search_results:
-                    # Process citations for inline integration
-                    citations = self.citation_service.process_search_sources(search_results)
+                # Use intelligent search orchestration (Phase 0 enhancement)
+                try:
+                    orchestration_result = await self.search_orchestrator.orchestrate_search(
+                        user_query=message,
+                        intent=search_decision.search_intent.value if search_decision.search_intent else "general",
+                        user_context=search_context,
+                        max_results=12
+                    )
                     
-                    # Still create web search summary for AI context
-                    web_search_results = self.web_search_service.summarize_search_results(search_results)
+                    # Use information synthesis engine (Phase 0 enhancement)
+                    synthesis_result = await self.synthesis_engine.synthesize_information(
+                        orchestration_result=orchestration_result,
+                        user_query=message,
+                        user_context=search_context
+                    )
                     
-                    # Extract traditional sources as backup
-                    search_sources = self.web_search_service.extract_sources(search_results)
-                    
-                    logger.info(f'Smart search completed. Found {len(search_sources)} sources and {len(citations)} citations '
-                               f'for {search_decision.search_intent.value if search_decision.search_intent else "general"} search')
-                else:
-                    logger.info(f'Web search error: {search_results.get("error")}')
+                    # Use synthesized response instead of traditional search summary
+                    if synthesis_result.synthesized_response:
+                        web_search_results = f"\n=== ENHANCED SEARCH RESULTS ===\n"
+                        web_search_results += f"Search Intelligence: Orchestrated {orchestration_result.search_summary.get('total_queries_executed', 0)} queries "
+                        web_search_results += f"across {orchestration_result.total_sources} sources "
+                        web_search_results += f"(confidence: {synthesis_result.confidence_score:.2f})\n\n"
+                        web_search_results += synthesis_result.synthesized_response
+                        
+                        # Handle detected conflicts
+                        if synthesis_result.detected_conflicts:
+                            conflicts = [c for c in synthesis_result.detected_conflicts if c.conflict_type.value != "no_conflict"]
+                            if conflicts:
+                                web_search_results += f"\n\nIMPORTANT CONFLICTS DETECTED:\n"
+                                for conflict in conflicts[:2]:  # Show top 2 conflicts
+                                    web_search_results += f"- {conflict.conflict_type.value}: {', '.join(conflict.conflicting_claims[:2])}\n"
+                        
+                        # Prepare enhanced citations
+                        search_sources = []
+                        for citation in synthesis_result.source_citations[:8]:  # Top 8 sources
+                            source = {
+                                "title": citation.get("title", ""),
+                                "link": citation.get("url", ""),
+                                "date": citation.get("date", ""),
+                                "credibility": f"{citation.get('credibility_score', 0.5):.2f}"
+                            }
+                            search_sources.append(source)
+                        
+                        logger.info(f'Enhanced search completed: {len(search_sources)} sources, '
+                                   f'confidence: {synthesis_result.confidence_score:.2f}, '
+                                   f'conflicts: {len(synthesis_result.detected_conflicts)}')
+                    else:
+                        # Fallback to traditional search if synthesis fails
+                        search_query = search_decision.search_query or message
+                        search_results = await self.web_search_service.search(search_query, {"location": "India", "num": 6})
+                        if "error" not in search_results:
+                            web_search_results = self.web_search_service.summarize_search_results(search_results)
+                            search_sources = self.web_search_service.extract_sources(search_results)
+                
+                except Exception as e:
+                    logger.warning(f'Enhanced search failed, falling back to traditional search: {str(e)}')
+                    # Fallback to original search method
+                    search_query = search_decision.search_query or message
+                    search_results = await self.web_search_service.search(search_query, {"location": "India", "num": 6})
+                    if "error" not in search_results:
+                        web_search_results = self.web_search_service.summarize_search_results(search_results)
+                        search_sources = self.web_search_service.extract_sources(search_results)
+                        
             else:
                 logger.info(f'Smart search engine decided not to search (relevance: {search_decision.estimated_relevance:.2f})')
             
