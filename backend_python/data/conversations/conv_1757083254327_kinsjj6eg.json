@@ -1,0 +1,26 @@
+{
+  "id": "conv_1757083290012_21842473",
+  "title": "New Chat",
+  "user_id": "rajesh-kumar",
+  "messages": [
+    {
+      "id": "e0e954a0-a214-4080-859d-6693ef1dc19d",
+      "content": "What's happening in the markets today?",
+      "timestamp": "2025-09-05T20:11:30.013054",
+      "is_bot": false,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1757083254327_kinsjj6eg"
+    },
+    {
+      "id": "fa8671e8-5dc0-474d-8ec9-9ca8fd116b0b",
+      "content": "It seems there is a temporary issue with fetching the latest market news. However, I can provide you with a general overview of recent trends in the Indian financial markets:\n\n1. **Stock Indices Performance**: Generally, the Nifty 50 and Sensex have been showing volatility due to global economic data and local corporate earnings reports.\n\n2. **Sector Movements**: Some sectors like IT and pharmaceuticals may be experiencing growth, while banking and real estate are under scrutiny due to rising interest rates.\n\n3. **Global Influences**: Global factors such as U.S. Federal Reserve policies, oil prices, and geopolitical developments are significantly impacting market sentiment.\n\n4. **Investor Sentiment**: Retail investor activity might be increasing, with a focus on certain high-growth sectors, while institutional investors may be more cautious.\n\nFor specific updates, I recommend checking reliable financial news sources or market analysis platforms. If you have specific stocks or sectors in mind, I can help analyze those further!",
+      "timestamp": "2025-09-05T20:11:30.013508",
+      "is_bot": true,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1757083254327_kinsjj6eg"
+    }
+  ],
+  "created_at": "2025-09-05T20:11:30.012243",
+  "updated_at": "2025-09-05T20:11:30.013513",
+  "archived": false
+}

@@ -1,0 +1,26 @@
+{
+  "id": "conv_1757086494201_85ce936c",
+  "title": "New Chat",
+  "user_id": "arjun-singh",
+  "messages": [
+    {
+      "id": "c1fcff3e-2fb6-4fcf-898c-796bd7a05536",
+      "content": "news related to my stocks",
+      "timestamp": "2025-09-05T21:04:54.202983",
+      "is_bot": false,
+      "user_id": "arjun-singh",
+      "conversation_id": "conv_1757086459697_84r83ba2z"
+    },
+    {
+      "id": "07800ea4-2d8c-46ed-acb5-c94ccc440eeb",
+      "content": "Here are some recent news articles related to the Indian stock market that may impact your stocks:\n\n1. **[Stock market today: Nifty50 ends flat; BSE Sensex above 80,700](https://timesofindia.indiatimes.com/business/india-business/stock-market-today-nifty50-bse-sensex-september-05-2025-gst-rate-cut-donald-trump-tariffs-indian-equities-global-markets/articleshow/123710765.cms)** - *The Times of India (12 hours ago)*\n   - The Nifty50 closed flat, while the BSE Sensex remained above 80,700.\n\n2. **[Closing Bell: Sensex, Nifty flat amid volatility; FMCG, IT drag, auto, metals shine](https://www.moneycontrol.com/news/business/markets/stock-market-live-sensex-nifty-50-share-price-gift-nifty-latest-updates-05-09-2025-liveblog-13523072.html)** - *Moneycontrol (5 hours ago)*\n   - The market showed volatility with FMCG and IT sectors dragging, while auto and metals stocks performed well.\n\n3. **[Sensex sheds 2% as Pakistan, China and other global stock markets surge up to 95% in a year \u2014 What explains this trend?](https://www.livemint.com/market/stock-market-news/indian-stock-market-underperforms-pakistan-china-and-others-over-a-year-what-explains-this-trend-11756968859345.html)** - *Mint (1 day ago)*\n   - The Indian stock market is underperforming compared to Pakistan, China, and others, raising questions about the reasons behind this trend.\n\n4. **[Stock Market Live News Update - Moneycontrol](https://www.moneycontrol.com/stocksmarketsindia/)** - *Moneycontrol*\n   - Current index values: NIFTY 50 at 24,741.00 (+0.03%), SENSEX at 80,710.76 (-0.01%).\n\n5. **[NSE - National Stock Exchange of India Ltd: Live Share/Stock Updates](https://www.nseindia.com/)** - *NSE India*\n   - Offers live updates, charts, and analysis of stock market movements.\n\nThese articles provide insights into the current market conditions and may help you make informed decisions regarding your investments. If you need more specific information or analysis on any particular stocks in your portfolio, feel free to ask!",
+      "timestamp": "2025-09-05T21:04:54.203492",
+      "is_bot": true,
+      "user_id": "arjun-singh",
+      "conversation_id": "conv_1757086459697_84r83ba2z"
+    }
+  ],
+  "created_at": "2025-09-05T21:04:54.202026",
+  "updated_at": "2025-09-05T21:04:54.203497",
+  "archived": false
+}
