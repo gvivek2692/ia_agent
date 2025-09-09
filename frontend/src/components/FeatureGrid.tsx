@@ -1,45 +1,36 @@
 import React from 'react';
 import { 
+  Bell, 
   PieChart, 
-  Shield, 
-  Brain, 
-  Smartphone,
+  Lightbulb, 
   CheckCircle
 } from 'lucide-react';
 
 const FeatureGrid: React.FC = () => {
   const features = [
     {
-      icon: Brain,
-      title: "AI Financial Health Coach",
-      description: "Get personalized guidance on building emergency funds, improving savings habits, and achieving financial independence.",
+      icon: Bell,
+      title: "Real-time Monitoring & Nudges",
+      description: "Track your financial goals live. Get proactive nudges that optimise your portfolio automatically.",
       gradient: "from-gold-500 to-amber-500",
       bgGradient: "from-gold-500/10 to-amber-500/10",
       borderGradient: "from-gold-500/20 to-amber-500/20"
     },
     {
       icon: PieChart,
-      title: "Comprehensive Tracking",
-      description: "Monitor investments, track spending patterns, and visualize your financial health journey in one unified dashboard.",
+      title: "Personalised Portfolios",
+      description: "AI-powered curated baskets designed to grow your wealth. Dynamic asset allocation that adjusts instantly to market changes.",
       gradient: "from-amber-500 to-gold-500",
       bgGradient: "from-amber-500/10 to-gold-500/10",
       borderGradient: "from-amber-500/20 to-gold-500/20"
     },
     {
-      icon: Shield,
-      title: "Risk Mitigation & Emergency Planning",
-      description: "Build robust emergency funds, assess financial risks, and protect your financial stability during uncertain times.",
+      icon: Lightbulb,
+      title: "Instant Insights & Action Plans",
+      description: "Understand your complete financial profile in seconds. Receive clear steps to bridge gaps and stay on track — without boring forms.",
       gradient: "from-amber-600 to-gold-600",
       bgGradient: "from-amber-600/10 to-gold-600/10",
       borderGradient: "from-amber-600/20 to-gold-600/20"
-    },
-    {
-      icon: Smartphone,
-      title: "Smart Financial News (Coming Soon)",
-      description: "Stay informed with AI-curated financial news relevant to your goals, plus expense tracking and bank connections.",
-      gradient: "from-amber-500 to-yellow-600",
-      bgGradient: "from-amber-500/10 to-yellow-600/10",
-      borderGradient: "from-amber-500/20 to-yellow-600/20"
     }
   ];
 
@@ -57,24 +48,19 @@ const FeatureGrid: React.FC = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
             <CheckCircle className="w-4 h-4 mr-2" />
-            Powerful Features
+            Core Features
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Everything You Need for{' '}
+            Finance is complex.{' '}
             <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-              Financial Health
+              We make it effortless.
             </span>
           </h2>
-          
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            From AI-powered insights to habit building tools, our platform provides 
-            comprehensive financial health management with smart tracking and guidance.
-          </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (

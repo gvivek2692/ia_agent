@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, TrendingUp, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Smartphone, Brain } from 'lucide-react';
 
 interface HeroSectionProps {
   onGetStarted: () => void;
@@ -23,68 +23,89 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
         <div className="absolute bottom-40 right-10 w-5 h-5 bg-amber-400/60 rounded-full animate-bounce delay-500"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Main Hero Content */}
-        <div className="mb-8">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
-            <Zap className="w-4 h-4 mr-2" />
-            AI-Powered Financial Health Platform
-          </div>
-          
-          <div className="mb-8">
-            <p className="text-3xl sm:text-3xl lg:text-4xl font-medium text-white mb-4 leading-relaxed tracking-wide">
-              Become Financially
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+              <span className="text-white block mb-2">Smarter money decisions.</span>
               <span className="bg-gradient-to-r from-gold-600 to-amber-500 bg-clip-text text-transparent">
-                Healthy, Wealthy & Wise 
+                Powered by AI.
               </span>
             </h1>
+            
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
+              Track goals in real-time, get intelligent nudges, and manage your portfolio — all in one place.
+            </p>
+
+            <div className="flex justify-center lg:justify-start">
+              <button
+                onClick={onGetStarted}
+                className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-gold-600 to-amber-600 text-black font-semibold rounded-2xl hover:from-gold-500 hover:to-amber-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gold-500/25"
+              >
+                Get Started
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-gold-400 to-amber-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity"></div>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Visual */}
+          <div className="relative flex justify-center lg:justify-end">
+            {/* Phone Mockup */}
+            <div className="relative z-20">
+              <div className="w-72 h-96 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-2 shadow-2xl border border-gray-700">
+                <div className="w-full h-full bg-black rounded-2xl p-4 overflow-hidden">
+                  {/* Mock Dashboard Content */}
+                  <div className="text-center mb-4">
+                    <h3 className="text-white text-sm font-semibold">Portfolio Dashboard</h3>
+                  </div>
+                  
+                  {/* Mock Chart */}
+                  <div className="bg-gradient-to-r from-gold-600/20 to-amber-600/20 rounded-xl h-24 mb-4 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full flex items-center justify-center">
+                      <span className="text-black font-bold text-lg">₹</span>
+                    </div>
+                  </div>
+
+                  {/* Mock Stats */}
+                  <div className="space-y-3">
+                    <div className="bg-gray-800 rounded-lg p-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 text-xs">Total Value</span>
+                        <span className="text-gold-400 text-sm font-bold">₹12,45,000</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 text-xs">Monthly Goal</span>
+                        <span className="text-green-400 text-sm font-bold">On Track</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 text-xs">AI Insights</span>
+                        <span className="text-amber-400 text-sm font-bold">3 New</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* AI Assistant Illustration */}
+            <div className="absolute -right-8 top-12 z-10">
+              <div className="w-24 h-24 bg-gradient-to-r from-gold-500/20 to-amber-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold-500/30">
+                <Brain className="w-12 h-12 text-gold-400" />
+              </div>
+              {/* Chat Bubble */}
+              <div className="absolute -bottom-2 -left-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2">
+                <p className="text-white text-xs">Ready to optimize your portfolio!</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Feature Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-          <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 bg-gradient-to-r from-gold-500 to-amber-500 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
-              <TrendingUp className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Grow your Wealth</h3>
-            <p className="text-gray-400 text-sm">Invest smartly and regularly for long term wealth building</p>
-          </div>
-
-          <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-gold-500 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
-              <Shield className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Know your Financial Health</h3>
-            <p className="text-gray-400 text-sm">Get detailed analysis of your financial wellness across key areas </p>
-          </div>
-
-          <div className="group p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300">
-            <div className="w-12 h-12 bg-gradient-to-r from-gold-600 to-amber-600 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Get Financially Wise</h3>
-            <p className="text-gray-400 text-sm">Monitor your spending and improve your investment discipline</p>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={onGetStarted}
-            className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-gold-600 to-amber-600 text-black font-semibold rounded-2xl hover:from-gold-500 hover:to-amber-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gold-500/25"
-          >
-            Improve Your Financial Health
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-gold-400 to-amber-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity"></div>
-          </button>
-        </div>
-
-
       </div>
-
     </section>
   );
 };

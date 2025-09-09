@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import HeroSection from './HeroSection';
+import ProblemPromise from './ProblemPromise';
 import FeatureGrid from './FeatureGrid';
+import AIAssistant from './AIAssistant';
+import HowItWorksEnhanced from './HowItWorksEnhanced';
+import SecurityTrust from './SecurityTrust';
+import FinalCTA from './FinalCTA';
 import { 
   Menu, 
   X, 
@@ -18,7 +23,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const navItems = [
     { label: 'Features', href: '#features' },
     { label: 'How it Works', href: '#how-it-works' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Security', href: '#security' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -110,77 +115,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       {/* Hero Section */}
       <HeroSection onGetStarted={onGetStarted} />
 
+      {/* Problem Promise Section */}
+      <ProblemPromise />
+
       {/* Features Section */}
       <div id="features">
         <FeatureGrid />
       </div>
 
+      {/* AI Assistant Section */}
+      <AIAssistant />
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-16 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Get Started in{' '}
-              <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-                3 Steps
-              </span>
-            </h2>
-          </div>
+      <div id="how-it-works">
+        <HowItWorksEnhanced />
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Connect Portfolio",
-                description: "Connect your portfolio or upload statements"
-              },
-              {
-                step: "02", 
-                title: "Set Goals",
-                description: "Define your financial objectives"
-              },
-              {
-                step: "03",
-                title: "Get AI Insights",
-                description: "Receive personalized recommendations"
-              }
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-gold-600 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-lg">{item.step}</span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Security & Trust Section */}
+      <div id="security">
+        <SecurityTrust />
+      </div>
 
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Ready to Transform{' '}
-            <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-              Your Financial Health?
-            </span>
-          </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Build better financial habits, secure emergency funds, and achieve financial independence with AI guidance.
-          </p>
-          
-          <button
-            onClick={onGetStarted}
-            className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-gold-600 to-amber-600 text-black font-semibold rounded-2xl hover:from-gold-500 hover:to-amber-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gold-500/25"
-          >
-            Start Your Journey
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-      </section>
+      {/* Final CTA Section */}
+      <FinalCTA onGetStarted={onGetStarted} />
 
       {/* Footer */}
       <footer className="bg-black border-t border-gold-500/20 py-12">
