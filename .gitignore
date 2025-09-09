@@ -2,6 +2,18 @@
 node_modules/
 */node_modules/
 
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
 # Environment variables  
 .env
 backend/.env
