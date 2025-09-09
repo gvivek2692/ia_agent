@@ -1,0 +1,42 @@
+{
+  "id": "conv_1757427239633_ed1dd026",
+  "title": "New Chat",
+  "user_id": "anita-desai",
+  "messages": [
+    {
+      "id": "ba07f1ce-47c4-429a-ac3d-eb496abd02a8",
+      "content": "how many kids do i have",
+      "timestamp": "2025-09-09T19:43:59.635087",
+      "is_bot": false,
+      "user_id": "anita-desai",
+      "conversation_id": "conv_1757427186216_ohiqbuth4"
+    },
+    {
+      "id": "7b883ebe-b255-47eb-b28b-824ea87d69d5",
+      "content": "You have 2 kids. If you have any specific questions or need assistance related to your family or finances, feel free to ask!",
+      "timestamp": "2025-09-09T19:43:59.635696",
+      "is_bot": true,
+      "user_id": "anita-desai",
+      "conversation_id": "conv_1757427186216_ohiqbuth4"
+    },
+    {
+      "id": "3bcceb97-3ace-4fb0-b1f8-19110a3f699d",
+      "content": "any important news related to my portfolio",
+      "timestamp": "2025-09-09T21:34:48.412533",
+      "is_bot": false,
+      "user_id": "anita-desai",
+      "conversation_id": "conv_1757427186216_ohiqbuth4"
+    },
+    {
+      "id": "c9ba2444-9c69-42bf-b4de-18523ea57623",
+      "content": "Here are some important news updates that may be relevant to your portfolio:\n\n1. **Dolly Khanna Portfolio's Smallcap Multibagger Sets Record Date for Final Dividend**  \n   - This article discusses a smallcap stock from Dolly Khanna's portfolio that has set September 17 as the record date for its final dividend. [Read more here](https://m.economictimes.com/markets/stocks/news/dolly-khanna-portfolios-smallcap-multibagger-sets-september-17-as-record-date-for-final-dividend/articleshow/123788504.cms) (Published 2 hours ago).\n\n2. **Is Cash in Mutual Fund Portfolio a Safety Net or a Performance Risk?**  \n   - The Economic Times explores the implications of holding cash in mutual fund portfolios and whether it serves as a safety net or poses a performance risk. [Read the full article](https://m.economictimes.com/mf/analysis/is-cash-in-mutual-fund-portfolio-a-safety-net-or-a-performance-risk/articleshow/123758811.cms) (Published 1 day ago).\n\n3. **Stock Market Today: Sensex, Nifty Trade Higher on Infosys Buyback Plan**  \n   - The stock market is experiencing upward movement, influenced by Infosys's buyback plan and positive sentiment regarding potential US Fed rate cuts. [More details here](https://www.hindustantimes.com/business/stock-market-today-sensex-nifty-open-higher-as-us-rate-cut-bets-strengthen-101757390794989.html) (Published 10 hours ago).\n\nFor ongoing updates and detailed market analysis, you can visit platforms like [Moneycontrol](https://www.moneycontrol.com/) or [Economic Times](https://economictimes.indiatimes.com/) for the latest business news. \n\nIf you have specific stocks or mutual funds in your portfolio that you want detailed insights on, feel free to ask!",
+      "timestamp": "2025-09-09T21:34:48.414565",
+      "is_bot": true,
+      "user_id": "anita-desai",
+      "conversation_id": "conv_1757427186216_ohiqbuth4"
+    }
+  ],
+  "created_at": "2025-09-09T19:43:59.633495",
+  "updated_at": "2025-09-09T21:34:48.414573",
+  "archived": false
+}
