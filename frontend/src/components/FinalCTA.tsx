@@ -65,7 +65,7 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
           {/* Right Visual */}
           <div className="relative flex justify-center lg:justify-end">
             {/* Glowing AI Assistant Silhouette */}
-            <div className="relative">
+            <div className="relative p-8">
               <div className="w-80 h-80 bg-gradient-to-br from-gold-500/30 to-amber-500/30 rounded-full backdrop-blur-xl border border-gold-500/50 shadow-2xl flex items-center justify-center">
                 {/* Inner Glow */}
                 <div className="w-64 h-64 bg-gradient-to-br from-gold-600/20 to-amber-600/20 rounded-full backdrop-blur-lg border border-gold-400/30 flex items-center justify-center">
@@ -77,7 +77,7 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
               </div>
 
               {/* Device Mockup Overlay */}
-              <div className="absolute -right-8 -bottom-8 z-10">
+              <div className="absolute bottom-0 right-0 z-10">
                 <div className="w-40 h-52 bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-2 shadow-xl border border-gray-700">
                   <div className="w-full h-full bg-black rounded-xl p-3 overflow-hidden">
                     {/* Mock App Interface */}
@@ -112,16 +112,16 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
                 </div>
               </div>
 
-              {/* Floating Action Bubbles */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30 flex items-center justify-center animate-bounce delay-300">
+              {/* Floating Action Bubbles - Safer Positioning */}
+              <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30 flex items-center justify-center animate-bounce delay-300 z-20">
                 <span className="text-green-400 text-xs font-bold">+12%</span>
               </div>
 
-              <div className="absolute -bottom-4 left-8 w-20 h-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center animate-bounce delay-700">
+              <div className="absolute bottom-12 left-16 w-20 h-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center animate-bounce delay-700 z-20">
                 <span className="text-blue-400 text-xs font-bold">Goal Hit!</span>
               </div>
 
-              <div className="absolute top-16 -right-12 w-14 h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full backdrop-blur-sm border border-purple-500/30 flex items-center justify-center animate-bounce delay-1000">
+              <div className="absolute top-20 right-4 w-14 h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full backdrop-blur-sm border border-purple-500/30 flex items-center justify-center animate-bounce delay-1000 z-20">
                 <Sparkles className="w-6 h-6 text-purple-400" />
               </div>
             </div>

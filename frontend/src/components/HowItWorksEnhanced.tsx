@@ -94,6 +94,13 @@ const HowItWorksEnhanced: React.FC = () => {
                 {/* Visual */}
                 <div className={`${isEven ? 'lg:order-1' : ''} flex justify-center`}>
                   <div className="relative">
+                    {/* Step Number Badge - Positioned Outside Circle */}
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
+                      <div className={`w-16 h-16 bg-gradient-to-r ${step.gradient} rounded-2xl flex items-center justify-center shadow-2xl border-4 border-black`}>
+                        <span className="text-black font-bold text-xl">{step.number}</span>
+                      </div>
+                    </div>
+
                     {/* Main Circle */}
                     <div className={`w-80 h-80 bg-gradient-to-br ${step.gradient} rounded-full p-1 shadow-2xl`}>
                       <div className="w-full h-full bg-black rounded-full flex items-center justify-center relative overflow-hidden">
@@ -107,17 +114,12 @@ const HowItWorksEnhanced: React.FC = () => {
                         <div className={`relative z-10 w-24 h-24 bg-gradient-to-r ${step.gradient} rounded-2xl flex items-center justify-center`}>
                           <IconComponent className="w-12 h-12 text-black" />
                         </div>
-                        
-                        {/* Step Number */}
-                        <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20">
-                          <span className="text-white font-bold text-lg">{step.number}</span>
-                        </div>
                       </div>
                     </div>
 
                     {/* Connecting Line to Next Step */}
                     {index < steps.length - 1 && (
-                      <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 hidden lg:block">
+                      <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 hidden lg:block z-10">
                         <div className="w-1 h-24 bg-gradient-to-b from-gold-500/50 to-transparent"></div>
                       </div>
                     )}

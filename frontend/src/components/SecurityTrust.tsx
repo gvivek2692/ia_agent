@@ -76,7 +76,7 @@ const SecurityTrust: React.FC = () => {
           {/* Right Visual - Security Illustration */}
           <div className="relative flex justify-center lg:justify-end">
             {/* Main Shield */}
-            <div className="relative">
+            <div className="relative p-8">
               <div className="w-80 h-96 bg-gradient-to-b from-gold-500/20 to-amber-500/20 rounded-3xl backdrop-blur-sm border border-gold-500/30 p-8 shadow-2xl">
                 {/* Central Shield Icon */}
                 <div className="flex justify-center mb-8">
@@ -129,16 +129,16 @@ const SecurityTrust: React.FC = () => {
                 </div>
               </div>
 
-              {/* Floating Security Elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30 flex items-center justify-center">
+              {/* Floating Security Elements - Safer Positioning */}
+              <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30 flex items-center justify-center z-20">
                 <Lock className="w-8 h-8 text-green-400" />
               </div>
 
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center">
+              <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/30 flex items-center justify-center z-20">
                 <Award className="w-8 h-8 text-blue-400" />
               </div>
 
-              <div className="absolute top-1/2 -right-8 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-gold-500/20 to-amber-500/20 rounded-full backdrop-blur-sm border border-gold-500/30 flex items-center justify-center">
+              <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-gold-500/20 to-amber-500/20 rounded-full backdrop-blur-sm border border-gold-500/30 flex items-center justify-center z-20">
                 <FileCheck className="w-6 h-6 text-gold-400" />
               </div>
             </div>

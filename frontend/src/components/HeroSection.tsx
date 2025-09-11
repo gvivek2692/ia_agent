@@ -51,7 +51,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
           </div>
 
           {/* Right Visual */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center lg:justify-end p-8">
             {/* Phone Mockup */}
             <div className="relative z-20">
               <div className="w-72 h-96 bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-2 shadow-2xl border border-gray-700">
@@ -93,14 +93,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               </div>
             </div>
 
-            {/* AI Assistant Illustration */}
-            <div className="absolute -right-8 top-12 z-10">
+            {/* AI Assistant Illustration - Clean Design */}
+            <div className="absolute right-0 top-16 z-30">
               <div className="w-24 h-24 bg-gradient-to-r from-gold-500/20 to-amber-500/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-gold-500/30">
                 <Brain className="w-12 h-12 text-gold-400" />
-              </div>
-              {/* Chat Bubble */}
-              <div className="absolute -bottom-2 -left-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 py-2">
-                <p className="text-white text-xs">Ready to optimize your portfolio!</p>
               </div>
             </div>
           </div>
