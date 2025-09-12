@@ -52,9 +52,9 @@ const FeatureGrid: React.FC = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Finance is complex.{' '}
+            Everything you need for{' '}
             <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-              We make it effortless.
+              smart investing
             </span>
           </h2>
         </div>
