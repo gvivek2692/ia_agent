@@ -5,26 +5,26 @@ const HowItWorksEnhanced: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "Connect your financial accounts securely",
-      description: "Link your bank accounts, mutual funds, and trading platforms through government-approved Account Aggregator, MF Central, and CIBIL integrations.",
+      title: "Connect accounts instantly (30 seconds)",
+      description: "Link your bank accounts, mutual funds, and trading platforms through secure government-approved integrations. Your data stays encrypted and private.",
       icon: Link,
       details: ["Account Aggregator (AA) integration", "MF Central connectivity", "CIBIL credit score access", "Bank-grade security"],
       gradient: "from-gold-500 to-amber-500"
     },
     {
       number: "02", 
-      title: "AI analyses your profile & builds your roadmap",
-      description: "Our advanced AI engine processes your financial data to create a comprehensive, personalized financial roadmap tailored to your goals and risk profile.",
+      title: "SIA creates your wealth blueprint (60 seconds)",
+      description: "SIA analyzes your complete financial profile and generates instant action plans. Get your financial health score and personalized wealth strategy immediately.",
       icon: Brain,
-      details: ["Complete financial health analysis", "Risk profile assessment", "Goal-based planning", "Personalized recommendations"],
+      details: ["Instant financial health score", "Personalized wealth blueprint", "Immediate action plans", "Real-time optimization strategies"],
       gradient: "from-amber-500 to-gold-500"
     },
     {
       number: "03",
-      title: "Get real-time insights, nudges, and action plans",
-      description: "Receive continuous monitoring with proactive nudges, instant insights, and clear action plans to keep you on track towards your financial goals.",
+      title: "Execute and prosper (30 seconds to start)",
+      description: "Start executing SIA's recommendations immediately. Watch your wealth score improve in real-time as SIA guards your portfolio 24/7 and optimizes automatically.",
       icon: TrendingUp,
-      details: ["24/7 portfolio monitoring", "Proactive optimization alerts", "Market-aware recommendations", "Instant execution capabilities"],
+      details: ["24/7 intelligent monitoring", "Automatic rebalancing nudges", "Real-time wealth optimization", "Zero-delay execution power"],
       gradient: "from-gold-600 to-amber-600"
     }
   ];
@@ -46,9 +46,9 @@ const HowItWorksEnhanced: React.FC = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Get started in{' '}
+            Take control in{' '}
             <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-              3 simple steps
+              just 2 minutes
             </span>
           </h2>
         </div>

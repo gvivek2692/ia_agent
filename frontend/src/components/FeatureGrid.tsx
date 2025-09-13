@@ -10,24 +10,24 @@ const FeatureGrid: React.FC = () => {
   const features = [
     {
       icon: Bell,
-      title: "Real-time Monitoring & Nudges",
-      description: "Track your financial goals live. Get proactive nudges that optimise your portfolio automatically.",
+      title: "24/7 Portfolio Guardian",
+      description: "SIA guards your portfolio round the clock, delivers rebalancing nudges as market dynamics shift, and adjusts automatically to maintain optimal asset allocation.",
       gradient: "from-gold-500 to-amber-500",
       bgGradient: "from-gold-500/10 to-amber-500/10",
       borderGradient: "from-gold-500/20 to-amber-500/20"
     },
     {
       icon: PieChart,
-      title: "Personalised Portfolios",
-      description: "AI-powered curated baskets designed to grow your wealth. Dynamic asset allocation that adjusts instantly to market changes.",
+      title: "Instant Action Plans",
+      description: "Invest with an instant action plan—and see your progress live. No more waiting for quarterly reviews or wealth manager approvals.",
       gradient: "from-amber-500 to-gold-500",
       bgGradient: "from-amber-500/10 to-gold-500/10",
       borderGradient: "from-amber-500/20 to-gold-500/20"
     },
     {
       icon: Lightbulb,
-      title: "Instant Insights & Action Plans",
-      description: "Understand your complete financial profile in seconds. Receive clear steps to bridge gaps and stay on track — without boring forms.",
+      title: "Financial Health X-Ray",
+      description: "Know your financial life like never before with comprehensive health scores and visual analytics. Complete transparency, instant insights.",
       gradient: "from-amber-600 to-gold-600",
       bgGradient: "from-amber-600/10 to-gold-600/10",
       borderGradient: "from-amber-600/20 to-gold-600/20"
@@ -52,9 +52,9 @@ const FeatureGrid: React.FC = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Everything you need for{' '}
+            Boost your returns with{' '}
             <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-              smart investing
+              SIA-powered intelligence
             </span>
           </h2>
         </div>

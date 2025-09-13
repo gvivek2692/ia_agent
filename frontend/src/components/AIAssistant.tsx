@@ -16,20 +16,20 @@ const AIAssistant: React.FC = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
               <Bot className="w-4 h-4 mr-2" />
-              AI-Powered Intelligence
+              SIA-Powered Intelligence
             </div>
 
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Your{' '}
+              SIA:{' '}
               <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-                24×7 financial
+                Financial genius
               </span>{' '}
-              co-pilot.
+              that fits in your pocket
             </h2>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Meet our conversational, human-like Genius Assistant. Available round the clock to answer questions, 
-              execute transactions, and simplify decisions. No more navigating endless menus.
+              It works for you (not the wealth managers). 24/7 companion, trusted advisor, instant execution. 
+              No more waiting for approvals or paying management fees.
             </p>
 
             {/* Key Features */}
@@ -87,7 +87,7 @@ const AIAssistant: React.FC = () => {
                         <Bot className="w-4 h-4 text-black" />
                       </div>
                       <div>
-                        <h4 className="text-white font-semibold text-sm">Financial AI</h4>
+                        <h4 className="text-white font-semibold text-sm">SIA Assistant</h4>
                         <p className="text-green-400 text-xs">Online</p>
                       </div>
                     </div>
@@ -101,14 +101,14 @@ const AIAssistant: React.FC = () => {
                         <Bot className="w-3 h-3 text-black" />
                       </div>
                       <div className="bg-gray-800 rounded-2xl rounded-tl-sm p-3 max-w-xs">
-                        <p className="text-white text-xs">Good morning! I noticed your SIP for HDFC Top 100 is due tomorrow. Shall I process it?</p>
+                        <p className="text-white text-xs">I've detected a rebalancing opportunity in your portfolio. Execute now for +2.3% optimization?</p>
                       </div>
                     </div>
 
                     {/* User Message */}
                     <div className="flex items-end justify-end space-x-2">
                       <div className="bg-gradient-to-r from-gold-600 to-amber-600 rounded-2xl rounded-br-sm p-3 max-w-xs">
-                        <p className="text-black text-xs font-medium">Yes, and can you show me my portfolio performance?</p>
+                        <p className="text-black text-xs font-medium">Yes, execute it. What's my wealth score today?</p>
                       </div>
                     </div>
 
@@ -118,7 +118,7 @@ const AIAssistant: React.FC = () => {
                         <Bot className="w-3 h-3 text-black" />
                       </div>
                       <div className="bg-gray-800 rounded-2xl rounded-tl-sm p-3 max-w-xs">
-                        <p className="text-white text-xs">SIP processed! ✅ Your portfolio is up 12.5% this year. Top performer: IT sector funds (+18.2%)</p>
+                        <p className="text-white text-xs">Rebalanced! ✅ Wealth score: 94/100. You're outperforming 89% of investors. Ready for next action?</p>
                       </div>
                     </div>
 

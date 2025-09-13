@@ -149,7 +149,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             <span className="text-2xl font-bold text-white">WealthWise</span>
           </div>
           <p className="text-gray-400 mb-6">
-            AI-powered platform for better financial health.
+            SIA-powered wealth intelligence for the top 1%. Take control.
           </p>
           <p className="text-gray-500 text-sm">
             © 2024 WealthWise. All rights reserved.

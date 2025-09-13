@@ -29,19 +29,18 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gold-500/10 to-amber-500/10 border border-gold-500/20 rounded-full text-gold-300 text-sm font-medium mb-6 backdrop-blur-sm">
               <Sparkles className="w-4 h-4 mr-2" />
-              Ready to Transform Your Future?
+              Elite Investor Circle
             </div>
 
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Take control of your{' '}
+              Become part of our mission to help you{' '}
               <span className="bg-gradient-to-r from-gold-400 to-amber-400 bg-clip-text text-transparent">
-                financial future
-              </span>{' '}
-              today.
+                invest like the top 1%
+              </span>
             </h2>
             
             <p className="text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              Join the next generation of intelligent money management. Start your journey towards financial independence with AI-powered insights.
+              Boost your returns by investing in SIA-powered personalized portfolios. Join the elite circle of intelligent investors who've taken control from wealth managers.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -49,15 +48,15 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
                 onClick={onGetStarted}
                 className="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-gold-600 to-amber-600 text-black font-bold rounded-2xl hover:from-gold-500 hover:to-amber-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-gold-500/25 text-lg"
               >
-                Get Started
+                Join Elite Circle
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-gold-400 to-amber-400 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity"></div>
               </button>
               
               <div className="flex items-center text-gray-400 text-sm">
-                <span>✓ Free to start</span>
+                <span>✓ Zero management fees</span>
                 <span className="mx-2">•</span>
-                <span>✓ No hidden fees</span>
+                <span>✓ Start in 2 minutes</span>
               </div>
             </div>
           </div>
@@ -85,26 +84,26 @@ const FinalCTA: React.FC<FinalCTAProps> = ({ onGetStarted }) => {
                       <div className="w-8 h-8 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full mx-auto mb-2 flex items-center justify-center">
                         <Brain className="w-4 h-4 text-black" />
                       </div>
-                      <h4 className="text-white text-xs font-semibold">AI Assistant</h4>
+                      <h4 className="text-white text-xs font-semibold">SIA Assistant</h4>
                     </div>
                     
                     <div className="space-y-2">
                       <div className="bg-gray-800 rounded-lg p-2">
                         <div className="flex justify-between items-center">
                           <span className="text-gray-300 text-xs">Portfolio</span>
-                          <span className="text-gold-400 text-xs font-bold">₹15L+</span>
+                          <span className="text-gold-400 text-xs font-bold">₹25L+</span>
                         </div>
                       </div>
                       <div className="bg-gray-800 rounded-lg p-2">
                         <div className="flex justify-between items-center">
                           <span className="text-gray-300 text-xs">Goals</span>
-                          <span className="text-green-400 text-xs font-bold">92%</span>
+                          <span className="text-green-400 text-xs font-bold">Top 1%</span>
                         </div>
                       </div>
                       <div className="bg-gradient-to-r from-gold-600/20 to-amber-600/20 rounded-lg p-2">
                         <div className="flex justify-between items-center">
-                          <span className="text-white text-xs">AI Score</span>
-                          <span className="text-gold-400 text-xs font-bold">Excellent</span>
+                          <span className="text-white text-xs">Elite Status</span>
+                          <span className="text-gold-400 text-xs font-bold">Achieved</span>
                         </div>
                       </div>
                     </div>

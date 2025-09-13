@@ -103,8 +103,8 @@ const ProblemPromise: React.FC = () => {
                   </div>
                   <div className="bg-gray-800/50 rounded-lg p-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300 text-xs">AI Recommendations</span>
-                      <span className="text-amber-400 text-xs font-bold">5 New</span>
+                      <span className="text-gray-300 text-xs">SIA Actions</span>
+                      <span className="text-amber-400 text-xs font-bold">3 Ready</span>
                     </div>
                   </div>
                 </div>

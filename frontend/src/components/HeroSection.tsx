@@ -28,14 +28,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-              <span className="text-white block mb-2">Smarter money decisions.</span>
+              <span className="text-white block mb-2">Take control of your money and goals</span>
               <span className="bg-gradient-to-r from-gold-600 to-amber-500 bg-clip-text text-transparent">
-                Powered by AI.
+                in just 2 mins
               </span>
             </h1>
             
+            <div className="mb-6">
+              <span className="text-gold-400 text-xl font-semibold">
+                Powered by SIA (Super Intelligent Agent) framework
+              </span>
+            </div>
+            
             <p className="text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              Track goals in real-time, get intelligent nudges, and manage your portfolio — all in one place.
+              Know your financial life like never before — with visual financial health scores. See what you own, what you owe, and get ready for what's next.
             </p>
 
             <div className="flex justify-center lg:justify-start">
@@ -58,13 +64,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
                 <div className="w-full h-full bg-black rounded-2xl p-4 overflow-hidden">
                   {/* Mock Dashboard Content */}
                   <div className="text-center mb-4">
-                    <h3 className="text-white text-sm font-semibold">Portfolio Dashboard</h3>
+                    <h3 className="text-white text-sm font-semibold">Financial Health Score</h3>
                   </div>
                   
-                  {/* Mock Chart */}
+                  {/* Financial Health Score Circle */}
                   <div className="bg-gradient-to-r from-gold-600/20 to-amber-600/20 rounded-xl h-24 mb-4 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full flex items-center justify-center">
-                      <span className="text-black font-bold text-lg">₹</span>
+                    <div className="relative w-16 h-16">
+                      <div className="w-16 h-16 bg-gradient-to-r from-gold-500 to-amber-500 rounded-full flex items-center justify-center">
+                        <span className="text-black font-bold text-lg">92</span>
+                      </div>
+                      <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">A</span>
+                      </div>
                     </div>
                   </div>
 
@@ -72,20 +83,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
                   <div className="space-y-3">
                     <div className="bg-gray-800 rounded-lg p-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-300 text-xs">Total Value</span>
-                        <span className="text-gold-400 text-sm font-bold">₹12,45,000</span>
+                        <span className="text-gray-300 text-xs">Portfolio Value</span>
+                        <span className="text-gold-400 text-sm font-bold">₹24,85,000</span>
                       </div>
                     </div>
                     <div className="bg-gray-800 rounded-lg p-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-300 text-xs">Monthly Goal</span>
-                        <span className="text-green-400 text-sm font-bold">On Track</span>
+                        <span className="text-gray-300 text-xs">Wealth Score</span>
+                        <span className="text-green-400 text-sm font-bold">Excellent</span>
                       </div>
                     </div>
                     <div className="bg-gray-800 rounded-lg p-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-300 text-xs">AI Insights</span>
-                        <span className="text-amber-400 text-sm font-bold">3 New</span>
+                        <span className="text-gray-300 text-xs">SIA Insights</span>
+                        <span className="text-amber-400 text-sm font-bold">5 Ready</span>
                       </div>
                     </div>
                   </div>
