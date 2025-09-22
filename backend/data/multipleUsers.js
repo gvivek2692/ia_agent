@@ -268,6 +268,43 @@ function loadUploadedUsers() {
   }
 }
 
+// Save uploaded users to file
+function saveUploadedUsers(uploadedUsers) {
+  const usersFilePath = path.join(__dirname, 'users.json');
+  
+  try {
+    fs.writeFileSync(usersFilePath, JSON.stringify(uploadedUsers, null, 2), 'utf8');
+    console.log('Successfully saved uploaded users to file');
+    return true;
+  } catch (error) {
+    console.error('Error saving uploaded users:', error);
+    return false;
+  }
+}
+
+// Update user data and save to file
+function updateUserData(userId, updatedUser) {
+  const uploadedUsers = loadUploadedUsers();
+  const userIndex = uploadedUsers.findIndex(u => u.id === userId);
+  
+  if (userIndex !== -1) {
+    // Update existing user
+    uploadedUsers[userIndex] = updatedUser;
+    return saveUploadedUsers(uploadedUsers);
+  } else {
+    // Check if it's a demo user (can't be updated in file)
+    const isDemoUser = demoUsers.find(u => u.id === userId);
+    if (isDemoUser) {
+      console.log(`Cannot save demo user ${userId} to file - demo users are read-only`);
+      return false;
+    }
+    
+    // Add new user
+    uploadedUsers.push(updatedUser);
+    return saveUploadedUsers(uploadedUsers);
+  }
+}
+
 // Get all users (demo + uploaded)
 function getAllUsers() {
   const uploadedUsers = loadUploadedUsers();
@@ -528,5 +565,6 @@ module.exports = {
   getUserById,
   getUserByEmail,
   getGoalsByUserId,
-  getUserTransactions
+  getUserTransactions,
+  updateUserData
 };

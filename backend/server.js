@@ -20,9 +20,10 @@ const marketDataService = require('./services/marketDataService');
 const conversationHistoryService = require('./services/conversationHistoryService');
 const authService = require('./services/authService');
 const webSearchService = require('./services/webSearchService');
-const { users, getUserById, getUserByEmail, getGoalsByUserId, getAllUsers } = require('./data/multipleUsers');
+const { users, getUserById, getUserByEmail, getGoalsByUserId, getAllUsers, updateUserData } = require('./data/multipleUsers');
 const { getUserTransactions } = require('./data/userTransactions');
 const uploadService = require('./services/uploadService');
+const financialHealthService = require('./services/financialHealthService');
 const { generateCompleteAIInsights } = require('./data/aiInsights');
 const { calculateRiskAnalysis } = require('./data/riskCalculations');
 const { generatePortfolioRecommendations } = require('./data/portfolioRecommendations');
@@ -659,6 +660,7 @@ app.get('/api/users/:userId', (req, res) => {
     });
   }
 });
+
 
 // User-specific data endpoints (protected)
 app.get('/api/user/:userId/context', (req, res) => {
@@ -1891,6 +1893,213 @@ app.get('/api/user/:userId/context', (req, res) => {
   } catch (error) {
     console.error('Error fetching user context:', error);
     res.status(500).json({ error: 'Failed to fetch user context' });
+  }
+});
+
+// Financial Health Score endpoint
+app.get('/api/user/:userId/financial-health', (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    // Get user data (supports both demo and Kite users)
+    let user;
+    if (userId.startsWith('kite-')) {
+      const kiteUserId = userId.replace('kite-', '');
+      user = kiteUserSessions.get(kiteUserId);
+    } else {
+      user = getUserById(userId);
+    }
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Build comprehensive user context for financial health calculation
+    let goals = [];
+    if (userId.startsWith('kite-')) {
+      goals = user.financial_goals?.goals || [];
+    } else {
+      goals = getGoalsForUser(userId);
+    }
+    
+    const userContext = {
+      user_profile: user.user_profile,
+      financial_profile: user.financial_profile,
+      investment_profile: user.investment_profile,
+      portfolio: user.portfolio,
+      goals: { goals },
+      monthly_expenses: user.monthly_expenses,
+      banking: user.banking,
+      risk_protection: user.risk_protection,
+      liabilities: user.liabilities,
+      tax_planning: user.tax_planning
+    };
+    
+    // Calculate financial health score
+    const healthResult = financialHealthService.calculateFinancialHealth(userContext);
+    
+    if (healthResult.success) {
+      res.json(healthResult.data);
+    } else {
+      res.status(500).json({ 
+        error: 'Failed to calculate financial health score',
+        details: healthResult.details 
+      });
+    }
+    
+  } catch (error) {
+    console.error('Error calculating financial health:', error);
+    res.status(500).json({ 
+      error: 'Failed to calculate financial health score',
+      details: error.message 
+    });
+  }
+});
+
+// Update user financial health data endpoint
+app.put('/api/user/:userId/financial-health-data', (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { category, data } = req.body;
+    
+    if (!category || !data) {
+      return res.status(400).json({ error: 'Category and data are required' });
+    }
+    
+    // Get user data (supports both demo and Kite users)
+    let user;
+    if (userId.startsWith('kite-')) {
+      const kiteUserId = userId.replace('kite-', '');
+      user = kiteUserSessions.get(kiteUserId);
+    } else {
+      user = getUserById(userId);
+    }
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Update user data based on category
+    if (category === 'Risk Protection') {
+      // Initialize risk_protection if it doesn't exist
+      if (!user.risk_protection) {
+        user.risk_protection = {};
+      }
+      
+      // Update insurance data
+      if (data.life_insurance_amount) {
+        user.risk_protection.life_insurance = {
+          coverage_amount: data.life_insurance_amount,
+          insurance_type: data.life_insurance_type,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.health_insurance_amount) {
+        user.risk_protection.health_insurance = {
+          coverage_amount: data.health_insurance_amount,
+          coverage_type: data.health_insurance_type,
+          updated_at: new Date().toISOString()
+        };
+      }
+    } else if (category === 'Liabilities & Credit') {
+      // Initialize liabilities if it doesn't exist
+      if (!user.liabilities) {
+        user.liabilities = {};
+      }
+      
+      // Update debt and credit data
+      if (data.credit_score) {
+        user.liabilities.credit_score = {
+          score: data.credit_score,
+          source: data.credit_score_source,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.home_loan_emi) {
+        user.liabilities.home_loan = {
+          monthly_emi: data.home_loan_emi,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.personal_loan_emi) {
+        user.liabilities.personal_loan = {
+          monthly_emi: data.personal_loan_emi,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.credit_card_outstanding) {
+        user.liabilities.credit_card = {
+          outstanding_amount: data.credit_card_outstanding,
+          updated_at: new Date().toISOString()
+        };
+      }
+    } else if (category === 'Tax Efficiency & Estate') {
+      // Initialize tax_planning if it doesn't exist
+      if (!user.tax_planning) {
+        user.tax_planning = {};
+      }
+      
+      // Update tax planning data
+      if (data.section_80c_investments) {
+        user.tax_planning.section_80c = {
+          annual_investment: data.section_80c_investments,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.nps_contributions) {
+        user.tax_planning.nps = {
+          annual_contribution: data.nps_contributions,
+          updated_at: new Date().toISOString()
+        };
+      }
+      
+      if (data.section_80d_premium) {
+        user.tax_planning.section_80d = {
+          annual_premium: data.section_80d_premium,
+          updated_at: new Date().toISOString()
+        };
+      }
+    }
+    
+    // Update the user data in storage
+    if (userId.startsWith('kite-')) {
+      const kiteUserId = userId.replace('kite-', '');
+      kiteUserSessions.set(kiteUserId, user);
+    } else {
+      // For demo and uploaded users, update the in-memory user data and save to file
+      const userIndex = users.findIndex(u => u.id === userId);
+      if (userIndex !== -1) {
+        users[userIndex] = user;
+      }
+      
+      // Save updated user data to file (for uploaded users)
+      const saved = updateUserData(userId, user);
+      if (saved) {
+        console.log(`Successfully saved updated user data for ${userId} to file`);
+      } else {
+        console.log(`User ${userId} is a demo user - data updated in memory only`);
+      }
+    }
+    
+    console.log(`Updated ${category} data for user ${userId}:`, data);
+    
+    res.json({
+      success: true,
+      message: `${category} data updated successfully`,
+      updated_data: data
+    });
+    
+  } catch (error) {
+    console.error('Error updating user financial health data:', error);
+    res.status(500).json({ 
+      error: 'Failed to update user data',
+      details: error.message 
+    });
   }
 });
 

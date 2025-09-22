@@ -1,0 +1,42 @@
+{
+  "id": "conv_1758483373198_8a0c2693",
+  "title": "New Chat",
+  "user_id": "priya-sharma",
+  "messages": [
+    {
+      "id": "604d51c2-7800-4696-8ab2-6f3002cced74",
+      "content": "Give me a summary of my portfolio performance",
+      "timestamp": "2025-09-22T01:06:13.201861",
+      "is_bot": false,
+      "user_id": "priya-sharma",
+      "conversation_id": "conv_1758483307814_acvkbmb21"
+    },
+    {
+      "id": "8b6f5ac8-7894-493b-93d5-446c49cd01e8",
+      "content": "Your portfolio summary is as follows:\n\n- **Total Value**: \u20b9568,899\n- **Total Investment**: \u20b9546,737\n- **Overall Gains**: \u20b922,162\n- **Percentage Gain**: 4.0%\n\n### Insights:\n- You have achieved a positive return of 4.0% on your investments, indicating a healthy performance overall.\n- The total value of your portfolio has increased compared to your initial investment, which is a good sign of growth.\n\nIf you would like to analyze specific holdings or receive personalized investment recommendations, please let me know!\n\n---\n**Sources:**\n1. [Live Analysis - Index Performances](https://www.nseindia.com/market-data/index-performances)\n2. [Performance of Indices -BSE & NSE ...](https://www.moneycontrol.com/stocks/marketstats/ind_performance/)\n3. [Equity Market Watch, Live Nifty & Sensex Charts & News](https://www.nseindia.com/market-data/live-equity-market)\n4. [Business News Today: Stock and Share Market News ...](https://www.moneycontrol.com/)\n5. [NSE and BSE Indices Performance and Analysis](https://trendlyne.com/equity/sector-industry-analysis/nse-bse-indices/day/)\n6. [Stock Market Highlights: Pullback momentum may continue ...](https://m.economictimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-30-october-2023/liveblog/104809663.cms) - 30 Oct 2023\n7. [Stock Market Live News Update](https://www.moneycontrol.com/stocksmarketsindia/)\n8. [Market News: Share Market Today, NIFTY, BSE/NSE LIVE ...](https://www.livemint.com/market) - 4 days ago\n",
+      "timestamp": "2025-09-22T01:06:13.202427",
+      "is_bot": true,
+      "user_id": "priya-sharma",
+      "conversation_id": "conv_1758483307814_acvkbmb21"
+    },
+    {
+      "id": "4f968427-169c-4349-bd80-bd15bb344fff",
+      "content": "Show me my portfolio summary",
+      "timestamp": "2025-09-22T01:07:54.041446",
+      "is_bot": false,
+      "user_id": "priya-sharma",
+      "conversation_id": "conv_1758483307814_acvkbmb21"
+    },
+    {
+      "id": "a6a8d686-9273-47c8-8eb6-35df1362b21f",
+      "content": "Your portfolio summary is as follows:\n\n- **Total Value**: \u20b9568,899\n- **Total Investment**: \u20b9546,737\n- **Overall Gains**: \u20b922,162 (4.0%)\n\nIf you need further details or specific analyses regarding your investments, feel free to ask!\n\n---\n**Sources:**\n1. [Live Stock Market updates for BSE SENSEX ...](https://www.bseindia.com/?)\n2. [Equity Research & Stocks Recommendation](https://www.icicidirect.com/research/equity)\n3. [Stock Market Live News Update](https://www.moneycontrol.com/stocksmarketsindia/)\n4. [Equity Market Watch, Live Nifty & Sensex Charts & News](https://www.nseindia.com/market-data/live-equity-market)\n5. [Business News Today: Stock and Share Market News ...](https://www.moneycontrol.com/)\n6. [NSE - National Stock Exchange of India Ltd: Live Share/Stock ...](https://www.nseindia.com/)\n7. [The Stock Market Platform to Stay Ahead: Stock Screeners ...](https://trendlyne.com/)\n8. [Research Reports & Best Stock Market Analysis](https://www.motilaloswal.com/stock-research)\n",
+      "timestamp": "2025-09-22T01:07:54.043737",
+      "is_bot": true,
+      "user_id": "priya-sharma",
+      "conversation_id": "conv_1758483307814_acvkbmb21"
+    }
+  ],
+  "created_at": "2025-09-22T01:06:13.198547",
+  "updated_at": "2025-09-22T01:07:54.043743",
+  "archived": false
+}

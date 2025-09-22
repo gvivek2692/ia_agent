@@ -7879,7 +7879,48 @@
         }
       ]
     },
-    "recent_transactions": []
+    "recent_transactions": [],
+    "risk_protection": {
+      "life_insurance": {
+        "coverage_amount": 5000000,
+        "insurance_type": "Term Life",
+        "updated_at": "2025-09-22T00:32:21.075062"
+      },
+      "health_insurance": {
+        "coverage_amount": 1500000,
+        "coverage_type": "Family Floater",
+        "updated_at": "2025-09-22T00:32:21.075103"
+      }
+    },
+    "liabilities": {
+      "credit_score": {
+        "score": 780,
+        "source": "CIBIL",
+        "updated_at": "2025-09-22T00:32:49.832398"
+      },
+      "home_loan": {
+        "monthly_emi": 25000,
+        "updated_at": "2025-09-22T00:32:49.832416"
+      },
+      "credit_card": {
+        "outstanding_amount": 50000,
+        "updated_at": "2025-09-22T00:32:49.832419"
+      }
+    },
+    "tax_planning": {
+      "section_80c": {
+        "annual_investment": 150000,
+        "updated_at": "2025-09-22T00:33:11.717974"
+      },
+      "nps": {
+        "annual_contribution": 50000,
+        "updated_at": "2025-09-22T00:33:11.717988"
+      },
+      "section_80d": {
+        "annual_premium": 25000,
+        "updated_at": "2025-09-22T00:33:11.717991"
+      }
+    }
   },
   {
     "id": "324e37c4-f949-4861-8edb-9d36db81d211",
