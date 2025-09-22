@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, BarChart3, Brain, User } from 'lucide-react';
+import { MessageSquare, BarChart3, Brain, User, Heart } from 'lucide-react';
 import LandingPage from './components/LandingPage';
 import AIChatSidebar from './components/AIChatSidebar';
 import LoginForm from './components/LoginForm';
@@ -9,7 +9,9 @@ import UploadStatement from './components/UploadStatement';
 import PortfolioDashboard from './components/PortfolioDashboard';
 import AIInsights from './components/AIInsights';
 import ProfileEditPage from './components/ProfileEditPage';
+import FinancialHealthDashboard from './components/FinancialHealth/FinancialHealthDashboard';
 import { apiService } from './services/apiService';
+import { config } from './config/environment';
 
 interface User {
   id: string;
@@ -22,7 +24,7 @@ interface User {
   risk_tolerance?: string;
 }
 
-type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights' | 'profile';
+type AppView = 'landing' | 'login' | 'userList' | 'upload' | 'portfolio' | 'insights' | 'profile' | 'financial-health';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
@@ -60,7 +62,7 @@ function App() {
       setIsAuthChecking(true);
       
       // Send request token to backend for authentication
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001/api'}/kite/callback`, {
+      const response = await fetch(`${config.apiUrl}/kite/callback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -328,6 +330,19 @@ function App() {
                   </span>
                 </button>
                 <button
+                  onClick={() => setCurrentView('financial-health')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                    currentView === 'financial-health'
+                      ? 'bg-gradient-to-r from-gold-600 to-amber-600 text-black shadow-lg'
+                      : 'text-gray-300 hover:text-white hover:bg-white/10 backdrop-blur-sm'
+                  }`}
+                >
+                  <span className="flex items-center space-x-2">
+                    <Heart className="w-4 h-4" />
+                    <span>Health Score</span>
+                  </span>
+                </button>
+                <button
                   onClick={() => setCurrentView('profile')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
                     currentView === 'profile'
@@ -368,6 +383,16 @@ function App() {
           
           {currentView === 'insights' && (
             <AIInsights 
+              userId={currentUser?.id}
+              userName={currentUser?.name}
+              sessionId={sessionId}
+              onSessionExpired={handleLogout}
+              onToggleAIChat={toggleAIChat}
+            />
+          )}
+          
+          {currentView === 'financial-health' && (
+            <FinancialHealthDashboard 
               userId={currentUser?.id}
               userName={currentUser?.name}
               sessionId={sessionId}

@@ -19,10 +19,10 @@ const getEnvironmentConfig = (): EnvironmentConfig => {
   
   // Use environment variables if available, otherwise use deployed backend
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 
-    (USE_LOCAL_BACKEND && isDevelopment ? 'http://localhost:3001' : 'https://ia-agent-aguf.onrender.com');
+    (USE_LOCAL_BACKEND && isDevelopment ? 'http://localhost:3002' : 'https://ia-agent-aguf.onrender.com');
   
   const apiUrl = process.env.REACT_APP_API_URL || 
-    (USE_LOCAL_BACKEND && isDevelopment ? 'http://localhost:3001/api' : 'https://ia-agent-aguf.onrender.com/api');
+    (USE_LOCAL_BACKEND && isDevelopment ? 'http://localhost:3002/api' : 'https://ia-agent-aguf.onrender.com/api');
 
   return {
     backendUrl,

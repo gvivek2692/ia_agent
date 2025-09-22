@@ -390,6 +390,19 @@ class ApiService {
       body: JSON.stringify({ userId, goals })
     });
   }
+
+  // Financial Health data
+  async getFinancialHealth(userId: string) {
+    return this.makeRequest(`/user/${userId}/financial-health`);
+  }
+
+  // Update Financial Health data
+  async updateFinancialHealthData(userId: string, category: string, data: any) {
+    return this.makeRequest(`/user/${userId}/financial-health-data`, {
+      method: 'PUT',
+      body: JSON.stringify({ category, data })
+    });
+  }
 }
 
 export const apiService = new ApiService();
