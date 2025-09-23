@@ -48,7 +48,9 @@ app.add_middleware(
         "http://localhost:3000",
         "https://localhost:3000",
         "https://ia-agent-aguf.onrender.com",
+        "https://ia-agent-1.onrender.com",
         "https://ia-agent-wine.vercel.app",
+        "https://ia-agent-mvk1.vercel.app",
         "https://*.vercel.app",
         "https://*.netlify.app",
         "https://*.github.io"
