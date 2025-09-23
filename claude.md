@@ -456,8 +456,8 @@ npm run dev
 
 #### Option 1: Using Gunicorn (Recommended for Production)
 ```bash
-# Install Gunicorn
-pip install gunicorn
+# Gunicorn is included in requirements.txt
+# No separate installation needed
 
 # Basic production start (for Render/cloud platforms)
 cd backend_python
@@ -768,3 +768,57 @@ curl https://your-render-app.onrender.com/health
 - **Error Handling**: Robust handling of wrong passwords, missing passwords, and parsing failures
 
 This implementation successfully demonstrates a production-ready AI wealth advisor with comprehensive support for password-protected CAS statements, achieving accurate portfolio valuation and complete transaction parsing.
+
+## Recent Deployment Fixes (September 2025)
+
+### Render Deployment Issues Resolved
+
+#### Issue 1: Cargo Cache Directory Error
+**Problem:** Rust packages trying to compile from source couldn't create cache directories in Render's read-only filesystem.
+**Solution:** Added Cargo environment variables to redirect cache to writable temporary directories:
+- `CARGO_HOME=/tmp/cargo`
+- `CARGO_TARGET_DIR=/tmp/cargo-target`
+- `RUSTUP_HOME=/tmp/rustup`
+
+#### Issue 2: Pydantic Version Compatibility
+**Problem:** `pydantic==2.5.0` required `pydantic-core==2.14.1` which was no longer available on PyPI.
+**Solution:** Updated to flexible version ranges:
+- `pydantic>=2.8.0,<3.0.0`
+- `pydantic-settings>=2.3.0,<3.0.0`
+- Compatible with available pydantic-core versions (2.20.0+)
+
+#### Issue 3: Dependency Conflicts
+**Problem:** Exact version pins created conflicts between FastAPI, OpenAI, and typing-extensions packages.
+**Solution:** Converted all packages to semantic version ranges:
+- `fastapi>=0.110.0,<1.0.0` (now 0.117.1)
+- `openai>=1.12.0,<2.0.0` (now 1.108.2)
+- `uvicorn>=0.27.0,<1.0.0` (now 0.36.0)
+- `typing-extensions>=4.9.0,<5.0.0` (now 4.15.0)
+
+#### Issue 4: Missing Gunicorn Dependency
+**Problem:** Build succeeded but deployment failed with "gunicorn: command not found".
+**Solution:** Added `gunicorn>=22.0.0,<23.0.0` to requirements.txt.
+
+### Current Production Status
+- ✅ **Render Deployment:** Fully operational with automatic deployments
+- ✅ **All Dependencies:** Compatible version ranges prevent future conflicts
+- ✅ **Health Checks:** `/health` and `/docs` endpoints responding
+- ✅ **Performance:** FastAPI 0.117.1 with modern dependency versions
+- ✅ **Reliability:** Semantic versioning allows automatic security updates
+
+### Deployment Commands Summary
+```bash
+# Render Build Command
+pip install -r requirements.txt
+
+# Render Start Command  
+gunicorn main:app --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+
+# Environment Variables (set in Render dashboard)
+CARGO_HOME=/tmp/cargo
+CARGO_TARGET_DIR=/tmp/cargo-target
+RUSTUP_HOME=/tmp/rustup
+OPENAI_API_KEY=your_key
+KITE_API_KEY=your_key
+# ... other environment variables
+```
