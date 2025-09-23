@@ -4,7 +4,7 @@
 Create a comprehensive demo of an AI wealth advisor that uses realistic simulated financial data to showcase intelligent, multi-turn conversations with web search capabilities, market analysis, and personalized financial planning for Indian investors. The system now supports both demo data and live portfolio data from Kite Connect integration.
 
 ## Technology Stack
-- **Backend**: Node.js with Express.js, Socket.io for real-time chat
+- **Backend**: Python FastAPI (primary) + Node.js with Express.js (legacy), Socket.io for real-time chat
 - **Frontend**: React with TypeScript, Tailwind CSS, Recharts for visualizations
 - **AI**: OpenAI GPT-4.1 Mini with web search preview tool
 - **Data**: In-memory simulated financial data + Live data from Kite Connect API
@@ -57,6 +57,24 @@ SERPER_API_KEY=your_serper_api_key_here
 KITE_API_KEY=your_kite_api_key_here
 KITE_API_SECRET=your_kite_api_secret_here
 KITE_REDIRECT_URL=https://your-production-url.com/
+```
+
+Create .env file in backend_python folder with:
+```
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=3002
+SERPER_API_KEY=your_serper_api_key_here
+
+# Kite Connect API Credentials
+KITE_API_KEY=your_kite_api_key_here
+KITE_API_SECRET=your_kite_api_secret_here
+KITE_REDIRECT_URL=https://your-production-url.com/
+```
+
+Create .env.local file in frontend folder with:
+```
+REACT_APP_API_URL=http://localhost:3002/api
+REACT_APP_WS_URL=ws://localhost:3002
 ```
 
 ### 1.3 Socket.io Integration
@@ -319,12 +337,14 @@ This phased approach ensures systematic development of a comprehensive AI wealth
 ### Completed Features
 ✅ **Phase 1-3**: All foundation features completed
 ✅ **Phase 4-6**: Core functionality and UI/UX completed
+✅ **Python FastAPI Backend**: Primary backend implementation with financial health services
 ✅ **Kite Connect Integration**: Live portfolio data from Zerodha Kite
 ✅ **Mutual Fund Statement Upload**: Support for CAS/statement processing with password-protected PDFs
 ✅ **Password-Protected PDF Support**: Full support for encrypted CAS statements using pdf.js-extract
 ✅ **Real-time Chat**: AI-powered conversations with portfolio context
 ✅ **Portfolio Recommendations**: Dynamic AI-generated investment advice
 ✅ **Goal Management**: Financial goals tracking and planning
+✅ **Financial Health Dashboard**: Complete scoring system with category-wise analysis
 
 ### Key Implementation Notes
 
@@ -348,32 +368,364 @@ This phased approach ensures systematic development of a comprehensive AI wealth
 - **Portfolio Sync**: Real-time refresh capability for Kite-connected portfolios
 
 #### Critical Files for Maintenance
+
+**Python Backend (Primary):**
+- `backend_python/main.py`: FastAPI application entry point
+- `backend_python/routers/users.py`: User management and financial health API endpoints
+- `backend_python/services/financial_health_service.py`: Financial health scoring service
+- `backend_python/shared_services.py`: Shared services and demo data management
+- `backend_python/models/user.py`: User data models and validation
+
+**Node.js Backend (Legacy):**
 - `backend/services/kiteService.js`: Kite Connect integration and data transformation
 - `backend/services/uploadService.js`: PDF parsing service with password support and market value extraction
 - `backend/server.js`: Main API routes and AI chat system (lines 102-265, 610-654, 1489-1597)  
 - `backend/data/portfolioRecommendations.js`: AI recommendation engine
+
+**Frontend:**
 - `frontend/src/components/PortfolioDashboard.tsx`: Main portfolio UI with null safety
 - `frontend/src/components/HoldingsTable.tsx`: Portfolio data display with error handling
 - `frontend/src/components/UploadStatement.tsx`: CAS PDF upload UI with password protection support
+- `frontend/src/components/FinancialHealth/FinancialHealthDashboard.tsx`: Financial health dashboard
 - `frontend/src/services/apiService.ts`: API service with enhanced error handling for PDF uploads
+- `frontend/src/config/environment.ts`: Environment configuration
 
-#### Testing Commands
+## How to Start the Application
+
+### Prerequisites
+- Node.js (v14 or higher)
+- Python 3.8+
+- pip (Python package manager)
+
+### Environment Setup
+1. Set up environment variables as described in section 1.2 above
+2. Install Python dependencies:
 ```bash
-# Backend testing
-cd backend && npm run dev
+cd backend_python
+pip install -r requirements.txt
+```
+3. Install Node.js dependencies:
+```bash
+cd frontend
+npm install
+```
+
+### Development Startup Commands
+
+#### Option 1: Start Components Separately (Recommended)
+
+**Terminal 1 - Python Backend (FastAPI):**
+```bash
+cd backend_python
+python -m uvicorn main:app --reload --port 3002
+```
+
+**Terminal 2 - Frontend (React):**
+```bash
+cd frontend
+npm start
+```
+
+**Terminal 3 - Node.js Backend (Legacy - Optional):**
+```bash
+cd backend
+npm run dev
+```
+
+#### Option 2: Single Command Startup
+```bash
+# From project root (if concurrently is configured)
+npm run dev
+```
+
+### Application URLs
+- **Frontend**: http://localhost:3000
+- **Python Backend API**: http://localhost:3002
+- **Python Backend Docs**: http://localhost:3002/docs (FastAPI auto-generated docs)
+- **Node.js Backend**: http://localhost:3001 (if running legacy backend)
+
+### Startup Verification
+1. Python backend should show: "INFO: Uvicorn running on http://0.0.0.0:3002"
+2. Frontend should show: "webpack compiled successfully"
+3. Open http://localhost:3000 to access the application
+4. Test demo profiles by clicking "Try Demo" and selecting any user profile
+
+## Production Deployment
+
+### Python Backend Production Setup
+
+#### Option 1: Using Gunicorn (Recommended for Production)
+```bash
+# Install Gunicorn
+pip install gunicorn
+
+# Basic production start (for Render/cloud platforms)
+cd backend_python
+gunicorn main:app --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+
+# Advanced configuration with multiple workers (for VPS/dedicated servers)
+gunicorn main:app \
+  --workers 4 \
+  --worker-class uvicorn.workers.UvicornWorker \
+  --bind 0.0.0.0:3002 \
+  --timeout 120 \
+  --keep-alive 5 \
+  --max-requests 1000 \
+  --preload
+```
+
+#### Option 2: Using Uvicorn with Production Settings
+```bash
+cd backend_python
+uvicorn main:app --host 0.0.0.0 --port 3002 --workers 4
+```
+
+#### Option 3: Using Docker
+```dockerfile
+# Dockerfile for Python backend
+FROM python:3.9-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+EXPOSE 3002
+
+CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:3002"]
+```
+
+```bash
+# Build and run Docker container
+docker build -t ia-agent-backend .
+docker run -p 3002:3002 --env-file .env ia-agent-backend
+```
+
+### Frontend Production Build
+```bash
+cd frontend
+npm run build
+
+# Serve using static server
+npm install -g serve
+serve -s build -l 3000
+
+# Or using nginx/apache to serve the build folder
+```
+
+### Environment Variables for Production
+```bash
+# Python Backend Production .env
+OPENAI_API_KEY=your_production_openai_key
+PORT=3002
+SERPER_API_KEY=your_production_serper_key
+KITE_API_KEY=your_production_kite_key
+KITE_API_SECRET=your_production_kite_secret
+KITE_REDIRECT_URL=https://your-production-domain.com/
+
+# Additional production settings
+ENVIRONMENT=production
+LOG_LEVEL=INFO
+CORS_ORIGINS=["https://your-frontend-domain.com"]
+```
+
+### Production Monitoring
+```bash
+# Health check endpoint
+curl http://localhost:3002/health
+
+# API documentation
+curl http://localhost:3002/docs
+
+# Monitor logs
+tail -f /var/log/ia-agent/app.log
+```
+
+### Production Checklist (Render)
+- [ ] Environment variables configured in Render dashboard
+- [ ] CORS origins set to production domains
+- [ ] SSL certificates (automatically provided by Render)
+- [ ] Health check endpoints responding (`/health`)
+- [ ] Auto-deploy configured from `python-backend` branch
+- [ ] Service logs monitoring setup in Render dashboard
+- [ ] Backup strategy for user data files
+- [ ] Rate limiting configured
+- [ ] Security headers implemented
+- [ ] Kite Connect redirect URL updated to Render domain
+- [ ] Frontend environment variables point to Render backend URL
+
+#### Legacy Testing Commands
+```bash
+# Python Backend testing
+cd backend_python && python -m uvicorn main:app --reload --port 3002
 
 # Frontend testing  
 cd frontend && npm start
+
+# Node.js Backend testing (legacy)
+cd backend && npm run dev
 
 # Full system test
 npm run dev  # (if root package.json has concurrently setup)
 ```
 
+### Cloud Deployment Platforms
+
+#### Vercel (Frontend + Backend)
+```bash
+# Frontend deployment
+cd frontend
+vercel --prod
+
+# Python backend deployment (using Vercel's Python runtime)
+cd backend_python
+vercel --prod
+```
+
+#### Render (Backend - Current Deployment)
+```bash
+# Deploy Python backend to Render
+# 1. Connect GitHub repository to Render dashboard
+# 2. Create new Web Service
+# 3. Configure build and start commands:
+
+# Build Command:
+pip install -r requirements.txt
+
+# Start Command:
+gunicorn main:app --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+
+# Environment Variables (set in Render dashboard):
+OPENAI_API_KEY=your_production_openai_key
+SERPER_API_KEY=your_production_serper_key
+KITE_API_KEY=your_production_kite_key
+KITE_API_SECRET=your_production_kite_secret
+KITE_REDIRECT_URL=https://your-render-app.onrender.com/
+ENVIRONMENT=production
+LOG_LEVEL=INFO
+```
+
+#### Render Configuration Files
+Create `render.yaml` in project root for automated deployment:
+```yaml
+services:
+  - type: web
+    name: ia-agent-backend
+    env: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SERPER_API_KEY
+        sync: false
+      - key: KITE_API_KEY
+        sync: false
+      - key: KITE_API_SECRET
+        sync: false
+      - key: KITE_REDIRECT_URL
+        value: https://ia-agent-backend.onrender.com/
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+```
+
+#### Railway (Backend)
+```bash
+# Deploy Python backend to Railway
+railway login
+railway link
+railway up
+```
+
+#### Heroku (Backend)
+```bash
+# Create Procfile in backend_python/
+echo "web: gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:\$PORT" > Procfile
+
+# Deploy to Heroku
+heroku create your-app-name
+heroku config:set OPENAI_API_KEY=your_key
+heroku config:set KITE_API_KEY=your_key
+git push heroku main
+```
+
+#### AWS/DigitalOcean (VPS)
+```bash
+# Server setup with systemd service
+sudo nano /etc/systemd/system/ia-agent.service
+
+# Service file content:
+[Unit]
+Description=IA Agent FastAPI Backend
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/ia_agent/backend_python
+Environment=PATH=/home/ubuntu/ia_agent/venv/bin
+EnvironmentFile=/home/ubuntu/ia_agent/.env
+ExecStart=/home/ubuntu/ia_agent/venv/bin/gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:3002
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# Enable and start service
+sudo systemctl enable ia-agent
+sudo systemctl start ia-agent
+sudo systemctl status ia-agent
+```
+
+### Current Production Setup (Render)
+
+#### Backend Deployment on Render
+- **Service Type**: Web Service
+- **Repository**: Connected to GitHub `gvivek2692/ia_agent`
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `gunicorn main:app --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT`
+- **Auto-Deploy**: Enabled on `python-backend` branch pushes
+
+#### Render-Specific Configuration
+```bash
+# Render automatically provides $PORT environment variable
+# Health check endpoint: https://your-app.onrender.com/health
+# API docs: https://your-app.onrender.com/docs
+# Logs available in Render dashboard
+
+# Manual deployment trigger:
+# 1. Go to Render dashboard
+# 2. Select your service
+# 3. Click "Manual Deploy" → "Deploy latest commit"
+```
+
+#### Frontend Configuration for Render Backend
+Update `frontend/.env.local` for production:
+```bash
+REACT_APP_API_URL=https://your-render-app.onrender.com/api
+REACT_APP_WS_URL=wss://your-render-app.onrender.com
+```
+
+#### Render Monitoring
+```bash
+# Health check
+curl https://your-render-app.onrender.com/health
+
+# Service logs (available in Render dashboard)
+# Navigate to: Dashboard → Service → Logs tab
+
+# Service metrics (available in Render dashboard)
+# Navigate to: Dashboard → Service → Metrics tab
+```
+
 #### Deployment Configuration
-- **Backend**: Deployed to production with Kite Connect credentials
-- **Frontend**: Deployed with correct API endpoints
+- **Python Backend**: Deployed on Render with auto-deploy from GitHub
+- **Frontend**: Static build deployed to Vercel/Netlify
 - **Environment**: Production URLs configured in Kite Connect dashboard
 - **CORS**: Properly configured for cross-origin requests between frontend/backend
+- **SSL**: HTTPS enforced for all production endpoints (Render provides SSL automatically)
 
 #### Recent Fixes Applied
 - ✅ Fixed Kite Connect authentication redirect URL issues
