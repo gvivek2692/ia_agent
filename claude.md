@@ -822,3 +822,76 @@ OPENAI_API_KEY=your_key
 KITE_API_KEY=your_key
 # ... other environment variables
 ```
+
+## Frontend Deployment (Vercel)
+
+### Vercel Configuration
+
+#### Automatic Deployment
+```bash
+# Connect GitHub repository to Vercel
+# Vercel automatically detects React apps and builds them
+# Build Command: npm run build (automatic)
+# Output Directory: build (automatic)
+```
+
+#### Environment Variables (Optional)
+If you need to override the default backend URL, set these in Vercel dashboard:
+```bash
+REACT_APP_API_URL=https://ia-agent-1.onrender.com/api
+REACT_APP_BACKEND_URL=https://ia-agent-1.onrender.com
+```
+
+**Note:** The frontend automatically detects the environment and uses the correct backend URL. Environment variables are only needed for custom configurations.
+
+### CORS Troubleshooting
+
+#### Common CORS Error
+```
+Access to fetch at 'https://ia-agent-1.onrender.com/api/auth/login' 
+from origin 'https://your-app.vercel.app' has been blocked by CORS policy
+```
+
+#### Solution Steps
+
+1. **Add Vercel Domain to Backend CORS** (already done for common domains):
+   ```python
+   # In backend_python/main.py
+   allow_origins=[
+       "https://ia-agent-mvk1.vercel.app",  # Add your specific domain
+       "https://ia-agent-1.onrender.com",   # Add your backend domain
+       # ... other domains
+   ]
+   ```
+
+2. **Verify Frontend Configuration**:
+   ```typescript
+   // frontend/src/config/environment.ts automatically handles this
+   // Development: uses http://localhost:3002
+   // Production: uses https://ia-agent-1.onrender.com
+   ```
+
+3. **Deploy Backend Changes**:
+   ```bash
+   git add backend_python/main.py
+   git commit -m "fix: Add CORS support for new Vercel domain"
+   git push  # Triggers auto-deployment to Render
+   ```
+
+#### CORS Configuration Reference
+Current allowed origins include:
+- Local development: `http://localhost:3000`, `https://localhost:3000`
+- Render backend: `https://ia-agent-1.onrender.com`
+- Vercel deployments: `https://ia-agent-mvk1.vercel.app`, `https://ia-agent-wine.vercel.app`
+- Wildcard patterns: `https://*.vercel.app`, `https://*.netlify.app`
+
+#### Testing CORS
+```bash
+# Test preflight request
+curl -X OPTIONS https://ia-agent-1.onrender.com/api/auth/login \
+  -H "Origin: https://your-app.vercel.app" \
+  -H "Access-Control-Request-Method: POST" \
+  -v
+
+# Should return Access-Control-Allow-Origin header
+```
