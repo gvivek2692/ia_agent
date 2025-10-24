@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import { X, MessageSquare } from 'lucide-react';
 import ConversationDropdown from './ConversationDropdown';
 import ChatInterface from './ChatInterface';
+import { InsightContext } from '../types/insight';
 
 interface AIChatSidebarProps {
   isOpen: boolean;
   onToggle: () => void;
   userId?: string;
   userName?: string;
+  initialContext?: InsightContext;
 }
 
 const AIChatSidebar: React.FC<AIChatSidebarProps> = ({
   isOpen,
   onToggle,
   userId,
-  userName
+  userName,
+  initialContext
 }) => {
   const [currentConversationId, setCurrentConversationId] = useState<string>('');
 
@@ -83,6 +86,7 @@ const AIChatSidebar: React.FC<AIChatSidebarProps> = ({
               onConversationChange={handleConversationChange}
               userId={userId}
               userName={userName}
+              initialContext={initialContext}
             />
           </div>
         </div>

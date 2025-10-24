@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import MessageRenderer from './MessageRenderer';
 import { config } from '../config/environment';
 import { apiService } from '../services/apiService';
+import { InsightContext } from '../types/insight';
+import { formatInsightContextMessage } from '../utils/insightContext';
 
 interface Message {
   id: number;
@@ -34,6 +36,7 @@ interface ChatInterfaceProps {
   onConversationChange?: (conversationId: string) => void;
   userId?: string;
   userName?: string;
+  initialContext?: InsightContext;
 }
 
 interface WebSocketMessage {
@@ -49,7 +52,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   selectedConversationId, 
   onConversationChange,
   userId,
-  userName
+  userName,
+  initialContext
 }) => {
   const [websocket, setWebsocket] = useState<WebSocket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -58,6 +62,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [conversationId, setConversationId] = useState<string>('');
   const [connectionError, setConnectionError] = useState<string>('');
+  const [contextSent, setContextSent] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const reconnectAttemptsRef = useRef<number>(0);
@@ -95,6 +100,24 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
     setMessages([welcomeMessage]);
     return newConversationId;
   }, [onConversationChange, userName, userId]);
+
+  const initializeConversationWithContext = useCallback((context: InsightContext) => {
+    const newConversationId = `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    setConversationId(newConversationId);
+    onConversationChange?.(newConversationId);
+    
+    // Create context-aware welcome message
+    const contextMessage = {
+      id: Date.now(),
+      message: formatInsightContextMessage(context),
+      timestamp: new Date().toISOString(),
+      isBot: false
+    };
+    
+    setMessages([contextMessage]);
+    setContextSent(false); // Will be set to true when sent via WebSocket
+    return newConversationId;
+  }, [onConversationChange]);
 
   const loadConversation = useCallback(async (conversationId: string) => {
     try {
@@ -205,9 +228,13 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   useEffect(() => {
     const cleanup = connectWebSocket();
     
-    // Initialize first conversation
+    // Initialize conversation based on context
     if (!selectedConversationId) {
-      initializeConversation();
+      if (initialContext) {
+        initializeConversationWithContext(initialContext);
+      } else {
+        initializeConversation();
+      }
     }
 
     return cleanup;
@@ -217,6 +244,41 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Auto-send insight context when WebSocket is connected
+  useEffect(() => {
+    if (isConnected && initialContext && !contextSent && websocket && conversationId) {
+      const contextMessage = formatInsightContextMessage(initialContext);
+      
+      // Send message in format expected by Python FastAPI backend
+      const wsMessage: WebSocketMessage = {
+        type: 'insight_context_message',
+        message: contextMessage,
+        userId: userId,
+        conversationId: conversationId,
+        context: {
+          insightContext: initialContext,
+          conversationHistory: messages.slice(-10),
+          userName: userName
+        }
+      };
+      
+      try {
+        websocket.send(JSON.stringify(wsMessage));
+        setContextSent(true);
+        setIsTyping(true);
+        console.log('Insight context sent to AI', initialContext.insight.title);
+      } catch (error) {
+        console.error('Error sending insight context:', error);
+        setMessages(prev => [...prev, {
+          id: Date.now(),
+          message: '⚠️ Failed to send insight context. Please try again.',
+          timestamp: new Date().toISOString(),
+          isBot: true
+        }]);
+      }
+    }
+  }, [isConnected, initialContext, contextSent, websocket, conversationId, messages, userId, userName]);
 
   // Handle conversation switching from parent component
   useEffect(() => {

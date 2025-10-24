@@ -21,6 +21,7 @@ import GoalsProgress from './GoalsProgress';
 import PortfolioHealthCard from './PortfolioHealthCard';
 import ActionableInsights from './ActionableInsights';
 import { apiService } from '../services/apiService';
+import { InsightData } from '../types/insight';
 
 interface AIInsightsProps {
   userId?: string;
@@ -28,19 +29,7 @@ interface AIInsightsProps {
   sessionId?: string;
   onSessionExpired?: () => void;
   onToggleAIChat?: () => void;
-}
-
-interface InsightData {
-  id: string;
-  type: 'performance' | 'risk' | 'opportunity' | 'warning' | 'goal' | 'market';
-  title: string;
-  description: string;
-  impact: 'high' | 'medium' | 'low';
-  confidence: number;
-  actionable: boolean;
-  recommendation?: string;
-  data?: any;
-  generated_at: string;
+  onKnowMore?: (insight: InsightData) => void;
 }
 
 interface GoalData {
@@ -65,7 +54,7 @@ interface AIInsightsData {
   last_updated: string;
 }
 
-const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, onSessionExpired, onToggleAIChat }) => {
+const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, onSessionExpired, onToggleAIChat, onKnowMore }) => {
   const [insightsData, setInsightsData] = useState<AIInsightsData | null>(null);
   const [goals, setGoals] = useState<GoalData[]>([]);
   const [portfolioValue, setPortfolioValue] = useState<number>(0);
@@ -331,6 +320,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
                 {/* Actionable Insights */}
                 <ActionableInsights
                   insights={insightsData.insights}
+                  onKnowMore={onKnowMore}
                   onViewAllInsights={() => setActiveTab('portfolio')}
                 />
                 
@@ -408,7 +398,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
               <h2 className="text-xl font-semibold text-white mb-6">Portfolio Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredInsights.map((insight) => (
-                  <InsightCard key={insight.id} insight={insight} />
+                  <InsightCard key={insight.id} insight={insight} onKnowMore={onKnowMore} />
                 ))}
               </div>
             </div>
@@ -423,7 +413,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
               <h2 className="text-xl font-semibold text-white mb-6">Market Insights</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredInsights.map((insight) => (
-                  <InsightCard key={insight.id} insight={insight} />
+                  <InsightCard key={insight.id} insight={insight} onKnowMore={onKnowMore} />
                 ))}
               </div>
             </div>

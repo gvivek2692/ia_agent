@@ -7,31 +7,23 @@ import {
   Clock, 
   ArrowRight,
   Lightbulb,
-  CheckCircle2
+  CheckCircle2,
+  MessageSquare
 } from 'lucide-react';
 
-interface InsightData {
-  id: string;
-  type: 'performance' | 'risk' | 'opportunity' | 'warning' | 'goal' | 'market';
-  title: string;
-  description: string;
-  impact: 'high' | 'medium' | 'low';
-  confidence: number;
-  actionable: boolean;
-  recommendation?: string;
-  data?: any;
-  generated_at: string;
-}
+import { InsightData } from '../types/insight';
 
 interface ActionableInsightsProps {
   insights: InsightData[];
   onTakeAction?: (insight: InsightData) => void;
+  onKnowMore?: (insight: InsightData) => void;
   onViewAllInsights?: () => void;
 }
 
 const ActionableInsights: React.FC<ActionableInsightsProps> = ({
   insights,
   onTakeAction,
+  onKnowMore,
   onViewAllInsights
 }) => {
   const getInsightIcon = (type: string, impact: string) => {
@@ -213,15 +205,29 @@ const ActionableInsights: React.FC<ActionableInsightsProps> = ({
                       </div>
                     </div>
                     
-                    {onTakeAction && (
-                      <button
-                        onClick={() => onTakeAction(insight)}
-                        className="flex items-center space-x-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group"
-                      >
-                        <span>Take Action</span>
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                      </button>
-                    )}
+                    <div className="flex items-center space-x-3">
+                      {onKnowMore && (
+                        <button
+                          onClick={() => onKnowMore(insight)}
+                          className="flex items-center space-x-1 text-sm font-medium text-gold-400 hover:text-gold-300 transition-colors group"
+                          title="Get detailed AI explanation"
+                        >
+                          <MessageSquare className="w-3 h-3" />
+                          <span>Know More</span>
+                        </button>
+                      )}
+                      
+                      {onTakeAction && (
+                        <button
+                          onClick={() => onTakeAction(insight)}
+                          className="flex items-center space-x-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group"
+                          title="Take recommended action"
+                        >
+                          <span>Take Action</span>
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

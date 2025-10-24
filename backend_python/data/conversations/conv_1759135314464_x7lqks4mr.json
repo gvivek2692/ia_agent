@@ -1,0 +1,26 @@
+{
+  "id": "conv_1759135418925_4dcdf7f0",
+  "title": "New Chat",
+  "user_id": "rajesh-kumar",
+  "messages": [
+    {
+      "id": "0671354d-d534-499d-a019-d490f8c1e71f",
+      "content": "Tell me about my portfolio",
+      "timestamp": "2025-09-29T14:13:38.927292",
+      "is_bot": false,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1759135314464_x7lqks4mr"
+    },
+    {
+      "id": "4e536128-7b8c-4289-aa72-0c9dbed68845",
+      "content": "Here's a summary of your portfolio:\n\n- **Total Value:** \u20b91,516,019\n- **Total Investment:** \u20b91,389,045\n- **Overall Gains:** \u20b9126,974 (9.1%)\n\nIf you need more detailed information such as individual holdings, sector allocation, or any specific analysis, please let me know!",
+      "timestamp": "2025-09-29T14:13:38.928033",
+      "is_bot": true,
+      "user_id": "rajesh-kumar",
+      "conversation_id": "conv_1759135314464_x7lqks4mr"
+    }
+  ],
+  "created_at": "2025-09-29T14:13:38.925425",
+  "updated_at": "2025-09-29T14:13:38.928039",
+  "archived": false
+}
