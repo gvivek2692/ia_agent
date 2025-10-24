@@ -132,6 +132,24 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
                     client_id=client_id
                 )
             
+            # Process insight context message
+            elif data.get("type") == "insight_context_message":
+                response = await ai_service.process_insight_context_message(
+                    message=data.get("message"),
+                    user_id=data.get("userId"),
+                    conversation_id=data.get("conversationId"),
+                    context=data.get("context")
+                )
+                
+                # Send response back to client
+                await websocket_manager.send_personal_message(
+                    message={
+                        "type": "chat_response",
+                        "data": response
+                    },
+                    client_id=client_id
+                )
+            
             # Handle conversation cleared event
             elif data.get("type") == "conversation_cleared":
                 conversation_id = data.get("conversationId")

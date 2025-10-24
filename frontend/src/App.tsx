@@ -12,6 +12,8 @@ import ProfileEditPage from './components/ProfileEditPage';
 import FinancialHealthDashboard from './components/FinancialHealth/FinancialHealthDashboard';
 import { apiService } from './services/apiService';
 import { config } from './config/environment';
+import { InsightData, InsightContext } from './types/insight';
+import { buildInsightContext } from './utils/insightContext';
 
 interface User {
   id: string;
@@ -32,6 +34,7 @@ function App() {
   const [sessionId, setSessionId] = useState<string>('');
   const [aiChatOpen, setAiChatOpen] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [chatInsightContext, setChatInsightContext] = useState<InsightContext | undefined>(undefined);
 
   // Check for existing session on app load
   useEffect(() => {
@@ -162,8 +165,69 @@ function App() {
     }
   };
 
-  const toggleAIChat = () => {
-    setAiChatOpen(!aiChatOpen);
+  const toggleAIChat = (insightContext?: InsightContext) => {
+    // If we have insight context, set it and open the chat
+    if (insightContext) {
+      setChatInsightContext(insightContext);
+      setAiChatOpen(true);
+    } else {
+      // Normal toggle behavior
+      setAiChatOpen(!aiChatOpen);
+      // Clear context when closing or opening normally
+      if (aiChatOpen) {
+        setChatInsightContext(undefined);
+      }
+    }
+  };
+
+  const handleKnowMoreInsight = async (insight: InsightData) => {
+    try {
+      // Get user context to build comprehensive insight context
+      let portfolioSummary: any = {
+        total_current_value: 0,
+        total_investment: 0,
+        day_change: 0,
+        day_change_percent: 0,
+        total_return: 0,
+        total_return_percent: 0
+      };
+      let userGoals: any[] = [];
+
+      if (currentUser?.id) {
+        // Fetch real user data
+        const userContext = await apiService.getUserContext(currentUser.id) as any;
+        portfolioSummary = {
+          ...portfolioSummary,
+          ...userContext.portfolio?.summary
+        };
+        userGoals = userContext.financial_goals?.goals || [];
+      } else {
+        // Use demo data
+        const [portfolioResponse, goalsResponse] = await Promise.all([
+          apiService.getPortfolioSummary(sessionId),
+          apiService.getGoalsOverview(sessionId)
+        ]);
+        portfolioSummary = {
+          ...portfolioSummary,
+          ...(portfolioResponse as any).summary
+        };
+        userGoals = (goalsResponse as any).goals || [];
+      }
+
+      // Build insight context
+      const insightContext = buildInsightContext(insight, portfolioSummary, {
+        userGoals,
+        userId: currentUser?.id,
+        userName: currentUser?.name
+      });
+
+      // Open AI chat with context
+      toggleAIChat(insightContext);
+    } catch (error) {
+      console.error('Error building insight context:', error);
+      // Fallback to simple toggle
+      toggleAIChat();
+    }
   };
 
   const handleUploadSuccess = async (result: any) => {
@@ -273,6 +337,7 @@ function App() {
         onToggle={toggleAIChat}
         userId={currentUser?.id}
         userName={currentUser?.name}
+        initialContext={chatInsightContext}
       />
 
       <div className={`relative z-10 transition-all duration-300 ${aiChatOpen ? 'lg:ml-[500px]' : ''}`}>
@@ -284,7 +349,7 @@ function App() {
             <div className="flex items-center justify-between overflow-visible relative">
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={toggleAIChat}
+                  onClick={() => toggleAIChat()}
                   className="p-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors backdrop-blur-sm"
                   title="Toggle AI Chat"
                 >
@@ -388,6 +453,7 @@ function App() {
               sessionId={sessionId}
               onSessionExpired={handleLogout}
               onToggleAIChat={toggleAIChat}
+              onKnowMore={handleKnowMoreInsight}
             />
           )}
           

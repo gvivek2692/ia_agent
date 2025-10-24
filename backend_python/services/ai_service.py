@@ -211,12 +211,23 @@ INDIAN MARKET FOCUS:
 - Investment limits and regulations (80C, ELSS, etc.)
 - Currency considerations (INR-based planning)
 
-CURRENT USER PROFILE:
-- Name: {user_context.get('user_profile', {}).get('name', 'User')}
-- Age: {user_context.get('user_profile', {}).get('age', 35)}, {user_context.get('user_profile', {}).get('profession', 'Professional')}
-- Location: {user_context.get('user_profile', {}).get('location', 'India')}
-- Monthly Income: ₹{user_context.get('financial_profile', {}).get('take_home', 80000):,}
-- Risk Profile: {user_context.get('investment_profile', {}).get('risk_tolerance', 'Moderate')}
+CURRENT USER PROFILE:"""
+        
+        # Extract user profile with fallback handling
+        user_profile_data = user_context.get('user_profile', {})
+        financial_profile_data = user_context.get('financial_profile', {})
+        investment_profile_data = user_context.get('investment_profile', {})
+        
+        # Handle case where data might be directly in user_context
+        if not user_profile_data and ('name' in user_context or 'age' in user_context):
+            user_profile_data = user_context
+        
+        prompt += f"""
+- Name: {user_profile_data.get('name', 'User')}
+- Age: {user_profile_data.get('age', 35)}, {user_profile_data.get('profession', 'Professional')}
+- Location: {user_profile_data.get('location', 'India')}
+- Monthly Income: ₹{financial_profile_data.get('take_home', 80000):,}
+- Risk Profile: {investment_profile_data.get('risk_tolerance', 'Moderate')}
 
 CURRENT PORTFOLIO OVERVIEW:
 - Total Portfolio Value: ₹{user_context.get('portfolio', {}).get('summary', {}).get('total_current_value', 0):,}
@@ -344,7 +355,7 @@ CONVERSATION GUIDELINES:
             )
             
             # Load only the needed context dynamically
-            effective_user_id = user_id or 'demo-user'
+            effective_user_id = user_id or 'priya-sharma'
             dynamic_context = await self.dynamic_context_service.load_dynamic_context(
                 effective_user_id, needed_contexts
             )
@@ -600,3 +611,213 @@ CONVERSATION GUIDELINES:
                 return response.choices[0].message.content
             else:
                 return "I apologize, but I'm experiencing technical difficulties. Please try again in a moment."
+    
+    async def process_insight_context_message(self, message: str, user_id: Optional[str] = None, 
+                                            conversation_id: Optional[str] = None, 
+                                            context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Process insight context message with specialized AI prompt for detailed insight explanations"""
+        
+        try:
+            # Extract insight context from the context parameter
+            insight_context = context.get('insightContext') if context else None
+            
+            if not insight_context:
+                # Fallback to regular chat processing if no insight context
+                return await self.process_chat_message(message, user_id, conversation_id, context)
+            
+            # Get conversation history for context analysis
+            conversation_history = []
+            if conversation_id:
+                conv_data = await self.conversation_service.load_conversation(conversation_id)
+                if conv_data and 'messages' in conv_data:
+                    conversation_history = [msg.get('content', '') for msg in conv_data['messages'][-5:]]
+            
+            # Load user context for insight analysis
+            effective_user_id = user_id or 'priya-sharma'
+            from services.dynamic_context_service import ContextType
+            dynamic_context = await self.dynamic_context_service.load_dynamic_context(
+                effective_user_id, [ContextType.USER_PROFILE, ContextType.PORTFOLIO_SUMMARY]
+            )
+            
+            logger.info(f"Processing insight context message for insight: {insight_context.get('insight', {}).get('title', 'Unknown')}")
+            
+            # Build specialized system prompt for insight explanation
+            system_prompt = self._build_insight_explanation_prompt(insight_context, dynamic_context)
+            
+            # Determine if web search is needed for this insight
+            insight_type = insight_context.get('insight', {}).get('type', '')
+            needs_search = insight_type in ['market', 'performance'] and any(
+                keyword in message.lower() 
+                for keyword in ['latest', 'current', 'recent', 'today', 'news', 'update']
+            )
+            
+            web_search_results = None
+            search_sources = []
+            
+            if needs_search:
+                # Perform targeted search for insight-related information
+                insight_title = insight_context.get('insight', {}).get('title', '')
+                search_query = f"{insight_title} Indian stock market latest news"
+                
+                search_results = await self.web_search_service.search(search_query, {"location": "India", "num": 4})
+                if "error" not in search_results:
+                    web_search_results = self.web_search_service.summarize_search_results(search_results)
+                    search_sources = self.web_search_service.extract_sources(search_results)
+                    
+                    # Enhance system prompt with search results
+                    system_prompt += f"\n\n=== LATEST MARKET DATA ===\n{web_search_results}"
+            
+            # Get AI response focused on insight explanation
+            ai_response = await self._get_ai_response(message, system_prompt, web_search_results is not None, effective_user_id)
+            
+            # Add sources if available
+            if search_sources:
+                ai_response += "\n\n---\n**Sources:**\n"
+                for i, source in enumerate(search_sources, 1):
+                    source_text = f"{i}. [{source.get('title', 'Source')}]({source.get('link', '#')})"
+                    if source.get('date'):
+                        source_text += f" - {source['date']}"
+                    ai_response += source_text + '\n'
+            
+            # Save messages to conversation
+            if conversation_id:
+                await self.conversation_service.add_message(conversation_id, message, False, effective_user_id)
+                await self.conversation_service.add_message(conversation_id, ai_response, True, effective_user_id)
+            
+            return {
+                "id": str(datetime.now().timestamp()),
+                "message": ai_response,
+                "timestamp": datetime.now().isoformat(),
+                "is_bot": True,
+                "sources": search_sources if search_sources else None,
+                "insight_context": True
+            }
+            
+        except Exception as e:
+            logger.error(f"Error processing insight context message: {str(e)}")
+            
+            # Return error response
+            return {
+                "id": str(datetime.now().timestamp()),
+                "message": "I apologize, but I'm having trouble processing this insight explanation. Please try asking about the insight in a different way.",
+                "timestamp": datetime.now().isoformat(),
+                "is_bot": True,
+                "error": str(e)
+            }
+    
+    def _build_insight_explanation_prompt(self, insight_context: Dict[str, Any], user_context: Dict[str, Any]) -> str:
+        """Build specialized system prompt for insight explanation"""
+        
+        insight = insight_context.get('insight', {})
+        portfolio_summary = insight_context.get('portfolioSummary', {})
+        user_goals = insight_context.get('userGoals', [])
+        
+        current_time = datetime.now()
+        
+        # Extract user profile from dynamic context - handle both structures
+        user_profile = {}
+        if 'user_profile' in user_context:
+            user_profile = user_context.get('user_profile', {})
+        elif 'name' in user_context or 'age' in user_context:
+            # Direct user context structure
+            user_profile = user_context
+        
+        # Extract portfolio context from dynamic context
+        portfolio_context = {}
+        if 'portfolio_summary' in user_context:
+            portfolio_context = user_context.get('portfolio_summary', {})
+        elif 'portfolio' in user_context:
+            portfolio_context = user_context.get('portfolio', {})
+        
+        prompt = f"""You are an expert AI wealth advisor specializing in detailed financial insight explanations. 
+Your role is to provide comprehensive, educational explanations of specific investment insights with actionable guidance.
+
+CURRENT CONTEXT:
+- Date: {current_time.strftime('%A, %B %d, %Y')}
+- Time: {current_time.strftime('%I:%M %p IST')}
+
+USER PROFILE:
+- Name: {user_profile.get('name', 'User')}
+- Age: {user_profile.get('age', 'N/A')}
+- Profession: {user_profile.get('profession', 'N/A')}
+- Location: {user_profile.get('location', 'India')}
+- Risk Tolerance: {user_profile.get('risk_tolerance', 'Moderate')}
+
+INSIGHT ANALYSIS REQUEST:
+You are being asked to provide a detailed explanation of a specific AI-generated financial insight. This is a "Know More" request where the user wants to understand the insight deeply.
+
+SPECIFIC INSIGHT TO EXPLAIN:
+- **Type**: {insight.get('type', '').upper()}
+- **Title**: {insight.get('title', '')}
+- **Description**: {insight.get('description', '')}
+- **Impact Level**: {insight.get('impact', '').upper()}
+- **Confidence**: {insight.get('confidence', 0)}%
+- **Actionable**: {'Yes' if insight.get('actionable') else 'No'}
+"""
+
+        if insight.get('recommendation'):
+            prompt += f"- **Recommendation**: {insight.get('recommendation')}\n"
+        
+        if insight.get('data'):
+            prompt += f"- **Supporting Data**: {insight.get('data')}\n"
+        
+        prompt += f"""
+USER'S PORTFOLIO CONTEXT:
+- Total Portfolio Value: ₹{portfolio_summary.get('total_current_value', 0):,}
+- Total Investment: ₹{portfolio_summary.get('total_investment', 0):,}
+- Overall Return: {portfolio_summary.get('total_return_percent', 0):.2f}%
+- Day Change: {portfolio_summary.get('day_change_percent', 0):.2f}%
+"""
+
+        if user_goals:
+            prompt += "\nUSER'S FINANCIAL GOALS:\n"
+            for goal in user_goals[:3]:
+                goal_name = goal.get('name', '')
+                progress = goal.get('progress_percentage', 0)
+                current_amt = goal.get('current_amount', 0)
+                target_amt = goal.get('target_amount', 0)
+                prompt += f"- {goal_name}: {progress:.1f}% complete (₹{current_amt:,}/₹{target_amt:,})\n"
+
+        prompt += f"""
+YOUR EXPLANATION TASK:
+Provide a comprehensive explanation that covers:
+
+1. **INSIGHT ANALYSIS**: Explain WHY this insight was generated
+   - What specific factors in the user's portfolio triggered this insight
+   - How the AI determined this insight was relevant
+   - The methodology behind the confidence level
+
+2. **PORTFOLIO IMPACT**: Explain HOW this affects the user's financial situation
+   - Specific impact on their current holdings
+   - Connection to their financial goals
+   - Risk implications for their overall strategy
+
+3. **MARKET CONTEXT**: Explain the BROADER market factors involved
+   - Current market conditions that make this insight relevant
+   - Industry trends or economic factors at play
+   - How this fits into the larger investment landscape
+
+4. **ACTIONABLE GUIDANCE**: Provide SPECIFIC recommendations
+   - Concrete steps the user should consider taking
+   - Timeline for implementation
+   - Alternative approaches to consider
+   - Potential risks and mitigation strategies
+
+5. **EDUCATIONAL VALUE**: Explain the UNDERLYING concepts
+   - Financial principles involved
+   - Why this type of analysis matters
+   - How the user can apply this knowledge going forward
+
+RESPONSE STYLE:
+- Be comprehensive but clear and well-structured
+- Use specific data from the user's portfolio
+- Include exact numbers and percentages where relevant
+- Structure your response with clear headings
+- Provide both immediate and long-term perspectives
+- Include appropriate risk warnings
+- Make it educational so the user learns from this explanation
+
+CRITICAL: This is an in-depth explanation request. Provide substantial detail and analysis, not just a brief summary. The user specifically clicked "Know More" to get comprehensive insights about this AI recommendation.
+"""
+
+        return prompt

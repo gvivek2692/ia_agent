@@ -7,28 +7,19 @@ import {
   Activity,
   BarChart3,
   Clock,
-  Lightbulb
+  Lightbulb,
+  MessageSquare
 } from 'lucide-react';
 
-interface InsightData {
-  id: string;
-  type: 'performance' | 'risk' | 'opportunity' | 'warning' | 'goal' | 'market';
-  title: string;
-  description: string;
-  impact: 'high' | 'medium' | 'low';
-  confidence: number;
-  actionable: boolean;
-  recommendation?: string;
-  data?: any;
-  generated_at: string;
-}
+import { InsightData } from '../types/insight';
 
 interface InsightCardProps {
   insight: InsightData;
   onActionClick?: (insight: InsightData) => void;
+  onKnowMore?: (insight: InsightData) => void;
 }
 
-const InsightCard: React.FC<InsightCardProps> = ({ insight, onActionClick }) => {
+const InsightCard: React.FC<InsightCardProps> = ({ insight, onActionClick, onKnowMore }) => {
   const getInsightIcon = (type: string) => {
     switch (type) {
       case 'performance':
@@ -210,14 +201,28 @@ const InsightCard: React.FC<InsightCardProps> = ({ insight, onActionClick }) => 
           </div>
         </div>
         
-        {insight.actionable && onActionClick && (
-          <button
-            onClick={() => onActionClick(insight)}
-            className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
-          >
-            Take Action →
-          </button>
-        )}
+        <div className="flex items-center space-x-3">
+          {onKnowMore && (
+            <button
+              onClick={() => onKnowMore(insight)}
+              className="flex items-center space-x-1 text-sm font-medium text-gold-400 hover:text-gold-300 transition-colors group"
+              title="Get detailed AI explanation"
+            >
+              <MessageSquare className="w-3 h-3" />
+              <span>Know More</span>
+            </button>
+          )}
+          
+          {insight.actionable && onActionClick && (
+            <button
+              onClick={() => onActionClick(insight)}
+              className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
+              title="Take recommended action"
+            >
+              Take Action →
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
