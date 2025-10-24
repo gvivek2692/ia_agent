@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Brain, 
-  TrendingUp, 
-  TrendingDown, 
-  AlertTriangle, 
-  Target, 
-  BarChart3, 
-  PieChart, 
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  Brain,
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Target,
+  BarChart3,
   Lightbulb,
   RefreshCw,
   MessageSquare
@@ -64,11 +63,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
   const [portfolioSummary, setPortfolioSummary] = useState<any>(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    loadInsightsData();
-  }, [userId]);
-
-  const loadInsightsData = async () => {
+  const loadInsightsData = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -109,7 +104,11 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId, sessionId, onSessionExpired]);
+
+  useEffect(() => {
+    loadInsightsData();
+  }, [loadInsightsData]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -138,18 +137,6 @@ const AIInsights: React.FC<AIInsightsProps> = ({ userId, userName, sessionId, on
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
-  };
-
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-400';
-    if (score >= 60) return 'text-yellow-400';
-    return 'text-red-400';
-  };
-
-  const getScoreBackground = (score: number) => {
-    if (score >= 80) return 'bg-green-500/20 border-green-400/30 backdrop-blur-sm';
-    if (score >= 60) return 'bg-yellow-500/20 border-yellow-400/30 backdrop-blur-sm';
-    return 'bg-red-500/20 border-red-400/30 backdrop-blur-sm';
   };
 
   const filterInsightsByTab = (insights: InsightData[]) => {

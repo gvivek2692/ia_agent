@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --z-dropdown: 9999;
-  --z-modal: 9998;
-  --z-sidebar: 50;
-  --z-overlay: 40;
+  --z-dropdown: 10000;
+  --z-sidebar: 9999;
+  --z-overlay: 9998;
+  --z-modal: 9997;
   --z-header: 30;
   --z-content: 10;
   --z-background: 0;

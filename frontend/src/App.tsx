@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, BarChart3, Brain, User, Heart } from 'lucide-react';
+import { MessageSquare, BarChart3, Brain, User as UserIcon, Heart } from 'lucide-react';
 import LandingPage from './components/LandingPage';
 import AIChatSidebar from './components/AIChatSidebar';
 import LoginForm from './components/LoginForm';
@@ -416,7 +416,7 @@ function App() {
                   }`}
                 >
                   <span className="flex items-center space-x-2">
-                    <User className="w-4 h-4" />
+                    <UserIcon className="w-4 h-4" />
                     <span>Profile</span>
                   </span>
                 </button>

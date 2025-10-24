@@ -73,9 +73,14 @@ const getImpactIndicator = (impact: string): string => {
 /**
  * Format insight context as a user-friendly message for AI chat
  */
-export const formatInsightContextMessage = (context: InsightContext): string => {
-  const { insight, portfolioSummary, userGoals, userName } = context;
-  
+export const formatInsightContextMessage = (context: InsightContext | undefined): string => {
+  // Safety check for undefined context
+  if (!context || !context.insight) {
+    return 'Please provide information about your financial question or concern.';
+  }
+
+  const { insight, portfolioSummary, userGoals } = context;
+
   const emoji = getInsightEmoji(insight.type);
   const impactIndicator = getImpactIndicator(insight.impact);
   

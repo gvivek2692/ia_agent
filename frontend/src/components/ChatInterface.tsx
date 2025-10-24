@@ -145,17 +145,17 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       // Convert HTTP URL to WebSocket URL
       const wsUrl = config.backendUrl.replace('http://', 'ws://').replace('https://', 'wss://');
       const websocketUrl = `${wsUrl}/ws/${clientId.current}`;
-      
+
       console.log('Connecting to WebSocket:', websocketUrl);
-      
+
       const ws = new WebSocket(websocketUrl);
-      
+
       ws.onopen = () => {
         console.log('WebSocket connected');
         setIsConnected(true);
         setConnectionError('');
         reconnectAttemptsRef.current = 0;
-        
+
         // Clear any existing reconnect timeout
         if (reconnectTimeoutRef.current) {
           clearTimeout(reconnectTimeoutRef.current);
@@ -167,7 +167,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
         try {
           const data = JSON.parse(event.data);
           console.log('WebSocket message received:', data);
-          
+
           if (data.type === 'chat_response') {
             const responseMessage = data.data;
             if (responseMessage && responseMessage.message) {
@@ -189,12 +189,12 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       ws.onclose = (event) => {
         console.log('WebSocket closed:', event.code, event.reason);
         setIsConnected(false);
-        
+
         // Attempt to reconnect if not manually closed
         if (event.code !== 1000 && reconnectAttemptsRef.current < maxReconnectAttempts) {
           reconnectAttemptsRef.current += 1;
           setConnectionError(`Reconnecting... (${reconnectAttemptsRef.current}/${maxReconnectAttempts})`);
-          
+
           reconnectTimeoutRef.current = setTimeout(() => {
             connectWebSocket();
           }, reconnectDelay * reconnectAttemptsRef.current);
@@ -210,12 +210,13 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
       };
 
       setWebsocket(ws);
-      
+
       return () => {
         if (reconnectTimeoutRef.current) {
           clearTimeout(reconnectTimeoutRef.current);
+          reconnectTimeoutRef.current = null;
         }
-        if (ws.readyState === WebSocket.OPEN) {
+        if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
           ws.close(1000, 'Component unmounting');
         }
       };
@@ -226,18 +227,29 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
   }, []);
 
   useEffect(() => {
-    const cleanup = connectWebSocket();
-    
-    // Initialize conversation based on context
-    if (!selectedConversationId) {
-      if (initialContext) {
-        initializeConversationWithContext(initialContext);
-      } else {
-        initializeConversation();
+    // Prevent duplicate connections in React StrictMode
+    let cleanup: (() => void) | undefined;
+    let isMounted = true;
+
+    if (isMounted) {
+      cleanup = connectWebSocket();
+
+      // Initialize conversation based on context
+      if (!selectedConversationId) {
+        if (initialContext) {
+          initializeConversationWithContext(initialContext);
+        } else {
+          initializeConversation();
+        }
       }
     }
 
-    return cleanup;
+    return () => {
+      isMounted = false;
+      if (cleanup) {
+        cleanup();
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
 
@@ -247,9 +259,10 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
 
   // Auto-send insight context when WebSocket is connected
   useEffect(() => {
-    if (isConnected && initialContext && !contextSent && websocket && conversationId) {
+    // Only send if we have valid insight context
+    if (isConnected && initialContext && initialContext.insight && !contextSent && websocket && conversationId) {
       const contextMessage = formatInsightContextMessage(initialContext);
-      
+
       // Send message in format expected by Python FastAPI backend
       const wsMessage: WebSocketMessage = {
         type: 'insight_context_message',
@@ -262,7 +275,7 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
           userName: userName
         }
       };
-      
+
       try {
         websocket.send(JSON.stringify(wsMessage));
         setContextSent(true);
@@ -383,18 +396,23 @@ ${userId ? `I have access to your complete financial profile, portfolio, and tra
         <div className="flex items-center justify-between px-4 py-2">
           <div className={`text-sm flex items-center ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
             {isConnected ? (
-              <span>🟢 Connected to WealthWise AI</span>
+              <span className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span>Connected to WealthWise AI</span>
+              </span>
             ) : (
               <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 bg-red-400 rounded-full"></span>
                 <span title={connectionError || 'Connecting...'}>
-                  🔴 {connectionError ? 'Connection Failed' : 'Connecting...'}
+                  {connectionError ? 'Connection Failed' : 'Connecting...'}
                 </span>
                 {connectionError && !connectionError.includes('Reconnecting') && (
                   <button
                     onClick={handleReconnect}
-                    className="px-2 py-1 text-xs bg-red-500/20 text-red-300 rounded hover:bg-red-500/30 border border-red-500/30"
+                    className="ml-2 px-3 py-1 text-xs bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 border border-red-500/30 transition-all duration-200 transform hover:scale-105"
+                    title="Click to retry connection"
                   >
-                    Retry
+                    ↻ Retry
                   </button>
                 )}
               </div>
